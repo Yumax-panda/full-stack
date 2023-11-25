@@ -1,7 +1,9 @@
+import type { UserId } from './user'
+
 export type ProviderType = 'qiita' | 'zenn'
 export type Provider = {
-  id: string
-  userId: string
+  id: number
+  userId: UserId
   type: ProviderType
   token: string
 }
