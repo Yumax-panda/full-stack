@@ -1,5 +1,5 @@
 import { Button, Typography, Grid, Stack } from '@mui/material'
-import { Feature } from '@/components/organisms/Section/Feature'
+import { Feature } from './_components/Feature'
 
 export default function Home() {
   return (
