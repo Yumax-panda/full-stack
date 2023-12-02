@@ -1,34 +1,53 @@
-import { Button, Typography, Grid, Stack } from '@mui/material'
+import { Button, Typography, Grid, Box } from '@mui/material'
 import { Feature } from './_components/Feature'
 
 export default function Home() {
   return (
-    <div>
-      <div style={{ margin: 'auto', padding: 20 }}>
-        <Grid container>
+    <Box>
+      <Box sx={{ margin: 'auto' }}>
+        <Grid container sx={{ display: 'flex' }}>
           <Grid item xs={12} md={6}>
-            <Typography sx={{ fontWeight: 'bold', fontSize: 32 }}>
+            <Typography
+              sx={{
+                fontWeight: 'bold',
+                fontSize: '2rem',
+                textAlign: {
+                  xs: 'center',
+                  md: 'left',
+                },
+              }}
+            >
               Full Stack
             </Typography>
-            <Typography style={{ fontSize: 24 }}>
+            <Typography
+              sx={{
+                fontSize: '1.2rem',
+                textAlign: {
+                  xs: 'center',
+                  md: 'left',
+                },
+                mb: {
+                  xs: 2,
+                  md: 0,
+                },
+              }}
+            >
               自分の技術を世界にアピール
             </Typography>
           </Grid>
           <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
-            <Stack spacing={2} sx={{ margin: 'auto' }}>
-              <Button variant='contained' color='primary'>
+            <Box sx={{ margin: 'auto' }}>
+              <Button variant='contained' color='primary' sx={{ m: 1 }}>
                 新規登録
               </Button>
-              <Button variant='contained' color='primary'>
+              <Button variant='contained' color='primary' sx={{ m: 1 }}>
                 ログイン
               </Button>
-            </Stack>
+            </Box>
           </Grid>
         </Grid>
-      </div>
-      <div>
-        <Feature />
-      </div>
-    </div>
+      </Box>
+      <Feature />
+    </Box>
   )
 }
