@@ -33,7 +33,17 @@ export default async function Profile({ userId }: Props) {
             }}
           />
         </Grid>
-        <Grid item xs={12} md={6} sx={{ textAlign: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{
+            textAlign: {
+              xs: 'center',
+              md: 'left',
+            },
+          }}
+        >
           <Typography
             sx={{
               fontSize: '2rem',
@@ -50,6 +60,14 @@ export default async function Profile({ userId }: Props) {
             }}
           >
             {user.location} / {user.organization}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: '1.2rem',
+              lineHeight: '2rem',
+            }}
+          >
+            ID: {user.id}
           </Typography>
         </Grid>
       </Grid>
