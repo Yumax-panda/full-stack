@@ -1,6 +1,8 @@
-import { Container, CssBaseline } from '@mui/material'
+import { CssBaseline } from '@mui/material'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Profile from './_components/Profile'
+import { Container } from '@/app/_components/Container/Container'
 import 'ress'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,12 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ja'>
-      <body
-        className={inter.className}
-        style={{ color: '#696f73', paddingTop: '2rem' }}
-      >
+      <body className={inter.className} style={{ color: '#696f73' }}>
         <CssBaseline />
-        <Container maxWidth='md'>{children}</Container>
+        <Profile />
+        <Container>{children}</Container>
       </body>
     </html>
   )
