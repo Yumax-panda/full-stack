@@ -14,14 +14,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: { userId: string }
 }) {
   return (
     <html lang='ja'>
       <body className={inter.className} style={{ color: '#696f73' }}>
         <CssBaseline />
-        <Profile />
+        <div
+          style={{
+            backgroundImage:
+              'linear-gradient(to bottom right, #2D9596, #9AD0C2)',
+            color: 'white',
+          }}
+        >
+          <Profile {...params} />
+        </div>
         <Container>{children}</Container>
       </body>
     </html>

@@ -9,5 +9,4 @@ export type User = {
   comment?: string
   location?: string
   organization?: string
-  skills: SkillId[]
 }
