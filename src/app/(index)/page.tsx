@@ -4,7 +4,7 @@ import { Feature } from './_components/Feature'
 
 export default function Home() {
   return (
-    <Box sx={{ pt: '2rem' }}>
+    <Box>
       <Box sx={{ margin: 'auto', textAlign: 'center' }}>
         <Typography sx={{ fontWeight: 'bold', fontSize: '2rem' }}>
           Full Stack

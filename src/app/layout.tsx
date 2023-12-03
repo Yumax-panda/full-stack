@@ -17,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ja'>
-      <body className={inter.className} style={{ color: '#696f73' }}>
+      <body
+        className={inter.className}
+        style={{ color: '#696f73', paddingTop: '2rem' }}
+      >
         <CssBaseline />
         <Container maxWidth='md'>{children}</Container>
       </body>
