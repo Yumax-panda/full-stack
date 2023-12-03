@@ -1,6 +1,6 @@
 import { MoneyOff, Share, FileDownload } from '@mui/icons-material'
 import { Typography, Grid, Box } from '@mui/material'
-import { Description } from '@/components/Text/Description'
+import { Description } from '@/app/_components/Text/Description'
 
 type Feature = {
   title: string
