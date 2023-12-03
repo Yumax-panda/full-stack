@@ -5,7 +5,15 @@ type Props = {
 } & Omit<TypographyProps, 'children'>
 
 export const Description = ({ description, ...rest }: Props) => (
-  <Typography {...rest} sx={{ color: 'grey', fontSize: 14 }}>
+  <Typography
+    {...rest}
+    sx={{
+      color: 'grey',
+      fontSize: '1rem',
+      lineHeight: '1.8rem',
+      ...rest['sx'],
+    }}
+  >
     {description}
   </Typography>
 )
