@@ -4,7 +4,7 @@
   "prettier.enable": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "prettier.enableDebugLogs": true,
   "prettier.requireConfig": true
