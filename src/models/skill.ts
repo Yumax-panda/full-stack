@@ -1,31 +1,10 @@
-import type { Id } from './common'
+import type { Tag } from './tag'
 
-export type Level = 0 | 1 | 2 | 3
-export type Category =
-  | 'Language'
-  | 'Framework'
-  | 'Library'
-  | 'Tool'
-  | 'Infra'
-  | 'Other'
-export type Usage =
-  | 'Frontend'
-  | 'Backend'
-  | 'Mobile'
-  | 'Data Analysis'
-  | 'Machine Learning'
-  | 'DevOps'
-  | 'Design'
-  | 'Hobby'
-  | 'Other'
-
-export type SkillId = Id<number, 'Skill'>
 export type Skill = {
-  id: SkillId
+  id: string
+  userId: string
   name: string
-  category: Category
-  usage: Usage
-  level: Level
-  description: string
-  href: string
+  image: string
+  level: number
+  tags: Tag[]
 }
