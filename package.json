@@ -15,10 +15,13 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
+    "@t3-oss/env-nextjs": "^0.7.1",
     "next": "14.0.1",
+    "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
-    "ress": "^5.0.2"
+    "ress": "^5.0.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
