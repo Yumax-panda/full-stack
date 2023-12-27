@@ -6,10 +6,10 @@ export default async function Page() {
   return (
     <>
       <h1>Sign in</h1>
-      {providers && Object.values(providers).map(provider => (
-        <SigninButton key={provider.id} id={provider.id} />
-      )
-      )}
+      {providers &&
+        Object.values(providers).map((provider) => (
+          <SigninButton key={provider.id} id={provider.id} />
+        ))}
     </>
   )
 }

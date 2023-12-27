@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { signIn } from 'next-auth/react'
 
@@ -8,10 +8,7 @@ type Props = {
 
 export const SigninButton = ({ id }: Props) => {
   return (
-    <button
-      className="btn btn-primary"
-      onClick={() => signIn(id)}
-    >
+    <button className='btn btn-primary' onClick={() => signIn(id)}>
       Sign in
     </button>
   )
