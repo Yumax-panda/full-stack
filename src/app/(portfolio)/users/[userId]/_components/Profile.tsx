@@ -1,6 +1,7 @@
-import { Avatar, Typography, Grid } from '@mui/material'
-import { Container } from '@/app/_components/Container/Container'
-import type { User, UserId } from '@/models'
+import { Container } from '@/app/_components/Container/Container';
+import { Avatar, Grid, Typography } from '@mui/material';
+
+import type { User } from '@/models'
 
 type Props = {
   userId: string
@@ -8,12 +9,13 @@ type Props = {
 
 const getProfile = async (userId: string): Promise<User> => {
   return {
-    id: parseInt(userId) as UserId,
+    id: userId,
     name: 'John Doe',
-    password: 'password',
-    comment: 'Hello, World!',
     location: 'Tokyo',
     organization: 'Full Stack',
+    image: "",
+    email: null,
+    emailVerified: null
   }
 }
 
