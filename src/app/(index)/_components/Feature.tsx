@@ -1,5 +1,6 @@
-import { Typography, Box } from '@mui/material'
+import { Box } from '@mui/material'
 import { Description } from '@/app/_components/Text/Description'
+import { Subtitle } from '@/app/_components/Text/Subtitle'
 
 // TODO: リリース時に文言を修正
 const features = [
@@ -25,16 +26,7 @@ export const Feature = () => {
     <div>
       {features.map((feature) => (
         <Box key={feature.title} sx={{ mb: '1rem' }}>
-          <Typography
-            sx={{
-              pb: '0.5rem',
-              fontWeight: 'bold',
-              fontSize: '1.2rem',
-              borderBottom: '1px solid #e5e7eb',
-            }}
-          >
-            {feature.title}
-          </Typography>
+          <Subtitle text={feature.title} />
           <Description description={feature.description} />
         </Box>
       ))}
