@@ -1,7 +1,17 @@
-import { env } from './env.mjs'
-import type { Client } from './types'
+import { PrismaClient } from '@prisma/client'
 
-const { NEXT_PUBLIC_API_BASE_URL } = env
+let prisma: PrismaClient
 
-// TODO: Implement the client
-export const client: Client = {} as const
+if (process.env.NODE_ENV === 'production') {
+  prisma = new PrismaClient()
+} else {
+  const globalWithPrisma = global as typeof globalThis & {
+    prisma: PrismaClient
+  }
+  if (!globalWithPrisma.prisma) {
+    globalWithPrisma.prisma = new PrismaClient()
+  }
+  prisma = globalWithPrisma.prisma
+}
+
+export { prisma }
