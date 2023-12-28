@@ -71,10 +71,25 @@ model SkillTagRelation {
   @@id([skillId, tagId])
 }
 
+enum Provider {
+  QIITA
+  ZENN
+  NOTE
+}
+
+model ArticleToken {
+  provider Provider
+  token    String
+  userId   String
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, userId])
+}
+
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
   location      String?
@@ -83,6 +98,7 @@ model User {
   sessions      Session[]
   skills        Skill[]
   tags          Tag[]
+  apiTokens     ArticleToken[]
 }
 
 model VerificationToken {
