@@ -3,29 +3,39 @@ import Link from 'next/link'
 
 import { formatDate } from '@/lib/formatDate'
 import { getProviderNick } from '@/usecase/article'
-import { ArticleOutlined } from '@mui/icons-material'
+import { HistoryEdu } from '@mui/icons-material'
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 
 const Text = ({ text }: { text: string }) => (
   <Typography
     sx={{
       color: 'grey',
-      fontSize: '1.5rem',
-      lineHeight: '1.8rem',
+      fontSize: '1rem',
     }}
   >
     {text}
   </Typography>
 )
 
+// TODO: 画像がない場合の表示を考える
 const Media = ({ ogp, articleUrl }: { ogp?: string; articleUrl: string }) =>
   ogp ? (
-    <CardMedia component='img' image={ogp} alt={articleUrl} />
+    <CardMedia
+      component='img'
+      image={ogp}
+      alt={articleUrl}
+      sx={{ flexGrow: 1, objectFit: 'contain' }}
+    />
   ) : (
     <Box
-      sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexGrow: 1,
+      }}
     >
-      <ArticleOutlined sx={{ fontSize: '10rem' }} />
+      <HistoryEdu sx={{ fontSize: '10rem' }} />
     </Box>
   )
 
@@ -35,8 +45,11 @@ export const ArticleCard = ({
   ogp,
   articleUrl,
 }: Props) => (
-  <Link href={articleUrl} style={{ textDecoration: 'none' }}>
-    <Card sx={{ display: 'flex', flexDirection: 'column' }}>
+  <Link
+    href={articleUrl}
+    style={{ textDecoration: 'none', height: '100%', display: 'flex' }}
+  >
+    <Card sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
       <Media ogp={ogp} articleUrl={articleUrl} />
       <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Text text={getProviderNick(provider)} />
