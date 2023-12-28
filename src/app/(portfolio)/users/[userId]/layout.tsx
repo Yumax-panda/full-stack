@@ -31,15 +31,7 @@ export default async function RootLayout({
     <html lang='ja'>
       <body className={inter.className} style={{ color: '#696f73' }}>
         <CssBaseline />
-        <div
-          style={{
-            backgroundImage:
-              'linear-gradient(to bottom right, #2D9596, #9AD0C2)',
-            color: 'white',
-          }}
-        >
-          <Profile {...user} />
-        </div>
+        <Profile {...user} />
         <Container>{children}</Container>
       </body>
     </html>
