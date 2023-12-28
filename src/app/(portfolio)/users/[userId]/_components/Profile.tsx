@@ -23,6 +23,7 @@ export default async function Profile({ userId }: Props) {
               height: '8rem',
               fontSize: '4rem',
             }}
+            src={user.image || undefined}
           />
         </Grid>
         <Grid
