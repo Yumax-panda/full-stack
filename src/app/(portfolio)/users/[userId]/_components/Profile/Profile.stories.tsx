@@ -27,10 +27,20 @@ export const Default: Story = {
   args: {
     ...user,
   },
+  parameters: {
+    nextjs: {
+      appDirectory: true
+    }
+  }
 }
 
 export const FewContent: Story = {
   args: {
     ...fewContentUser,
   },
+  parameters: {
+    nextjs: {
+      appDirectory: true
+    }
+  }
 }
