@@ -2,6 +2,8 @@ import { Container } from '@/app/_components/Container/Container'
 import { CorporateFare, LocationOn } from '@mui/icons-material'
 import { Avatar, Box, Grid, Typography } from '@mui/material'
 
+import { Tabs } from '../Tabs'
+
 import type { User } from '@prisma/client'
 
 type Props = Pick<User, 'name' | 'location' | 'organization' | 'image' | 'id'>
@@ -64,5 +66,6 @@ export const Profile = ({ name, location, organization, image, id }: Props) => (
         </Typography>
       </Grid>
     </Grid>
+    <Tabs userId={id} />
   </Container>
 )
