@@ -6,10 +6,11 @@ import type {
   QiitaArticleResponse,
 } from '@/models/article'
 import type { Provider } from '@prisma/client'
+import { getArticleTokenByUserId } from '@/repository/articleToken'
 
 type Fetcher = (token: ArticleToken) => Promise<Article[]>
 
-export const fetchNoteArticles: Fetcher = async (token) => {
+const fetchNoteArticles: Fetcher = async (token) => {
   const url = `https://note.com/api/v2/creators/${token.token}/contents?kind=note`
   const res = await fetch(url)
   const json = (await res.json()) as NoteArticleResponse
@@ -20,7 +21,7 @@ export const fetchNoteArticles: Fetcher = async (token) => {
   }))
 }
 
-export const fetchZennArticles: Fetcher = async (token) => {
+const fetchZennArticles: Fetcher = async (token) => {
   const url = `https://api.zenn.dev/articles?username=${token.token}?order=latest`
   const res = await fetch(url)
   const json = (await res.json()) as ZennArticleResponse
@@ -31,7 +32,7 @@ export const fetchZennArticles: Fetcher = async (token) => {
   }))
 }
 
-export const fetchQiitaArticles: Fetcher = async (token) => {
+const fetchQiitaArticles: Fetcher = async (token) => {
   const url = `https://qiita.com/api/v2/authenticated_user/items`
   const res = await fetch(url, {
     headers: {
@@ -46,9 +47,7 @@ export const fetchQiitaArticles: Fetcher = async (token) => {
   }))
 }
 
-export const fetchArticles = async (
-  tokens: ArticleToken[],
-): Promise<Article[]> => {
+const fetchArticles = async (tokens: ArticleToken[]): Promise<Article[]> => {
   const fetchers: Record<Provider, Fetcher> = {
     NOTE: fetchNoteArticles,
     ZENN: fetchZennArticles,
@@ -63,4 +62,9 @@ export const fetchArticles = async (
   )
 
   return articles.flat()
+}
+
+export async function getArticlesByUserId(userId: string): Promise<Article[]> {
+  const tokens = await getArticleTokenByUserId(userId)
+  return await fetchArticles(tokens)
 }
