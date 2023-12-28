@@ -6,10 +6,20 @@ export type NoteArticle = {
   noteUrl: string
 }
 
+export type NoteArticleResponse = {
+  data: {
+    contents: NoteArticle[]
+  }
+}
+
 export type ZennArticle = {
   provider: `ZENN`
   created_at: string
   path: string
+}
+
+export type ZennArticleResponse = {
+  articles: ZennArticle[]
 }
 
 export type QiitaArticle = {
@@ -17,6 +27,8 @@ export type QiitaArticle = {
   created_at: string
   url: string
 }
+
+export type QiitaArticleResponse = QiitaArticle[]
 
 export type Article = {
   provider: Provider
