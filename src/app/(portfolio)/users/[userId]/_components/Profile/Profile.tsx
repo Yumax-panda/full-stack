@@ -60,6 +60,7 @@ export const Profile = ({ name, location, organization, image, id }: Props) => (
           sx={{
             fontSize: '1.2rem',
             lineHeight: '2rem',
+            textAlign: "left"
           }}
         >
           ID: {id}
