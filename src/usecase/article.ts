@@ -25,7 +25,6 @@ const fetchZennArticles: Fetcher = async (token) => {
   const url = `https://zenn.dev/api/articles?username=${token.token}?order=latest`
   const res = await fetch(url)
   const json = (await res.json()) as ZennArticleResponse
-  console.log('zenn', json)
   return json.articles.map((article) => ({
     provider: `ZENN`,
     publishedAt: article.created_at,
