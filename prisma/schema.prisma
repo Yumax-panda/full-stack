@@ -38,26 +38,26 @@ model Session {
 }
 
 model Skill {
-  id               String             @id @default(cuid())
-  name             String             @unique
-  level            Int                @default(0)
-  image            String?
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  tags             Tag[]
-  skillTagRelation SkillTagRelation[]
-  user             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId           String
+  id        String             @id @default(cuid())
+  name      String             @unique
+  level     Int                @default(0)
+  image     String?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  tags      SkillTagRelation[]
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 }
 
 model Tag {
-  id               String             @id @default(cuid())
-  name             String             @unique
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  skills           Skill[]
-  color            String
-  skillTagRelation SkillTagRelation[]
+  id        String             @id @default(cuid())
+  name      String             @unique
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  color     String
+  skills    SkillTagRelation[]
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 }
 
 model SkillTagRelation {
@@ -82,6 +82,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   skills        Skill[]
+  tags          Tag[]
 }
 
 model VerificationToken {

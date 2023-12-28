@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react'
 import { SkillCard } from './SkillCard'
 
 export default {
-  title: 'SkillCard',
+  title: 'Skill/SkillCard',
   component: SkillCard,
 } as Meta
 

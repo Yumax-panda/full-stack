@@ -1,10 +1,5 @@
-import type { Tag } from './tag'
+import type { Tag, Skill } from '@prisma/client'
 
-export type Skill = {
-  id: string
-  userId: string
-  name: string
-  image: string
-  level: number
+export type SkillWithTags = Omit<Skill, 'tags'> & {
   tags: Tag[]
 }

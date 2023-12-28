@@ -7,7 +7,7 @@ type StarProps = {
 }
 type Skill = Pick<SkillPayload, 'name' | 'level' | 'image'>
 type Tag = Pick<TagPayload, 'name' | 'color'>
-type Props = Skill & {
+export type Props = Skill & {
   tags: Tag[]
 }
 
@@ -56,7 +56,13 @@ export const SkillCard = ({ name, level, image, tags = [] }: Props) => (
       </CardContent>
     </Box>
     <Box
-      sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', margin: 'auto' }}
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '0.5rem',
+        margin: 'auto',
+        height: '2rem',
+      }}
     >
       {tags.map((tag) => (
         <Chip
