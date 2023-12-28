@@ -78,3 +78,12 @@ export async function getArticlesByUserId(
     }),
   )
 }
+
+export function getProviderNick(provider: Provider): string {
+  const nicknames: Record<Provider, string> = {
+    NOTE: 'Note',
+    ZENN: 'Zenn',
+    QIITA: 'Qiita',
+  }
+  return nicknames[provider]
+}
