@@ -9,8 +9,11 @@ export default function Home() {
   return (
     <Box>
       <Box sx={{ margin: 'auto', textAlign: 'center' }}>
-        <Title title="Full Stack" />
-        <Subtitle text="エンジニアのためのポートフォリオサイト" />
+        <Title title='Full Stack' />
+        <Subtitle
+          text='エンジニアのためのポートフォリオサイト'
+          sx={{ my: '0.5rem' }}
+        />
         <SigninButton />
       </Box>
       <Feature />

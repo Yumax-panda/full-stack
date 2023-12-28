@@ -1,17 +1,19 @@
-import { Typography, type TypographyProps } from '@mui/material'
+import { Typography } from '@mui/material'
+
+import type { TypographyProps } from '@mui/material'
 
 type Props = {
   description: string
-} & Omit<TypographyProps, 'children'>
+  sx?: TypographyProps['sx']
+}
 
-export const Description = ({ description, ...rest }: Props) => (
+export const Description = ({ description, sx }: Props) => (
   <Typography
-    {...rest}
     sx={{
       color: 'grey',
       fontSize: '1rem',
       lineHeight: '1.8rem',
-      ...rest['sx'],
+      ...sx,
     }}
   >
     {description}
