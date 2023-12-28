@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const SkillSection = ({ skills }: Props) => (
-  <Grid container spacing={2} sx={{ my: '1.5rem', display: 'flex' }}>
+  <Grid container spacing={2} sx={{ display: 'flex' }}>
     {skills.map((skill) => (
       <Grid item xs={12} md={4} key={skill.name}>
         <SkillCard {...skill} />

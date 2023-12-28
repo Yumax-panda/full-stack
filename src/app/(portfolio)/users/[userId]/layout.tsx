@@ -32,7 +32,7 @@ export default async function RootLayout({
       <body className={inter.className} style={{ color: '#696f73' }}>
         <CssBaseline />
         <Profile {...user} />
-        <Container>{children}</Container>
+        <Container sx={{ py: '2rem' }}>{children}</Container>
       </body>
     </html>
   )

@@ -29,9 +29,9 @@ export const Default: Story = {
   },
   parameters: {
     nextjs: {
-      appDirectory: true
-    }
-  }
+      appDirectory: true,
+    },
+  },
 }
 
 export const FewContent: Story = {
@@ -40,7 +40,7 @@ export const FewContent: Story = {
   },
   parameters: {
     nextjs: {
-      appDirectory: true
-    }
-  }
+      appDirectory: true,
+    },
+  },
 }
