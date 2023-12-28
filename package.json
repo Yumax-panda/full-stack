@@ -24,6 +24,7 @@
     "firebase": "^10.7.1",
     "next": "14.0.1",
     "next-auth": "^4.24.5",
+    "node-html-parser": "^6.1.12",
     "react": "^18",
     "react-dom": "^18",
     "ress": "^5.0.2",

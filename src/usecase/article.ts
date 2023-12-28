@@ -6,9 +6,11 @@ import type {
   QiitaArticleResponse,
 } from '@/models/article'
 import type { Provider } from '@prisma/client'
+import { fetchOgp } from '@/lib/ogp'
 import { getArticleTokenByUserId } from '@/repository/articleToken'
 
 type Fetcher = (token: ArticleToken) => Promise<Article[]>
+type ArticleWithOgp = Article & { ogp?: string }
 
 const fetchNoteArticles: Fetcher = async (token) => {
   const url = `https://note.com/api/v2/creators/${token.token}/contents?kind=note`
@@ -64,7 +66,15 @@ const fetchArticles = async (tokens: ArticleToken[]): Promise<Article[]> => {
   return articles.flat()
 }
 
-export async function getArticlesByUserId(userId: string): Promise<Article[]> {
+export async function getArticlesByUserId(
+  userId: string,
+): Promise<ArticleWithOgp[]> {
   const tokens = await getArticleTokenByUserId(userId)
-  return await fetchArticles(tokens)
+  const articles = await fetchArticles(tokens)
+  return await Promise.all(
+    articles.map(async (article) => {
+      const ogp = await fetchOgp(article.articleUrl)
+      return { ...article, ogp }
+    }),
+  )
 }
