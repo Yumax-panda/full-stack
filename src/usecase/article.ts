@@ -10,7 +10,7 @@ import { fetchOgp } from '@/lib/ogp'
 import { getArticleTokenByUserId } from '@/repository/articleToken'
 
 type Fetcher = (token: ArticleToken) => Promise<Article[]>
-type ArticleWithOgp = Article & { ogp?: string }
+export type ArticleWithOgp = Article & { ogp?: string }
 
 const fetchNoteArticles: Fetcher = async (token) => {
   const url = `https://note.com/api/v2/creators/${token.token}/contents?kind=note`
