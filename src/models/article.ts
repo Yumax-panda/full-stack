@@ -2,7 +2,7 @@ import type { Provider } from '@prisma/client'
 
 export type NoteArticle = {
   provider: `NOTE`
-  publishedAt: string
+  publishAt: string
   noteUrl: string
 }
 
@@ -14,7 +14,7 @@ export type NoteArticleResponse = {
 
 export type ZennArticle = {
   provider: `ZENN`
-  created_at: string
+  published_at: string
   path: string
 }
 
