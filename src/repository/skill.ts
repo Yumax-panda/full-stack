@@ -1,11 +1,12 @@
 import { prisma } from '@/lib/client'
 
-import type { Skill } from '@prisma/client'
-
-export const getSkillsByUserId = async (userId: string): Promise<Skill[]> => {
+export async function getSkillsWithTagsByUserId(userId: string) {
   return await prisma.skill.findMany({
     where: {
       userId,
+    },
+    include: {
+      tags: true,
     },
   })
 }
