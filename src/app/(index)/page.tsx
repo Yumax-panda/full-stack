@@ -1,6 +1,7 @@
-import { Typography, Box } from '@mui/material'
-import Link from 'next/link'
+import { Box, Typography } from '@mui/material'
+
 import { Feature } from './_components/Feature'
+import { SigninButton } from './_components/SignInButton'
 
 export default function Home() {
   return (
@@ -13,19 +14,7 @@ export default function Home() {
           エンジニアのためのポートフォリオサイト
         </Typography>
 
-        <Link
-          href='#'
-          style={{
-            margin: 'auto',
-            padding: '0.5rem 1rem',
-            borderRadius: '0.5rem',
-            backgroundColor: 'lightgray',
-            color: 'black',
-            textDecoration: 'none',
-          }}
-        >
-          今すぐ始める
-        </Link>
+        <SigninButton />
       </Box>
       <Feature />
     </Box>

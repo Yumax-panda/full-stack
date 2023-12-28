@@ -1,6 +1,6 @@
-import { Box } from '@mui/material'
 import { Description } from '@/app/_components/Text/Description'
-import { Subtitle } from '@/app/_components/Text/Subtitle'
+import { Sectiontitle } from '@/app/_components/Text/Sectiontitle'
+import { Box } from '@mui/material'
 
 // TODO: リリース時に文言を修正
 const features = [
@@ -25,8 +25,8 @@ export const Feature = () => {
   return (
     <div>
       {features.map((feature) => (
-        <Box key={feature.title} sx={{ mb: '1rem' }}>
-          <Subtitle text={feature.title} />
+        <Box key={feature.title} sx={{ my: '0.5rem' }}>
+          <Sectiontitle text={feature.title} />
           <Description description={feature.description} />
         </Box>
       ))}

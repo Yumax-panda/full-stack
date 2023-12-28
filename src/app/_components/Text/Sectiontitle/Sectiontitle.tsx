@@ -4,7 +4,7 @@ type Props = {
   text: string
 }
 
-export const Subtitle = ({ text }: Props) => (
+export const Sectiontitle = ({ text }: Props) => (
   <Typography
     sx={{
       pb: '0.5rem',

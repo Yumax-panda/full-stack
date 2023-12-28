@@ -1,26 +1,16 @@
-import { Container } from '@/app/_components/Container/Container';
-import { Avatar, Grid, Typography } from '@mui/material';
+import { notFound } from 'next/navigation'
 
-import type { User } from '@/models'
+import { Container } from '@/app/_components/Container/Container'
+import { getUserById } from '@/repository/user'
+import { Avatar, Grid, Typography } from '@mui/material'
 
 type Props = {
   userId: string
 }
 
-const getProfile = async (userId: string): Promise<User> => {
-  return {
-    id: userId,
-    name: 'John Doe',
-    location: 'Tokyo',
-    organization: 'Full Stack',
-    image: "",
-    email: null,
-    emailVerified: null
-  }
-}
-
 export default async function Profile({ userId }: Props) {
-  const user = await getProfile(userId)
+  const user = await getUserById(userId)
+  if (!user) notFound()
 
   return (
     <Container>

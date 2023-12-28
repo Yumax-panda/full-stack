@@ -1,6 +1,8 @@
-import { prisma } from '@/lib/client';
+import { prisma } from '@/lib/client'
 
-export async function getUserById(userId: string) {
+import type { User } from '@/models'
+
+export async function getUserById(userId: string): Promise<User | null> {
   return await prisma.user.findUnique({
     where: {
       id: userId,

@@ -1,4 +1,5 @@
 import { getProviders } from 'next-auth/react'
+
 import { SigninButton } from '../_components/SigninButton'
 
 export default async function Page() {
