@@ -40,7 +40,6 @@ model Session {
 model Skill {
   id               String             @id @default(cuid())
   name             String             @unique
-  description      String?
   level            Int                @default(0)
   image            String?
   createdAt        DateTime           @default(now())
