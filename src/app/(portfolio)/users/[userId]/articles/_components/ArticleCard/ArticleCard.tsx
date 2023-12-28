@@ -18,18 +18,16 @@ const Text = ({ text }: { text: string }) => (
   </Typography>
 )
 
-const Media = ({ ogp, articleUrl }: { ogp?: string, articleUrl: string }) => ogp ? (
-  <CardMedia
-    component='img'
-    image={ogp}
-    alt={articleUrl}
-  />
-) : (
-  <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-    <ArticleOutlined sx={{ fontSize: "10rem" }} />
-  </Box>
-)
-
+const Media = ({ ogp, articleUrl }: { ogp?: string; articleUrl: string }) =>
+  ogp ? (
+    <CardMedia component='img' image={ogp} alt={articleUrl} />
+  ) : (
+    <Box
+      sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+    >
+      <ArticleOutlined sx={{ fontSize: '10rem' }} />
+    </Box>
+  )
 
 export const ArticleCard = ({
   provider,
@@ -37,10 +35,10 @@ export const ArticleCard = ({
   ogp,
   articleUrl,
 }: Props) => (
-  <Link href={articleUrl} style={{ textDecoration: "none" }}>
-    <Card sx={{ display: 'flex', flexDirection: "column" }}>
+  <Link href={articleUrl} style={{ textDecoration: 'none' }}>
+    <Card sx={{ display: 'flex', flexDirection: 'column' }}>
       <Media ogp={ogp} articleUrl={articleUrl} />
-      <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
+      <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Text text={getProviderNick(provider)} />
         <Text text={formatDate(publishedAt)} />
       </CardContent>
