@@ -13,16 +13,17 @@ export const Default: Story = {
   args: {
     name: 'TypeScript',
     level: 1,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg',
     tags: [
       {
         name: 'Frontend',
-        color: "skyblue",
+        color: 'skyblue',
       },
       {
         name: 'Backend',
-        color: "grey",
-      }
-    ]
+        color: 'grey',
+      },
+    ],
   },
 }
