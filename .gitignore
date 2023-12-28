@@ -28,6 +28,7 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+full-stack-dev-82d28-firebase-adminsdk-2rdri-294f5bf1a8.json
 
 # vercel
 .vercel
