@@ -4,9 +4,8 @@
   "prettier.enable": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": true
   },
-  "eslint.format.enable": false,
   "prettier.enableDebugLogs": true,
   "prettier.requireConfig": true,
   "[prisma]": { "editor.defaultFormatter": "Prisma.prisma" }
