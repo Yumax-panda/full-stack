@@ -73,11 +73,11 @@ model SkillTagRelation {
 
 model Work {
   id        String   @id @default(cuid())
-  title     String
+  title     String?
   thumbnail String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  content   String
+  content   String?
   private   Boolean  @default(false)
   isDraft   Boolean  @default(true)
   pinned    Boolean  @default(false)
