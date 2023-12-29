@@ -11,7 +11,8 @@
     "lint:fix": "yarn lint --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint-staged": "yarn lint:fix && yarn format"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
