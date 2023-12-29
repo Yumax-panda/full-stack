@@ -3,9 +3,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.enable": true,
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
   "prettier.enableDebugLogs": true,
   "prettier.requireConfig": true,
   "[prisma]": { "editor.defaultFormatter": "Prisma.prisma" }

@@ -1,11 +1,11 @@
 import 'ress'
 
+import { CssBaseline } from '@mui/material'
+import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { Container } from '@/app/_components/Container/Container'
-import { CssBaseline } from '@mui/material'
 
-import type { Metadata } from 'next'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
