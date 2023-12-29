@@ -20,7 +20,7 @@ type UseEditorReturn = {
   save: () => Promise<void>
 }
 
-type Props = Omit<Work, 'createdAt' | 'updatedAt'>
+export type Props = Omit<Work, 'createdAt' | 'updatedAt'>
 
 export const useEditor = ({
   id,

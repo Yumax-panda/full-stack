@@ -79,7 +79,6 @@ model Work {
   updatedAt DateTime @updatedAt
   content   String?
   isPrivate Boolean  @default(false)
-  isDraft   Boolean  @default(true)
   pinned    Boolean  @default(false)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
