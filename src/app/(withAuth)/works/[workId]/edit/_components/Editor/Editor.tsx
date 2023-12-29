@@ -14,9 +14,5 @@ type Props = {
 export const Editor = ({ work }: Props) => {
   const { editor } = useEditor(work)
 
-  return (
-    <div>
-      <EditorContent editor={editor} />
-    </div>
-  )
+  return <EditorContent editor={editor} />
 }
