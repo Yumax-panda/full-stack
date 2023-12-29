@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
+import { notFound } from 'next/navigation'
 
-import { getSession } from '@/lib/auth';
+import { getSession } from '@/lib/auth'
 
 export default async function Layout({
   children,
