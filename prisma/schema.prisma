@@ -71,6 +71,19 @@ model SkillTagRelation {
   @@id([skillId, tagId])
 }
 
+model Work {
+  id        String   @id @default(cuid())
+  title     String
+  thumbnail String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  private   Boolean  @default(false)
+  isDraft   Boolean  @default(true)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+}
+
 enum Provider {
   QIITA
   ZENN
@@ -99,6 +112,7 @@ model User {
   skills        Skill[]
   tags          Tag[]
   apiTokens     ArticleToken[]
+  works         Work[]
 }
 
 model VerificationToken {
