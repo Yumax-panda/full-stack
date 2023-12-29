@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation'
 
-import { getMyWorkByWorkId } from '@/usecase/work'
-
 import { Editor } from './_components/Editor/Editor'
+import { getMyWorkByWorkId } from '@/usecase/work'
 
 export default async function Edit({
   params: { workId },

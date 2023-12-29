@@ -1,9 +1,8 @@
+import { Box } from '@mui/material'
 import { notFound } from 'next/navigation'
 
-import { getUserById } from '@/repository/user'
-import { Box } from '@mui/material'
-
 import { Profile } from './_components/Profile'
+import { getUserById } from '@/repository/user'
 
 export default async function Layout({
   children,

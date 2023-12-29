@@ -1,10 +1,9 @@
 import 'server-only'
 
+import type { Work } from '@prisma/client'
 import { getSession } from '@/lib/auth'
 import { prisma } from '@/lib/client'
 import { createNewWork, getEmptyWork } from '@/repository/work'
-
-import type { Work } from '@prisma/client'
 
 export async function getOrCreateEmptyWork(userId: string): Promise<Work> {
   const emptyWork = await getEmptyWork(userId)

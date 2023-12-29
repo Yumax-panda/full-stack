@@ -1,6 +1,6 @@
+import type { Tag } from '@prisma/client'
 import { prisma } from '@/lib/client'
 
-import type { Tag } from '@prisma/client'
 import type { SkillWithTags } from '@/models'
 
 export async function getSkillsWithTagsByUserId(

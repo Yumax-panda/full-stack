@@ -5,9 +5,8 @@ import {
   uploadBytes,
 } from 'firebase/storage'
 
-import { storage } from '@/lib/firebase'
-
 import type { FirebaseStorage } from 'firebase/storage'
+import { storage } from '@/lib/firebase'
 
 type StringMap = Record<string, string>
 

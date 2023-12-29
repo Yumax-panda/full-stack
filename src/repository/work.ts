@@ -1,6 +1,5 @@
-import { prisma } from '@/lib/client'
-
 import type { Work } from '@prisma/client'
+import { prisma } from '@/lib/client'
 
 export type PartialWork = Pick<Work, 'id' | 'title' | 'thumbnail'>
 

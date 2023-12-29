@@ -1,9 +1,8 @@
 import { CorporateFare, LocationOn } from '@mui/icons-material'
 import { Avatar, Box, Grid, Typography } from '@mui/material'
 
-import { Tabs } from '../Tabs'
-
 import type { User } from '@prisma/client'
+import { Tabs } from '../Tabs'
 
 type Props = Pick<User, 'name' | 'location' | 'organization' | 'image' | 'id'>
 type FieldProps = {

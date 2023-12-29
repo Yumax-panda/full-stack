@@ -1,15 +1,13 @@
-import React, { useCallback, useState } from 'react'
+import type { Work } from '@prisma/client'
 
-import { workImageStorage } from '@/repository/storage'
 import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import { useEditor as defaultUseEditor } from '@tiptap/react'
+import type { Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 
-import type { Work } from '@prisma/client'
-
-import type { Editor } from '@tiptap/react'
-
+import React, { useCallback, useState } from 'react'
+import { workImageStorage } from '@/repository/storage'
 type UseEditorReturn = {
   editor: Editor | null
   title: string
@@ -28,7 +26,6 @@ export const useEditor = ({
   thumbnail: initialThumbnail,
   content,
   isPrivate,
-  isDraft,
   pinned,
   userId,
 }: Props): UseEditorReturn => {
