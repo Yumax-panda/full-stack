@@ -1,4 +1,3 @@
-import { Container } from '@/app/_components/Container/Container'
 import { CorporateFare, LocationOn } from '@mui/icons-material'
 import { Avatar, Box, Grid, Typography } from '@mui/material'
 
@@ -20,7 +19,7 @@ const Field = ({ icon, text }: FieldProps) => (
 )
 
 export const Profile = ({ name, location, organization, image, id }: Props) => (
-  <Container>
+  <div>
     <Grid container sx={{ py: '2rem' }}>
       <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
         <Avatar
@@ -68,5 +67,5 @@ export const Profile = ({ name, location, organization, image, id }: Props) => (
       </Grid>
     </Grid>
     <Tabs userId={id} />
-  </Container>
+  </div>
 )
