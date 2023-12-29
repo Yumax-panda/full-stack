@@ -1,10 +1,10 @@
-import type { ArticleWithOgp as Props } from '@/usecase/article'
-import Link from 'next/link'
-
-import { formatDate } from '@/lib/formatDate'
-import { getProviderNick } from '@/usecase/article'
 import { HistoryEdu } from '@mui/icons-material'
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import Link from 'next/link'
+import { formatDate } from '@/lib/formatDate'
+import type { ArticleWithOgp as Props } from '@/usecase/article'
+
+import { getProviderNick } from '@/usecase/article'
 
 const Text = ({ text }: { text: string }) => (
   <Typography

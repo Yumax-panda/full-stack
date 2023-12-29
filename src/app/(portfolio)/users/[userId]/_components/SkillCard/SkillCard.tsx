@@ -1,4 +1,3 @@
-import type { Skill as SkillPayload, Tag as TagPayload } from '@prisma/client'
 import { Star as MuiStar, StarOutline } from '@mui/icons-material'
 import {
   Box,
@@ -8,6 +7,7 @@ import {
   Chip,
   Typography,
 } from '@mui/material'
+import type { Skill as SkillPayload, Tag as TagPayload } from '@prisma/client'
 
 type StarProps = {
   filled: boolean
