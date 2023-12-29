@@ -1,4 +1,5 @@
 'use client'
+import './Editor.css'
 
 import { EditorContent } from '@tiptap/react'
 

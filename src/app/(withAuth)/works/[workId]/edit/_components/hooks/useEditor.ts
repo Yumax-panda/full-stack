@@ -1,3 +1,4 @@
+import Placeholder from '@tiptap/extension-placeholder'
 import { useEditor as defaultUseEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 
@@ -14,7 +15,12 @@ type UseEditorReturn = {
 
 export const useEditor = ({ initialContent = '' }: Props): UseEditorReturn => {
   const editor = defaultUseEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Placeholder.configure({
+        placeholder: 'Write something here...',
+      }),
+    ],
     content: initialContent,
   })
 
