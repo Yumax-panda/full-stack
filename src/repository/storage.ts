@@ -49,10 +49,12 @@ class StorageService<T extends Record<string, string>> {
 
 type WorkImageProps = {
   userId: string
+  workId: string
   filename: string
 }
 
 export const workImageStorage = new StorageService<WorkImageProps>({
   storage,
-  getPath: ({ userId, filename }) => `users/${userId}/work-images/${filename}`,
+  getPath: ({ userId, workId, filename }) =>
+    `users/${userId}/work-images/${workId}/${filename}`,
 })
