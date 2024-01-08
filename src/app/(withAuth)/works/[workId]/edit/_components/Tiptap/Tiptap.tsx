@@ -1,6 +1,5 @@
 import './Tiptap.css'
 
-import { Box } from '@mui/material'
 import Image from '@tiptap/extension-image' // eslint-disable-line import/no-named-as-default
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit' // eslint-disable-line import/no-named-as-default
@@ -22,9 +21,5 @@ export const Tiptap = ({ content, onChange }: Props) => {
     },
   })
 
-  return (
-    <Box sx={{ minHeight: "80vh" }}>
-      <EditorContent editor={editor} />
-    </Box>
-  )
+  return <EditorContent editor={editor} />
 }

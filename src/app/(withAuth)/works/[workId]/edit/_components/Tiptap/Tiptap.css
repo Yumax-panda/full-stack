@@ -1,0 +1,8 @@
+.tiptap {
+  padding: 1rem;
+  min-height: 80vh;
+}
+
+.tiptap:focus-visible {
+  outline: none;
+}
