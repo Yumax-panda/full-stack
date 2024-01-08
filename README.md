@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Full Stack
 
-## Getting Started
+エンジニア専用のポートフォリオ作成サービス。
 
-First, run the development server:
+## 機能
+
+以下のことをポートフォリオで公開できます。
+
+- 技術スタック
+- 制作物 (WIP)
+- 外部サイトで執筆した記事
+
+執筆記事はユーザー名(またはトークン)を登録して連携させることで自動取得。
+
+## 技術構成(仮)
+
+Next.jsのApp Routerで構成。認証機能はAuth.js。
+
+### フロントエンド
+
+- Material UI (UIコンポーネント)
+- tiptap (エディタ)
+- Storybook (テスト)
+
+### バックエンド
+
+- Prisma (ORM)
+- node-html-parser (urlからOGP画像を取得するため)
+
+### その他
+
+- PostgreSQL (データベース)
+- Firebase Storage (オブジェクトストレージ)
+
+## Dev
+
+### Dockerの起動
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ docker-compose up
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### アプリの起動
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+$ npm install
+$ npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+キャッシュなしで実行する場合は2つめのコマンドを以下に置き換えてください。
 
-## Learn More
+```bash
+$ npm run dev:nocache
+```
 
-To learn more about Next.js, take a look at the following resources:
+### StorybookでUIのテスト
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+$ npm run storybook
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### データベース管理
 
-## Deploy on Vercel
+マイグレーション
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+$ npx prisma migrate dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+データベースの管理画面を起動
+
+```bash
+$ npx prisma studio
+```
