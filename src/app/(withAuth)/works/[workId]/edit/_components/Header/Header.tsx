@@ -2,7 +2,6 @@ import { useRouter } from 'next/navigation'
 
 import { CloseOutlined, SaveAsOutlined } from '@mui/icons-material'
 import {
-  AppBar,
   Box,
   List,
   ListItem,
@@ -22,14 +21,7 @@ const ButtonWithIcon = ({ icon, text, onClick, type }: ButtonWithIconProps) => (
   <ListItem disablePadding>
     <ListItemButton onClick={onClick} type={type} component='button'>
       <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText
-        primary={text}
-        sx={{
-          '& .MuiListItemText-root': {
-            color: 'black',
-          },
-        }}
-      />
+      <ListItemText primary={text} />
     </ListItemButton>
   </ListItem>
 )
@@ -38,9 +30,13 @@ export const Header = () => {
   const router = useRouter()
 
   return (
-    <AppBar
-      position='sticky'
-      sx={{ backgroundColor: 'inherit', marginBottom: '2rem' }}
+    <nav
+      style={{
+        backgroundColor: 'inherit',
+        marginBottom: '2rem',
+        position: 'sticky',
+        top: 0,
+      }}
     >
       <Box
         sx={{
@@ -61,6 +57,6 @@ export const Header = () => {
           <ButtonWithIcon icon={<SaveAsOutlined />} text='保存' type='submit' />
         </List>
       </Box>
-    </AppBar>
+    </nav>
   )
 }
