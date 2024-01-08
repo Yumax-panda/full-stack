@@ -22,7 +22,6 @@ const TitleField = forwardRef<HTMLInputElement, Props>((props, ref) => {
       ref={ref}
       variant='standard'
       margin='normal'
-      required
       fullWidth
       autoFocus
       label={undefined}

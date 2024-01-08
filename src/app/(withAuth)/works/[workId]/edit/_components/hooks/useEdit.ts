@@ -1,10 +1,15 @@
 import type { Control, FormState } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-type FormValues = {
-  title: string
-  content: string
-}
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const formSchema = z.object({
+  title: z.string().min(1).trim(),
+  content: z.string().min(1).trim(),
+})
+
+type FormValues = z.infer<typeof formSchema>
 
 type UseEditReturn = {
   control: Control<FormValues>
@@ -20,6 +25,7 @@ type Props = {
 export const useEdit = ({ title, content }: Props): UseEditReturn => {
   const { control, handleSubmit, formState } = useForm<FormValues>({
     mode: 'onChange',
+    resolver: zodResolver(formSchema),
     defaultValues: {
       title: title ?? '',
       content: content ?? '',
