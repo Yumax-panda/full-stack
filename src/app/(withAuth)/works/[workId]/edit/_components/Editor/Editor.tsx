@@ -2,10 +2,11 @@
 import { Controller } from 'react-hook-form'
 
 import { Container } from '@/app/_components/Container/Container'
-import { Button, TextField } from '@mui/material'
+import { Button } from '@mui/material'
 
 import { useEdit } from '../hooks/useEdit'
 import { Tiptap } from '../Tiptap/Tiptap'
+import { TitleField } from '../TitleField'
 
 import type { Work } from '@prisma/client'
 
@@ -22,14 +23,9 @@ export const Editor = ({ work }: Props) => {
         name="title"
         control={control}
         render={({ field }) => (
-          <TextField
+          <TitleField
             {...field}
-            label="タイトル"
-            variant="standard"
-            margin="normal"
-            required
-            fullWidth
-            autoFocus
+            placeholder="タイトル"
           />
         )}
       />
