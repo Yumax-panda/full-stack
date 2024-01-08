@@ -25,7 +25,7 @@ export const Editor = ({ work }: Props) => {
           <TextField
             {...field}
             label="タイトル"
-            variant="outlined"
+            variant="standard"
             margin="normal"
             required
             fullWidth
