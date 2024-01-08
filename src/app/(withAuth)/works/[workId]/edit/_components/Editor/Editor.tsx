@@ -1,18 +1,56 @@
 'use client'
-import './Editor.css'
+import { Controller } from 'react-hook-form'
 
-import { EditorContent } from '@tiptap/react'
+import { Container } from '@/app/_components/Container/Container'
+import { Button, TextField } from '@mui/material'
 
-import { useEditor } from '../hooks/useEditor'
+import { useEdit } from '../hooks/useEdit'
+import { Tiptap } from '../Tiptap/Tiptap'
 
-import type { Props as WorkPayload } from '../hooks/useEditor'
+import type { Work } from '@prisma/client'
 
 type Props = {
-  work: WorkPayload
+  work: Work
 }
 
 export const Editor = ({ work }: Props) => {
-  const { editor } = useEditor(work)
+  const { control, onSubmit, formState } = useEdit({ title: work.title, content: work.content })
 
-  return <EditorContent editor={editor} />
+  return (
+    <Container component="form" onSubmit={onSubmit}>
+      <Controller
+        name="title"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            label="タイトル"
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            autoFocus
+          />
+        )}
+      />
+      <Controller
+        name="content"
+        control={control}
+        render={({ field }) => (
+          <Tiptap
+            content={field.value}
+            onChange={(content) => field.onChange(content)}
+          />
+        )}
+      />
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        disabled={!formState.isValid}
+      >
+        保存
+      </Button>
+    </Container>
+  )
 }
