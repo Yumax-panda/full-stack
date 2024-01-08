@@ -1,4 +1,6 @@
-import { Container as MuiContainer, ContainerProps } from '@mui/material'
+import { Container as MuiContainer } from '@mui/material'
+
+import type { ContainerProps } from '@mui/material'
 
 export const Container = (props: ContainerProps) => {
   const { children, ...rest } = props
