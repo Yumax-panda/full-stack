@@ -16,10 +16,7 @@ type Props = {
 }
 
 export const Editor = ({ work }: Props) => {
-  const { control, onSubmit, formState } = useEdit({
-    title: work.title,
-    content: work.content,
-  })
+  const { control, onSubmit, formState } = useEdit(work)
 
   return (
     <Box component='form' onSubmit={onSubmit}>
@@ -28,17 +25,17 @@ export const Editor = ({ work }: Props) => {
         <Controller
           name='title'
           control={control}
-          render={({ field }) => (
-            <TitleField {...field} placeholder='タイトル' />
+          render={({ field: { value, ...rest } }) => (
+            <TitleField value={value ?? ''} placeholder='タイトル' {...rest} />
           )}
         />
         <Controller
           name='content'
           control={control}
-          render={({ field }) => (
+          render={({ field: { value, ...rest } }) => (
             <Tiptap
-              content={field.value}
-              onChange={(content) => field.onChange(content)}
+              content={value ?? ''}
+              onChange={(content) => rest.onChange(content)}
             />
           )}
         />

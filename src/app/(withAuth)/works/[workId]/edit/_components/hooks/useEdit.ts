@@ -1,15 +1,12 @@
 import type { Control, FormState } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
+import { updateWorkSchema as formSchema } from '@/models/work'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-const formSchema = z.object({
-  title: z.string().min(1).trim(),
-  content: z.string().min(1).trim(),
-})
+import type { Work as Props } from '@prisma/client'
 
-type FormValues = z.infer<typeof formSchema>
+import type { UpdateWork as FormValues } from '@/models'
 
 type UseEditReturn = {
   control: Control<FormValues>
@@ -17,18 +14,14 @@ type UseEditReturn = {
   formState: FormState<FormValues>
 }
 
-type Props = {
-  title: string | null
-  content: string | null
-}
-
-export const useEdit = ({ title, content }: Props): UseEditReturn => {
+export const useEdit = ({ title, content, ...rest }: Props): UseEditReturn => {
   const { control, handleSubmit, formState } = useForm<FormValues>({
     mode: 'onChange',
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: title ?? '',
       content: content ?? '',
+      ...rest,
     },
   })
 
