@@ -1,9 +1,12 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
+
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+
 import { prisma } from './client'
 import { env } from './env.mjs'
+
+import type { NextAuthOptions } from 'next-auth'
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -28,9 +31,6 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) session.user.id = user.id
       return session
     },
-  },
-  pages: {
-    signIn: '/auth/signin',
   },
 }
 

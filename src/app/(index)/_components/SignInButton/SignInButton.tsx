@@ -1,11 +1,12 @@
 'use client'
 
-import { Button } from '@mui/material'
 import { signIn } from 'next-auth/react'
+
+import { Button } from '@mui/material'
 
 export const SigninButton = () => (
   <Button
-    onClick={() => signIn()}
+    onClick={() => signIn('github')}
     style={{
       padding: '0.5rem 1rem',
       borderRadius: '0.5rem',
