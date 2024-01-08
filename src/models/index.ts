@@ -1,3 +1,4 @@
+export * from './article'
 export * from './skill'
 export * from './tag'
-export * from './user'
+export * from './work'
