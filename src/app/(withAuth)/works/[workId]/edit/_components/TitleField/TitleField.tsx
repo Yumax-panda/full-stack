@@ -4,8 +4,15 @@ import { TextField } from '@mui/material'
 
 import type { TextFieldProps } from '@mui/material'
 
-type RemovedProps = 'variant' | 'label' | 'margin' | 'required' | 'fullWidth' | 'autoFocus'
-type Props = Omit<TextFieldProps, RemovedProps> & ComponentPropsWithoutRef<'input'>
+type RemovedProps =
+  | 'variant'
+  | 'label'
+  | 'margin'
+  | 'required'
+  | 'fullWidth'
+  | 'autoFocus'
+type Props = Omit<TextFieldProps, RemovedProps> &
+  ComponentPropsWithoutRef<'input'>
 
 const TitleField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const { children, ...rest } = props
@@ -13,8 +20,8 @@ const TitleField = forwardRef<HTMLInputElement, Props>((props, ref) => {
     <TextField
       {...rest}
       ref={ref}
-      variant="standard"
-      margin="normal"
+      variant='standard'
+      margin='normal'
       required
       fullWidth
       autoFocus

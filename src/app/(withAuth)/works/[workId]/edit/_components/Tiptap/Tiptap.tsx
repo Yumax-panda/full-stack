@@ -11,10 +11,7 @@ type Props = {
 
 export const Tiptap = ({ content, onChange }: Props) => {
   const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Image,
-    ],
+    extensions: [StarterKit, Image],
     content,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML())

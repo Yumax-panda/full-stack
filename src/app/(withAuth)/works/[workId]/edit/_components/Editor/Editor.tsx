@@ -2,7 +2,9 @@
 import { Controller } from 'react-hook-form'
 
 import { Container } from '@/app/_components/Container/Container'
+import { Box } from '@mui/material'
 
+import { Header } from '../Header/Header'
 import { useEdit } from '../hooks/useEdit'
 import { SaveButton } from '../SaveButton'
 import { Tiptap } from '../Tiptap/Tiptap'
@@ -15,34 +17,33 @@ type Props = {
 }
 
 export const Editor = ({ work }: Props) => {
-  const { control, onSubmit, formState } = useEdit({ title: work.title, content: work.content })
+  const { control, onSubmit, formState } = useEdit({
+    title: work.title,
+    content: work.content,
+  })
 
   return (
-    <Container component="form" onSubmit={onSubmit}>
-      <Controller
-        name="title"
-        control={control}
-        render={({ field }) => (
-          <TitleField
-            {...field}
-            placeholder="タイトル"
-          />
-        )}
-      />
-      <Controller
-        name="content"
-        control={control}
-        render={({ field }) => (
-          <Tiptap
-            content={field.value}
-            onChange={(content) => field.onChange(content)}
-          />
-        )}
-      />
-      <SaveButton
-        onSubmit={onSubmit}
-        disabled={!formState.isValid}
-      />
-    </Container>
+    <Box component='form' onSubmit={onSubmit}>
+      <Header />
+      <Container>
+        <Controller
+          name='title'
+          control={control}
+          render={({ field }) => (
+            <TitleField {...field} placeholder='タイトル' />
+          )}
+        />
+        <Controller
+          name='content'
+          control={control}
+          render={({ field }) => (
+            <Tiptap
+              content={field.value}
+              onChange={(content) => field.onChange(content)}
+            />
+          )}
+        />
+      </Container>
+    </Box>
   )
 }

@@ -7,10 +7,9 @@ type Props = {
 }
 
 export const SaveButton = ({ onSubmit }: Props) => (
-  <Tooltip title="保存" placement='right-start'>
+  <Tooltip title='保存' placement='right-start'>
     <IconButton onSubmit={onSubmit} type='submit'>
       <SaveAltOutlined />
     </IconButton>
   </Tooltip>
 )
-

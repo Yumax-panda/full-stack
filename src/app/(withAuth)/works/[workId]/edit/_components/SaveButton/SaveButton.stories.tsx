@@ -10,6 +10,6 @@ type Story = StoryObj<typeof SaveButton>
 
 export const Default: Story = {
   args: {
-    onSubmit: () => { },
+    onSubmit: () => {},
   },
 }
