@@ -2,9 +2,9 @@
 import { Controller } from 'react-hook-form'
 
 import { Container } from '@/app/_components/Container/Container'
-import { Button } from '@mui/material'
 
 import { useEdit } from '../hooks/useEdit'
+import { SaveButton } from '../SaveButton'
 import { Tiptap } from '../Tiptap/Tiptap'
 import { TitleField } from '../TitleField'
 
@@ -39,14 +39,10 @@ export const Editor = ({ work }: Props) => {
           />
         )}
       />
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
+      <SaveButton
+        onSubmit={onSubmit}
         disabled={!formState.isValid}
-      >
-        保存
-      </Button>
+      />
     </Container>
   )
 }
