@@ -5,5 +5,6 @@
   "editor.formatOnSave": true,
   "prettier.enableDebugLogs": true,
   "prettier.requireConfig": true,
+  "prettier.configPath": ".prettierrc",
   "[prisma]": { "editor.defaultFormatter": "Prisma.prisma" }
 }

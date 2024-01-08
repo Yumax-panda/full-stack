@@ -7,13 +7,6 @@
     "prettier"
   ],
   "rules": {
-    "import/order": [
-      "error",
-      {
-        "alphabetize": {
-          "order": "asc"
-        }
-      }
-    ]
+    "semi": ["error", "never"]
   }
 }
