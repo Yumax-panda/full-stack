@@ -32,3 +32,21 @@ export async function getMyWorkByWorkId(workId: string): Promise<Work | null> {
 
   return work
 }
+
+type UpdateProps = {
+  workId: string
+} & Partial<Work>
+
+export async function updateWork({
+  workId,
+  ...data
+}: UpdateProps): Promise<Work | null> {
+  const work = await prisma.work.update({
+    where: {
+      id: workId,
+    },
+    data,
+  })
+
+  return work
+}

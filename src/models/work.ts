@@ -7,6 +7,12 @@ export const updateWorkCommonSchema = z.object({
   pinned: z.boolean(),
 })
 
+const isEmpty = (html: string) => {
+  const tmp = document.createElement('div')
+  tmp.innerHTML = html
+  return !tmp.textContent?.trim()
+}
+
 export const privateContentSchema = z.object({
   title: z.string().min(1).max(100).nullish(),
   content: z.string().min(1).max(5000).nullish(),
@@ -27,14 +33,6 @@ export const publicContentSchema = z.object({
 export const publicWorkSchema =
   updateWorkCommonSchema.merge(publicContentSchema)
 
-export const updateWorkSchema = z
-  .union([privateWorkSchema, publicWorkSchema])
-  .refine((data) => {
-    if (data.isPrivate) {
-      return privateWorkSchema.safeParse(data).success
-    }
-
-    return publicWorkSchema.safeParse(data).success
-  })
+export const updateWorkSchema = z.union([privateWorkSchema, publicWorkSchema])
 
 export type UpdateWork = z.infer<typeof updateWorkSchema>
