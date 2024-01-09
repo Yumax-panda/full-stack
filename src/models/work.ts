@@ -16,7 +16,7 @@ export const isEmpty = (html?: string | null) => {
 
 export const nonEmptyHtml = z.string().refine((html) => !isEmpty(html))
 
-export const trimedNullishHtml = z
+export const NullishHtml = z
   .string()
   .nullish()
   .transform((v) => (isEmpty(v) ? null : v))
@@ -36,7 +36,7 @@ export const nonEmptyTitle = z
 
 export const privateContentSchema = z.object({
   title: trimedNullishTitle,
-  content: trimedNullishHtml,
+  content: NullishHtml,
   thumnail: z.string().nullish(),
   isPrivate: z.literal(true),
 })
