@@ -20,12 +20,16 @@ Next.jsのApp Routerで構成。認証機能はAuth.js。
 
 - Material UI (UIコンポーネント)
 - tiptap (エディタ)
-- Storybook (テスト)
 
 ### バックエンド
 
 - Prisma (ORM)
 - node-html-parser (urlからOGP画像を取得するため)
+
+## テスト
+
+- Storybook
+- Vitest
 
 ### その他
 
