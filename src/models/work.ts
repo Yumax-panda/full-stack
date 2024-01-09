@@ -16,15 +16,11 @@ export const isEmpty = (html?: string | null) => {
 
 export const nonEmptyHtml = z.string().refine((html) => !isEmpty(html))
 
-export const NullishHtml = z
-  .string()
-  .nullish()
-  .transform((v) => (isEmpty(v) ? null : v))
+export const NullishHtml = z.string().transform((v) => (isEmpty(v) ? null : v))
 
 export const trimedNullishTitle = z
   .string()
   .max(100)
-  .nullish()
   .transform((v) => (v?.trim().length ? v.trim() : null))
 
 export const nonEmptyTitle = z
@@ -37,14 +33,14 @@ export const nonEmptyTitle = z
 export const privateContentSchema = z.object({
   title: trimedNullishTitle,
   content: NullishHtml,
-  thumnail: z.string().nullish(),
+  thumnail: z.string().nullable(),
   isPrivate: z.literal(true),
 })
 
 export const publicContentSchema = z.object({
   title: nonEmptyTitle,
   content: nonEmptyHtml,
-  thumnail: z.string().nullish(),
+  thumnail: z.string().nullable(),
   isPrivate: z.literal(false),
 })
 
