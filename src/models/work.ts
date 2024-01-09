@@ -7,7 +7,8 @@ export const updateWorkCommonSchema = z.object({
   pinned: z.boolean(),
 })
 
-const isEmpty = (html: string) => {
+export const isEmpty = (html?: string | null) => {
+  if (!html) return true
   const tmp = document.createElement('div')
   tmp.innerHTML = html
   return !tmp.textContent?.trim()
