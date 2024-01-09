@@ -49,3 +49,7 @@ test('isEmpty multiple line1', () => {
 test('isEmpty multiple line2', () => {
   expect(isEmpty('<br/>  <div> </div> <div> </div>  ')).toBe(true)
 })
+
+test('is Empty with tabspace', () => {
+  expect(isEmpty('<div>	</div>')).toBe(true)
+})
