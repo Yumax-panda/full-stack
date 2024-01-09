@@ -29,3 +29,23 @@ test('isEmpty nested empty div', () => {
 test('isEmpty nested div', () => {
   expect(isEmpty('<div><div>test</div></div>')).toBe(false)
 })
+
+test('isEmpty nested empty div with space', () => {
+  expect(isEmpty('<div> <div> </div> </div>')).toBe(true)
+})
+
+test('isEmpty nested div with space', () => {
+  expect(isEmpty('<div> <div> test </div> </div>')).toBe(false)
+})
+
+test('isEmpty nested empty div with br', () => {
+  expect(isEmpty('<div><div><br></div></div>')).toBe(true)
+})
+
+test('isEmpty multiple line1', () => {
+  expect(isEmpty('<br/>  <div>test</div> <div>test</div>')).toBe(false)
+})
+
+test('isEmpty multiple line2', () => {
+  expect(isEmpty('<br/>  <div> </div> <div> </div>  ')).toBe(true)
+})
