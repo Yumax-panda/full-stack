@@ -90,3 +90,33 @@ test('schema: update PublicWork with title to be trimed', () => {
   const parsed = updateWorkSchema.parse(payload)
   expect(parsed.title).toBe('test')
 })
+
+test('schema: update PrivateWork with title to be null', () => {
+  const parsed = updateWorkSchema.parse({
+    title: ' ',
+    content: '<div>test</div>',
+    isPrivate: true,
+    ...commonProps,
+  })
+  expect(parsed.title).toBeNull()
+})
+
+test('schema: update PrivateWork with content to be null', () => {
+  const parsed = updateWorkSchema.parse({
+    title: 'test',
+    content: '<div> </div>',
+    isPrivate: true,
+    ...commonProps,
+  })
+  expect(parsed.content).toBeNull()
+})
+
+test('schema: update PrivateWork with content not to be null', () => {
+  const parsed = updateWorkSchema.parse({
+    title: 'test',
+    content: '<div> test</div>',
+    isPrivate: true,
+    ...commonProps,
+  })
+  expect(parsed.content).not.toBeNull()
+})
