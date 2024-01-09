@@ -14,22 +14,42 @@ export const isEmpty = (html?: string | null) => {
   return !tmp.textContent?.trim()
 }
 
+export const nonEmptyHtml = z.string().refine((html) => !isEmpty(html))
+
+export const trimedNullishHtml = z
+  .string()
+  .nullish()
+  .transform((v) => (isEmpty(v) ? null : v))
+
+export const trimedNullishTitle = z
+  .string()
+  .max(100)
+  .nullish()
+  .transform((v) => (v?.trim().length ? v.trim() : null))
+
+export const nonEmptyTitle = z
+  .string()
+  .min(1)
+  .max(100)
+  .refine((v) => v.trim())
+  .transform((v) => v.trim())
+
 export const privateContentSchema = z.object({
-  title: z.string().min(1).max(100).nullish(),
-  content: z.string().min(1).max(5000).nullish(),
+  title: trimedNullishTitle,
+  content: trimedNullishHtml,
   thumnail: z.string().nullish(),
   isPrivate: z.literal(true),
 })
 
-export const privateWorkSchema =
-  updateWorkCommonSchema.merge(privateContentSchema)
-
 export const publicContentSchema = z.object({
-  title: z.string().min(1).max(100),
-  content: z.string().min(1).max(5000),
+  title: nonEmptyTitle,
+  content: nonEmptyHtml,
   thumnail: z.string().nullish(),
   isPrivate: z.literal(false),
 })
+
+export const privateWorkSchema =
+  updateWorkCommonSchema.merge(privateContentSchema)
 
 export const publicWorkSchema =
   updateWorkCommonSchema.merge(publicContentSchema)
