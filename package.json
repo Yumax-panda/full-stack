@@ -12,7 +12,8 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "lint-staged": "yarn lint:fix && yarn format"
+    "lint-staged": "yarn lint:fix && yarn format",
+    "test": "vitest"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -60,6 +61,7 @@
     "prettier": "^3.0.3",
     "prisma": "^5.7.1",
     "storybook": "^7.6.6",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^1.1.3"
   }
 }
