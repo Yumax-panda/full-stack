@@ -12,7 +12,14 @@ export const Thumbnail = ({ url, onClick }: Props) => {
   if (!url) return null
 
   return (
-    <Box sx={{ position: 'relative', width: { sm: 400 }, height: { sm: 250 } }}>
+    <Box
+      sx={{
+        position: 'relative',
+        width: { sm: 400 },
+        height: { sm: 250 },
+        m: 'auto',
+      }}
+    >
       <Image
         src={url}
         alt='thumbnail'

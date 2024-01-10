@@ -20,10 +20,11 @@ export const Editor = ({ work }: Props) => {
   const {
     control,
     onSubmit,
-    formState,
     isPrivate,
     toggleIsPrivate,
     onThumbnailUpload,
+    thumbnail,
+    onThumbnailRemove,
   } = useEdit(work)
 
   return (
@@ -41,6 +42,9 @@ export const Editor = ({ work }: Props) => {
             <TitleField value={value ?? ''} placeholder='タイトル' {...rest} />
           )}
         />
+        <Box sx={{ display: 'flex', py: '2rem' }}>
+          <Thumbnail url={thumbnail} onClick={onThumbnailRemove} />
+        </Box>
         <Controller
           name='content'
           control={control}
