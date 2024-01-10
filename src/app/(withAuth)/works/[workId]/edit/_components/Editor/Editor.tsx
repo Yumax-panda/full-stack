@@ -17,11 +17,12 @@ type Props = {
 }
 
 export const Editor = ({ work }: Props) => {
-  const { control, onSubmit, formState } = useEdit(work)
+  const { control, onSubmit, formState, isPrivate, toggleIsPrivate } =
+    useEdit(work)
 
   return (
     <Box component='form' onSubmit={onSubmit}>
-      <Header />
+      <Header isPrivate={isPrivate} toggleIsPrivate={toggleIsPrivate} />
       <Container>
         <Controller
           name='title'

@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import { CloseOutlined, SaveAsOutlined } from '@mui/icons-material'
 import {
   Box,
+  Button,
   List,
   ListItem,
   ListItemButton,
@@ -26,7 +27,22 @@ const ButtonWithIcon = ({ icon, text, onClick, type }: ButtonWithIconProps) => (
   </ListItem>
 )
 
-export const Header = () => {
+type Props = {
+  isPrivate: boolean
+  toggleIsPrivate: () => void
+}
+
+const ToggleIsPrivateButon = ({ isPrivate, toggleIsPrivate }: Props) => (
+  <Button
+    onClick={toggleIsPrivate}
+    variant='outlined'
+    sx={{ border: 'none', whiteSpace: 'nowrap', mx: '1rem' }}
+  >
+    {isPrivate ? '非公開' : '公開'}
+  </Button>
+)
+
+export const Header = (props: Props) => {
   const router = useRouter()
 
   return (
@@ -54,6 +70,7 @@ export const Header = () => {
           />
         </List>
         <List sx={{ display: 'flex' }}>
+          <ToggleIsPrivateButon {...props} />
           <ButtonWithIcon icon={<SaveAsOutlined />} text='保存' type='submit' />
         </List>
       </Box>

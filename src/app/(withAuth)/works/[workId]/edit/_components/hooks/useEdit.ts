@@ -16,6 +16,8 @@ type UseEditReturn = {
   thumbnail: string | null
   onThumbnailUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
   onThumbnailRemove: () => void
+  isPrivate: boolean
+  toggleIsPrivate: () => void
 }
 
 export const useEdit = ({
@@ -36,8 +38,6 @@ export const useEdit = ({
       },
     })
 
-  const thumbnail = watch('thumbnail')
-
   const onThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -51,6 +51,8 @@ export const useEdit = ({
     setValue('thumbnail', url)
   }
 
+  const thumbnail = watch('thumbnail')
+
   const onThumbnailRemove = async () => {
     if (!thumbnail) return
 
@@ -62,6 +64,12 @@ export const useEdit = ({
     console.log(data)
   })
 
+  const isPrivate = watch('isPrivate')
+
+  const toggleIsPrivate = () => {
+    setValue('isPrivate', !isPrivate)
+  }
+
   return {
     control,
     onSubmit,
@@ -69,5 +77,7 @@ export const useEdit = ({
     thumbnail,
     onThumbnailUpload,
     onThumbnailRemove,
+    isPrivate,
+    toggleIsPrivate,
   }
 }
