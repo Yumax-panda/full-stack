@@ -6,6 +6,7 @@ import { Box } from '@mui/material'
 
 import { Header } from '../Header/Header'
 import { useEdit } from '../hooks/useEdit'
+import { Thumbnail } from '../Thumbnail'
 import { Tiptap } from '../Tiptap/Tiptap'
 import { TitleField } from '../TitleField'
 
