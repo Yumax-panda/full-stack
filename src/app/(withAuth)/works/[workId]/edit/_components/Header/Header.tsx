@@ -35,8 +35,8 @@ const ToggleIsPrivateButton = ({
   toggleIsPrivate,
 }: ToggleIsPrivateButtonProps) => (
   <ButtonWithIcon
-    icon={isPrivate ? <PublicOutlined /> : <EnhancedEncryptionOutlined />}
-    text={isPrivate ? '公開' : '非公開'}
+    icon={!isPrivate ? <PublicOutlined /> : <EnhancedEncryptionOutlined />}
+    text={!isPrivate ? '「公開」に設定中' : '「非公開」に設定中'}
     onClick={toggleIsPrivate}
   />
 )

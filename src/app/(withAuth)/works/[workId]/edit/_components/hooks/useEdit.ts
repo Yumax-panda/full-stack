@@ -1,4 +1,4 @@
-import type { Control, FormState } from 'react-hook-form'
+import type { Control, FormState, FieldErrors } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -114,14 +114,29 @@ export const useEdit = ({
     // })}
   }
 
+  const getErrorMessage = (e: FieldErrors<FormValues>) => {
+    if (e.title?.type === 'required') {
+      return 'タイトルは必須です'
+    }
+    if (e.title?.type === 'maxLength') {
+      return 'タイトルは100文字以内で入力してください'
+    }
+    if (e.content?.type === 'required') {
+      return '本文は必須です'
+    }
+    return '入力に誤りがあります'
+  }
+
   const onSubmit = handleSubmit(
     async (data) =>
-      toast.promise(submithandler(data), {
-        pending: '更新中',
-        success: '更新しました',
-        error: '更新に失敗しました',
-      }),
-    (invalid) => toast.error(JSON.stringify(invalid)),
+      toast
+        .promise(submithandler(data), {
+          pending: '更新中',
+          success: '更新しました',
+          error: '更新に失敗しました',
+        })
+        .catch((e) => console.error('error, failed to update work : ', e)),
+    (invalid) => toast.error(getErrorMessage(invalid)),
   )
 
   const isPrivate = watch('isPrivate')
