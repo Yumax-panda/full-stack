@@ -1,9 +1,12 @@
 import 'ress'
+import 'react-toastify/dist/ReactToastify.css'
+
+import { Inter } from 'next/font/google'
+import { ToastContainer } from 'react-toastify'
 
 import { CssBaseline } from '@mui/material'
 
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -20,7 +23,10 @@ export default function RootLayout({
     <html lang='ja'>
       <body className={inter.className}>
         <CssBaseline />
-        <div style={{ color: '#696f73' }}>{children}</div>
+        <div style={{ color: '#696f73' }}>
+          <ToastContainer position='top-center' autoClose={5000} />
+          {children}
+        </div>
       </body>
     </html>
   )

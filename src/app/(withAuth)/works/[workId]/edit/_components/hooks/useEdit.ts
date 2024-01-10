@@ -1,6 +1,7 @@
 import type { Control, FormState } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { updateWorkSchema as formSchema } from '@/models'
 import { workImageStorage } from '@/repository/storage'
@@ -69,7 +70,7 @@ export const useEdit = ({
     setValue('thumbnail', null)
   }
 
-  const onSubmit = handleSubmit(async (data) => {
+  const submithandler = async (data: FormValues) => {
     const { id, userId, thumbnail } = data
 
     // データを値渡しでコピー
@@ -110,8 +111,18 @@ export const useEdit = ({
     //     'Content-Type': 'application/json',
     //   },
     //   body: JSON.stringify(updatePayload),
-    // })
-  })
+    // })}
+  }
+
+  const onSubmit = handleSubmit(
+    async (data) =>
+      toast.promise(submithandler(data), {
+        pending: '更新中',
+        success: '更新しました',
+        error: '更新に失敗しました',
+      }),
+    (invalid) => toast.error(JSON.stringify(invalid)),
+  )
 
   const isPrivate = watch('isPrivate')
 
