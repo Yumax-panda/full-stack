@@ -117,15 +117,13 @@ export const useEdit = ({
 
   const getErrorMessage = (e: FieldErrors<FormValues>) => {
     if (e.title?.type === 'required') {
-      return 'タイトルは必須です'
-    }
-    if (e.title?.type === 'maxLength') {
-      return `タイトルは${titleMaxLength}文字以内で入力してください`
+      return 'タイトルは必須です。'
     }
     if (e.content?.type === 'required') {
-      return '本文は必須です'
+      return '本文は必須です。'
     }
-    return '入力に誤りがあります'
+    const messages = Object.values(e).map((v) => v?.message)
+    return messages.join('\n')
   }
 
   const onSubmit = handleSubmit(

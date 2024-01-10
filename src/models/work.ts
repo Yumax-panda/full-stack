@@ -20,20 +20,26 @@ export const isEmpty = (html?: string | null) => {
   return !tmp.textContent?.trim()
 }
 
-export const nonEmptyHtml = z.string().refine((html) => !isEmpty(html))
+export const nonEmptyHtml = z
+  .string()
+  .refine((html) => !isEmpty(html), { message: '本文を入力してください。' })
 
 export const NullishHtml = z.string().transform((v) => (isEmpty(v) ? null : v))
 
 export const trimedNullableTitle = z
   .string()
-  .max(titleMaxLength)
+  .max(titleMaxLength, {
+    message: `タイトルは${titleMaxLength}文字以内で入力してください。`,
+  })
   .transform((v) => (v?.trim().length ? v.trim() : null))
 
 export const nonEmptyTitle = z
   .string()
-  .min(1)
-  .max(titleMaxLength)
-  .refine((v) => v.trim())
+  .min(1, { message: 'タイトルを入力してください。' })
+  .max(titleMaxLength, {
+    message: `タイトルは${titleMaxLength}文字以内で入力してください。`,
+  })
+  .refine((v) => v.trim(), { message: 'タイトルを入力してください。' })
   .transform((v) => v.trim())
 
 export const privateContentSchema = z.object({
