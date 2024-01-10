@@ -64,6 +64,9 @@ const AddThumbnailButton = ({ onThumbnailAdd }: AddThumbnailButtonProps) => {
         style={{ display: 'none' }}
         onChange={onThumbnailAdd}
         ref={inputRef}
+        onClick={(e) => {
+          e.currentTarget.value = ''
+        }}
       />
     </label>
   )
