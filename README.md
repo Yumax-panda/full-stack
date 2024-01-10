@@ -20,6 +20,7 @@ Next.jsのApp Routerで構成。認証機能はAuth.js。
 
 - Material UI (UIコンポーネント)
 - tiptap (エディタ)
+- react-toastify (トースト表示)
 
 ### バックエンド
 
