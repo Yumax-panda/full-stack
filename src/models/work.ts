@@ -2,6 +2,22 @@ import { z } from 'zod'
 
 import { titleMaxLength } from '@/constants/works'
 
+// TODO: サーバー側のバリデーションをテスト
+// NOTE: for server isEmptyがクライアント専用なので、サーバー側のバリデーションを用意する。
+//       認証付けてサイト内のリクエストしか通さないので、サーバー側のバリデーションは少し緩くても問題ないかも
+export const updateWorkInServer = z.object({
+  id: z.string(),
+  userId: z.string(),
+  pinned: z.boolean(),
+  title: z.string().nullable(),
+  content: z.string().nullable(),
+  thumbnail: z.string().nullable(),
+  isPrivate: z.boolean(),
+})
+
+export type UpdateWorkInServer = z.infer<typeof updateWorkInServer>
+
+// for client
 export const thumbnailSchema = z
   .string()
   .nullable()
