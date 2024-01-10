@@ -23,6 +23,7 @@ export async function PATCH(
   const work = parsed.data
   await updateWork(work)
 
+  // TODO: ユーザーマイページworks`/users/[userId]/works`, workの詳細`works/[workId]`のキャッシュを更新
   revalidatePath(`/works/${workId}/edit`, 'page')
   revalidatePath(`/works/${workId}`, 'page')
   return NextResponse.json(work, { status: 200 })
