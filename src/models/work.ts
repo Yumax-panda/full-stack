@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { titleMaxLength } from '@/constants/works'
+
 export const thumbnailSchema = z
   .string()
   .nullable()
@@ -24,13 +26,13 @@ export const NullishHtml = z.string().transform((v) => (isEmpty(v) ? null : v))
 
 export const trimedNullableTitle = z
   .string()
-  .max(100)
+  .max(titleMaxLength)
   .transform((v) => (v?.trim().length ? v.trim() : null))
 
 export const nonEmptyTitle = z
   .string()
   .min(1)
-  .max(100)
+  .max(titleMaxLength)
   .refine((v) => v.trim())
   .transform((v) => v.trim())
 

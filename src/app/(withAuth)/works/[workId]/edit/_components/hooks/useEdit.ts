@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { titleMaxLength } from '@/constants/works'
 import { updateWorkSchema as formSchema } from '@/models'
 import { workImageStorage } from '@/repository/storage'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -119,7 +120,7 @@ export const useEdit = ({
       return 'タイトルは必須です'
     }
     if (e.title?.type === 'maxLength') {
-      return 'タイトルは100文字以内で入力してください'
+      return `タイトルは${titleMaxLength}文字以内で入力してください`
     }
     if (e.content?.type === 'required') {
       return '本文は必須です'
