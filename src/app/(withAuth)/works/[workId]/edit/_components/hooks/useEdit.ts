@@ -26,7 +26,7 @@ export const useEdit = ({
     defaultValues: {
       title: title ?? '',
       content: content ?? '',
-      thumnail: thumbnail ?? '',
+      thumbnail: thumbnail ?? '',
       ...rest,
     },
   })

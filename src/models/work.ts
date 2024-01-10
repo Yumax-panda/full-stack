@@ -1,6 +1,10 @@
 import { z } from 'zod'
 
-// TODO: エディタへ何も入力しないと必ずエラーになる不具合を修正する
+export const thumbnailSchema = z
+  .string()
+  .nullable()
+  .transform((v) => (v?.trim().length ? v.trim() : null))
+
 export const updateWorkCommonSchema = z.object({
   id: z.string(),
   userId: z.string(),
@@ -18,7 +22,7 @@ export const nonEmptyHtml = z.string().refine((html) => !isEmpty(html))
 
 export const NullishHtml = z.string().transform((v) => (isEmpty(v) ? null : v))
 
-export const trimedNullishTitle = z
+export const trimedNullableTitle = z
   .string()
   .max(100)
   .transform((v) => (v?.trim().length ? v.trim() : null))
@@ -31,16 +35,16 @@ export const nonEmptyTitle = z
   .transform((v) => v.trim())
 
 export const privateContentSchema = z.object({
-  title: trimedNullishTitle,
+  title: trimedNullableTitle,
   content: NullishHtml,
-  thumnail: z.string().nullable(),
+  thumbnail: thumbnailSchema,
   isPrivate: z.literal(true),
 })
 
 export const publicContentSchema = z.object({
   title: nonEmptyTitle,
   content: nonEmptyHtml,
-  thumnail: z.string().nullable(),
+  thumbnail: thumbnailSchema,
   isPrivate: z.literal(false),
 })
 

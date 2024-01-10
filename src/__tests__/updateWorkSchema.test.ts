@@ -6,7 +6,7 @@ const commonProps = {
   id: 'test',
   userId: 'test',
   pinned: true,
-  thumnail: 'test',
+  thumbnail: 'test',
 }
 
 test('schema: update PrivateWork without content', () => {
@@ -119,4 +119,28 @@ test('schema: update PrivateWork with content not to be null', () => {
     ...commonProps,
   })
   expect(parsed.content).not.toBeNull()
+})
+
+test('schema: update PrivateWork with thumbnail to be null', () => {
+  const { thumbnail, ...rest } = commonProps
+  const parsed = updateWorkSchema.parse({
+    title: 'test',
+    content: '<div>test</div>',
+    thumbnail: '',
+    isPrivate: true,
+    ...rest,
+  })
+  expect(parsed.thumbnail).toBeNull()
+})
+
+test('schema: update PrivateWork with thumbnail not to be null', () => {
+  const { thumbnail, ...rest } = commonProps
+  const parsed = updateWorkSchema.parse({
+    title: 'test',
+    content: '<div>test</div>',
+    thumbnail: 'test',
+    isPrivate: true,
+    ...rest,
+  })
+  expect(parsed.thumbnail).toBe('test')
 })
