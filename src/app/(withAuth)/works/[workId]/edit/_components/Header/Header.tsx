@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useRef } from 'react'
 
 import {
   AddPhotoAlternateOutlined,
@@ -45,22 +45,29 @@ type AddThumbnailButtonProps = {
   onThumbnailAdd: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const AddThumbnailButton = ({ onThumbnailAdd }: AddThumbnailButtonProps) => (
-  <label htmlFor='thumbnail'>
-    <ButtonWithIcon
-      icon={<AddPhotoAlternateOutlined />}
-      text='サムネイル'
-      type='button'
-    />
-    <input
-      id='thumbnail'
-      type='file'
-      accept='image/*'
-      style={{ display: 'none' }}
-      onChange={onThumbnailAdd}
-    />
-  </label>
-)
+// onClickとonChangeが重複してonChangeが発火しないのでrefを使ってinputをクリックする
+const AddThumbnailButton = ({ onThumbnailAdd }: AddThumbnailButtonProps) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  return (
+    <label htmlFor='thumbnail'>
+      <ButtonWithIcon
+        icon={<AddPhotoAlternateOutlined />}
+        text='サムネイル'
+        type='button'
+        onClick={() => inputRef.current?.click()}
+      />
+      <input
+        id='thumbnail'
+        type='file'
+        accept='image/*'
+        style={{ display: 'none' }}
+        onChange={onThumbnailAdd}
+        ref={inputRef}
+      />
+    </label>
+  )
+}
 
 type Props = ToggleIsPrivateButtonProps & AddThumbnailButtonProps
 export const Header = ({
