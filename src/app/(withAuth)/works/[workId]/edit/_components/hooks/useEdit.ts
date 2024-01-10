@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { titleMaxLength } from '@/constants/works'
 import { updateWorkSchema as formSchema } from '@/models'
 import { workImageStorage } from '@/repository/storage'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -103,16 +102,13 @@ export const useEdit = ({
       await Promise.all(tasks)
     }
 
-    console.log('updatePayload', updatePayload)
-
-    // apiに送信
-    // await fetch(`/api/works/${id}`, {
-    //   method: 'PATCH',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(updatePayload),
-    // })}
+    await fetch(`/api/works/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatePayload),
+    })
   }
 
   const getErrorMessage = (e: FieldErrors<FormValues>) => {

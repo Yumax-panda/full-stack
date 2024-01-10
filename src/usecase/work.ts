@@ -4,6 +4,8 @@ import { getSession } from '@/lib/auth'
 import { prisma } from '@/lib/client'
 import { createNewWork, getEmptyWork } from '@/repository/work'
 
+import type { UpdateWorkInServer } from '@/models'
+
 import type { Work } from '@prisma/client'
 
 export async function getOrCreateEmptyWork(userId: string): Promise<Work> {
@@ -33,14 +35,10 @@ export async function getMyWorkByWorkId(workId: string): Promise<Work | null> {
   return work
 }
 
-type UpdateProps = {
-  workId: string
-} & Partial<Work>
-
 export async function updateWork({
-  workId,
+  id: workId,
   ...data
-}: UpdateProps): Promise<Work | null> {
+}: UpdateWorkInServer): Promise<Work | null> {
   const work = await prisma.work.update({
     where: {
       id: workId,

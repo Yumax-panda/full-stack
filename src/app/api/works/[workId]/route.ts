@@ -1,16 +1,11 @@
+import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
-import { z } from 'zod'
 
 import { getSession } from '@/lib/auth'
+import { updateWorkInServer } from '@/models'
 import { updateWork } from '@/usecase/work'
 
-const formSchema = z.object({
-  title: z.string().nullish(),
-  content: z.string().nullish(),
-  thumnail: z.string().nullish(),
-})
-
-export async function POST(
+export async function PATCH(
   req: NextRequest,
   { params: { workId } }: { params: { workId: string } },
 ) {
@@ -20,19 +15,15 @@ export async function POST(
   }
 
   const body = await req.json()
-  const form = formSchema.safeParse(body)
-  if (!form.success) {
-    return NextResponse.json({ error: form.error }, { status: 400 })
+  const parsed = updateWorkInServer.safeParse(body)
+
+  if (!parsed.success) {
+    return NextResponse.json(parsed.error, { status: 400 })
   }
+  const work = parsed.data
+  await updateWork(work)
 
-  const work = await updateWork({
-    workId,
-    ...form.data,
-  })
-
-  if (!work) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 })
-  }
-
+  revalidatePath(`/works/${workId}/edit`, 'page')
+  revalidatePath(`/works/${workId}`, 'page')
   return NextResponse.json(work, { status: 200 })
 }
