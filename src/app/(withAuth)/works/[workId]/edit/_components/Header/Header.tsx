@@ -1,15 +1,14 @@
 import { useRouter } from 'next/navigation'
+import { ChangeEvent } from 'react'
 
-import { CloseOutlined, SaveAsOutlined } from '@mui/icons-material'
 import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from '@mui/material'
+  AddPhotoAlternateOutlined,
+  CloseOutlined,
+  EnhancedEncryptionOutlined,
+  PublicOutlined,
+  SaveAsOutlined,
+} from '@mui/icons-material'
+import { Box, IconButton, List, Tooltip } from '@mui/material'
 
 type ButtonWithIconProps = {
   icon: any
@@ -19,30 +18,56 @@ type ButtonWithIconProps = {
 }
 
 const ButtonWithIcon = ({ icon, text, onClick, type }: ButtonWithIconProps) => (
-  <ListItem disablePadding>
-    <ListItemButton onClick={onClick} type={type} component='button'>
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText primary={text} />
-    </ListItemButton>
-  </ListItem>
+  <Tooltip title={text} sx={{ mx: '0.5rem' }}>
+    <IconButton onClick={onClick} type={type}>
+      {icon}
+    </IconButton>
+  </Tooltip>
 )
 
-type Props = {
+type ToggleIsPrivateButtonProps = {
   isPrivate: boolean
   toggleIsPrivate: () => void
 }
 
-const ToggleIsPrivateButon = ({ isPrivate, toggleIsPrivate }: Props) => (
-  <Button
+const ToggleIsPrivateButton = ({
+  isPrivate,
+  toggleIsPrivate,
+}: ToggleIsPrivateButtonProps) => (
+  <ButtonWithIcon
+    icon={isPrivate ? <PublicOutlined /> : <EnhancedEncryptionOutlined />}
+    text={isPrivate ? '公開' : '非公開'}
     onClick={toggleIsPrivate}
-    variant='outlined'
-    sx={{ border: 'none', whiteSpace: 'nowrap', mx: '1rem' }}
-  >
-    {isPrivate ? '非公開' : '公開'}
-  </Button>
+  />
 )
 
-export const Header = (props: Props) => {
+type AddThumbnailButtonProps = {
+  onThumbnailAdd: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+const AddThumbnailButton = ({ onThumbnailAdd }: AddThumbnailButtonProps) => (
+  <label htmlFor='thumbnail'>
+    <ButtonWithIcon
+      icon={<AddPhotoAlternateOutlined />}
+      text='サムネイル'
+      type='button'
+    />
+    <input
+      id='thumbnail'
+      type='file'
+      accept='image/*'
+      style={{ display: 'none' }}
+      onChange={onThumbnailAdd}
+    />
+  </label>
+)
+
+type Props = ToggleIsPrivateButtonProps & AddThumbnailButtonProps
+export const Header = ({
+  isPrivate,
+  toggleIsPrivate,
+  onThumbnailAdd,
+}: Props) => {
   const router = useRouter()
 
   return (
@@ -70,7 +95,11 @@ export const Header = (props: Props) => {
           />
         </List>
         <List sx={{ display: 'flex' }}>
-          <ToggleIsPrivateButon {...props} />
+          <AddThumbnailButton onThumbnailAdd={onThumbnailAdd} />
+          <ToggleIsPrivateButton
+            isPrivate={isPrivate}
+            toggleIsPrivate={toggleIsPrivate}
+          />
           <ButtonWithIcon icon={<SaveAsOutlined />} text='保存' type='submit' />
         </List>
       </Box>
