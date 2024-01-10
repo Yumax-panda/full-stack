@@ -42,7 +42,7 @@ export const Editor = ({ work }: Props) => {
             <TitleField value={value ?? ''} placeholder='タイトル' {...rest} />
           )}
         />
-        <Box sx={{ display: 'flex', py: '2rem' }}>
+        <Box sx={{ display: 'flex' }}>
           <Thumbnail url={thumbnail} onClick={onThumbnailRemove} />
         </Box>
         <Controller

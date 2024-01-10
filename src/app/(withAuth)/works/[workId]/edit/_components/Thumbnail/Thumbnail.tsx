@@ -17,7 +17,7 @@ export const Thumbnail = ({ url, onClick }: Props) => {
         position: 'relative',
         width: { sm: 400 },
         height: { sm: 250 },
-        m: 'auto',
+        m: '2rem auto',
       }}
     >
       <Image
