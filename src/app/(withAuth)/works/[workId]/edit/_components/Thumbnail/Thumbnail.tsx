@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { Close } from '@mui/icons-material'
-import { Box } from '@mui/material'
+import { Box, IconButton, Tooltip } from '@mui/material'
 
 type Props = {
   url?: string | null
@@ -22,15 +22,19 @@ export const Thumbnail = ({ url, onClick }: Props) => {
         height={250}
         style={{ borderRadius: '0.5rem' }}
       />
-      <Close
-        sx={{
-          position: 'absolute',
-          top: '0.5rem',
-          right: '0.5rem',
-          cursor: 'pointer',
-        }}
-        onClick={onClick}
-      />
+      <Tooltip title='削除'>
+        <IconButton
+          sx={{
+            position: 'absolute',
+            top: '0.5rem',
+            right: '0.5rem',
+            color: 'white',
+          }}
+          onClick={onClick}
+        >
+          <Close />
+        </IconButton>
+      </Tooltip>
     </Box>
   )
 }
