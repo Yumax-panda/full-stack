@@ -12,15 +12,13 @@ export const Thumbnail = ({ url, onClick }: Props) => {
   if (!url) return null
 
   return (
-    <Box
-      sx={{ position: 'relative', width: 'fit-content', height: 'fit-content' }}
-    >
+    <Box sx={{ position: 'relative', width: { sm: 400 }, height: { sm: 250 } }}>
       <Image
         src={url}
         alt='thumbnail'
         width={400}
         height={250}
-        style={{ borderRadius: '0.5rem' }}
+        style={{ borderRadius: '0.5rem', width: '100%', height: '100%' }}
       />
       <Tooltip title='削除'>
         <IconButton

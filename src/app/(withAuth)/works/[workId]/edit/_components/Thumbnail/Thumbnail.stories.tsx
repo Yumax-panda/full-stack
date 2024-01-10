@@ -14,3 +14,16 @@ export const Default: Story = {
     onClick: () => {},
   },
 }
+
+export const NoImage: Story = {
+  args: {
+    url: null,
+    onClick: () => {},
+  },
+}
+
+export const NoOnClick: Story = {
+  args: {
+    url: 'https://mui.com/static/images/cards/live-from-space.jpg',
+  },
+}
