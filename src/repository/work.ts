@@ -1,21 +1,30 @@
 import type { Work } from '@prisma/client'
 import { prisma } from '@/lib/client'
 
-export type PartialWork = Pick<Work, 'id' | 'title' | 'thumbnail'>
+export type PartialWork = {
+  id: string
+  title: string
+  thumbnail: string | null
+  updatedAt: Date
+}
 
-export async function getPartialWorksByUserId(
+export async function getPublicPartialWorksByUserId(
   userId: string,
 ): Promise<PartialWork[]> {
   return prisma.work.findMany({
     where: {
       userId,
+      isPrivate: false,
+      title: { not: null },
+      content: { not: null },
     },
     select: {
       id: true,
       title: true,
       thumbnail: true,
+      updatedAt: true,
     },
-  })
+  }) as Promise<PartialWork[]>
 }
 
 export async function getWorkById(workId: string): Promise<Work | null> {
