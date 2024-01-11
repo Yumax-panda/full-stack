@@ -2,12 +2,12 @@
 import { Controller } from 'react-hook-form'
 
 import { Container } from '@/app/_components/Container/Container'
+import { Thumbnail } from '@/app/_components/Thumbnail'
 import { Tiptap } from '@/app/_components/Tiptap/Tiptap'
 import { Box } from '@mui/material'
 
 import { Header } from '../Header/Header'
 import { useEdit } from '../hooks/useEdit'
-import { Thumbnail } from '../Thumbnail'
 import { TitleField } from '../TitleField'
 
 import type { Work } from '@prisma/client'

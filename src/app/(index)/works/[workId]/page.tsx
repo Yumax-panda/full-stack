@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 
-import { Tiptap } from '@/app/_components/Tiptap/Tiptap'
 import { getPublicWork } from '@/repository/work'
-import { Container } from '@mui/material'
+
+import { Content } from './_components/Content'
 
 export default async function WorkDetailPage({
   params: { workId },
@@ -16,10 +16,5 @@ export default async function WorkDetailPage({
     return notFound()
   }
 
-  return (
-    <Container>
-      <h1>{work.title}</h1>
-      <Tiptap content={work.content || ''} editable={false} />
-    </Container>
-  )
+  return <Content {...work} />
 }
