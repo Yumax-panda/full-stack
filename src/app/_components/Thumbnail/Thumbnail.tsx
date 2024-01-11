@@ -33,8 +33,8 @@ export const Thumbnail = ({ url, onClick, omitDeleteButton }: Props) => {
           boxShadow: '0 0 0.5rem rgba(0, 0, 0, 0.2)',
         }}
       />
-      {
-        !omitDeleteButton ? (<Tooltip title='削除'>
+      {!omitDeleteButton ? (
+        <Tooltip title='削除'>
           <IconButton
             sx={{
               position: 'absolute',
@@ -46,8 +46,8 @@ export const Thumbnail = ({ url, onClick, omitDeleteButton }: Props) => {
           >
             <Close />
           </IconButton>
-        </Tooltip>) : null
-      }
+        </Tooltip>
+      ) : null}
     </Box>
   )
 }

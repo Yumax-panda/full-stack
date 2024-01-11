@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { SessionProvider } from 'next-auth/react'
 
@@ -7,7 +7,5 @@ type Props = {
 }
 
 export const AuthProvider = ({ children }: Props) => (
-  <SessionProvider>
-    {children}
-  </SessionProvider>
+  <SessionProvider>{children}</SessionProvider>
 )

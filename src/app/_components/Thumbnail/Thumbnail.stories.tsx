@@ -11,28 +11,28 @@ type Story = StoryObj<typeof Thumbnail>
 export const Default: Story = {
   args: {
     url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg',
-    onClick: () => { },
+    onClick: () => {},
   },
 }
 
 export const NoImage: Story = {
   args: {
     url: null,
-    onClick: () => { },
+    onClick: () => {},
   },
 }
 
 export const NoOnClick: Story = {
   args: {
     url: 'https://mui.com/static/images/cards/live-from-space.jpg',
-    onClick: () => { },
+    onClick: () => {},
   },
 }
 
 export const NoDeleteButton: Story = {
   args: {
     url: 'https://mui.com/static/images/cards/live-from-space.jpg',
-    onClick: () => { },
+    onClick: () => {},
     omitDeleteButton: true,
   },
 }
