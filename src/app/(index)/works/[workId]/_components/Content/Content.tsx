@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import type { Work as Props } from '@prisma/client'
 import { Title } from '@/app/_components/Text/Title'
@@ -7,8 +7,8 @@ import { Tiptap } from '@/app/_components/Tiptap/Tiptap'
 
 export const Content = ({ title, content, thumbnail }: Props) => (
   <div>
-    <Title title={title || ""} />
-    <Thumbnail url={thumbnail} onClick={() => { }} omitDeleteButton />
-    <Tiptap content={content || ""} editable={false} />
+    <Title title={title || ''} />
+    <Thumbnail url={thumbnail} onClick={() => {}} omitDeleteButton />
+    <Tiptap content={content || ''} editable={false} />
   </div>
 )
