@@ -1,6 +1,6 @@
 import { Container } from '@mui/material'
 
-import { Header } from './_components/Header/Header'
+import { Header } from './_components/Header'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
