@@ -17,10 +17,14 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
 
   const router = useRouter()
 
-  const redirectToMyPage = () => router.push(routes.userSkill(id))
+  const redirectToMyPage = () => {
+    router.push(routes.userSkill(id))
+    handleCloseMenu()
+  }
 
   const handleSignOut = () => {
     signOut()
+    handleCloseMenu()
   }
 
   return (
