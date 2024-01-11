@@ -20,11 +20,11 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'https://d2l930y2yx77uc.cloudfront.net',
+        hostname: 'd2l930y2yx77uc.cloudfront.net',
       },
       {
         protocol: 'https',
-        hostname: 'https://firebasestorage.googleapis.com',
+        hostname: 'firebasestorage.googleapis.com',
       },
     ],
   },
