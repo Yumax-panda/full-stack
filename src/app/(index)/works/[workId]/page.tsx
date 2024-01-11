@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { Tiptap } from '@/app/(withAuth)/works/[workId]/edit/_components/Tiptap/Tiptap'
+import { Tiptap } from '@/app/_components/Tiptap/Tiptap'
 import { getPublicWork } from '@/repository/work'
 import { Container } from '@mui/material'
 
