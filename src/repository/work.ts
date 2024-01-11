@@ -3,6 +3,7 @@ import { prisma } from '@/lib/client'
 
 export type PartialWork = {
   id: string
+  userId: string
   title: string
   thumbnail: string | null
   updatedAt: Date
@@ -20,6 +21,7 @@ export async function getPublicPartialWorksByUserId(
     },
     select: {
       id: true,
+      userId: true,
       title: true,
       thumbnail: true,
       updatedAt: true,

@@ -20,9 +20,9 @@ const ThumbnailWithoutImage = () => (
   </Box>
 )
 
-export const WorkCard = ({ id, title, thumbnail, updatedAt }: Props) => (
+export const WorkCard = ({ id, userId, title, thumbnail, updatedAt }: Props) => (
   <Link
-    href={routes.workDetails(id)}
+    href={routes.userWorkDetail(userId, id)}
     passHref
     style={{ textDecoration: 'none' }}
   >
