@@ -3,7 +3,14 @@ import { useRouter } from 'next/navigation'
 
 import { routes } from '@/lib/routes'
 import { AccountCircleOutlined, LogoutOutlined } from '@mui/icons-material'
-import { Avatar, IconButton, Menu, MenuItem, Typography } from '@mui/material'
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+} from '@mui/material'
 
 import { useMenu } from '../hooks/useMenu'
 
@@ -43,7 +50,7 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
         id='menu-appbar'
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'top',
+          vertical: 'bottom',
           horizontal: 'right',
         }}
         keepMounted
@@ -53,10 +60,39 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
         }}
         open={Boolean(anchorEl)}
         onClose={handleCloseMenu}
+        slotProps={{
+          paper: {
+            elevation: 0,
+            sx: {
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+              mt: 1.5,
+              '& .MuiAvatar-root': {
+                width: 32,
+                height: 32,
+                ml: -0.5,
+                mr: 1,
+              },
+              '&::before': {
+                content: '""',
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                right: 14,
+                width: 10,
+                height: 10,
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
+            },
+          },
+        }}
       >
         <MenuItem>
           <Typography>{name}</Typography>
         </MenuItem>
+        <Divider />
         <MenuItem onClick={redirectToMyPage}>
           <AccountCircleOutlined sx={{ mr: 1 }} />
           マイページ
