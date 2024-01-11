@@ -6,6 +6,8 @@ import { ToastContainer } from 'react-toastify'
 
 import { CssBaseline } from '@mui/material'
 
+import { AuthProvider } from './_components/Provider/AuthProvider'
+
 import type { Metadata } from 'next'
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,14 +22,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang='ja'>
-      <body className={inter.className}>
-        <CssBaseline />
-        <div style={{ color: '#696f73' }}>
-          <ToastContainer position='top-center' autoClose={5000} />
-          {children}
-        </div>
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang='ja'>
+        <body className={inter.className}>
+          <CssBaseline />
+          <div style={{ color: '#696f73' }}>
+            <ToastContainer position='top-center' autoClose={5000} />
+            {children}
+          </div>
+        </body>
+      </html>
+    </AuthProvider>
   )
 }
