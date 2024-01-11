@@ -3,8 +3,9 @@
 import { useSession } from 'next-auth/react'
 import OriginalLink from 'next/link'
 
+import { Container } from '@/app/_components/Container/Container'
 import { routes } from '@/lib/routes'
-import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Toolbar, Typography } from '@mui/material'
 
 import { AccountIconButton } from '../AccountIconButton.tsx'
 import { SignInIconButton } from '../SignInIconButton'
@@ -28,7 +29,7 @@ export const Header = () => {
 
   return (
     <AppBar position='static'>
-      <Container maxWidth='xl'>
+      <Container>
         <Toolbar disableGutters>
           <Link>
             <Typography
