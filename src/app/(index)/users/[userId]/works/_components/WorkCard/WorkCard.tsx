@@ -1,4 +1,5 @@
 import type { PartialWork as Props } from '@/repository/work'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { formatDate } from '@/lib/formatDate'
@@ -13,6 +14,7 @@ const ThumbnailWithoutImage = () => (
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: 'grey.300',
+      height: 230,
     }}
   >
     <AutoAwesomeOutlined sx={{ fontSize: 80 }} />
@@ -25,9 +27,9 @@ export const WorkCard = ({ id, title, thumbnail, updatedAt }: Props) => (
     passHref
     style={{ textDecoration: 'none' }}
   >
-    <Card sx={{ maxWidth: 400 }}>
+    <Card sx={{ maxWidth: 368 }}>
       {thumbnail ? (
-        <CardMedia component='img' image={thumbnail} alt={title} />
+        <Image src={thumbnail} alt={title} width={368} height={230} objectFit='cover' />
       ) : (
         <ThumbnailWithoutImage />
       )}
