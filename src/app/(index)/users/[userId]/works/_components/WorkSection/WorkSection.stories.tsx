@@ -27,7 +27,8 @@ export const Default: Story = {
       {
         id: '2',
         title: 'タイトル',
-        thumbnail: 'https://mui.com/static/images/cards/contemplative-reptile.jpg',
+        thumbnail:
+          'https://mui.com/static/images/cards/contemplative-reptile.jpg',
         updatedAt: new Date(),
       },
       {

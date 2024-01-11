@@ -29,7 +29,13 @@ export const WorkCard = ({ id, title, thumbnail, updatedAt }: Props) => (
   >
     <Card sx={{ maxWidth: 368 }}>
       {thumbnail ? (
-        <Image src={thumbnail} alt={title} width={368} height={230} objectFit='cover' />
+        <Image
+          src={thumbnail}
+          alt={title}
+          width={368}
+          height={230}
+          objectFit='cover'
+        />
       ) : (
         <ThumbnailWithoutImage />
       )}

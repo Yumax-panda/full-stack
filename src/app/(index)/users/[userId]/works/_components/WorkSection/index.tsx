@@ -1,1 +1,1 @@
-export * from "./WorkSection"
+export * from './WorkSection'
