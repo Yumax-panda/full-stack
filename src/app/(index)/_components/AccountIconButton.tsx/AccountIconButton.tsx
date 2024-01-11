@@ -1,5 +1,5 @@
 import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import { routes } from '@/lib/routes'
 import { AccountCircleOutlined, LogoutOutlined } from '@mui/icons-material'
@@ -7,8 +7,9 @@ import { Avatar, IconButton, Menu, MenuItem, Typography } from '@mui/material'
 
 import { useMenu } from '../hooks/useMenu'
 
-import type { User } from '@prisma/client'
+import type { Session } from 'next-auth'
 
+type User = NonNullable<Session['user']>
 type Props = Pick<User, 'id' | 'name' | 'image'>
 
 export const AccountIconButton = ({ id, name, image }: Props) => {
