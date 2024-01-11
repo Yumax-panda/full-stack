@@ -16,7 +16,6 @@ export const Thumbnail = ({ url, onClick }: Props) => {
       sx={{
         position: 'relative',
         width: { sm: 400 },
-        height: { sm: 250 },
         m: '2rem auto',
       }}
     >
@@ -25,7 +24,13 @@ export const Thumbnail = ({ url, onClick }: Props) => {
         alt='thumbnail'
         width={400}
         height={250}
-        style={{ borderRadius: '0.5rem', width: '100%', height: '100%' }}
+        style={{
+          borderRadius: '0.5rem',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          boxShadow: '0 0 0.5rem rgba(0, 0, 0, 0.2)',
+        }}
       />
       <Tooltip title='削除'>
         <IconButton
