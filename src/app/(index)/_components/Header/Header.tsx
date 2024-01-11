@@ -1,11 +1,26 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
+import OriginalLink from 'next/link'
 
+import { routes } from '@/lib/routes'
 import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material'
 
 import { AccountIconButton } from '../AccountIconButton.tsx'
 import { SignInIconButton } from '../SignInIconButton'
+
+type LinkProps = {
+  children: React.ReactNode
+}
+
+const Link = ({ children }: LinkProps) => (
+  <OriginalLink
+    href={routes.top()}
+    style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}
+  >
+    {children}
+  </OriginalLink>
+)
 
 export const Header = () => {
   const { data: session } = useSession()
@@ -15,39 +30,37 @@ export const Header = () => {
     <AppBar position='static'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <Typography
-            variant='h6'
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              flexGrow: 1,
-            }}
-          >
-            Full Stack
-          </Typography>
+          <Link>
+            <Typography
+              variant='h6'
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontWeight: 700,
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              Full Stack
+            </Typography>
+          </Link>
 
-          <Typography
-            variant='h5'
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Full Stack
-          </Typography>
+          <Link>
+            <Typography
+              variant='h5'
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                fontWeight: 700,
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              Full Stack
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 0 }}>
             {user ? <AccountIconButton {...user} /> : <SignInIconButton />}
