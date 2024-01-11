@@ -1,5 +1,12 @@
 import { Container } from '@mui/material'
 
+import { Header } from './_components/Header/Header'
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <Container sx={{ py: '2rem' }}>{children}</Container>
+  return (
+    <div>
+      <Header />
+      <Container sx={{ py: '2rem' }}>{children}</Container>
+    </div>
+  )
 }
