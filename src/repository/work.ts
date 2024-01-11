@@ -3,7 +3,6 @@ import { prisma } from '@/lib/client'
 
 export type PartialWork = {
   id: string
-  userId: string
   title: string
   thumbnail: string | null
   updatedAt: Date
@@ -21,7 +20,6 @@ export async function getPublicPartialWorksByUserId(
     },
     select: {
       id: true,
-      userId: true,
       title: true,
       thumbnail: true,
       updatedAt: true,
@@ -56,5 +54,16 @@ export async function createNewWork(userId: string): Promise<Work> {
 export async function getEmptyWork(userId: string): Promise<Work | null> {
   return prisma.work.findFirst({
     where: { userId, title: null, content: null, thumbnail: null },
+  })
+}
+
+export async function getPublicWork(workId: string): Promise<Work | null> {
+  return prisma.work.findFirst({
+    where: {
+      id: workId,
+      isPrivate: false,
+      title: { not: null },
+      content: { not: null },
+    },
   })
 }

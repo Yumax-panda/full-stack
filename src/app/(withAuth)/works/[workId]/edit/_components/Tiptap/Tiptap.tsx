@@ -1,3 +1,5 @@
+'use client'
+
 import './Tiptap.css'
 
 import Image from '@tiptap/extension-image' // eslint-disable-line import/no-named-as-default
@@ -7,10 +9,15 @@ import StarterKit from '@tiptap/starter-kit' // eslint-disable-line import/no-na
 
 type Props = {
   content: string
-  onChange: (content: string) => void
+  onChange?: (content: string) => void
+  editable?: boolean
 }
 
-export const Tiptap = ({ content, onChange }: Props) => {
+export const Tiptap = ({
+  content,
+  onChange = () => {},
+  editable = true,
+}: Props) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -21,6 +28,7 @@ export const Tiptap = ({ content, onChange }: Props) => {
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML())
     },
+    editable,
   })
 
   return <EditorContent editor={editor} />
