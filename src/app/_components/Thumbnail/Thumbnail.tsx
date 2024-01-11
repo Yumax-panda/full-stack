@@ -5,10 +5,11 @@ import { Box, IconButton, Tooltip } from '@mui/material'
 
 type Props = {
   url?: string | null
-  onClick?: () => void
+  onClick: () => void
+  omitDeleteButton?: boolean
 }
 
-export const Thumbnail = ({ url, onClick }: Props) => {
+export const Thumbnail = ({ url, onClick, omitDeleteButton }: Props) => {
   if (!url) return null
 
   return (
@@ -32,19 +33,21 @@ export const Thumbnail = ({ url, onClick }: Props) => {
           boxShadow: '0 0 0.5rem rgba(0, 0, 0, 0.2)',
         }}
       />
-      <Tooltip title='削除'>
-        <IconButton
-          sx={{
-            position: 'absolute',
-            top: '0.5rem',
-            right: '0.5rem',
-            color: 'white',
-          }}
-          onClick={onClick}
-        >
-          <Close />
-        </IconButton>
-      </Tooltip>
+      {
+        !omitDeleteButton ? (<Tooltip title='削除'>
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: '0.5rem',
+              right: '0.5rem',
+              color: 'white',
+            }}
+            onClick={onClick}
+          >
+            <Close />
+          </IconButton>
+        </Tooltip>) : null
+      }
     </Box>
   )
 }

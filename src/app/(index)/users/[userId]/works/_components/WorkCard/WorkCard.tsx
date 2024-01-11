@@ -22,7 +22,7 @@ const ThumbnailWithoutImage = () => (
 
 export const WorkCard = ({ id, title, thumbnail, updatedAt }: Props) => (
   <Link
-    href={routes.workDetails(id)}
+    href={routes.workDetail(id)}
     passHref
     style={{ textDecoration: 'none' }}
   >

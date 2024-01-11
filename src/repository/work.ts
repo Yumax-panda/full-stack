@@ -56,3 +56,14 @@ export async function getEmptyWork(userId: string): Promise<Work | null> {
     where: { userId, title: null, content: null, thumbnail: null },
   })
 }
+
+export async function getPublicWork(workId: string): Promise<Work | null> {
+  return prisma.work.findFirst({
+    where: {
+      id: workId,
+      isPrivate: false,
+      title: { not: null },
+      content: { not: null },
+    },
+  })
+}
