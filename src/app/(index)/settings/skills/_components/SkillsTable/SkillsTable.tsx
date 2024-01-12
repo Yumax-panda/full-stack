@@ -8,6 +8,9 @@ import { Box, IconButton, Tooltip } from '@mui/material'
 
 import { UpdateSkillForm } from '../UpdateSkillForm'
 
+// NOTE: tableの内側にフォームをネストできないのでdisplay: table系のコンポーネントを使う
+// TODO: テーブルのスタイルを調整する
+
 const TableRow = ({ children }: { children: React.ReactNode }) => (
   <Box sx={{ display: 'table-row' }}>{children}</Box>
 )
