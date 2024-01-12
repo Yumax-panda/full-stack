@@ -188,3 +188,7 @@ export const skills: Skill[] = [
     image: url('Postman'),
   },
 ]
+
+export const getImage = (name: string) => {
+  return skills.find((skill) => skill.name === name)?.image ?? null
+}
