@@ -1,5 +1,6 @@
 import { getPublicPartialWorksByUserId } from '@/repository/work'
 
+import { WorkAddButton } from './_components/WorkAddButton'
 import { WorkSection } from './_components/WorkSection'
 
 export default async function Work({
@@ -9,5 +10,10 @@ export default async function Work({
 }) {
   const works = await getPublicPartialWorksByUserId(userId)
 
-  return <WorkSection works={works} />
+  return (
+    <>
+      <WorkAddButton userId={userId} />
+      <WorkSection works={works} />
+    </>
+  )
 }
