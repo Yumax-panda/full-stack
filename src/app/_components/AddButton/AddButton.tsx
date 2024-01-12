@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const AddButton = ({ onClick, text, type = 'button' }: Props) => (
-  <Tooltip title={text}>
+  <Tooltip title={text} arrow placement='top-end'>
     <IconButton
       color='inherit'
       onClick={onClick}
