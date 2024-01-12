@@ -1,13 +1,23 @@
 import { Check, Close } from '@mui/icons-material'
 import {
-  Button, IconButton, MenuItem, OutlinedInput, Select, Slider, TextField, Tooltip
+  Button,
+  IconButton,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  Slider,
+  TextField,
+  Tooltip,
 } from '@mui/material'
 
 import { updateSkillAction } from './action'
 
 import type { SkillWithTags, Tag } from '@/models'
 
-type Props = SkillWithTags & { tags: Pick<Tag, 'id' | 'name'>[], onClose: () => void }
+type Props = SkillWithTags & {
+  tags: Pick<Tag, 'id' | 'name'>[]
+  onClose: () => void
+}
 
 export const UpdateSkillForm = ({ id, name, level, tags, onClose }: Props) => {
   const action = updateSkillAction.bind(null, id)

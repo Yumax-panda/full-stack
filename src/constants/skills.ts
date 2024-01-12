@@ -30,7 +30,7 @@ type Skill = {
 const url = (name: string) =>
   `https://raw.githubusercontent.com/tandpfun/skill-icons/59059d9d1a2c092696dc66e00931cc1181a4ce1f/icons/${name}.svg`
 
-const skills: Skill[] = [
+export const skills: Skill[] = [
   {
     name: 'AWS',
     image: url('AWS-Light'),

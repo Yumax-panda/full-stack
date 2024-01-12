@@ -72,7 +72,11 @@ const EditableRow = ({ skill }: EditableTableRowProps) => {
         borderBottom: '1px solid lightgray',
       }}
     >
-      {open ? <UpdateSkillForm {...skill} onClose={handleClose} /> : <SkillTableRow />}
+      {open ? (
+        <UpdateSkillForm {...skill} onClose={handleClose} />
+      ) : (
+        <SkillTableRow />
+      )}
     </Box>
   )
 }

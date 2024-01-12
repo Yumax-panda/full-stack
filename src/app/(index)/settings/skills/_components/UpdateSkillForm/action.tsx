@@ -25,5 +25,5 @@ export async function updateSkillAction(skillId: string, formData: FormData) {
     throw new Error(parsed.error.message)
   }
   await updateSkill(parsed.data)
-  revalidatePath(routes.userSkillEdit(), "page")
+  revalidatePath(routes.userSkillEdit(), 'page')
 }
