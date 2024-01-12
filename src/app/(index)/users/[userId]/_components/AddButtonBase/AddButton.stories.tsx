@@ -11,6 +11,6 @@ type Story = StoryObj<typeof AddButtonBase>
 export const Default: Story = {
   args: {
     text: 'Add',
-    onClick: () => { },
+    onClick: () => {},
   },
 }
