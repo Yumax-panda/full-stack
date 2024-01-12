@@ -1,13 +1,7 @@
+import { skills } from '@/constants/skills'
 import { Check, Close } from '@mui/icons-material'
 import {
-  Button,
-  IconButton,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  Slider,
-  TextField,
-  Tooltip,
+  Autocomplete, IconButton, MenuItem, OutlinedInput, Select, Slider, TextField, Tooltip
 } from '@mui/material'
 
 import { updateSkillAction } from './action'
@@ -24,12 +18,12 @@ export const UpdateSkillForm = ({ id, name, level, tags, onClose }: Props) => {
 
   return (
     <form action={action}>
-      <TextField
-        name='name'
-        defaultValue={name}
-        variant='outlined'
-        margin='normal'
-        required
+      <Autocomplete
+        options={skills.map((skill) => skill.name)}
+        renderInput={(params) => (
+          <TextField {...params} label='スキル名' name='name' />
+        )}
+        defaultValue={skills.find((skill) => skill.name === name)?.name}
       />
       <Slider
         name='level'
