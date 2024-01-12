@@ -1,5 +1,8 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
+
+import { routes } from '@/lib/routes'
 import { updateSkillSchema } from '@/models'
 import { updateSkill } from '@/repository/skill'
 
@@ -17,12 +20,10 @@ export async function updateSkillAction(skillId: string, formData: FormData) {
     data.level = Number(level)
   }
 
-  try {
-    const skill = updateSkillSchema.parse(data)
-    // await updateSkill(skill)
-    console.log('skill: ', skill)
-  } catch (error) {
-    console.error(error)
-    console.error('data: ', data)
+  const parsed = updateSkillSchema.safeParse(data)
+  if (!parsed.success) {
+    throw new Error(parsed.error.message)
   }
+  await updateSkill(parsed.data)
+  revalidatePath(routes.userSkillEdit(), "page")
 }
