@@ -11,7 +11,7 @@ type StarProps = {
   size?: string | number
 }
 
-const Star = ({ filled, size = "2.5rem" }: StarProps) => {
+const Star = ({ filled, size = '2.5rem' }: StarProps) => {
   const Icon = filled ? MuiStar : StarOutline
   const color = filled ? 'gold' : 'gray'
   return <Icon sx={{ color, height: size, width: size }} />

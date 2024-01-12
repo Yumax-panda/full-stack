@@ -1,4 +1,4 @@
-import { Star as MuiStar, StarOutline } from '@mui/icons-material'
+import { StarField } from '@/app/(index)/_components/StarField'
 import {
   Box,
   Card,
@@ -7,33 +7,13 @@ import {
   Chip,
   Typography,
 } from '@mui/material'
+
 import type { Skill as SkillPayload, Tag as TagPayload } from '@prisma/client'
 
-type StarProps = {
-  filled: boolean
-}
 type Skill = Pick<SkillPayload, 'name' | 'level' | 'image'>
 type Tag = Pick<TagPayload, 'name' | 'color'>
 export type Props = Skill & {
   tags: Tag[]
-}
-
-const Star = ({ filled }: StarProps) => {
-  const Icon = filled ? MuiStar : StarOutline
-  const color = filled ? 'gold' : 'gray'
-  return <Icon sx={{ color, height: '2.5rem', width: '2.5rem' }} />
-}
-
-const StarField = ({ level }: { level: number }) => {
-  const filledStarNum = Math.min(3, Math.max(0, level))
-  const stars = Array.from({ length: 3 }, (_, i) => i < filledStarNum)
-  return (
-    <Box sx={{ display: 'flex' }}>
-      {stars.map((filled, i) => (
-        <Star key={i} filled={filled} />
-      ))}
-    </Box>
-  )
 }
 
 export const SkillCard = ({ name, level, image, tags = [] }: Props) => (
