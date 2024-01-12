@@ -1,5 +1,6 @@
 import { getSkillsWithTagsByUserId } from '@/repository/skill'
 
+import { AddSkillButton } from './_components/AddSkillButton'
 import { SkillSection } from './_components/SkillSection'
 
 export default async function Page({
@@ -9,5 +10,10 @@ export default async function Page({
 }) {
   const skills = await getSkillsWithTagsByUserId(userId)
 
-  return <SkillSection skills={skills} />
+  return (
+    <>
+      <AddSkillButton userId={userId} />
+      <SkillSection skills={skills} />
+    </>
+  )
 }
