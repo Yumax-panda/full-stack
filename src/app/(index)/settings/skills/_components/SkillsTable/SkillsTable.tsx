@@ -3,33 +3,11 @@
 import type { SkillWithTags } from '@/models'
 import { useState } from 'react'
 
+import { StarField } from '@/app/(index)/_components/StarField'
 import { Edit } from '@mui/icons-material'
 import { Box, IconButton, Tooltip } from '@mui/material'
 
 import { UpdateSkillForm } from '../UpdateSkillForm'
-
-// NOTE: tableの内側にフォームをネストできないのでdisplay: table系のコンポーネントを使う
-// TODO: テーブルのスタイルを調整する
-
-const TableRow = ({ children }: { children: React.ReactNode }) => (
-  <Box sx={{ display: 'table-row' }}>{children}</Box>
-)
-
-const TableCell = ({ children }: { children: React.ReactNode }) => (
-  <Box sx={{ display: 'table-cell' }}>{children}</Box>
-)
-
-const TableHead = ({ children }: { children: React.ReactNode }) => (
-  <Box sx={{ display: 'table-header-group' }}>{children}</Box>
-)
-
-const TableBody = ({ children }: { children: React.ReactNode }) => (
-  <Box sx={{ display: 'table-row-group' }}>{children}</Box>
-)
-
-const Table = ({ children }: { children: React.ReactNode }) => (
-  <Box sx={{ display: 'table' }}>{children}</Box>
-)
 
 type ToggleEditButtonProps = {
   onClick: () => void
@@ -47,17 +25,21 @@ type EditableTableRowProps = {
   skill: SkillWithTags
 }
 
-const EditableTableRow = ({ skill }: EditableTableRowProps) => {
+const EditableRow = ({ skill }: EditableTableRowProps) => {
   const [open, setOpen] = useState(false)
   const SkillTableRow = () => (
-    <TableRow>
-      <TableCell>{skill.name}</TableCell>
-      <TableCell>{skill.level}</TableCell>
-      <TableCell>{skill.tags.map(({ name }) => name).join(', ')}</TableCell>
-      <TableCell>
+    <Box sx={{ display: 'flex', width: '100%' }}>
+      <Box sx={{ width: '20%', pl: '1rem' }}>{skill.name}</Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <StarField level={skill.level} />
+      </Box>
+      <Box sx={{ flexGrow: 4 }}>
+        {skill.tags.map(({ name }) => name).join(', ')}
+      </Box>
+      <Box sx={{ flexGrow: 3, alignItems: 'flex-end', display: 'flex' }}>
         <ToggleEditButton onClick={() => setOpen(true)} />
-      </TableCell>
-    </TableRow>
+      </Box>
+    </Box>
   )
   return open ? <UpdateSkillForm {...skill} /> : <SkillTableRow />
 }
@@ -67,19 +49,14 @@ type Props = {
 }
 
 export const SkillsTable = ({ skills }: Props) => (
-  <Table>
-    <TableHead>
-      <TableRow>
-        <TableCell>スキル名</TableCell>
-        <TableCell>レベル</TableCell>
-        <TableCell>タグ</TableCell>
-        <TableCell>編集</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
+  <Box sx={{ border: '1px solid lightgray', borderRadius: '0.5rem' }}>
+    <Box sx={{ borderBottom: '1px solid lightgray', p: '0.5rem' }}>
+      {skills.length} 件
+    </Box>
+    <Box>
       {skills.map((skill) => (
-        <EditableTableRow skill={skill} key={skill.id} />
+        <EditableRow skill={skill} key={skill.id} />
       ))}
-    </TableBody>
-  </Table>
+    </Box>
+  </Box>
 )
