@@ -1,7 +1,14 @@
 import { skills } from '@/constants/skills'
 import { Check, Close } from '@mui/icons-material'
 import {
-  Autocomplete, IconButton, MenuItem, OutlinedInput, Select, Slider, TextField, Tooltip
+  Autocomplete,
+  IconButton,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  Slider,
+  TextField,
+  Tooltip,
 } from '@mui/material'
 
 import { updateSkillAction } from './action'
@@ -17,7 +24,7 @@ export const UpdateSkillForm = ({ id, name, level, tags, onClose }: Props) => {
   const action = updateSkillAction.bind(null, id)
 
   return (
-    <form action={action}>
+    <form action={action} style={{ display: 'flex', width: '100%' }}>
       <Autocomplete
         options={skills.map((skill) => skill.name)}
         renderInput={(params) => (
@@ -33,6 +40,7 @@ export const UpdateSkillForm = ({ id, name, level, tags, onClose }: Props) => {
         step={1}
         marks
         valueLabelDisplay='auto'
+        sx={{ width: '20%' }}
       />
       <Select
         name='tagIds'
@@ -41,6 +49,7 @@ export const UpdateSkillForm = ({ id, name, level, tags, onClose }: Props) => {
         defaultValue={tags.map((tag) => tag.id)}
         input={<OutlinedInput label='タグ' />}
         required
+        sx={{ flexGrow: 1 }}
       >
         {tags.map((tag) => (
           <MenuItem key={tag.id} value={tag.id}>
