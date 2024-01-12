@@ -1,18 +1,15 @@
+import { Check, Close } from '@mui/icons-material'
 import {
-  Button,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  TextField,
+  Button, IconButton, MenuItem, OutlinedInput, Select, Slider, TextField, Tooltip
 } from '@mui/material'
 
 import { updateSkillAction } from './action'
 
 import type { SkillWithTags, Tag } from '@/models'
 
-type Props = SkillWithTags & { tags: Pick<Tag, 'id' | 'name'>[] }
+type Props = SkillWithTags & { tags: Pick<Tag, 'id' | 'name'>[], onClose: () => void }
 
-export const UpdateSkillForm = ({ id, name, level, tags }: Props) => {
+export const UpdateSkillForm = ({ id, name, level, tags, onClose }: Props) => {
   const action = updateSkillAction.bind(null, id)
 
   return (
@@ -24,12 +21,14 @@ export const UpdateSkillForm = ({ id, name, level, tags }: Props) => {
         margin='normal'
         required
       />
-      <TextField
+      <Slider
         name='level'
         defaultValue={level}
-        variant='outlined'
-        required
-        type='number'
+        min={0}
+        max={3}
+        step={1}
+        marks
+        valueLabelDisplay='auto'
       />
       <Select
         name='tagIds'
@@ -45,9 +44,17 @@ export const UpdateSkillForm = ({ id, name, level, tags }: Props) => {
           </MenuItem>
         ))}
       </Select>
-      <Button type='submit' variant='contained' color='primary'>
-        更新する
-      </Button>
+      <Tooltip title='保存'>
+        <IconButton type='submit'>
+          <Check />
+        </IconButton>
+      </Tooltip>
+
+      <Tooltip title='閉じる'>
+        <IconButton onClick={onClose}>
+          <Close />
+        </IconButton>
+      </Tooltip>
     </form>
   )
 }

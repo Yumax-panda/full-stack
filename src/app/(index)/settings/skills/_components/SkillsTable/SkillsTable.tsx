@@ -27,6 +27,7 @@ type EditableTableRowProps = {
 
 const EditableRow = ({ skill }: EditableTableRowProps) => {
   const [open, setOpen] = useState(false)
+  const handleClose = () => setOpen(false)
   const SkillTableRow = () => (
     <>
       <Box sx={{ width: '20%', pl: '1rem', display: 'flex' }}>
@@ -71,7 +72,7 @@ const EditableRow = ({ skill }: EditableTableRowProps) => {
         borderBottom: '1px solid lightgray',
       }}
     >
-      {open ? <UpdateSkillForm {...skill} /> : <SkillTableRow />}
+      {open ? <UpdateSkillForm {...skill} onClose={handleClose} /> : <SkillTableRow />}
     </Box>
   )
 }
