@@ -12,6 +12,8 @@ import {
   Typography,
 } from '@mui/material'
 
+import { updateUserAction } from './action'
+
 type FieldProps = {
   icon: React.ReactNode
   text: string
@@ -35,9 +37,10 @@ export const EditProfileForm = ({
   const readOnlyStyle = {
     textAlign: 'left',
   } as const
+  const action = updateUserAction.bind(null, id)
 
   return (
-    <Box component='form'>
+    <Box component='form' action={action}>
       <Sectiontitle text='プロフィール' />
       <Grid
         container
@@ -55,6 +58,7 @@ export const EditProfileForm = ({
             <Typography sx={readOnlyStyle}>名前: {name}</Typography>
             <Field icon={<Email />} text={email || 'N/A'} />
             <TextField
+              name='location'
               fullWidth
               label='居住地'
               defaultValue={location}
@@ -70,6 +74,7 @@ export const EditProfileForm = ({
             <TextField
               fullWidth
               label='所属'
+              name='organization'
               defaultValue={organization}
               variant='standard'
               InputProps={{
