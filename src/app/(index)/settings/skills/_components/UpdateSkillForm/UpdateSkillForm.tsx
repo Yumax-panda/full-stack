@@ -1,8 +1,17 @@
 import { getLevelHelperText, skills } from '@/constants/skills'
 import { Check, Close } from '@mui/icons-material'
 import {
-  Autocomplete, Box, Chip, IconButton, Input, InputLabel, MenuItem, Select, Slider, TextField,
-  Tooltip
+  Autocomplete,
+  Box,
+  Chip,
+  IconButton,
+  Input,
+  InputLabel,
+  MenuItem,
+  Select,
+  Slider,
+  TextField,
+  Tooltip,
 } from '@mui/material'
 
 import { updateSkillAction } from './action'
