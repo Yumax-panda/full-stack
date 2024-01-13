@@ -7,6 +7,8 @@ import { StarField } from '@/app/(index)/_components/StarField'
 import { Edit } from '@mui/icons-material'
 import { Box, Chip, IconButton, Tooltip } from '@mui/material'
 
+import { DeleteSkillButton } from '../DeleteSkillButton'
+import { deleteSkillAction } from '../DeleteSkillButton/action'
 import { UpdateSkillForm } from '../UpdateSkillForm'
 
 type ToggleEditButtonProps = {
@@ -14,7 +16,7 @@ type ToggleEditButtonProps = {
 }
 
 const ToggleEditButton = ({ onClick }: ToggleEditButtonProps) => (
-  <Tooltip title='編集'>
+  <Tooltip title='編集' arrow placement='top'>
     <IconButton onClick={onClick}>
       <Edit />
     </IconButton>
@@ -30,6 +32,7 @@ type EditableTableRowProps = {
 const EditableRow = ({ skill, tags, userId }: EditableTableRowProps) => {
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
+  const deleteAction = deleteSkillAction.bind(null, skill.id)
   const SkillTableRow = () => (
     <>
       <Box sx={{ width: '20%', pl: '1rem', display: 'flex' }}>
@@ -59,7 +62,10 @@ const EditableRow = ({ skill, tags, userId }: EditableTableRowProps) => {
           pr: '1rem',
         }}
       >
-        <Box sx={{ my: 'auto' }}>
+        <Box sx={{ my: 'auto', display: 'flex' }}>
+          <form action={deleteAction}>
+            <DeleteSkillButton />
+          </form>
           <ToggleEditButton onClick={() => setOpen(true)} />
         </Box>
       </Box>
