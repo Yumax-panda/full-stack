@@ -1,8 +1,17 @@
 import { getLevelHelperText, skills } from '@/constants/skills'
 import { Check, Close } from '@mui/icons-material'
 import {
-  Autocomplete, Box, Chip, IconButton, Input, InputLabel, MenuItem, Select, Slider, TextField,
-  Tooltip
+  Autocomplete,
+  Box,
+  Chip,
+  IconButton,
+  Input,
+  InputLabel,
+  MenuItem,
+  Select,
+  Slider,
+  TextField,
+  Tooltip,
 } from '@mui/material'
 
 import { updateSkillAction } from './action'
@@ -10,13 +19,21 @@ import { updateSkillAction } from './action'
 import type { SkillWithTags, Tag } from '@/models'
 
 type Props = SkillWithTags & {
-  tags: Pick<Tag, 'id' | 'name'>[]
+  allTags: Tag[]
   onClose: () => void
 }
 
-export const UpdateSkillForm = ({ id, name, level, tags, onClose }: Props) => {
+export const UpdateSkillForm = ({
+  id,
+  name,
+  level,
+  tags,
+  onClose,
+  allTags,
+}: Props) => {
   const action = updateSkillAction.bind(null, id)
-  const tagColorMap = new Map(tags.map((tag) => [tag.id, tag.color]))
+  const tagColorMap = new Map(allTags.map((tag) => [tag.id, tag.color]))
+  const tagIdNameMap = new Map(allTags.map((tag) => [tag.id, tag.name]))
 
   return (
     <form
@@ -74,7 +91,7 @@ export const UpdateSkillForm = ({ id, name, level, tags, onClose }: Props) => {
               {(selected as string[]).map((value) => (
                 <Chip
                   key={value}
-                  label={tags.find((tag) => tag.id === value)?.name}
+                  label={tagIdNameMap.get(value)}
                   sx={{ mr: 0.5, bgcolor: tagColorMap.get(value) }}
                 />
               ))}
@@ -84,7 +101,7 @@ export const UpdateSkillForm = ({ id, name, level, tags, onClose }: Props) => {
           required
           sx={{ flexGrow: 2 }}
         >
-          {tags.map((tag) => (
+          {allTags.map((tag) => (
             <MenuItem key={tag.id} value={tag.id}>
               {tag.name}
             </MenuItem>

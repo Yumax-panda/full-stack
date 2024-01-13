@@ -1,6 +1,6 @@
 'use client'
 
-import type { SkillWithTags } from '@/models'
+import type { SkillWithTags, Tag } from '@/models'
 import { useState } from 'react'
 
 import { StarField } from '@/app/(index)/_components/StarField'
@@ -23,9 +23,10 @@ const ToggleEditButton = ({ onClick }: ToggleEditButtonProps) => (
 
 type EditableTableRowProps = {
   skill: SkillWithTags
+  tags: Tag[]
 }
 
-const EditableRow = ({ skill }: EditableTableRowProps) => {
+const EditableRow = ({ skill, tags }: EditableTableRowProps) => {
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
   const SkillTableRow = () => (
@@ -73,7 +74,7 @@ const EditableRow = ({ skill }: EditableTableRowProps) => {
       }}
     >
       {open ? (
-        <UpdateSkillForm {...skill} onClose={handleClose} />
+        <UpdateSkillForm {...skill} onClose={handleClose} allTags={tags} />
       ) : (
         <SkillTableRow />
       )}
@@ -83,9 +84,10 @@ const EditableRow = ({ skill }: EditableTableRowProps) => {
 
 type Props = {
   skills: SkillWithTags[]
+  tags: Tag[]
 }
 
-export const SkillsTable = ({ skills }: Props) => (
+export const SkillsTable = ({ skills, tags }: Props) => (
   <Box
     sx={{ border: '1px solid gray', borderRadius: '0.5rem', borderBottom: 0 }}
   >
@@ -96,7 +98,7 @@ export const SkillsTable = ({ skills }: Props) => (
     </Box>
     <Box>
       {skills.map((skill) => (
-        <EditableRow skill={skill} key={skill.id} />
+        <EditableRow skill={skill} key={skill.id} tags={tags} />
       ))}
     </Box>
   </Box>
