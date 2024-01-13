@@ -53,3 +53,15 @@ export async function createTag({
     },
   })
 }
+
+type DeleteSkillProps = {
+  id: string
+}
+
+export async function deleteSkill({ id }: DeleteSkillProps): Promise<Skill> {
+  return prisma.skill.delete({
+    where: {
+      id,
+    },
+  })
+}

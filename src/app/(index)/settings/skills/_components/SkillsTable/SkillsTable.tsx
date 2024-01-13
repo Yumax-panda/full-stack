@@ -104,9 +104,16 @@ export const SkillsTable = ({ skills, tags, userId }: Props) => (
       {skills.length} 件
     </Box>
     <Box>
-      {skills.sort((a, b) => Number(a.createdAt > b.createdAt)).map((skill) => (
-        <EditableRow skill={skill} key={skill.id} tags={tags} userId={userId} />
-      ))}
+      {skills
+        .sort((a, b) => Number(a.createdAt > b.createdAt))
+        .map((skill) => (
+          <EditableRow
+            skill={skill}
+            key={skill.id}
+            tags={tags}
+            userId={userId}
+          />
+        ))}
     </Box>
   </Box>
 )
