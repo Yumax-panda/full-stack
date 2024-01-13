@@ -5,9 +5,9 @@ import {
   uploadBytes,
 } from 'firebase/storage'
 
-import type { FirebaseStorage } from 'firebase/storage'
 import { storage } from '@/lib/firebase'
 
+import type { FirebaseStorage } from 'firebase/storage'
 type StringMap = Record<string, string>
 
 type StorageServiceProps<T extends StringMap> = {
@@ -25,35 +25,25 @@ type PathProps<T extends StringMap> = {
 
 type UploadPathProps<T extends StringMap> = PathProps<T> & FileProps
 
-const getHashedMessage = async (message: string): Promise<string> => {
-  const encoder = new TextEncoder()
-  const data = encoder.encode(message)
-  const hashedBuffer = await crypto.subtle.digest('SHA-256', data)
-  const hashedArray = Array.from(new Uint8Array(hashedBuffer))
-  return hashedArray.map((b) => b.toString(16).padStart(2, '0')).join('')
-}
-
-const getHashedFilename = async (file: File): Promise<string> => {
-  const filename = file.name
-  const ext = filename.split('.').pop() ?? ''
-  const hashedMessage = await getHashedMessage(filename)
-  return `${hashedMessage}.${ext}`
-}
+const getUrlSafeString = (text: string) =>
+  btoa(text).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_')
 
 class StorageService<T extends StringMap> {
   storage: FirebaseStorage
-  getUploadPath: (props: UploadPathProps<T>) => Promise<string>
+  getUploadPath: (props: UploadPathProps<T>) => string
 
   constructor({ storage, getPath }: StorageServiceProps<T>) {
     this.storage = storage
-    this.getUploadPath = async (props) => {
-      const hashedFilename = await getHashedFilename(props.file)
-      return `${getPath(props)}/${hashedFilename}`
+    this.getUploadPath = (props) => {
+      const path = getPath(props)
+      const ext = props.file.name.split('.').pop()
+      const fileName = getUrlSafeString(props.file.name)
+      return `${path}/${fileName}.${ext}`
     }
   }
 
   async upload(props: UploadPathProps<T>): Promise<string> {
-    const path = await this.getUploadPath(props)
+    const path = this.getUploadPath(props)
     const storageRef = ref(this.storage, path)
     await uploadBytes(storageRef, props.file)
     return await getDownloadURL(storageRef)
