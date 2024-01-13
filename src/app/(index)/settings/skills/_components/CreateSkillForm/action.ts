@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { getImage } from '@/constants/skills'
 import { routes } from '@/lib/routes'
 import { createSkillSchema } from '@/models'
-import { createSkill } from '@/repository/skill'
+import { createSkill } from '@/usecase/skills'
 
 export async function createSkillAction(userId: string, formData: FormData) {
   const name = formData.get('name') as string

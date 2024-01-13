@@ -1,9 +1,9 @@
 import 'server-only'
 
 import { prisma } from '@/lib/client'
+import { createSkill as create } from '@/repository/skill'
 
-import type { UpdateSkillProps } from '@/models'
-
+import type { UpdateSkillProps, CreateSkillProps } from '@/models'
 type IsSkillNameDuplicateProps = {
   userId: string
   skillId: string
@@ -82,4 +82,19 @@ export async function updateSkillWithTagIds({
     console.error(error)
     throw new Error('Failed to update skill.')
   })
+}
+
+export async function createSkill(props: CreateSkillProps) {
+  const nameDupulicatedSkill = await prisma.skill.findFirst({
+    where: {
+      userId: props.userId,
+      name: props.name,
+    },
+  })
+
+  if (nameDupulicatedSkill) {
+    throw new Error('スキル名が重複しています')
+  }
+
+  return create(props)
 }
