@@ -89,7 +89,7 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
           },
         }}
       >
-        <MenuItem>
+        <MenuItem onClick={redirectToMyPage}>
           <Typography>{name}</Typography>
         </MenuItem>
         <Divider />
