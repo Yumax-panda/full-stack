@@ -1,7 +1,7 @@
 import type { Skill, Tag } from '@prisma/client'
 import { prisma } from '@/lib/client'
 
-import type { SkillWithTags } from '@/models'
+import type { SkillWithTags, CreateSkillProps } from '@/models'
 
 export async function getSkillsWithTagsByUserId(
   userId: string,
@@ -31,27 +31,30 @@ export async function getSkillsWithTagsByUserId(
   })
 }
 
-type CreateTagProps = {
-  name: string
-  userId: string
-  image?: string | null
-  level?: 0 | 1 | 2 | 3
-}
-
-export async function createTag({
+export async function createSkill({
   name,
   userId,
   image,
-  level,
-}: CreateTagProps): Promise<Skill> {
-  return prisma.skill.create({
+  tagIds,
+}: CreateSkillProps): Promise<Skill> {
+  const skill = await prisma.skill.create({
     data: {
       name,
       userId,
       image,
-      level,
     },
   })
+
+  const relations = tagIds.map((tagId) => ({
+    skillId: skill.id,
+    tagId,
+  }))
+
+  await prisma.skillTagRelation.createMany({
+    data: relations,
+  })
+
+  return skill
 }
 
 type DeleteSkillProps = {
