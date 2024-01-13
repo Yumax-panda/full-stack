@@ -15,6 +15,7 @@ export const routes = {
   },
   userArticle: (userId: string) => `/users/${userId}/articles`,
   userWork: (userId: string) => `/users/${userId}/works`,
+  userProfileSettings: () => '/settings/profile',
   workDetail: (workId: string) => `/works/${workId}`,
   createNewWork: (workId: string) => `/works/${workId}/edit`,
 } as const

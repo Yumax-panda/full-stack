@@ -2,7 +2,11 @@ import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 import { routes } from '@/lib/routes'
-import { AccountCircleOutlined, LogoutOutlined } from '@mui/icons-material'
+import {
+  AccountCircleOutlined,
+  LogoutOutlined,
+  SettingsOutlined,
+} from '@mui/icons-material'
 import {
   Avatar,
   Divider,
@@ -31,6 +35,11 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
 
   const handleSignOut = () => {
     signOut()
+    handleCloseMenu()
+  }
+
+  const redirectToSettings = () => {
+    router.push(routes.userProfileSettings())
     handleCloseMenu()
   }
 
@@ -96,6 +105,10 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
         <MenuItem onClick={redirectToMyPage}>
           <AccountCircleOutlined sx={{ mr: 1 }} />
           マイページ
+        </MenuItem>
+        <MenuItem onClick={redirectToSettings}>
+          <SettingsOutlined sx={{ mr: 1 }} />
+          設定
         </MenuItem>
         <MenuItem onClick={handleSignOut}>
           <LogoutOutlined sx={{ mr: 1 }} />
