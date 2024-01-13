@@ -1,5 +1,3 @@
-import { get } from 'http'
-
 import { getSession } from '@/lib/auth'
 import {
   getAllPartialWorksByUserId,
@@ -15,9 +13,10 @@ export default async function Work({
   params: { userId: string }
 }) {
   const session = await getSession()
-  const fetcher = session
-    ? getAllPartialWorksByUserId
-    : getPublicPartialWorksByUserId
+  const fetcher =
+    session?.user?.id === userId
+      ? getAllPartialWorksByUserId
+      : getPublicPartialWorksByUserId
   const works = await fetcher(userId)
 
   return (
