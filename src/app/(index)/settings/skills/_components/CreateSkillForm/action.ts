@@ -1,6 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 import { getImage } from '@/constants/skills'
 import { routes } from '@/lib/routes'
@@ -26,4 +27,5 @@ export async function createSkillAction(userId: string, formData: FormData) {
   const skill = await createSkill(parsed.data)
   revalidatePath(routes.userSkill(skill.userId), 'page')
   revalidatePath(routes.userSkillEdit(), 'page')
+  redirect(routes.userSkillEdit())
 }

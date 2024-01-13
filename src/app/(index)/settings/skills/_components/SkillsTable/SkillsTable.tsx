@@ -1,9 +1,12 @@
 'use client'
 
+import type { EditActionType } from '@/lib/routes'
 import type { SkillWithTags, Tag } from '@/models'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { StarField } from '@/app/(index)/_components/StarField'
+import { routes } from '@/lib/routes'
 import { Add, Edit } from '@mui/icons-material'
 import { Box, Button, Chip, IconButton, Tooltip } from '@mui/material'
 
@@ -115,11 +118,20 @@ type Props = {
   skills: SkillWithTags[]
   tags: Tag[]
   userId: string
+  action?: string
 }
 
-export const SkillsTable = ({ skills, tags, userId }: Props) => {
-  const [open, setOpen] = useState(false)
-  const toggleOpen = () => setOpen((prev) => !prev)
+export const SkillsTable = ({ skills, tags, userId, action }: Props) => {
+  const router = useRouter()
+  const toggleOpen = () => {
+    if (action && action === 'new') {
+      router.push(routes.userSkillEdit())
+    } else {
+      router.push(routes.userSkillEdit('new'))
+    }
+  }
+
+  const open = action === 'new'
 
   return (
     <Box>
@@ -146,7 +158,7 @@ export const SkillsTable = ({ skills, tags, userId }: Props) => {
           {open && (
             <RowContainer>
               <CreateSkillForm
-                onClose={toggleOpen}
+                onClose={() => router.push(routes.userSkillEdit())}
                 allTags={tags}
                 userId={userId}
               />

@@ -10,7 +10,6 @@ import {
   MenuItem,
   Select,
   Slider,
-  Stack,
   TextField,
   Tooltip,
 } from '@mui/material'
@@ -33,7 +32,6 @@ export const CreateSkillForm = ({ onClose, allTags, userId }: Props) => {
   return (
     <form
       action={action}
-      onSubmit={onClose}
       style={{
         display: 'flex',
         width: '100%',

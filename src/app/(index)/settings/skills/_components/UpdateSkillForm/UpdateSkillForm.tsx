@@ -57,7 +57,6 @@ export const UpdateSkillForm = ({
       </form>
       <form
         action={action}
-        onSubmit={onClose}
         style={{
           display: 'flex',
           width: '100%',
