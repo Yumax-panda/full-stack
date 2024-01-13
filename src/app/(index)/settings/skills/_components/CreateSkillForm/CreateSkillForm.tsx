@@ -17,9 +17,9 @@ import {
 
 import { createSkillAction } from './action'
 
-import type { SkillWithTags, Tag } from '@/models'
+import type { Tag } from '@/models'
 
-type Props = SkillWithTags & {
+type Props = {
   allTags: Tag[]
   onClose: () => void
   userId: string

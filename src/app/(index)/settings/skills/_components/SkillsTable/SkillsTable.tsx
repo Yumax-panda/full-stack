@@ -4,9 +4,10 @@ import type { SkillWithTags, Tag } from '@/models'
 import { useState } from 'react'
 
 import { StarField } from '@/app/(index)/_components/StarField'
-import { Edit } from '@mui/icons-material'
-import { Box, Chip, IconButton, Tooltip } from '@mui/material'
+import { Add, Edit } from '@mui/icons-material'
+import { Box, Button, Chip, IconButton, Tooltip } from '@mui/material'
 
+import { CreateSkillForm } from '../CreateSkillForm'
 import { DeleteSkillButton } from '../DeleteSkillButton'
 import { deleteSkillAction } from '../DeleteSkillButton/action'
 import { UpdateSkillForm } from '../UpdateSkillForm'
@@ -21,6 +22,19 @@ const ToggleEditButton = ({ onClick }: ToggleEditButtonProps) => (
       <Edit />
     </IconButton>
   </Tooltip>
+)
+
+const RowContainer = ({ children }: { children: React.ReactNode }) => (
+  <Box
+    sx={{
+      display: 'flex',
+      width: '100%',
+      py: '0.5rem',
+      borderBottom: '1px solid lightgray',
+    }}
+  >
+    {children}
+  </Box>
 )
 
 type EditableTableRowProps = {
@@ -72,14 +86,7 @@ const EditableRow = ({ skill, tags, userId }: EditableTableRowProps) => {
     </>
   )
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        width: '100%',
-        py: '0.5rem',
-        borderBottom: '1px solid lightgray',
-      }}
-    >
+    <RowContainer>
       {open ? (
         <UpdateSkillForm
           {...skill}
@@ -90,9 +97,19 @@ const EditableRow = ({ skill, tags, userId }: EditableTableRowProps) => {
       ) : (
         <SkillTableRow />
       )}
-    </Box>
+    </RowContainer>
   )
 }
+
+type CreateSkillButtonProps = {
+  onClick: () => void
+}
+
+const CreateSkillButton = ({ onClick }: CreateSkillButtonProps) => (
+  <Button onClick={onClick} variant='contained' startIcon={<Add />}>
+    スキルを追加
+  </Button>
+)
 
 type Props = {
   skills: SkillWithTags[]
@@ -100,26 +117,53 @@ type Props = {
   userId: string
 }
 
-export const SkillsTable = ({ skills, tags, userId }: Props) => (
-  <Box
-    sx={{ border: '1px solid gray', borderRadius: '0.5rem', borderBottom: 0 }}
-  >
-    <Box
-      sx={{ borderBottom: '1px solid gray', p: '0.5rem', bgcolor: 'lightgrey' }}
-    >
-      {skills.length} 件
-    </Box>
+export const SkillsTable = ({ skills, tags, userId }: Props) => {
+  const [open, setOpen] = useState(false)
+  const toggleOpen = () => setOpen((prev) => !prev)
+
+  return (
     <Box>
-      {skills
-        .sort((a, b) => Number(a.createdAt > b.createdAt))
-        .map((skill) => (
-          <EditableRow
-            skill={skill}
-            key={skill.id}
-            tags={tags}
-            userId={userId}
-          />
-        ))}
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: '1rem' }}>
+        <CreateSkillButton onClick={toggleOpen} />
+      </Box>
+      <Box
+        sx={{
+          border: '1px solid gray',
+          borderRadius: '0.5rem',
+          borderBottom: 0,
+        }}
+      >
+        <Box
+          sx={{
+            borderBottom: '1px solid gray',
+            p: '0.5rem',
+            bgcolor: 'lightgrey',
+          }}
+        >
+          {skills.length} 件
+        </Box>
+        <Box>
+          {open && (
+            <RowContainer>
+              <CreateSkillForm
+                onClose={toggleOpen}
+                allTags={tags}
+                userId={userId}
+              />
+            </RowContainer>
+          )}
+          {skills
+            .sort((a, b) => Number(a.createdAt > b.createdAt))
+            .map((skill) => (
+              <EditableRow
+                skill={skill}
+                key={skill.id}
+                tags={tags}
+                userId={userId}
+              />
+            ))}
+        </Box>
+      </Box>
     </Box>
-  </Box>
-)
+  )
+}
