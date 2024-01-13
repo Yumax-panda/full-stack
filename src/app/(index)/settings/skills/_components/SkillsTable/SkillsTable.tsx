@@ -24,9 +24,10 @@ const ToggleEditButton = ({ onClick }: ToggleEditButtonProps) => (
 type EditableTableRowProps = {
   skill: SkillWithTags
   tags: Tag[]
+  userId: string
 }
 
-const EditableRow = ({ skill, tags }: EditableTableRowProps) => {
+const EditableRow = ({ skill, tags, userId }: EditableTableRowProps) => {
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
   const SkillTableRow = () => (
@@ -74,7 +75,12 @@ const EditableRow = ({ skill, tags }: EditableTableRowProps) => {
       }}
     >
       {open ? (
-        <UpdateSkillForm {...skill} onClose={handleClose} allTags={tags} />
+        <UpdateSkillForm
+          {...skill}
+          onClose={handleClose}
+          allTags={tags}
+          userId={userId}
+        />
       ) : (
         <SkillTableRow />
       )}
@@ -85,9 +91,10 @@ const EditableRow = ({ skill, tags }: EditableTableRowProps) => {
 type Props = {
   skills: SkillWithTags[]
   tags: Tag[]
+  userId: string
 }
 
-export const SkillsTable = ({ skills, tags }: Props) => (
+export const SkillsTable = ({ skills, tags, userId }: Props) => (
   <Box
     sx={{ border: '1px solid gray', borderRadius: '0.5rem', borderBottom: 0 }}
   >
@@ -98,7 +105,7 @@ export const SkillsTable = ({ skills, tags }: Props) => (
     </Box>
     <Box>
       {skills.map((skill) => (
-        <EditableRow skill={skill} key={skill.id} tags={tags} />
+        <EditableRow skill={skill} key={skill.id} tags={tags} userId={userId} />
       ))}
     </Box>
   </Box>

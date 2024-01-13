@@ -13,5 +13,5 @@ export default async function Page() {
   const skills = await getSkillsWithTagsByUserId(session.user.id)
   const tags = await getTagsByUserId(session.user.id)
 
-  return <SkillsTable skills={skills} tags={tags} />
+  return <SkillsTable skills={skills} tags={tags} userId={session.user.id} />
 }

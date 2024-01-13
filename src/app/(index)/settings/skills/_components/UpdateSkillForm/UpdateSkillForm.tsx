@@ -1,17 +1,8 @@
 import { getLevelHelperText, skills } from '@/constants/skills'
 import { Check, Close } from '@mui/icons-material'
 import {
-  Autocomplete,
-  Box,
-  Chip,
-  IconButton,
-  Input,
-  InputLabel,
-  MenuItem,
-  Select,
-  Slider,
-  TextField,
-  Tooltip,
+  Autocomplete, Box, Chip, IconButton, Input, InputLabel, MenuItem, Select, Slider, TextField,
+  Tooltip
 } from '@mui/material'
 
 import { updateSkillAction } from './action'
@@ -21,6 +12,7 @@ import type { SkillWithTags, Tag } from '@/models'
 type Props = SkillWithTags & {
   allTags: Tag[]
   onClose: () => void
+  userId: string
 }
 
 export const UpdateSkillForm = ({
@@ -30,8 +22,9 @@ export const UpdateSkillForm = ({
   tags,
   onClose,
   allTags,
+  userId,
 }: Props) => {
-  const action = updateSkillAction.bind(null, id)
+  const action = updateSkillAction.bind(null, id, userId)
   const tagColorMap = new Map(allTags.map((tag) => [tag.id, tag.color]))
   const tagIdNameMap = new Map(allTags.map((tag) => [tag.id, tag.name]))
 
@@ -98,7 +91,6 @@ export const UpdateSkillForm = ({
             </Box>
           )}
           input={<Input fullWidth />}
-          required
           sx={{ flexGrow: 2 }}
         >
           {allTags.map((tag) => (
