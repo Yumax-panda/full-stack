@@ -21,6 +21,7 @@ export const createSkillSchema = z.object({
   tagIds: z.array(z.string()),
   image: z.string().nullable(),
   userId: z.string(),
+  level: z.number().min(0).max(3),
 })
 
 export type CreateSkillProps = z.infer<typeof createSkillSchema>

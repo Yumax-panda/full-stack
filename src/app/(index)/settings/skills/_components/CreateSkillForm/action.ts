@@ -17,6 +17,12 @@ export async function createSkillAction(userId: string, formData: FormData) {
     image: getImage(name),
   }
 
+  const level = formData.get('level')
+
+  if (level) {
+    data.level = Number(level)
+  }
+
   data.tagIds = data.tagIds.filter(Boolean)
   const parsed = createSkillSchema.safeParse(data)
 

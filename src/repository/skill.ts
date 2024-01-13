@@ -32,17 +32,11 @@ export async function getSkillsWithTagsByUserId(
 }
 
 export async function createSkill({
-  name,
-  userId,
-  image,
   tagIds,
+  ...data
 }: CreateSkillProps): Promise<Skill> {
   const skill = await prisma.skill.create({
-    data: {
-      name,
-      userId,
-      image,
-    },
+    data,
   })
 
   const relations = tagIds.map((tagId) => ({
