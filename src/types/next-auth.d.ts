@@ -3,6 +3,6 @@ import type { User } from '@prisma/client'
 
 declare module 'next-auth' {
   interface Session {
-    user?: DefaultUser & User
+    user?: DefaultUser & { id: string }
   }
 }
