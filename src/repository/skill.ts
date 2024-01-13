@@ -1,7 +1,7 @@
 import type { Skill, Tag } from '@prisma/client'
 import { prisma } from '@/lib/client'
 
-import type { SkillWithTags, UpdateSkillProps } from '@/models'
+import type { SkillWithTags } from '@/models'
 
 export async function getSkillsWithTagsByUserId(
   userId: string,
@@ -51,32 +51,5 @@ export async function createTag({
       image,
       level,
     },
-  })
-}
-
-export async function updateSkill({
-  id,
-  tagIds,
-  ...props
-}: UpdateSkillProps): Promise<Skill> {
-  await prisma.skillTagRelation.deleteMany({
-    where: {
-      skillId: id,
-    },
-  })
-  const relations = tagIds.map((tagId) => {
-    return {
-      skillId: id,
-      tagId,
-    }
-  })
-  await prisma.skillTagRelation.createMany({
-    data: relations,
-  })
-  return prisma.skill.update({
-    where: {
-      id,
-    },
-    data: props,
   })
 }
