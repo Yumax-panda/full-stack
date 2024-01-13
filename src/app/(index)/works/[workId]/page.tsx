@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 
-import { getPublicWork } from '@/repository/work'
+import { getSession } from '@/lib/auth'
+import { getWorkById } from '@/repository/work'
 
 import { Content } from './_components/Content'
 
@@ -11,8 +12,16 @@ export default async function WorkDetailPage({
     workId: string
   }
 }) {
-  const work = await getPublicWork(workId)
+  const session = await getSession()
+  const work = await getWorkById(workId)
+
   if (!work) {
+    return notFound()
+  }
+
+  const isMyWork = session?.user?.id === work.userId
+
+  if (work.isPrivate && !isMyWork) {
     return notFound()
   }
 
