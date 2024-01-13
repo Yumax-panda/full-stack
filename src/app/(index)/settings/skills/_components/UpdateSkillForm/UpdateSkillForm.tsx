@@ -126,15 +126,14 @@ export const UpdateSkillForm = ({
           </Select>
         </Box>
         <Box>
-          <Tooltip title='保存' arrow>
-            <IconButton type='submit'>
-              <Check />
-            </IconButton>
-          </Tooltip>
-
           <Tooltip title='閉じる' arrow>
             <IconButton onClick={onClose}>
               <Close />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='保存' arrow>
+            <IconButton type='submit'>
+              <Check />
             </IconButton>
           </Tooltip>
         </Box>

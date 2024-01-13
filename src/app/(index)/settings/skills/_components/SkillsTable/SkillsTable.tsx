@@ -63,10 +63,10 @@ const EditableRow = ({ skill, tags, userId }: EditableTableRowProps) => {
         }}
       >
         <Box sx={{ my: 'auto', display: 'flex' }}>
+          <ToggleEditButton onClick={() => setOpen(true)} />
           <form action={deleteAction}>
             <DeleteSkillButton />
           </form>
-          <ToggleEditButton onClick={() => setOpen(true)} />
         </Box>
       </Box>
     </>
