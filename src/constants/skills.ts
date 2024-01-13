@@ -192,3 +192,18 @@ export const skills: Skill[] = [
 export const getImage = (name: string) => {
   return skills.find((skill) => skill.name === name)?.image ?? null
 }
+
+export const getLevelHelperText = (level: number | string) => {
+  const value = Number(level)
+
+  switch (value) {
+    case 1:
+      return '初学者'
+    case 2:
+      return '中級者'
+    case 3:
+      return '上級者'
+    default:
+      return '興味がある'
+  }
+}
