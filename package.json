@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "dev:nocache": "rm -rf .next && yarn dev",
-    "build": "next build",
+    "postinstall": "prisma generate",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint --dir src",
     "lint:fix": "yarn lint --fix",
