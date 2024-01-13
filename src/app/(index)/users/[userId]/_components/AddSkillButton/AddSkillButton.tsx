@@ -15,7 +15,7 @@ export const AddSkillButton = ({ userId }: Props) => {
   const { data: session } = useSession()
   const router = useRouter()
   const isMyPage = session?.user?.id === userId
-  const onClick = () => router.push(routes.userSkillEdit())
+  const onClick = () => router.push(routes.userSkillEdit('new'))
 
   if (!isMyPage) return null
 
