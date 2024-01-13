@@ -23,6 +23,25 @@ export async function getPublicPartialWorksByUserId(
       title: true,
       thumbnail: true,
       updatedAt: true,
+      isPrivate: true,
+    },
+  }) as Promise<PartialWork[]>
+}
+
+export async function getAllPartialWorksByUserId(
+  userId: string,
+): Promise<PartialWork[]> {
+  return prisma.work.findMany({
+    where: {
+      userId,
+      title: { not: null },
+    },
+    select: {
+      id: true,
+      title: true,
+      thumbnail: true,
+      updatedAt: true,
+      isPrivate: true,
     },
   }) as Promise<PartialWork[]>
 }
