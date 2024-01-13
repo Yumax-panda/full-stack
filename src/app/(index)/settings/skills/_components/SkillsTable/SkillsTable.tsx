@@ -153,7 +153,7 @@ export const SkillsTable = ({ skills, tags, userId }: Props) => {
             </RowContainer>
           )}
           {skills
-            .sort((a, b) => Number(a.createdAt > b.createdAt))
+            .sort((a, b) => Number(a.createdAt < b.createdAt))
             .map((skill) => (
               <EditableRow
                 skill={skill}

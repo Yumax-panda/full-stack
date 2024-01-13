@@ -57,6 +57,7 @@ export const UpdateSkillForm = ({
       </form>
       <form
         action={action}
+        onSubmit={onClose}
         style={{
           display: 'flex',
           width: '100%',
@@ -71,9 +72,11 @@ export const UpdateSkillForm = ({
               label='スキル名'
               name='name'
               variant='standard'
+              required
             />
           )}
-          defaultValue={skills.find((skill) => skill.name === name)?.name}
+          freeSolo
+          defaultValue={name}
           sx={{ flexGrow: 2, mr: '1rem' }}
         />
         <Box

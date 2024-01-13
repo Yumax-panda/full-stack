@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 import { Close } from '@mui/icons-material'
-import { Alert, Box, IconButton, Tooltip } from '@mui/material'
+import { Alert, IconButton, Tooltip } from '@mui/material'
 
 type Props = {
   error: Error & { digest?: string }

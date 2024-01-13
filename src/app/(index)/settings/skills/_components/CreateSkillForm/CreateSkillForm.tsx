@@ -52,6 +52,7 @@ export const CreateSkillForm = ({ onClose, allTags, userId }: Props) => {
             required
           />
         )}
+        freeSolo
         sx={{ flexGrow: 2, mr: '1rem' }}
       />
       <Box
