@@ -6,6 +6,7 @@ export type PartialWork = {
   title: string
   thumbnail: string | null
   updatedAt: Date
+  isPrivate: boolean
 }
 
 export async function getPublicPartialWorksByUserId(

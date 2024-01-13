@@ -3,8 +3,15 @@ import Link from 'next/link'
 
 import { formatDate } from '@/lib/formatDate'
 import { routes } from '@/lib/routes'
-import { AutoAwesomeOutlined } from '@mui/icons-material'
-import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { AutoAwesomeOutlined, LockOutlined } from '@mui/icons-material'
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@mui/material'
 
 const ThumbnailWithoutImage = () => (
   <Box
@@ -20,13 +27,32 @@ const ThumbnailWithoutImage = () => (
   </Box>
 )
 
-export const WorkCard = ({ id, title, thumbnail, updatedAt }: Props) => (
+export const WorkCard = ({
+  id,
+  title,
+  thumbnail,
+  updatedAt,
+  isPrivate,
+}: Props) => (
   <Link
     href={routes.workDetail(id)}
     passHref
     style={{ textDecoration: 'none' }}
   >
-    <Card sx={{ maxWidth: 368 }}>
+    <Card sx={{ maxWidth: 368, position: 'relative' }}>
+      {isPrivate && (
+        <Avatar
+          sx={{
+            position: 'absolute',
+            top: '0.5rem',
+            left: '0.5rem',
+            fontSize: '2rem',
+            zIndex: 1,
+          }}
+        >
+          <LockOutlined />
+        </Avatar>
+      )}
       {thumbnail ? (
         <CardMedia
           image={thumbnail}
