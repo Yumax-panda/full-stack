@@ -4,6 +4,7 @@ import { getSession } from '@/lib/auth'
 import { getWorkById } from '@/repository/work'
 import { Box } from '@mui/material'
 
+import { BackButton } from '../../_components/BackButton'
 import { Content } from './_components/Content'
 import { EditButton } from './_components/EditButton'
 
@@ -34,10 +35,11 @@ export default async function WorkDetailPage({
           sx={{
             display: 'flex',
             width: '100%',
-            justifyContent: 'flex-end',
-            my: '0.5rem',
+            justifyContent: 'space-between',
+            my: '1rem',
           }}
         >
+          <BackButton userId={work.userId} />
           <EditButton workId={workId} />
         </Box>
       )}
