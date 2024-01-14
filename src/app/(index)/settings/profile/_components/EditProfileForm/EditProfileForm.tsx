@@ -44,8 +44,6 @@ export const EditProfileForm = ({
       <Sectiontitle text='プロフィール' />
       <Grid
         container
-        xs={12}
-        md={8}
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column-reverse', md: 'row' },
