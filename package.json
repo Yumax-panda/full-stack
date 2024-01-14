@@ -6,7 +6,7 @@
     "dev": "next dev",
     "dev:nocache": "rm -rf .next && yarn dev",
     "postinstall": "prisma generate",
-    "build": "prisma generate && prisma migrate deploy && next build",
+    "build": "prisma generate && prisma db pull && next build",
     "start": "next start",
     "lint": "next lint --dir src",
     "lint:fix": "yarn lint --fix",
