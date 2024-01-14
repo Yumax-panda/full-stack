@@ -18,7 +18,7 @@ export const BackButton = ({ userId }: Props) => {
     <Tooltip
       title='プロフィールへ戻る'
       arrow
-      placement='top-end'
+      placement='top-start'
       sx={{
         border: '1px solid',
       }}
