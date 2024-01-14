@@ -5,6 +5,7 @@ import { getArticleTokenByUserId } from '@/repository/articleToken'
 import { getUserById } from '@/repository/user'
 import { Box } from '@mui/material'
 
+import { TopContent } from '../_components/TopContent'
 import { EditProfileForm } from './_components/EditProfileForm'
 import { TokenForm } from './_components/TokenForm'
 
@@ -18,6 +19,7 @@ export default async function Page() {
 
   return (
     <Box>
+      <TopContent userId={user.id} />
       <EditProfileForm {...user} />
       <TokenForm tokens={tokens} userId={user.id} />
     </Box>

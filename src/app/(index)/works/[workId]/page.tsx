@@ -4,7 +4,7 @@ import { getSession } from '@/lib/auth'
 import { getWorkById } from '@/repository/work'
 import { Box } from '@mui/material'
 
-import { BackButton } from './_components/BackButton'
+import { BackButton } from '../../_components/BackButton'
 import { Content } from './_components/Content'
 import { EditButton } from './_components/EditButton'
 
