@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, useRef } from 'react'
 
+import { routes } from '@/lib/routes'
 import {
   AddPhotoAlternateOutlined,
   CloseOutlined,
@@ -72,8 +73,10 @@ const AddThumbnailButton = ({ onThumbnailAdd }: AddThumbnailButtonProps) => {
   )
 }
 
-type Props = ToggleIsPrivateButtonProps & AddThumbnailButtonProps
+type Props = ToggleIsPrivateButtonProps &
+  AddThumbnailButtonProps & { workId: string }
 export const Header = ({
+  workId,
   isPrivate,
   toggleIsPrivate,
   onThumbnailAdd,
@@ -100,8 +103,8 @@ export const Header = ({
         <List sx={{ display: 'flex' }}>
           <ButtonWithIcon
             icon={<CloseOutlined />}
-            text='戻る'
-            onClick={router.back}
+            text='プレビュー画面へ戻る'
+            onClick={() => router.push(routes.workDetail(workId))}
           />
         </List>
         <List sx={{ display: 'flex' }}>

@@ -30,6 +30,7 @@ export const Editor = ({ work }: Props) => {
   return (
     <Box component='form' onSubmit={onSubmit}>
       <Header
+        workId={work.id}
         isPrivate={isPrivate}
         toggleIsPrivate={toggleIsPrivate}
         onThumbnailAdd={onThumbnailUpload}
