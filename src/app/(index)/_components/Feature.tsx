@@ -2,7 +2,6 @@ import { Description } from '@/app/_components/Text/Description'
 import { Sectiontitle } from '@/app/_components/Text/Sectiontitle'
 import { Box } from '@mui/material'
 
-// TODO: リリース時に文言を修正
 const features = [
   {
     title: '完全無料',
