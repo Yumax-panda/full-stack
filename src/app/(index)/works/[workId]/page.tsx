@@ -30,19 +30,17 @@ export default async function WorkDetailPage({
 
   return (
     <>
-      {isMyWork && (
-        <Box
-          sx={{
-            display: 'flex',
-            width: '100%',
-            justifyContent: 'space-between',
-            my: '1rem',
-          }}
-        >
-          <BackButton userId={work.userId} />
-          <EditButton workId={workId} />
-        </Box>
-      )}
+      <Box
+        sx={{
+          display: 'flex',
+          width: '100%',
+          justifyContent: 'space-between',
+          my: '1rem',
+        }}
+      >
+        <BackButton userId={work.userId} />
+        {isMyWork && <EditButton workId={work.id} />}
+      </Box>
       <Content {...work} />
     </>
   )
