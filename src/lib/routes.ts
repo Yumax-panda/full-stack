@@ -22,11 +22,23 @@ export const routes = {
 
 export const path: Record<keyof typeof routes, string> = {
   top: '/',
-  userSkill: '/users/[userId]',
-  userSkillEdit: '/settings/skills',
-  userArticle: '/users/[userId]/articles',
-  userWork: '/users/[userId]/works',
-  userProfileSettings: '/settings/profile',
-  workDetail: '/works/[workId]',
-  createNewWork: '/works/[workId]/edit',
+  userSkill: '(index)/users/[userId]',
+  userSkillEdit: '(index)/settings/skills',
+  userArticle: '(index)/users/[userId]/articles',
+  userWork: '(index)/users/[userId]/works',
+  userProfileSettings: '(index)/settings/profile',
+  workDetail: '(index)/works/[workId]',
+  createNewWork: '(withAuth)/works/[workId]/edit',
 }
+
+export const tag = {
+  skill: 'skill',
+  tag: 'tag',
+  article: 'article',
+  work: 'work',
+  private: 'private',
+  public: 'public',
+  partial: 'partial',
+  token: 'token',
+  profile: 'profile',
+} as const

@@ -1,6 +1,7 @@
-import { cache } from 'react'
+import { unstable_cache as cache } from 'next/cache'
 
 import { prisma } from '@/lib/client'
+import { tag } from '@/lib/routes'
 
 import type { UpdateArticleToken } from '@/models/articleToken'
 
@@ -15,6 +16,8 @@ export async function getArticleTokenByUserIdWithoutCache(userId: string) {
 
 export const getArticleTokenByUserId = cache(
   getArticleTokenByUserIdWithoutCache,
+  ['getArticleTokenByUserId'],
+  { tags: [tag.token] },
 )
 
 export async function updateArticleToken(

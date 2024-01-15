@@ -1,7 +1,8 @@
 import type { Work } from '@prisma/client'
-import { cache } from 'react'
+import { unstable_cache as cache } from 'next/cache'
 
 import { prisma } from '@/lib/client'
+import { tag } from '@/lib/routes'
 
 export type PartialWork = {
   id: string
@@ -34,6 +35,8 @@ export async function getPublicPartialWorksByUserIdWithoutCache(
 
 export const getPublicPartialWorksByUserId = cache(
   getPublicPartialWorksByUserIdWithoutCache,
+  ['getPublicPartialWorksByUserId'],
+  { tags: [tag.work] },
 )
 
 export async function getAllPartialWorksByUserIdWithoutCache(
@@ -57,6 +60,8 @@ export async function getAllPartialWorksByUserIdWithoutCache(
 
 export const getAllPartialWorksByUserId = cache(
   getAllPartialWorksByUserIdWithoutCache,
+  ['getAllPartialWorksByUserId'],
+  { tags: [tag.work] },
 )
 
 export async function getWorkByIdWithoutCache(
@@ -70,7 +75,9 @@ export async function getWorkByIdWithoutCache(
   })
 }
 
-export const getWorkById = cache(getWorkByIdWithoutCache)
+export const getWorkById = cache(getWorkByIdWithoutCache, ['getWorkById'], {
+  tags: [tag.work],
+})
 
 export async function getWorksByUserIdWithoutCache(
   userId: string,
@@ -83,7 +90,11 @@ export async function getWorksByUserIdWithoutCache(
   })
 }
 
-export const getWorksByUserId = cache(getWorksByUserIdWithoutCache)
+export const getWorksByUserId = cache(
+  getWorksByUserIdWithoutCache,
+  ['getWorksByUserId'],
+  { tags: [tag.work] },
+)
 
 export async function createNewWork(userId: string): Promise<Work> {
   return prisma.work.create({

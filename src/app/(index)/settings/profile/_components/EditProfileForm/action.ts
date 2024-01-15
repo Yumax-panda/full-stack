@@ -1,8 +1,8 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 
-import { path } from '@/lib/routes'
+import { tag } from '@/lib/routes'
 import { updateUserSchema } from '@/models/user'
 import { updateUser } from '@/repository/user'
 
@@ -20,6 +20,5 @@ export async function updateUserAction(userId: string, formData: FormData) {
   }
 
   await updateUser(parsed.data)
-  revalidatePath(path.userProfileSettings, 'page')
-  revalidatePath(path.userSkill, 'layout')
+  revalidateTag(tag.profile)
 }

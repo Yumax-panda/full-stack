@@ -1,7 +1,8 @@
 import type { Skill, Tag } from '@prisma/client'
-import { cache } from 'react'
+import { unstable_cache as cache } from 'next/cache'
 
 import { prisma } from '@/lib/client'
+import { tag } from '@/lib/routes'
 
 import type { SkillWithTags, CreateSkillProps } from '@/models'
 
@@ -36,6 +37,8 @@ export async function getSkillsWithTagsByUserIdWithOutCache(
 
 export const getSkillsWithTagsByUserId = cache(
   getSkillsWithTagsByUserIdWithOutCache,
+  ['getSkillsWithTagsByUserId'],
+  { tags: [tag.skill] },
 )
 
 export async function createSkill({

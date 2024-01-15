@@ -1,8 +1,9 @@
 import 'server-only'
 
-import { cache } from 'react'
+import { unstable_cache as cache } from 'next/cache'
 
 import { prisma } from '@/lib/client'
+import { tag } from '@/lib/routes'
 
 import type { UpdateUserProps } from '@/models/user'
 
@@ -19,7 +20,9 @@ export async function getUserByIdWithoutCache(
   })
 }
 
-export const getUserById = cache(getUserByIdWithoutCache)
+export const getUserById = cache(getUserByIdWithoutCache, ['getUserById'], {
+  tags: [tag.profile],
+})
 
 export async function updateUser(props: UpdateUserProps): Promise<User> {
   const { id, ...rest } = props

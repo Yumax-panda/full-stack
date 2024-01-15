@@ -5,6 +5,7 @@ export async function fetchOgp(url: string): Promise<string | undefined> {
     headers: {
       'Allow-Cross-Origin-Origin': '*',
     },
+    next: { revalidate: 259200 }, // 1month
   })
   const text = await response.text()
   const doc = parse(text)

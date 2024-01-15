@@ -1,8 +1,8 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 
-import { path } from '@/lib/routes'
+import { tag } from '@/lib/routes'
 import { updateArticleTokenSchema } from '@/models/articleToken'
 import { updateArticleToken } from '@/repository/articleToken'
 
@@ -25,5 +25,5 @@ export async function updateTokenAction(userId: string, formData: FormData) {
   }
 
   await Promise.all(tasks)
-  revalidatePath(path.userArticle, 'page')
+  revalidateTag(tag.token)
 }

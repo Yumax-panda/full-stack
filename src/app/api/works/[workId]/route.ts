@@ -1,8 +1,8 @@
-import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { getSession } from '@/lib/auth'
-import { path } from '@/lib/routes'
+import { tag } from '@/lib/routes'
 import { updateWorkInServer } from '@/models'
 import { updateWork } from '@/usecase/work'
 
@@ -24,8 +24,6 @@ export async function PATCH(
   const work = parsed.data
   await updateWork(work)
 
-  revalidatePath(path.createNewWork, 'page')
-  revalidatePath(path.workDetail, 'page')
-  revalidatePath(path.userWork, 'page')
+  revalidateTag(tag.work)
   return NextResponse.json(work, { status: 200 })
 }
