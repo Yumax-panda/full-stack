@@ -2,7 +2,7 @@ import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { getSession } from '@/lib/auth'
-import { routes } from '@/lib/routes'
+import { path } from '@/lib/routes'
 import { updateWorkInServer } from '@/models'
 import { updateWork } from '@/usecase/work'
 
@@ -24,9 +24,8 @@ export async function PATCH(
   const work = parsed.data
   await updateWork(work)
 
-  // TODO: ユーザーマイページworks`/users/[userId]/works`, workの詳細`works/[workId]`のキャッシュを更新
-  revalidatePath(routes.createNewWork(workId), 'page')
-  revalidatePath(routes.workDetail(workId), 'page')
-  revalidatePath(routes.userWork(work.userId), 'page')
+  revalidatePath(path.createNewWork, 'page')
+  revalidatePath(path.workDetail, 'page')
+  revalidatePath(path.userWork, 'page')
   return NextResponse.json(work, { status: 200 })
 }

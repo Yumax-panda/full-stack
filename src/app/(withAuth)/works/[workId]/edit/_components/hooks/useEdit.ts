@@ -103,6 +103,7 @@ export const useEdit = ({
     }
 
     await fetch(`/api/works/${id}`, {
+      cache: 'no-cache',
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
