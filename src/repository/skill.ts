@@ -1,11 +1,14 @@
 import type { Skill, Tag } from '@prisma/client'
+import { cache } from 'react'
+
 import { prisma } from '@/lib/client'
 
 import type { SkillWithTags, CreateSkillProps } from '@/models'
 
-export async function getSkillsWithTagsByUserId(
+export async function getSkillsWithTagsByUserIdWithOutCache(
   userId: string,
 ): Promise<SkillWithTags[]> {
+  console.info(`called get skills with tags by user id: ${userId}`)
   const skills = await prisma.skill.findMany({
     where: {
       userId,
@@ -30,6 +33,10 @@ export async function getSkillsWithTagsByUserId(
     }
   })
 }
+
+export const getSkillsWithTagsByUserId = cache(
+  getSkillsWithTagsByUserIdWithOutCache,
+)
 
 export async function createSkill({
   tagIds,
