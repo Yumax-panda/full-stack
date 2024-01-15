@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 
-import { routes } from '@/lib/routes'
+import { path } from '@/lib/routes'
 import { updateUserSchema } from '@/models/user'
 import { updateUser } from '@/repository/user'
 
@@ -20,6 +20,6 @@ export async function updateUserAction(userId: string, formData: FormData) {
   }
 
   await updateUser(parsed.data)
-  revalidatePath(routes.userProfileSettings(), 'page')
-  revalidatePath(routes.userSkill(userId), 'layout')
+  revalidatePath(path.userProfileSettings, 'page')
+  revalidatePath(path.userSkill, 'layout')
 }

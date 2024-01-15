@@ -19,3 +19,14 @@ export const routes = {
   workDetail: (workId: string) => `/works/${workId}`,
   createNewWork: (workId: string) => `/works/${workId}/edit`,
 } as const
+
+export const path: Record<keyof typeof routes, string> = {
+  top: '/',
+  userSkill: '/users/[userId]',
+  userSkillEdit: '/settings/skills',
+  userArticle: '/users/[userId]/articles',
+  userWork: '/users/[userId]/works',
+  userProfileSettings: '/settings/profile',
+  workDetail: '/works/[workId]',
+  createNewWork: '/works/[workId]/edit',
+}

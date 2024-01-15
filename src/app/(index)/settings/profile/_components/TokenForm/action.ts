@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 
-import { routes } from '@/lib/routes'
+import { path } from '@/lib/routes'
 import { updateArticleTokenSchema } from '@/models/articleToken'
 import { updateArticleToken } from '@/repository/articleToken'
 
@@ -25,5 +25,5 @@ export async function updateTokenAction(userId: string, formData: FormData) {
   }
 
   await Promise.all(tasks)
-  revalidatePath(routes.userArticle(userId), 'page')
+  revalidatePath(path.userArticle, 'page')
 }

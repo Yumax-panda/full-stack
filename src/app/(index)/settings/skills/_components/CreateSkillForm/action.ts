@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { getImage } from '@/constants/skills'
-import { routes } from '@/lib/routes'
+import { path, routes } from '@/lib/routes'
 import { createSkillSchema } from '@/models'
 import { createSkill } from '@/usecase/skills'
 
@@ -31,7 +31,7 @@ export async function createSkillAction(userId: string, formData: FormData) {
   }
 
   const skill = await createSkill(parsed.data)
-  revalidatePath(routes.userSkill(skill.userId), 'page')
-  revalidatePath(routes.userSkillEdit(), 'page')
+  revalidatePath(path.userSkill, 'page')
+  revalidatePath(path.userSkillEdit, 'page')
   redirect(routes.userSkillEdit())
 }
