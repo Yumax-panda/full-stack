@@ -1,9 +1,10 @@
 import 'server-only'
 
-import { cache } from 'react'
+import { unstable_cache as cache } from 'next/cache'
 
 import { getSession } from '@/lib/auth'
 import { prisma } from '@/lib/client'
+import { tag } from '@/lib/routes'
 import { createNewWork, getEmptyWork } from '@/repository/work'
 
 import type { UpdateWorkInServer } from '@/models'
@@ -23,7 +24,11 @@ export async function getOrCreateEmptyWorkWithutCache(
   return createNewWork(userId)
 }
 
-export const getOrCreateEmptyWork = cache(getOrCreateEmptyWorkWithutCache)
+export const getOrCreateEmptyWork = cache(
+  getOrCreateEmptyWorkWithutCache,
+  ['getOrCreateEmptyWork'],
+  { tags: [tag.work] },
+)
 
 export async function getMyWorkByWorkIdWithoutCache(
   workId: string,
@@ -45,7 +50,7 @@ export async function getMyWorkByWorkIdWithoutCache(
   return work
 }
 
-export const getMyWorkByWorkId = cache(getMyWorkByWorkIdWithoutCache)
+export { getMyWorkByWorkIdWithoutCache as getMyWorkByWorkId } // sessionを使うためキャッシュしない
 
 export async function updateWork({
   id: workId,

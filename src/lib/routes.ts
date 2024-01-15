@@ -30,3 +30,15 @@ export const path: Record<keyof typeof routes, string> = {
   workDetail: '(index)/works/[workId]',
   createNewWork: '(withAuth)/works/[workId]/edit',
 }
+
+export const tag = {
+  skill: 'skill',
+  tag: 'tag',
+  article: 'article',
+  work: 'work',
+  private: 'private',
+  public: 'public',
+  partial: 'partial',
+  token: 'token',
+  profile: 'profile',
+} as const

@@ -1,9 +1,9 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 
 import { getImage } from '@/constants/skills'
-import { path } from '@/lib/routes'
+import { tag } from '@/lib/routes'
 import { updateSkillSchema } from '@/models'
 import { updateSkillWithTagIds } from '@/usecase/skills'
 
@@ -34,5 +34,5 @@ export async function updateSkillAction(
   // フォームが空のときtagIdsが[""]になってしまうので空配列にする
   parsed.data.tagIds = parsed.data.tagIds.filter(Boolean)
   await updateSkillWithTagIds(parsed.data)
-  revalidatePath(path.userSkillEdit, 'page')
+  revalidateTag(tag.skill)
 }

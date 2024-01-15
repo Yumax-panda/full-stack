@@ -1,10 +1,10 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { getImage } from '@/constants/skills'
-import { path, routes } from '@/lib/routes'
+import { routes, tag } from '@/lib/routes'
 import { createSkillSchema } from '@/models'
 import { createSkill } from '@/usecase/skills'
 
@@ -30,8 +30,7 @@ export async function createSkillAction(userId: string, formData: FormData) {
     throw new Error(parsed.error.message)
   }
 
-  const skill = await createSkill(parsed.data)
-  revalidatePath(path.userSkill, 'page')
-  revalidatePath(path.userSkillEdit, 'page')
+  await createSkill(parsed.data)
+  revalidateTag(tag.skill)
   redirect(routes.userSkillEdit())
 }
