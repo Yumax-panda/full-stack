@@ -63,8 +63,6 @@ export const WorkCard = ({
             component='img'
             sx={{
               transition: 'transform 0.3s ease',
-              overflow: 'hidden',
-              marginInline: 'auto',
               ":hover": {
                 transform: 'scale(1.1)',
               }
