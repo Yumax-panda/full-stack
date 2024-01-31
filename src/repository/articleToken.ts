@@ -1,4 +1,5 @@
 import { unstable_cache as cache } from 'next/cache'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 
 import { prisma } from '@/lib/client'
 import { tag } from '@/lib/routes'
@@ -25,14 +26,23 @@ export async function updateArticleToken(
 ): Promise<void> {
   const { userId, provider, token } = data
   if (token === null) {
-    await prisma.articleToken.delete({
-      where: {
-        provider_userId: {
-          provider,
-          userId,
+    try {
+      await prisma.articleToken.delete({
+        where: {
+          provider_userId: {
+            provider,
+            userId,
+          },
         },
-      },
-    })
+      })
+    } catch (e) {
+      if (e instanceof PrismaClientKnownRequestError) {
+        // P2025: Record to delete does not exist.
+        if (e.code === 'P2025') {
+          return
+        }
+      }
+    }
     return
   }
   await prisma.articleToken.upsert({
