@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form'
 
 import { Container } from '@/app/_components/Container/Container'
 import { Thumbnail } from '@/app/_components/Thumbnail'
-import { Tiptap } from '@/app/_components/Tiptap/Tiptap'
+import { Tiptap } from '@/app/_components/Tiptap'
 import { Box } from '@mui/material'
 
 import { Header } from '../Header/Header'
