@@ -50,8 +50,6 @@ export async function getMyWorkByWorkIdWithoutCache(
   return work
 }
 
-export { getMyWorkByWorkIdWithoutCache as getMyWorkByWorkId } // sessionを使うためキャッシュしない
-
 export async function updateWork({
   id: workId,
   ...data
