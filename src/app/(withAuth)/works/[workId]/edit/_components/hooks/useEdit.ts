@@ -13,6 +13,7 @@ import type { UpdateWork as FormValues, UpdateWork } from '@/models'
 type UseEditReturn = {
   control: Control<FormValues>
   onSubmit: () => void
+  isLoading: boolean
   formState: FormState<FormValues>
   thumbnail: string | null
   onThumbnailUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -32,6 +33,7 @@ export const useEdit = ({
   const [initialThumbnail, setInitialThumbnail] = useState<string | null>(
     _initialThumbnail,
   )
+  const [isLoading, setIsLoading] = useState(false)
 
   const { control, handleSubmit, formState, watch, setValue } =
     useForm<FormValues>({
@@ -70,7 +72,7 @@ export const useEdit = ({
     setValue('thumbnail', null)
   }
 
-  const submithandler = async (data: FormValues) => {
+  const submitHandler = async (data: FormValues) => {
     const { id, userId, thumbnail } = data
 
     // データを値渡しでコピー
@@ -126,12 +128,19 @@ export const useEdit = ({
   const onSubmit = handleSubmit(
     async (data) =>
       toast
-        .promise(submithandler(data), {
-          pending: '更新中',
-          success: '更新しました',
-          error: '更新に失敗しました',
-        })
-        .catch((e) => console.error('error, failed to update work : ', e)),
+        .promise(
+          async () => {
+            setIsLoading(true)
+            await submitHandler(data)
+          },
+          {
+            pending: '更新中',
+            success: '更新しました',
+            error: '更新に失敗しました',
+          },
+        )
+        .catch((e) => console.error('error, failed to update work : ', e))
+        .finally(() => setIsLoading(false)),
     (invalid) => toast.error(getErrorMessage(invalid)),
   )
 
@@ -144,6 +153,7 @@ export const useEdit = ({
   return {
     control,
     onSubmit,
+    isLoading,
     formState,
     thumbnail,
     onThumbnailUpload,

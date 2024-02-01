@@ -20,6 +20,7 @@ export const Editor = ({ work }: Props) => {
   const {
     control,
     onSubmit,
+    isLoading,
     isPrivate,
     toggleIsPrivate,
     onThumbnailUpload,
@@ -30,6 +31,7 @@ export const Editor = ({ work }: Props) => {
   return (
     <Box component='form' onSubmit={onSubmit}>
       <Header
+        isLoading={isLoading}
         workId={work.id}
         isPrivate={isPrivate}
         toggleIsPrivate={toggleIsPrivate}

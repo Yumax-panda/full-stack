@@ -16,11 +16,18 @@ type ButtonWithIconProps = {
   text: string
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
 }
 
-const ButtonWithIcon = ({ icon, text, onClick, type }: ButtonWithIconProps) => (
+const ButtonWithIcon = ({
+  icon,
+  text,
+  onClick,
+  type,
+  disabled,
+}: ButtonWithIconProps) => (
   <Tooltip title={text} sx={{ mx: '0.5rem' }}>
-    <IconButton onClick={onClick} type={type}>
+    <IconButton onClick={onClick} type={type} disabled={disabled}>
       {icon}
     </IconButton>
   </Tooltip>
@@ -74,10 +81,11 @@ const AddThumbnailButton = ({ onThumbnailAdd }: AddThumbnailButtonProps) => {
 }
 
 type Props = ToggleIsPrivateButtonProps &
-  AddThumbnailButtonProps & { workId: string }
+  AddThumbnailButtonProps & { workId: string; isLoading: boolean }
 export const Header = ({
   workId,
   isPrivate,
+  isLoading,
   toggleIsPrivate,
   onThumbnailAdd,
 }: Props) => {
@@ -113,7 +121,12 @@ export const Header = ({
             isPrivate={isPrivate}
             toggleIsPrivate={toggleIsPrivate}
           />
-          <ButtonWithIcon icon={<SaveAsOutlined />} text='保存' type='submit' />
+          <ButtonWithIcon
+            icon={<SaveAsOutlined />}
+            text='保存'
+            type='submit'
+            disabled={isLoading}
+          />
         </List>
       </Box>
     </nav>
