@@ -10,6 +10,7 @@ import {
   InputAdornment,
   Stack,
   TextField,
+  InputLabel,
   Typography,
 } from '@mui/material'
 import { Alert } from '@/app/_components/Alert'
@@ -65,10 +66,11 @@ export const EditProfileForm = ({
             <Typography sx={readOnlyStyle}>ID: {id}</Typography>
             <Typography sx={readOnlyStyle}>名前: {name}</Typography>
             <Field icon={<Email />} text={email || 'N/A'} />
+            <InputLabel htmlFor='location'>居住地</InputLabel>
             <TextField
+              id='location'
               name='location'
               fullWidth
-              label='居住地'
               defaultValue={location}
               variant='standard'
               InputProps={{
@@ -79,10 +81,12 @@ export const EditProfileForm = ({
                 ),
               }}
             />
+            <InputLabel htmlFor='organization'>所属</InputLabel>
             <TextField
+              id='organization'
               fullWidth
-              label='所属'
               name='organization'
+              autoComplete='organization'
               defaultValue={organization}
               variant='standard'
               InputProps={{
