@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form'
 
 import { Container } from '@/app/_components/Container/Container'
 import { Thumbnail } from '@/app/_components/Thumbnail'
-import { Tiptap } from '@/app/_components/Tiptap/Tiptap'
+import { Tiptap } from '@/app/_components/Tiptap'
 import { Box } from '@mui/material'
 
 import { Header } from '../Header/Header'
@@ -20,6 +20,7 @@ export const Editor = ({ work }: Props) => {
   const {
     control,
     onSubmit,
+    isLoading,
     isPrivate,
     toggleIsPrivate,
     onThumbnailUpload,
@@ -30,7 +31,7 @@ export const Editor = ({ work }: Props) => {
   return (
     <Box component='form' onSubmit={onSubmit}>
       <Header
-        workId={work.id}
+        isLoading={isLoading}
         isPrivate={isPrivate}
         toggleIsPrivate={toggleIsPrivate}
         onThumbnailAdd={onThumbnailUpload}

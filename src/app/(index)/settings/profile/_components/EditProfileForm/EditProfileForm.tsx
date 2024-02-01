@@ -1,5 +1,6 @@
+'use client'
 import type { User as Props } from '@prisma/client'
-import { Sectiontitle } from '@/app/_components/Text/Sectiontitle'
+import { SectionTitle } from '@/app/_components/Text/SectionTitle'
 import { CorporateFare, Email, LocationOn } from '@mui/icons-material'
 import {
   Avatar,
@@ -9,10 +10,13 @@ import {
   InputAdornment,
   Stack,
   TextField,
+  InputLabel,
   Typography,
 } from '@mui/material'
+import { Alert } from '@/app/_components/Alert'
 
 import { updateUserAction } from './action'
+import { useServerForm } from '@/app/_components/hooks/useServerForm'
 
 type FieldProps = {
   icon: React.ReactNode
@@ -37,11 +41,18 @@ export const EditProfileForm = ({
   const readOnlyStyle = {
     textAlign: 'left',
   } as const
+
   const action = updateUserAction.bind(null, id)
+  const {
+    formState,
+    dispatch,
+    status: { pending },
+  } = useServerForm({ action, initialState: null })
 
   return (
-    <Box component='form' action={action}>
-      <Sectiontitle text='プロフィール' />
+    <Box component='form' action={dispatch}>
+      <SectionTitle text='プロフィール' />
+      <Alert state={formState} />
       <Grid
         container
         sx={{
@@ -55,12 +66,14 @@ export const EditProfileForm = ({
             <Typography sx={readOnlyStyle}>ID: {id}</Typography>
             <Typography sx={readOnlyStyle}>名前: {name}</Typography>
             <Field icon={<Email />} text={email || 'N/A'} />
+            <InputLabel htmlFor='location'>居住地</InputLabel>
             <TextField
+              id='location'
               name='location'
               fullWidth
-              label='居住地'
               defaultValue={location}
               variant='standard'
+              placeholder='Tokyo'
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
@@ -69,12 +82,15 @@ export const EditProfileForm = ({
                 ),
               }}
             />
+            <InputLabel htmlFor='organization'>所属</InputLabel>
             <TextField
+              id='organization'
               fullWidth
-              label='所属'
               name='organization'
+              autoComplete='organization'
               defaultValue={organization}
               variant='standard'
+              placeholder='Full Stack Inc.'
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
@@ -92,7 +108,7 @@ export const EditProfileForm = ({
         </Grid>
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: '2rem' }}>
-        <Button variant='contained' type='submit'>
+        <Button variant='contained' type='submit' disabled={pending}>
           更新
         </Button>
       </Box>

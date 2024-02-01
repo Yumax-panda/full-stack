@@ -7,7 +7,7 @@ type Props = {
   sx?: TypographyProps['sx']
 }
 
-export const Sectiontitle = ({ text, sx }: Props) => (
+export const SectionTitle = ({ text, sx }: Props) => (
   <Typography
     sx={{
       pb: '0.5rem',

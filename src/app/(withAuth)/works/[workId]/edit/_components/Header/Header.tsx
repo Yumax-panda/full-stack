@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, useRef } from 'react'
 
-import { routes } from '@/lib/routes'
 import {
   AddPhotoAlternateOutlined,
   CloseOutlined,
@@ -16,11 +15,18 @@ type ButtonWithIconProps = {
   text: string
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
 }
 
-const ButtonWithIcon = ({ icon, text, onClick, type }: ButtonWithIconProps) => (
+const ButtonWithIcon = ({
+  icon,
+  text,
+  onClick,
+  type,
+  disabled,
+}: ButtonWithIconProps) => (
   <Tooltip title={text} sx={{ mx: '0.5rem' }}>
-    <IconButton onClick={onClick} type={type}>
+    <IconButton onClick={onClick} type={type} disabled={disabled}>
       {icon}
     </IconButton>
   </Tooltip>
@@ -74,10 +80,11 @@ const AddThumbnailButton = ({ onThumbnailAdd }: AddThumbnailButtonProps) => {
 }
 
 type Props = ToggleIsPrivateButtonProps &
-  AddThumbnailButtonProps & { workId: string }
+  AddThumbnailButtonProps & { isLoading: boolean }
+
 export const Header = ({
-  workId,
   isPrivate,
+  isLoading,
   toggleIsPrivate,
   onThumbnailAdd,
 }: Props) => {
@@ -104,7 +111,7 @@ export const Header = ({
           <ButtonWithIcon
             icon={<CloseOutlined />}
             text='プレビュー画面へ戻る'
-            onClick={() => router.push(routes.workDetail(workId))}
+            onClick={() => router.back()}
           />
         </List>
         <List sx={{ display: 'flex' }}>
@@ -113,7 +120,12 @@ export const Header = ({
             isPrivate={isPrivate}
             toggleIsPrivate={toggleIsPrivate}
           />
-          <ButtonWithIcon icon={<SaveAsOutlined />} text='保存' type='submit' />
+          <ButtonWithIcon
+            icon={<SaveAsOutlined />}
+            text='保存'
+            type='submit'
+            disabled={isLoading}
+          />
         </List>
       </Box>
     </nav>

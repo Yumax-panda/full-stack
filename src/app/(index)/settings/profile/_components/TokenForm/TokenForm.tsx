@@ -1,6 +1,11 @@
+'use client'
+
 import type { ArticleToken } from '@prisma/client'
-import { Sectiontitle } from '@/app/_components/Text/Sectiontitle'
+import { SectionTitle } from '@/app/_components/Text/SectionTitle'
 import { Button, Stack, TextField, Typography } from '@mui/material'
+import { useServerForm } from '@/app/_components/hooks/useServerForm'
+import { Alert } from '@/app/_components/Alert'
+import { InputLabel } from '@mui/material'
 
 import { updateTokenAction } from './action'
 
@@ -14,39 +19,49 @@ export const TokenForm = ({ tokens, userId }: Props) => {
   const getValueFromProvider = (provider: ArticleToken['provider']) =>
     tokenMap.get(provider)?.token || ''
   const action = updateTokenAction.bind(null, userId)
+  const {
+    formState,
+    status: { pending },
+    dispatch,
+  } = useServerForm({ action, initialState: null })
 
   return (
-    <Stack spacing={2} my={'2rem'} component='form' action={action}>
-      <Sectiontitle text='連携' />
-      <Typography>Qiita</Typography>
+    <Stack spacing={2} my={'2rem'} component='form' action={dispatch}>
+      <SectionTitle text='連携' />
+      <Alert state={formState} />
+      <InputLabel htmlFor='qiita'>QiitaのAPIトークン</InputLabel>
       <TextField
+        id='qiita'
         fullWidth
         variant='standard'
         defaultValue={getValueFromProvider('QIITA')}
         name='QIITA'
-        placeholder='Qiitaのトークン'
+        placeholder='abcde12345'
       />
-      <Typography>Zenn</Typography>
+      <InputLabel htmlFor='zenn'>ZENNのアカウント名</InputLabel>
       <TextField
+        id='zenn'
         fullWidth
         variant='standard'
         defaultValue={getValueFromProvider('ZENN')}
         name='ZENN'
-        placeholder='ZENNのアカウント名'
+        placeholder='zenn_account'
       />
-      <Typography>Note</Typography>
+      <InputLabel htmlFor='note'>Noteのアカウント名</InputLabel>
       <TextField
+        id='note'
         fullWidth
         variant='standard'
         defaultValue={getValueFromProvider('NOTE')}
         name='NOTE'
-        placeholder='Noteのアカウント名'
+        placeholder='note_account'
       />
       <Button
         type='submit'
         variant='contained'
         color='primary'
         sx={{ width: 'fit-content' }}
+        disabled={pending}
       >
         保存
       </Button>

@@ -5,8 +5,13 @@ import { revalidateTag } from 'next/cache'
 import { tag } from '@/lib/routes'
 import { updateUserSchema } from '@/models/user'
 import { updateUser } from '@/repository/user'
+import type { FormState } from './types'
 
-export async function updateUserAction(userId: string, formData: FormData) {
+export async function updateUserAction(
+  userId: string,
+  _: any,
+  formData: FormData,
+): Promise<FormState> {
   const data: any = {
     id: userId,
     location: formData.get('location') || null,
@@ -16,9 +21,11 @@ export async function updateUserAction(userId: string, formData: FormData) {
   const parsed = updateUserSchema.safeParse(data)
 
   if (!parsed.success) {
-    throw new Error(parsed.error.message)
+    // おそらく起こりえない
+    return { message: '入力内容に誤りがあります。', success: false }
   }
 
   await updateUser(parsed.data)
   revalidateTag(tag.profile)
+  return { message: 'プロフィールを更新しました。', success: true }
 }
