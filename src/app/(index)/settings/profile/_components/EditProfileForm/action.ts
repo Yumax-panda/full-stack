@@ -6,7 +6,13 @@ import { tag } from '@/lib/routes'
 import { updateUserSchema } from '@/models/user'
 import { updateUser } from '@/repository/user'
 
-export async function updateUserAction(userId: string, formData: FormData) {
+type FormState = string | null
+
+export async function updateUserAction(
+  userId: string,
+  _: FormState,
+  formData: FormData,
+): Promise<FormState> {
   const data: any = {
     id: userId,
     location: formData.get('location') || null,
@@ -16,9 +22,10 @@ export async function updateUserAction(userId: string, formData: FormData) {
   const parsed = updateUserSchema.safeParse(data)
 
   if (!parsed.success) {
-    throw new Error(parsed.error.message)
+    return 'フォームの入力内容が不正です。'
   }
 
   await updateUser(parsed.data)
   revalidateTag(tag.profile)
+  return 'プロフィールを更新しました。'
 }

@@ -1,3 +1,5 @@
+'use client'
+import { useFormState, useFormStatus } from 'react-dom'
 import type { User as Props } from '@prisma/client'
 import { Sectiontitle } from '@/app/_components/Text/Sectiontitle'
 import { CorporateFare, Email, LocationOn } from '@mui/icons-material'
@@ -37,10 +39,13 @@ export const EditProfileForm = ({
   const readOnlyStyle = {
     textAlign: 'left',
   } as const
+
   const action = updateUserAction.bind(null, id)
+  const [state, dispatch] = useFormState(action, null)
+  const { pending } = useFormStatus()
 
   return (
-    <Box component='form' action={action}>
+    <Box component='form' action={dispatch}>
       <Sectiontitle text='プロフィール' />
       <Grid
         container
@@ -92,7 +97,7 @@ export const EditProfileForm = ({
         </Grid>
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: '2rem' }}>
-        <Button variant='contained' type='submit'>
+        <Button variant='contained' type='submit' disabled={pending}>
           更新
         </Button>
       </Box>

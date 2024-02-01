@@ -54,7 +54,7 @@ export const WorkCard = ({
         </Avatar>
       )}
       {thumbnail ? (
-        <Box sx={{ width: 368, height: 230, overflow: "hidden" }}>
+        <Box sx={{ width: 368, height: 230, overflow: 'hidden' }}>
           <CardMedia
             image={thumbnail}
             alt={title}
@@ -63,9 +63,9 @@ export const WorkCard = ({
             component='img'
             sx={{
               transition: 'transform 0.3s ease',
-              ":hover": {
+              ':hover': {
                 transform: 'scale(1.1)',
-              }
+              },
             }}
           />
         </Box>
