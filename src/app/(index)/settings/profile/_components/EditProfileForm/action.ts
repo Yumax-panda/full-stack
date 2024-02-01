@@ -5,11 +5,7 @@ import { revalidateTag } from 'next/cache'
 import { tag } from '@/lib/routes'
 import { updateUserSchema } from '@/models/user'
 import { updateUser } from '@/repository/user'
-
-type FormState = {
-  message: string
-  success: boolean
-}
+import type { FormState } from './types'
 
 export async function updateUserAction(
   userId: string,

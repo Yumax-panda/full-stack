@@ -1,5 +1,4 @@
 'use client'
-import { useFormState, useFormStatus } from 'react-dom'
 import type { User as Props } from '@prisma/client'
 import { SectionTitle } from '@/app/_components/Text/SectionTitle'
 import { CorporateFare, Email, LocationOn } from '@mui/icons-material'
@@ -16,6 +15,7 @@ import {
 import { Alert } from '@/app/_components/Alert'
 
 import { updateUserAction } from './action'
+import { useServerForm } from '@/app/_components/hooks/useServerForm'
 
 type FieldProps = {
   icon: React.ReactNode
@@ -42,13 +42,16 @@ export const EditProfileForm = ({
   } as const
 
   const action = updateUserAction.bind(null, id)
-  const [state, dispatch] = useFormState(action, null)
-  const { pending } = useFormStatus()
+  const {
+    formState,
+    dispatch,
+    status: { pending },
+  } = useServerForm({ action, initialState: null })
 
   return (
     <Box component='form' action={dispatch}>
       <SectionTitle text='プロフィール' />
-      <Alert state={state} />
+      <Alert state={formState} />
       <Grid
         container
         sx={{
