@@ -1,7 +1,7 @@
 'use client'
 import { useFormState, useFormStatus } from 'react-dom'
 import type { User as Props } from '@prisma/client'
-import { Sectiontitle } from '@/app/_components/Text/Sectiontitle'
+import { SectionTitle } from '@/app/_components/Text/SectionTitle'
 import { CorporateFare, Email, LocationOn } from '@mui/icons-material'
 import {
   Avatar,
@@ -46,7 +46,7 @@ export const EditProfileForm = ({
 
   return (
     <Box component='form' action={dispatch}>
-      <Sectiontitle text='プロフィール' />
+      <SectionTitle text='プロフィール' />
       <Grid
         container
         sx={{

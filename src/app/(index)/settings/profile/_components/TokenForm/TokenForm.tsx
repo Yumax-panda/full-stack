@@ -1,5 +1,5 @@
 import type { ArticleToken } from '@prisma/client'
-import { Sectiontitle } from '@/app/_components/Text/Sectiontitle'
+import { SectionTitle } from '@/app/_components/Text/SectionTitle'
 import { Button, Stack, TextField, Typography } from '@mui/material'
 
 import { updateTokenAction } from './action'
@@ -17,7 +17,7 @@ export const TokenForm = ({ tokens, userId }: Props) => {
 
   return (
     <Stack spacing={2} my={'2rem'} component='form' action={action}>
-      <Sectiontitle text='連携' />
+      <SectionTitle text='連携' />
       <Typography>Qiita</Typography>
       <TextField
         fullWidth

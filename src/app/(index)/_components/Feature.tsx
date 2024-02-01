@@ -1,5 +1,5 @@
 import { Description } from '@/app/_components/Text/Description'
-import { Sectiontitle } from '@/app/_components/Text/Sectiontitle'
+import { SectionTitle } from '@/app/_components/Text/SectionTitle'
 import { Box } from '@mui/material'
 
 const features = [
@@ -25,7 +25,7 @@ export const Feature = () => {
     <div>
       {features.map((feature) => (
         <Box key={feature.title} sx={{ my: '0.5rem' }}>
-          <Sectiontitle text={feature.title} />
+          <SectionTitle text={feature.title} />
           <Description description={feature.description} />
         </Box>
       ))}

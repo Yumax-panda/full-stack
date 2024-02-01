@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Sectiontitle } from './Sectiontitle'
+import { SectionTitle } from './SectionTitle'
 
 export default {
-  title: 'Text/Sectiontitle',
-  component: Sectiontitle,
+  title: 'Text/SectionTitle',
+  component: SectionTitle,
   argTypes: {
     children: {
       control: {
@@ -12,9 +12,9 @@ export default {
       },
     },
   },
-} as Meta<typeof Sectiontitle>
+} as Meta<typeof SectionTitle>
 
-type Story = StoryObj<typeof Sectiontitle>
+type Story = StoryObj<typeof SectionTitle>
 
 export const Basic: Story = {
   args: { text: 'test' },
