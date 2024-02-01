@@ -73,6 +73,7 @@ export const EditProfileForm = ({
               fullWidth
               defaultValue={location}
               variant='standard'
+              placeholder='Tokyo'
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
@@ -89,6 +90,7 @@ export const EditProfileForm = ({
               autoComplete='organization'
               defaultValue={organization}
               variant='standard'
+              placeholder='Full Stack Inc.'
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
