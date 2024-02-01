@@ -13,6 +13,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
+import { Alert } from '@/app/_components/Alert'
 
 import { updateUserAction } from './action'
 
@@ -47,6 +48,7 @@ export const EditProfileForm = ({
   return (
     <Box component='form' action={dispatch}>
       <SectionTitle text='プロフィール' />
+      <Alert state={state} />
       <Grid
         container
         sx={{
