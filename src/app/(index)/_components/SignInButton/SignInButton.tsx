@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { routes } from '@/lib/routes'
 import { Button } from '@mui/material'
 
-export const SigninButton = () => {
+export const SignInButton = () => {
   const { data: session } = useSession()
   const user = session?.user ?? null
   const router = useRouter()
