@@ -1,3 +1,4 @@
+// TODO: メニューみたいに外側をクリックすると閉じるようにする
 import { Paper, Typography } from "@mui/material"
 
 type ColorPalletProps = {
