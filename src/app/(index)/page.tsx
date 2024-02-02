@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { Subtitle } from '../_components/Text/Subtitle/Subtitle'
 import { Title } from '../_components/Text/Title'
 import { Feature } from './_components/Feature'
-import { SigninButton } from './_components/SignInButton'
+import { SignInButton } from './_components/SignInButton'
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
           text='エンジニアのためのポートフォリオサイト'
           sx={{ my: '0.5rem' }}
         />
-        <SigninButton />
+        <SignInButton />
       </Box>
       <Feature />
     </Box>

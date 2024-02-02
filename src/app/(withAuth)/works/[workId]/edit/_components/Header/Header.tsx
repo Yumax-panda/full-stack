@@ -9,6 +9,7 @@ import {
   SaveAsOutlined,
 } from '@mui/icons-material'
 import { Box, IconButton, List, Tooltip } from '@mui/material'
+import { routes } from '@/lib/routes'
 
 type ButtonWithIconProps = {
   icon: any
@@ -80,9 +81,10 @@ const AddThumbnailButton = ({ onThumbnailAdd }: AddThumbnailButtonProps) => {
 }
 
 type Props = ToggleIsPrivateButtonProps &
-  AddThumbnailButtonProps & { isLoading: boolean }
+  AddThumbnailButtonProps & { isLoading: boolean; workId: string }
 
 export const Header = ({
+  workId,
   isPrivate,
   isLoading,
   toggleIsPrivate,
@@ -111,7 +113,7 @@ export const Header = ({
           <ButtonWithIcon
             icon={<CloseOutlined />}
             text='プレビュー画面へ戻る'
-            onClick={() => router.back()}
+            onClick={() => router.push(routes.workDetail(workId))}
           />
         </List>
         <List sx={{ display: 'flex' }}>
