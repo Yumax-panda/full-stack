@@ -15,8 +15,7 @@ import {
 } from '@mui/material'
 
 import { createSkillAction } from './action'
-
-import type { Tag } from '@/models'
+import type { Tag } from '@prisma/client'
 
 type Props = {
   allTags: Tag[]
