@@ -1,6 +1,5 @@
 'use client'
 
-import type { EditActionType } from '@/lib/routes'
 import type { SkillWithTags, Tag } from '@/models'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -14,6 +13,7 @@ import { CreateSkillForm } from '../CreateSkillForm'
 import { DeleteSkillButton } from '../DeleteSkillButton'
 import { deleteSkillAction } from '../DeleteSkillButton/action'
 import { UpdateSkillForm } from '../UpdateSkillForm'
+import { Container, Header, RowContainer } from '../../../_components/Table'
 
 type ToggleEditButtonProps = {
   onClick: () => void
@@ -25,19 +25,6 @@ const ToggleEditButton = ({ onClick }: ToggleEditButtonProps) => (
       <Edit />
     </IconButton>
   </Tooltip>
-)
-
-const RowContainer = ({ children }: { children: React.ReactNode }) => (
-  <Box
-    sx={{
-      display: 'flex',
-      width: '100%',
-      py: '0.5rem',
-      borderBottom: '1px solid lightgray',
-    }}
-  >
-    {children}
-  </Box>
 )
 
 type EditableTableRowProps = {
@@ -138,22 +125,8 @@ export const SkillsTable = ({ skills, tags, userId, action }: Props) => {
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: '1rem' }}>
         <CreateSkillButton onClick={toggleOpen} />
       </Box>
-      <Box
-        sx={{
-          border: '1px solid gray',
-          borderRadius: '0.5rem',
-          borderBottom: 0,
-        }}
-      >
-        <Box
-          sx={{
-            borderBottom: '1px solid gray',
-            p: '0.5rem',
-            bgcolor: 'lightgrey',
-          }}
-        >
-          {skills.length} 件
-        </Box>
+      <Container>
+        <Header>{skills.length} 件</Header>
         <Box>
           {open && (
             <RowContainer>
@@ -175,7 +148,7 @@ export const SkillsTable = ({ skills, tags, userId, action }: Props) => {
               />
             ))}
         </Box>
-      </Box>
+      </Container>
     </Box>
   )
 }
