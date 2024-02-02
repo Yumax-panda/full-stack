@@ -1,6 +1,7 @@
 'use client'
 
-import type { SkillWithTags, Tag } from '@/models'
+import type { Tag } from '@prisma/client'
+import type { SkillWithTags } from '@/models'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
