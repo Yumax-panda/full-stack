@@ -13,6 +13,7 @@ export const routes = {
     }
     return urls.join('')
   },
+  tag: () => 'settings/tags',
   userArticle: (userId: string) => `/users/${userId}/articles`,
   userWork: (userId: string) => `/users/${userId}/works`,
   userProfileSettings: () => '/settings/profile',
@@ -24,6 +25,7 @@ export const path: Record<keyof typeof routes, string> = {
   top: '/',
   userSkill: '(index)/users/[userId]',
   userSkillEdit: '(index)/settings/skills',
+  tag: '(index)/settings/tags',
   userArticle: '(index)/users/[userId]/articles',
   userWork: '(index)/users/[userId]/works',
   userProfileSettings: '(index)/settings/profile',
