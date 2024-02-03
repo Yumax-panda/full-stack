@@ -7,9 +7,11 @@ type Props = {
 export const Header = ({ children }: Props) => (
   <Box
     sx={{
-      bgcolor: 'lightgrey',
+      bgcolor: 'grey.200',
       p: '0.5rem',
-      borderBottom: 'lightgray',
+      borderTopLeftRadius: '0.5rem',
+      borderTopRightRadius: '0.5rem',
+      borderBottom: 'lightgray 1px solid',
     }}
   >
     {children}
