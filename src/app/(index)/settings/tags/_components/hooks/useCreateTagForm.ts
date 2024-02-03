@@ -4,10 +4,7 @@ import { useRouter } from 'next/navigation'
 import { createTagSchema, type CreateTag } from '@/models'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { generateRandomColor } from '@/lib/color'
-import { toast } from 'react-toastify'
-import { message } from '@/lib/message'
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
-import { on } from 'events'
 
 type Props = {
   onCanceled: () => void
