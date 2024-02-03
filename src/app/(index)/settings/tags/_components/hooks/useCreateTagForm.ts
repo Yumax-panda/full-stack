@@ -1,5 +1,5 @@
 import { useForm, type UseFormReturn } from 'react-hook-form'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createTagSchema, type CreateTag } from '@/models'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { generateRandomColor } from '@/lib/color'
@@ -20,20 +20,25 @@ type UseCreateTagFormReturn = Pick<
 > & {
   handleSubmit: () => void
   isLoading: boolean
+  current: FormValues
+  regenerateColor: () => void
 }
 
 export const useCreateTagForm = ({
   onCanceled,
 }: Props): UseCreateTagFormReturn => {
-  const { register, handleSubmit, formState, setValue } = useForm<FormValues>({
-    defaultValues: {
-      name: '',
-      brief: '',
-      color: generateRandomColor(),
-    },
-    resolver: zodResolver(createTagSchema),
-  })
+  const { register, handleSubmit, formState, setValue, watch } =
+    useForm<FormValues>({
+      defaultValues: {
+        name: '',
+        brief: '',
+        // NOTE: ここでランダムにするとサーバー生成の色と同じに(ほぼ)ならないためエラーが出る
+        color: '',
+      },
+      resolver: zodResolver(createTagSchema),
+    })
   const [isLoading, setIsLoading] = useState(false)
+  const current = watch()
 
   const createTag = async (data: CreateTag) => {
     const apiUrl = '/api/tags'
@@ -45,6 +50,10 @@ export const useCreateTagForm = ({
       body: JSON.stringify(data),
     })
   }
+
+  useEffect(() => {
+    setValue('color', generateRandomColor())
+  }, [])
 
   // TODO: Add error handling
   const onSubmit = async (data: CreateTag) => {
@@ -59,11 +68,17 @@ export const useCreateTagForm = ({
     }
   }
 
+  const regenerateColor = () => {
+    setValue('color', generateRandomColor())
+  }
+
   return {
     register,
     handleSubmit: handleSubmit(onSubmit),
     formState,
     setValue,
     isLoading,
+    current,
+    regenerateColor,
   }
 }
