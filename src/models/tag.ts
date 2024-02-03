@@ -27,3 +27,10 @@ export const createTagSchema = z.object({
 })
 
 export type CreateTag = z.infer<typeof createTagSchema>
+
+export const updateTagSchema = z.object({
+  id: z.string(),
+  ...createTagSchema.shape,
+})
+
+export type UpdateTag = z.infer<typeof updateTagSchema>
