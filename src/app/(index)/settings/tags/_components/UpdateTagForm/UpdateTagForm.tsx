@@ -1,13 +1,14 @@
 import { Box } from '@mui/material'
-import { useCreateTagForm } from '../hooks/useCreateTagForm'
+import { useUpdateTagForm } from '../hooks/useUpdateTagForm'
 import { TagForm } from '../TagForm'
+import type { Tag } from '@prisma/client'
 
 type Props = {
   onClose: () => void
+  tag: Tag
 }
 
-// NOTE: zodResolverでバリデーションをするため、ここでは不要
-export const CreateTagForm = ({ onClose }: Props) => {
+export const UpdateTagForm = ({ onClose, tag }: Props) => {
   const {
     register,
     formState,
@@ -16,20 +17,21 @@ export const CreateTagForm = ({ onClose }: Props) => {
     isLoading,
     current,
     regenerateColor,
-  } = useCreateTagForm({ onCanceled: onClose })
+    handleDelete,
+  } = useUpdateTagForm({ ...tag, onCanceled: onClose })
 
   return (
-    <Box sx={{ bgcolor: 'grey.200', py: '0.25rem', borderRadius: '4px' }}>
+    <Box sx={{ py: '0.25rem', borderRadius: '4px' }}>
       <TagForm
         onClose={onClose}
         onSubmit={handleSubmit}
+        onDelete={handleDelete}
         register={register}
         formState={formState}
         setValue={setValue}
         isLoading={isLoading}
         current={current}
         regenerateColor={regenerateColor}
-        onDelete={null}
       />
     </Box>
   )

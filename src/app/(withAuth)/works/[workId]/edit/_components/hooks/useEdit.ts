@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 import { updateWorkSchema as formSchema } from '@/models'
 import { workImageStorage } from '@/repository/storage'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -46,6 +47,13 @@ export const useEdit = ({
         ...rest,
       },
     })
+
+  const { task } = useToastPromise({
+    pending: '更新中',
+    success: '更新しました',
+    action: async (data: FormValues) => submitHandler(data),
+    setIsLoading,
+  })
 
   useEffect(() => {
     if (initialThumbnail) {
@@ -125,23 +133,8 @@ export const useEdit = ({
     return messages.join('\n')
   }
 
-  const onSubmit = handleSubmit(
-    async (data) =>
-      toast
-        .promise(
-          async () => {
-            setIsLoading(true)
-            await submitHandler(data)
-          },
-          {
-            pending: '更新中',
-            success: '更新しました',
-            error: '更新に失敗しました',
-          },
-        )
-        .catch((e) => console.error('error, failed to update work : ', e))
-        .finally(() => setIsLoading(false)),
-    (invalid) => toast.error(getErrorMessage(invalid)),
+  const onSubmit = handleSubmit(task, (invalid) =>
+    toast.error(getErrorMessage(invalid)),
   )
 
   const isPrivate = watch('isPrivate')
