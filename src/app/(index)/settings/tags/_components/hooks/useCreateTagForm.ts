@@ -4,6 +4,10 @@ import { useRouter } from 'next/navigation'
 import { createTagSchema, type CreateTag } from '@/models'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { generateRandomColor } from '@/lib/color'
+import { toast } from 'react-toastify'
+import { message } from '@/lib/message'
+import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import { on } from 'events'
 
 type Props = {
   onCanceled: () => void
@@ -46,45 +50,44 @@ export const useCreateTagForm = ({
   const [isLoading, setIsLoading] = useState(false)
   const current = watch()
   const router = useRouter()
+  const { task } = useToastPromise({
+    pending: 'タグを作成中...',
+    success: 'タグを作成しました',
+    action: async (data: CreateTag) => {
+      await createTag(data)
+      router.refresh()
+      onCanceled()
+    },
+    setIsLoading,
+  })
 
   const createTag = async (data: CreateTag) => {
     const apiUrl = '/api/tags'
-    return await fetch(apiUrl, {
+    const res = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
+    if (!res.ok) {
+      const error = await res.json()
+      throw new Error(error.error)
+    }
+    return
   }
 
   useEffect(() => {
     setValue('color', generateRandomColor())
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // TODO: Add error handling
-  const onSubmit = async (data: CreateTag) => {
-    setIsLoading(true)
-    try {
-      await createTag(data)
-      onCanceled()
-      router.refresh()
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   const regenerateColor = () => {
     setValue('color', generateRandomColor())
   }
 
-  const handleSubmit = defaultHandleSubmit(onSubmit)
-
   return {
     register,
-    handleSubmit,
+    handleSubmit: defaultHandleSubmit(task),
     formState,
     setValue,
     isLoading,
