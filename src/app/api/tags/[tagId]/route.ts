@@ -18,8 +18,13 @@ export async function PATCH(
 
   try {
     const body = await req.json()
-    const tagPayload = updateTagSchema.parse(body)
-    await updateTag({ ...tagPayload, userId: session.user.id, id: tagId })
+    const tagPayload = updateTagSchema.parse({
+      name: body.name,
+      brief: body.brief,
+      color: body.color,
+      id: tagId,
+    })
+    await updateTag({ ...tagPayload, userId: session.user.id })
     revalidateTag(tag.tag)
     return NextResponse.json({}, { status: 200 })
   } catch (e) {
