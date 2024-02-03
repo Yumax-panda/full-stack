@@ -1,13 +1,62 @@
-// TODO: メニューみたいに外側をクリックすると閉じるようにする
-import { Paper, Typography } from '@mui/material'
+import { Typography, Menu } from '@mui/material'
 
 type ColorPalletProps = {
   onSelect: (color: string) => void
+  anchorEl: null | HTMLElement
+  onClose: () => void
+  open: boolean
 }
 
 type ColorCellProps = {
   color: string
   onClick: () => void
+}
+
+export const ColorPallet = ({
+  onSelect,
+  anchorEl,
+  onClose,
+  open,
+}: ColorPalletProps) => {
+  return (
+    <Menu
+      id='color-pallet-menu'
+      anchorEl={anchorEl}
+      open={open}
+      onClose={onClose}
+      slotProps={{
+        paper: {
+          sx: {
+            width: 'fit-content',
+            padding: '10px',
+            overflow: 'visible',
+            mt: 1.5,
+            '&::before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              left: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: 'left', vertical: 'top' }}
+      anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+    >
+      <ColorPalletContent
+        onSelect={(c) => {
+          onSelect(c)
+          onClose()
+        }}
+      />
+    </Menu>
+  )
 }
 
 const ColorCell = ({ color, onClick }: ColorCellProps) => (
@@ -26,7 +75,9 @@ const ColorCell = ({ color, onClick }: ColorCellProps) => (
   />
 )
 
-export const ColorPallet = ({ onSelect }: ColorPalletProps) => {
+const ColorPalletContent = ({
+  onSelect,
+}: Pick<ColorPalletProps, 'onSelect'>) => {
   const colors = [
     '#B60205',
     '#D93F0B',
@@ -47,7 +98,7 @@ export const ColorPallet = ({ onSelect }: ColorPalletProps) => {
   ]
   const onClick = (color: string) => () => onSelect(color)
   return (
-    <Paper sx={{ width: 'fit-content', padding: '10px' }}>
+    <>
       <Typography color='GrayText' sx={{ fontSize: '14px' }}>
         Choose from default colors:
       </Typography>
@@ -63,6 +114,6 @@ export const ColorPallet = ({ onSelect }: ColorPalletProps) => {
           <ColorCell key={color} color={color} onClick={onClick(color)} />
         ))}
       </div>
-    </Paper>
+    </>
   )
 }
