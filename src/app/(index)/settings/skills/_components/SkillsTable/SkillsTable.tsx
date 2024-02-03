@@ -1,6 +1,6 @@
 'use client'
 
-import type { Tag } from '@prisma/client'
+import type { Tag as TagType } from '@prisma/client'
 import type { SkillWithTags } from '@/models'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -8,12 +8,13 @@ import { useState } from 'react'
 import { StarField } from '@/app/(index)/_components/StarField'
 import { routes } from '@/lib/routes'
 import { Add, Edit } from '@mui/icons-material'
-import { Box, Button, Chip, IconButton, Tooltip } from '@mui/material'
+import { Box, Button, IconButton, Tooltip } from '@mui/material'
 
 import { CreateSkillForm } from '../CreateSkillForm'
 import { DeleteSkillButton } from '../DeleteSkillButton'
 import { deleteSkillAction } from '../DeleteSkillButton/action'
 import { UpdateSkillForm } from '../UpdateSkillForm'
+import { Tag } from '@/app/(index)/_components/Tag'
 import { Container, Header, RowContainer } from '../../../_components/Table'
 
 type ToggleEditButtonProps = {
@@ -30,7 +31,7 @@ const ToggleEditButton = ({ onClick }: ToggleEditButtonProps) => (
 
 type EditableTableRowProps = {
   skill: SkillWithTags
-  tags: Tag[]
+  tags: TagType[]
   userId: string
 }
 
@@ -51,11 +52,7 @@ const EditableRow = ({ skill, tags, userId }: EditableTableRowProps) => {
       <Box sx={{ flexGrow: 4, display: 'flex' }}>
         <Box sx={{ my: 'auto' }}>
           {skill.tags.map((t) => (
-            <Chip
-              key={t.id}
-              label={t.name}
-              sx={{ mr: '0.5rem', bgcolor: `${t.color}` }}
-            />
+            <Tag key={t.id} {...t} />
           ))}
         </Box>
       </Box>
@@ -104,7 +101,7 @@ const CreateSkillButton = ({ onClick }: CreateSkillButtonProps) => (
 
 type Props = {
   skills: SkillWithTags[]
-  tags: Tag[]
+  tags: TagType[]
   userId: string
   action?: string
 }
