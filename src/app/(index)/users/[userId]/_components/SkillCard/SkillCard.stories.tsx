@@ -19,10 +19,17 @@ export const Default: Story = {
       {
         name: 'Frontend',
         color: 'skyblue',
+        brief: 'Frontend',
       },
       {
         name: 'Backend',
         color: 'grey',
+        brief: 'Backend',
+      },
+      {
+        name: 'JavaScript',
+        color: 'yellow',
+        brief: null,
       },
     ],
   },

@@ -5,14 +5,14 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Chip,
   Typography,
 } from '@mui/material'
 
 import type { Skill as SkillPayload, Tag as TagPayload } from '@prisma/client'
+import { Tag } from '@/app/(index)/_components/Tag'
 
 type Skill = Pick<SkillPayload, 'name' | 'level' | 'image'>
-type Tag = Pick<TagPayload, 'name' | 'color'>
+type Tag = Pick<TagPayload, 'name' | 'color' | 'brief'>
 export type Props = Skill & {
   tags: Tag[]
 }
@@ -63,14 +63,7 @@ export const SkillCard = ({ name, level, image, tags = [] }: Props) => {
         }}
       >
         {tags.map((tag) => (
-          <Chip
-            key={tag.name}
-            label={tag.name}
-            sx={{
-              backgroundColor: tag.color,
-              color: 'white',
-            }}
-          />
+          <Tag key={tag.name} {...tag} />
         ))}
       </Box>
     </Card>
