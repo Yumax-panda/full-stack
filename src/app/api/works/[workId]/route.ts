@@ -7,6 +7,7 @@ import { message } from '@/lib/message'
 import { updateWorkInServer } from '@/models'
 import { updateWork } from '@/usecase/work'
 
+// FIXME: workIdが冗長なので削除して良い
 export async function PATCH(
   req: NextRequest,
   { params: { workId } }: { params: { workId: string } },
