@@ -1,5 +1,6 @@
 import { useForm, type UseFormReturn } from 'react-hook-form'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type FormEventHandler } from 'react'
+import { useRouter } from 'next/navigation'
 import { createTagSchema, type CreateTag } from '@/models'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { generateRandomColor } from '@/lib/color'
@@ -18,7 +19,7 @@ type UseCreateTagFormReturn = Pick<
   UseFormReturn<FormValues>,
   'register' | 'formState' | 'setValue'
 > & {
-  handleSubmit: () => void
+  handleSubmit: FormEventHandler<HTMLFormElement>
   isLoading: boolean
   current: FormValues
   regenerateColor: () => void
@@ -27,22 +28,28 @@ type UseCreateTagFormReturn = Pick<
 export const useCreateTagForm = ({
   onCanceled,
 }: Props): UseCreateTagFormReturn => {
-  const { register, handleSubmit, formState, setValue, watch } =
-    useForm<FormValues>({
-      defaultValues: {
-        name: '',
-        brief: '',
-        // NOTE: ここでランダムにするとサーバー生成の色と同じに(ほぼ)ならないためエラーが出る
-        color: '',
-      },
-      resolver: zodResolver(createTagSchema),
-    })
+  const {
+    register,
+    handleSubmit: defaultHandleSubmit,
+    formState,
+    setValue,
+    watch,
+  } = useForm<FormValues>({
+    defaultValues: {
+      name: '',
+      brief: '',
+      // NOTE: ここでランダムにするとサーバー生成の色と同じに(ほぼ)ならないためエラーが出る
+      color: '',
+    },
+    resolver: zodResolver(createTagSchema),
+  })
   const [isLoading, setIsLoading] = useState(false)
   const current = watch()
+  const router = useRouter()
 
   const createTag = async (data: CreateTag) => {
     const apiUrl = '/api/tags'
-    await fetch(apiUrl, {
+    return await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,6 +68,7 @@ export const useCreateTagForm = ({
     try {
       await createTag(data)
       onCanceled()
+      router.refresh()
     } catch (error) {
       console.error(error)
     } finally {
@@ -72,9 +80,11 @@ export const useCreateTagForm = ({
     setValue('color', generateRandomColor())
   }
 
+  const handleSubmit = defaultHandleSubmit(onSubmit)
+
   return {
     register,
-    handleSubmit: handleSubmit(onSubmit),
+    handleSubmit,
     formState,
     setValue,
     isLoading,
