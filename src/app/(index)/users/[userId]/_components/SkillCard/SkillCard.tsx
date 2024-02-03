@@ -1,12 +1,6 @@
 import { StarField } from '@/app/(index)/_components/StarField'
 import { QuestionMark } from '@mui/icons-material'
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 
 import type { Skill as SkillPayload, Tag as TagPayload } from '@prisma/client'
 import { Tag } from '@/app/(index)/_components/Tag'
