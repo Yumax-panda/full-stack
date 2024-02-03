@@ -7,15 +7,14 @@ import { Replay } from '@mui/icons-material'
 import { Tag } from '@/app/(index)/_components/Tag'
 import { useCreateTagForm } from '../hooks/useCreateTagForm'
 import { ColorPallet } from '../ColorPallet'
-import type { Tag as TagType } from '@prisma/client'
 import { hexToRgb } from '@/lib/color'
 
 type Props = {
   onClose: () => void
-  allTags: TagType[]
 }
 
-export const CreateTagForm = ({ onClose, allTags }: Props) => {
+// NOTE: zodResolverでバリデーションをするため、ここでは不要
+export const CreateTagForm = ({ onClose }: Props) => {
   const {
     register,
     formState: { errors },
@@ -74,17 +73,10 @@ export const CreateTagForm = ({ onClose, allTags }: Props) => {
             variant='filled'
             size='small'
             fullWidth
-            {...register('name', {
-              required: true,
-              validate: (v) => {
-                return allTags.some((tag) => tag.name === v)
-                  ? '同じ名前のタグが既に存在します'
-                  : true
-              },
-            })}
+            {...register('name')}
             placeholder='タグの名前'
             error={!!errors.name}
-            helperText={errors.name ? '名前は必須です' : ''}
+            helperText={errors.name?.message}
             sx={fieldProps}
           />
         </div>
@@ -98,6 +90,8 @@ export const CreateTagForm = ({ onClose, allTags }: Props) => {
             sx={fieldProps}
             placeholder='タグの説明 (任意)'
             fullWidth
+            error={!!errors.brief}
+            helperText={errors.brief?.message}
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -127,20 +121,15 @@ export const CreateTagForm = ({ onClose, allTags }: Props) => {
               id='color'
               variant='filled'
               size='small'
-              {...register('color', {
-                pattern: {
-                  value: /^#[0-9a-fA-F]{6}$/,
-                  message: '#000000 〜 #ffffff の形式で指定してください',
-                },
-                minLength: 7,
-                maxLength: 7,
-              })}
+              {...register('color')}
               sx={{
                 ...fieldProps,
                 m: 'auto',
                 flexGrow: 1,
               }}
               onClick={handleClick}
+              error={!!errors.color}
+              helperText={errors.color?.message}
             />
           </div>
         </div>
