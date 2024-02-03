@@ -53,7 +53,7 @@ export const useCreateTagForm = ({
 
   useEffect(() => {
     setValue('color', generateRandomColor())
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // TODO: Add error handling
   const onSubmit = async (data: CreateTag) => {
