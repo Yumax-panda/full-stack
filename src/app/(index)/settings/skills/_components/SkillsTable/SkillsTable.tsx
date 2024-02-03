@@ -1,19 +1,21 @@
 'use client'
 
-import type { EditActionType } from '@/lib/routes'
-import type { SkillWithTags, Tag } from '@/models'
+import type { Tag as TagType } from '@prisma/client'
+import type { SkillWithTags } from '@/models'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { StarField } from '@/app/(index)/_components/StarField'
 import { routes } from '@/lib/routes'
 import { Add, Edit } from '@mui/icons-material'
-import { Box, Button, Chip, IconButton, Tooltip } from '@mui/material'
+import { Box, Button, IconButton, Tooltip } from '@mui/material'
 
 import { CreateSkillForm } from '../CreateSkillForm'
 import { DeleteSkillButton } from '../DeleteSkillButton'
 import { deleteSkillAction } from '../DeleteSkillButton/action'
 import { UpdateSkillForm } from '../UpdateSkillForm'
+import { Tag } from '@/app/(index)/_components/Tag'
+import { Container, Header, RowContainer } from '../../../_components/Table'
 
 type ToggleEditButtonProps = {
   onClick: () => void
@@ -27,22 +29,9 @@ const ToggleEditButton = ({ onClick }: ToggleEditButtonProps) => (
   </Tooltip>
 )
 
-const RowContainer = ({ children }: { children: React.ReactNode }) => (
-  <Box
-    sx={{
-      display: 'flex',
-      width: '100%',
-      py: '0.5rem',
-      borderBottom: '1px solid lightgray',
-    }}
-  >
-    {children}
-  </Box>
-)
-
 type EditableTableRowProps = {
   skill: SkillWithTags
-  tags: Tag[]
+  tags: TagType[]
   userId: string
 }
 
@@ -63,11 +52,7 @@ const EditableRow = ({ skill, tags, userId }: EditableTableRowProps) => {
       <Box sx={{ flexGrow: 4, display: 'flex' }}>
         <Box sx={{ my: 'auto' }}>
           {skill.tags.map((t) => (
-            <Chip
-              key={t.id}
-              label={t.name}
-              sx={{ mr: '0.5rem', bgcolor: `${t.color}` }}
-            />
+            <Tag key={t.id} {...t} />
           ))}
         </Box>
       </Box>
@@ -116,7 +101,7 @@ const CreateSkillButton = ({ onClick }: CreateSkillButtonProps) => (
 
 type Props = {
   skills: SkillWithTags[]
-  tags: Tag[]
+  tags: TagType[]
   userId: string
   action?: string
 }
@@ -138,22 +123,8 @@ export const SkillsTable = ({ skills, tags, userId, action }: Props) => {
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: '1rem' }}>
         <CreateSkillButton onClick={toggleOpen} />
       </Box>
-      <Box
-        sx={{
-          border: '1px solid gray',
-          borderRadius: '0.5rem',
-          borderBottom: 0,
-        }}
-      >
-        <Box
-          sx={{
-            borderBottom: '1px solid gray',
-            p: '0.5rem',
-            bgcolor: 'lightgrey',
-          }}
-        >
-          {skills.length} 件
-        </Box>
+      <Container>
+        <Header>{skills.length} 件</Header>
         <Box>
           {open && (
             <RowContainer>
@@ -175,7 +146,7 @@ export const SkillsTable = ({ skills, tags, userId, action }: Props) => {
               />
             ))}
         </Box>
-      </Box>
+      </Container>
     </Box>
   )
 }

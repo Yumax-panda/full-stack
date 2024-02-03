@@ -52,6 +52,7 @@ model Tag {
   updatedAt DateTime           @updatedAt
   color     String
   userId    String
+  brief     String?
   skills    SkillTagRelation[]
   user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

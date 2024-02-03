@@ -14,11 +14,13 @@ const tags = [
     id: 1,
     name: 'JavaScript',
     color: 'skyblue',
+    brief: 'Frontend',
   },
   {
     id: 2,
     name: 'TypeScript',
     color: 'blue',
+    brief: null,
   },
 ]
 

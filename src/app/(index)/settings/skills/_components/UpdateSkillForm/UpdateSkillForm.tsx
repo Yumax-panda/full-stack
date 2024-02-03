@@ -1,9 +1,9 @@
 import { getLevelHelperText, skills } from '@/constants/skills'
 import { Check, Close } from '@mui/icons-material'
+import type { Tag as TagType } from '@prisma/client'
 import {
   Autocomplete,
   Box,
-  Chip,
   IconButton,
   Input,
   InputLabel,
@@ -15,14 +15,15 @@ import {
   Tooltip,
 } from '@mui/material'
 
+import { Tag } from '@/app/(index)/_components/Tag'
 import { DeleteSkillButton } from '../DeleteSkillButton'
 import { deleteSkillAction } from '../DeleteSkillButton/action'
 import { updateSkillAction } from './action'
 
-import type { SkillWithTags, Tag } from '@/models'
+import type { SkillWithTags } from '@/models'
 
 type Props = SkillWithTags & {
-  allTags: Tag[]
+  allTags: TagType[]
   onClose: () => void
   userId: string
 }
@@ -38,8 +39,7 @@ export const UpdateSkillForm = ({
 }: Props) => {
   const action = updateSkillAction.bind(null, id, userId)
   const deleteAction = deleteSkillAction.bind(null, id)
-  const tagColorMap = new Map(allTags.map((tag) => [tag.id, tag.color]))
-  const tagIdNameMap = new Map(allTags.map((tag) => [tag.id, tag.name]))
+  const tagMap = new Map(allTags.map((tag) => [tag.id, tag]))
 
   return (
     <Stack
@@ -108,13 +108,11 @@ export const UpdateSkillForm = ({
             defaultValue={tags.map((tag) => tag.id)}
             renderValue={(selected) => (
               <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                {(selected as string[]).map((value) => (
-                  <Chip
-                    key={value}
-                    label={tagIdNameMap.get(value)}
-                    sx={{ mr: 0.5, bgcolor: tagColorMap.get(value) }}
-                  />
-                ))}
+                {(selected as string[]).map((value) => {
+                  const tag = tagMap.get(value)
+                  if (!tag) return null
+                  return <Tag key={tag.id} {...tag} />
+                })}
               </Box>
             )}
             input={<Input fullWidth />}
