@@ -1,5 +1,3 @@
-'use client'
-
 import { FormEventHandler, useState } from 'react'
 import { Box, InputLabel, TextField, Tooltip, Button } from '@mui/material'
 import type { SxProps, Theme } from '@mui/material'
@@ -192,7 +190,7 @@ export const TagForm = ({
               disabled={isLoading}
               size='small'
             >
-              作成
+              {isLoading ? '送信中...' : onDelete ? '更新' : '追加'}
             </Button>
           </Box>
         </Box>
