@@ -13,6 +13,7 @@ export async function createSkillAction(userId: string, formData: FormData) {
   const data: any = {
     name,
     userId,
+    // NOTE: ["id1", "id2", "id3"]ではなく["id1,id2,id3"]となっている
     tagIds: formData.getAll('tagIds'),
     image: getImage(name),
   }

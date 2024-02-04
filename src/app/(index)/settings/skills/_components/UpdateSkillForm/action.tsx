@@ -7,7 +7,6 @@ import { tag } from '@/lib/routes'
 import { updateSkillSchema } from '@/models'
 import { updateSkillWithTagIds } from '@/usecase/skills'
 
-// TODO: エラー処理 名前の重複など
 export async function updateSkillAction(
   skillId: string,
   userId: string,
@@ -16,6 +15,7 @@ export async function updateSkillAction(
   const data: any = {
     id: skillId,
     name: formData.get('name'),
+    // NOTE: ["id1", "id2", "id3"]ではなく["id1,id2,id3"]となっている
     tagIds: formData.getAll('tagIds'),
     userId,
     image: getImage(formData.get('name') as string),
@@ -31,8 +31,6 @@ export async function updateSkillAction(
   if (!parsed.success) {
     throw new Error(parsed.error.message)
   }
-  // フォームが空のときtagIdsが[""]になってしまうので空配列にする
-  parsed.data.tagIds = parsed.data.tagIds.filter(Boolean)
   await updateSkillWithTagIds(parsed.data)
   revalidateTag(tag.skill)
 }
