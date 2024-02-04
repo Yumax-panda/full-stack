@@ -33,9 +33,9 @@ export async function isSkillNameDuplicate({
 export async function updateSkillWithTagIds({
   id,
   userId,
-  tagIds,
+  tags,
   ...props
-}: UpdateSkillProps) {
+}: UpdateSkillProps & { userId: string }) {
   const isNameDuplicating = await isSkillNameDuplicate({
     userId,
     skillId: id,
@@ -60,14 +60,16 @@ export async function updateSkillWithTagIds({
   })
 
   await prisma.skillTagRelation.createMany({
-    data: tagIds.map((tagId) => ({
+    data: tags.map((tagId) => ({
       skillId: id,
       tagId,
     })),
   })
 }
 
-export async function createSkill(props: CreateSkillProps) {
+export async function createSkill(
+  props: CreateSkillProps & { userId: string },
+) {
   const isNameDuplicating = await isSkillNameDuplicate({
     userId: props.userId,
     newName: props.name,
@@ -78,4 +80,18 @@ export async function createSkill(props: CreateSkillProps) {
   }
 
   return create(props)
+}
+
+export async function deleteSkill(skillId: string) {
+  await prisma.skillTagRelation.deleteMany({
+    where: {
+      skillId,
+    },
+  })
+
+  await prisma.skill.delete({
+    where: {
+      id: skillId,
+    },
+  })
 }

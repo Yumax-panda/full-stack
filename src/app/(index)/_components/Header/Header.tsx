@@ -7,7 +7,7 @@ import { Container } from '@/app/_components/Container/Container'
 import { routes } from '@/lib/routes'
 import { AppBar, Box, Toolbar, Typography } from '@mui/material'
 
-import { AccountIconButton } from '../AccountIconButton.tsx'
+import { AccountIconButton } from '../AccountIconButton'
 import { SignInIconButton } from '../SignInIconButton'
 
 type LinkProps = {
