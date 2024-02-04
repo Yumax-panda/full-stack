@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/(index)/_components/SignInIconButton"
+    "src/app/(index)/_components/SignInIconButton",
+    "src/app/(index)/_components/AccountIconButton"
   ],
   "exclude": ["node_modules"]
 }
