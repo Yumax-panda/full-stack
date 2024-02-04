@@ -29,7 +29,7 @@ export const SkillForm = ({
   formState: { errors },
   isLoading,
   onDeleted,
-  selectedTags,
+  value,
   handleChangeTagIds,
 }: Props) => {
   const tagMap = new Map(tags.map((tag) => [tag.id, tag]))
@@ -87,11 +87,13 @@ export const SkillForm = ({
                 helperText={errors.name?.message}
                 placeholder='スキル名'
                 size='small'
+                defaultValue={value.name}
               />
             )}
             freeSolo
             fullWidth
             sx={{ flexGrow: 2 }}
+            defaultValue={value.name}
           />
         </Box>
         <div style={{ flexGrow: 2 }}>
@@ -104,6 +106,7 @@ export const SkillForm = ({
             valueLabelFormat={getLevelHelperText}
             valueLabelDisplay='auto'
             {...registerLevelProps}
+            defaultValue={value.level}
           />
         </div>
         <div style={{ flexGrow: 2 }}>
@@ -117,7 +120,7 @@ export const SkillForm = ({
             error={!!errors.tags}
             input={<Input fullWidth />}
             sx={{ flexGrow: 2 }}
-            value={selectedTags}
+            value={value.tags}
             onChange={(e) => {
               handleChangeTagIds(e.target.value)
             }}

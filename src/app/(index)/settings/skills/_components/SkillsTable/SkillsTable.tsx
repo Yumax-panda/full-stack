@@ -9,6 +9,7 @@ import { Add, Edit, Delete } from '@mui/icons-material'
 import { Box, Button, IconButton } from '@mui/material'
 
 import { CreateSkillForm } from '../CreateSkillForm'
+import { UpdateSkillForm } from '../UpdateSkillForm'
 import { Container, Header, RowContainer } from '../../../_components/Table'
 
 type TableRowProps = {
@@ -22,7 +23,14 @@ const TableRow = ({ skill, tags }: TableRowProps) => {
   const handleClose = () => setOpen(false)
   const onDelete = console.log
 
-  return open ? null : (
+  return open ? (
+    <UpdateSkillForm
+      onClose={handleClose}
+      tags={tags}
+      skill={skill}
+      onDelete={onDelete}
+    />
+  ) : (
     <RowContainer>
       <Box sx={{ width: '20%', pl: '1rem' }}>{skill.name}</Box>
       <Box sx={{ flexGrow: 1 }}>
@@ -44,20 +52,12 @@ type CreateSkillButtonProps = {
   onClick: () => void
 }
 
-const CreateSkillButton = ({ onClick }: CreateSkillButtonProps) => (
-  <Button onClick={onClick} variant='contained' startIcon={<Add />}>
-    スキルを追加
-  </Button>
-)
-
 type Props = {
   skills: SkillWithTags[]
   tags: TagType[]
-  userId: string
-  action?: string
 }
 
-export const SkillsTable = ({ skills, tags, userId, action }: Props) => {
+export const SkillsTable = ({ skills, tags }: Props) => {
   const [open, setOpen] = useState(false)
 
   return (

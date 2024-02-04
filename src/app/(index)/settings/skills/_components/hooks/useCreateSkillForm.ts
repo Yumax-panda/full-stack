@@ -20,7 +20,7 @@ export type UseCreateSkillFormReturn = Pick<
   handleSubmit: FormEventHandler<HTMLFormElement>
   isLoading: boolean
   handleChangeTagIds: (id: string | string[]) => void
-  selectedTags: string[]
+  value: FormValues
 }
 
 export const useCreateSkillForm = ({
@@ -76,7 +76,7 @@ export const useCreateSkillForm = ({
     setValue('tags', typeof value === 'string' ? value.split(',') : value)
   }
 
-  const selectedTags = watch('tags')
+  const value = watch()
 
   return {
     register,
@@ -84,6 +84,6 @@ export const useCreateSkillForm = ({
     formState,
     isLoading,
     handleChangeTagIds,
-    selectedTags,
+    value,
   }
 }
