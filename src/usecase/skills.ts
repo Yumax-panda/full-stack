@@ -5,7 +5,6 @@ import { createSkill as create } from '@/repository/skill'
 
 import type { UpdateSkillProps, CreateSkillProps } from '@/models'
 
-// FIXME: タグが2つ以上指定されるとエラーになる
 type IsSkillNameDuplicateProps = {
   userId: string
   skillId?: string
