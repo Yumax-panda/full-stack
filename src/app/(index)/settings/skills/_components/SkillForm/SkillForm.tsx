@@ -9,51 +9,45 @@ import {
   MenuItem,
   Select,
   Slider,
-  Stack,
   TextField,
 } from '@mui/material'
 
+import type { UseCreateSkillFormReturn } from '../hooks/useCreateSkillForm'
 import { Tag } from '@/app/(index)/_components/Tag'
-import type { FormEvent } from 'react'
-import type { UseFormRegister } from 'react-hook-form'
-
-type FormValues = {
-  name: string
-  level: number
-  tagIds: string[]
-}
 
 type Props = {
   tags: TagType[]
   onClose: () => void
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void
-  register: UseFormRegister<FormValues>
-  isLoading: boolean
-  onDeleted: (() => Promise<void>) | null
-}
+  onDeleted: (() => void) | null
+} & UseCreateSkillFormReturn
 
 export const SkillForm = ({
   tags,
   onClose,
-  onSubmit,
+  handleSubmit,
   register,
+  formState: { errors },
   isLoading,
   onDeleted,
+  selectedTags,
+  handleChangeTagIds,
 }: Props) => {
   const tagMap = new Map(tags.map((tag) => [tag.id, tag]))
-  const { min, max, ...registerProps } = register('level')
+  const { min, max, ...registerLevelProps } = register('level', {
+    valueAsNumber: true,
+  })
   const isUpdate = onDeleted !== null
 
   return (
-    <Stack
-      sx={{
-        display: 'flex',
-        width: '100%',
-        padding: '1rem',
-      }}
-    >
-      {isUpdate && (
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+    <div>
+      <Box
+        sx={{
+          p: '0.25rem 1rem',
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}
+      >
+        {isUpdate && (
           <Button
             variant='outlined'
             color='error'
@@ -63,38 +57,44 @@ export const SkillForm = ({
           >
             削除
           </Button>
-        </div>
-      )}
-      <form
-        style={{
+        )}
+      </Box>
+      <Box
+        component='form'
+        sx={{
           display: 'flex',
-          width: '100%',
-          alignItems: 'center',
+          flexDirection: {
+            xs: 'column',
+            sm: 'row',
+          },
+          gap: '1rem',
+          p: '0 1rem 1rem 1rem',
         }}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
       >
-        <Autocomplete
-          options={skills.map((skill) => skill.name)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              {...register('name')}
-              label='スキル名'
-              variant='standard'
-              required
-            />
-          )}
-          freeSolo
-          sx={{ flexGrow: 2, mr: '1rem' }}
-        />
-        <Box
-          sx={{
-            width: '20%',
-            display: 'flex',
-            mx: '1rem',
-            flexDirection: 'column',
-          }}
-        >
+        <Box sx={{ flexGrow: 2 }}>
+          <InputLabel htmlFor='name'>スキル名</InputLabel>
+          <Autocomplete
+            options={skills.map((skill) => skill.name)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                {...register('name')}
+                variant='standard'
+                required
+                fullWidth
+                error={!!errors.name}
+                helperText={errors.name?.message}
+                placeholder='スキル名'
+                size='small'
+              />
+            )}
+            freeSolo
+            fullWidth
+            sx={{ flexGrow: 2 }}
+          />
+        </Box>
+        <div style={{ flexGrow: 2 }}>
           <InputLabel id='level'>熟練度</InputLabel>
           <Slider
             min={0}
@@ -103,28 +103,30 @@ export const SkillForm = ({
             sx={{ my: 'auto' }}
             valueLabelFormat={getLevelHelperText}
             valueLabelDisplay='auto'
-            {...registerProps}
+            {...registerLevelProps}
           />
-        </Box>
-        <Box sx={{ width: '40%' }}>
-          <InputLabel id='tagIds'>タグ</InputLabel>
+        </div>
+        <div style={{ flexGrow: 2 }}>
+          <InputLabel id='tags'>タグ</InputLabel>
           <Select
-            name='tagIds'
-            labelId='tagIds'
+            id='tags'
+            name='tags'
+            labelId='tags'
             multiple
             fullWidth
-            defaultValue={tags.map((tag) => tag.id)}
-            renderValue={(selected) => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                {(selected as string[]).map((value) => {
-                  const tag = tagMap.get(value)
-                  if (!tag) return null
-                  return <Tag key={tag.id} {...tag} />
-                })}
-              </Box>
-            )}
+            error={!!errors.tags}
             input={<Input fullWidth />}
             sx={{ flexGrow: 2 }}
+            value={selectedTags}
+            onChange={(e) => {
+              handleChangeTagIds(e.target.value)
+            }}
+            renderValue={(selected) => {
+              const tags = selected
+                .map((id) => tagMap.get(id))
+                .filter(Boolean) as TagType[]
+              return tags.map((tag) => <Tag key={tag.id} {...tag} />)
+            }}
           >
             {tags.map((tag) => (
               <MenuItem key={tag.id} value={tag.id}>
@@ -132,28 +134,35 @@ export const SkillForm = ({
               </MenuItem>
             ))}
           </Select>
-        </Box>
-        <Box>
-          <Button
-            variant='outlined'
-            color='error'
-            onClick={onClose}
-            size='small'
-            type='button'
+        </div>
+        <Box sx={{ flexGrow: 1, mt: 'auto', mb: 0 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: { xs: 'flex-start', md: 'flex-end' },
+            }}
           >
-            閉じる
-          </Button>
-          <Button
-            variant='outlined'
-            color='primary'
-            size='small'
-            type='submit'
-            disabled={isLoading}
-          >
-            {isUpdate ? '更新' : '追加'}
-          </Button>
+            <Button
+              variant='outlined'
+              color='error'
+              onClick={onClose}
+              size='small'
+              sx={{ mr: 1 }}
+            >
+              キャンセル
+            </Button>
+            <Button
+              type='submit'
+              variant='outlined'
+              color='primary'
+              disabled={isLoading}
+              size='small'
+            >
+              {isLoading ? '送信中...' : isUpdate ? '更新' : '追加'}
+            </Button>
+          </Box>
         </Box>
-      </form>
-    </Stack>
+      </Box>
+    </div>
   )
 }
