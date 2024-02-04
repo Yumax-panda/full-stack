@@ -105,7 +105,7 @@ export const TagForm = ({
         onSubmit={onSubmit}
         sx={{
           display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
+          flexDirection: { xs: 'column', sm: 'row' },
           gap: '1rem',
           p: '0 1rem 1rem 1rem',
         }}
