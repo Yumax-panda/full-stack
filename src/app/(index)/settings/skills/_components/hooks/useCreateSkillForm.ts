@@ -67,7 +67,7 @@ export const useCreateSkillForm = ({
     })
     if (!res.ok) {
       const error = await res.json()
-      throw new Error(error.message)
+      throw new Error(error.error)
     }
     return
   }

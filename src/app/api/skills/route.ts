@@ -9,7 +9,7 @@ import { createSkillSchema } from '@/models'
 export async function POST(req: NextRequest) {
   const session = await getSession()
   if (!session || !session.user) {
-    return NextResponse.json({ message: message.unauthorized }, { status: 401 })
+    return NextResponse.json({ error: message.unauthorized }, { status: 401 })
   }
   const body = await req.json()
 
@@ -18,10 +18,10 @@ export async function POST(req: NextRequest) {
     await createSkill({ ...skillPayload, userId: session.user.id })
   } catch (e) {
     if (e instanceof Error) {
-      return NextResponse.json({ message: e.message }, { status: 400 })
+      return NextResponse.json({ error: e.message }, { status: 400 })
     }
     console.error('failed to create skill', e)
-    return NextResponse.json({ message: message.unknown }, { status: 500 })
+    return NextResponse.json({ error: message.unknown }, { status: 500 })
   }
   revalidateTag(tag.skill)
   return NextResponse.json({}, { status: 201 })
