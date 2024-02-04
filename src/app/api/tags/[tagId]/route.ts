@@ -6,6 +6,7 @@ import { message } from '@/lib/message'
 import { updateTag } from '@/usecase/tags'
 import { tag } from '@/lib/routes'
 import { updateTagSchema } from '@/models'
+import { deleteTag } from '@/repository/tag'
 
 export async function PATCH(
   req: NextRequest,
@@ -32,6 +33,25 @@ export async function PATCH(
       return NextResponse.json({ error: e.message }, { status: 400 })
     }
     console.error('failed to update tag', e)
+    return NextResponse.json({ error: message.unknown }, { status: 500 })
+  }
+}
+
+export async function DELETE(
+  req: NextRequest,
+  { params: { tagId } }: { params: { tagId: string } },
+) {
+  const session = await getSession()
+  if (!session || !session.user) {
+    return NextResponse.json({ error: message.unauthorized }, { status: 401 })
+  }
+
+  try {
+    await deleteTag(tagId)
+    revalidateTag(tag.tag)
+    return NextResponse.json({}, { status: 200 })
+  } catch (e) {
+    console.error('failed to delete tag', e)
     return NextResponse.json({ error: message.unknown }, { status: 500 })
   }
 }

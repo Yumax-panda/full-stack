@@ -1,8 +1,9 @@
-import { FormEventHandler, useState } from 'react'
+import { FormEventHandler, MouseEventHandler, useState } from 'react'
 import { Box, InputLabel, TextField, Tooltip, Button } from '@mui/material'
 import type { SxProps, Theme } from '@mui/material'
 import { Replay } from '@mui/icons-material'
 import { Tag } from '@/app/(index)/_components/Tag'
+import { useDeleteTag } from '../hooks/useDeleteTag'
 import { ColorPallet } from '../ColorPallet'
 import { hexToRgb } from '@/lib/color'
 import type {
@@ -26,13 +27,12 @@ type Props = {
   regenerateColor: () => void
   formState: FormState<FormValues>
   setValue: UseFormSetValue<FormValues>
-  onDelete: null | (() => void)
+  tagId?: string
 }
 
 // NOTE: zodResolverでバリデーションをするため、ここでは不要
 export const TagForm = ({
   onSubmit,
-  onDelete,
   register,
   formState: { errors },
   setValue,
@@ -40,9 +40,19 @@ export const TagForm = ({
   current,
   regenerateColor,
   onClose,
+  tagId,
 }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
+  const { onDelete: onDeleteConfirmed } = useDeleteTag({ tagId })
+
+  const onDelete: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    if (
+      window.confirm('本当に削除しますか？一度削除すると元には戻せません。')
+    ) {
+      await onDeleteConfirmed(e)
+    }
+  }
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget)
@@ -78,7 +88,7 @@ export const TagForm = ({
         }}
       >
         <Tag {...tagPreview} />
-        {onDelete !== null && (
+        {tagId && (
           <Button
             variant='outlined'
             color='error'
@@ -190,7 +200,7 @@ export const TagForm = ({
               disabled={isLoading}
               size='small'
             >
-              {isLoading ? '送信中...' : onDelete ? '更新' : '追加'}
+              {isLoading ? '送信中...' : tagId ? '更新' : '追加'}
             </Button>
           </Box>
         </Box>

@@ -3,14 +3,13 @@ import { unstable_cache as cache } from 'next/cache'
 
 import { prisma } from '@/lib/client'
 import { tag } from '@/lib/routes'
+import { getTagsByUserId } from './tag'
 
 import type { SkillWithTags, CreateSkillProps } from '@/models'
 
-export async function getSkillsWithTagsByUserIdWithOutCache(
-  userId: string,
-): Promise<SkillWithTags[]> {
-  console.info(`called get skills with tags by user id: ${userId}`)
-  const skills = await prisma.skill.findMany({
+async function getSkillsByUserIdWithoutCache(userId: string) {
+  console.info(`called get skills by user id: ${userId}`)
+  return await prisma.skill.findMany({
     where: {
       userId,
     },
@@ -18,11 +17,22 @@ export async function getSkillsWithTagsByUserIdWithOutCache(
       tags: true,
     },
   })
-  const tags = await prisma.tag.findMany({
-    where: {
-      userId,
-    },
-  })
+}
+
+export const getSkillsByUserId = cache(
+  getSkillsByUserIdWithoutCache,
+  ['getSkillsByUserId'],
+  { tags: [tag.skill] },
+)
+
+export async function getSkillsWithTagsByUserIdWithoutCache(
+  userId: string,
+): Promise<SkillWithTags[]> {
+  console.info(`called get skills with tags by user id: ${userId}`)
+  const [skills, tags] = await Promise.all([
+    getSkillsByUserIdWithoutCache(userId),
+    getTagsByUserId(userId),
+  ])
   const tagMap: Record<string, Tag> = {}
   tags.forEach((tag) => {
     tagMap[tag.id] = tag
@@ -36,9 +46,9 @@ export async function getSkillsWithTagsByUserIdWithOutCache(
 }
 
 export const getSkillsWithTagsByUserId = cache(
-  getSkillsWithTagsByUserIdWithOutCache,
+  getSkillsWithTagsByUserIdWithoutCache,
   ['getSkillsWithTagsByUserId'],
-  { tags: [tag.skill] },
+  { tags: [tag.skill, tag.tag] },
 )
 
 export async function createSkill({

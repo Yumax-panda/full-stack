@@ -17,7 +17,6 @@ export const UpdateTagForm = ({ onClose, tag }: Props) => {
     isLoading,
     current,
     regenerateColor,
-    handleDelete,
   } = useUpdateTagForm({ ...tag, onCanceled: onClose })
 
   return (
@@ -25,7 +24,7 @@ export const UpdateTagForm = ({ onClose, tag }: Props) => {
       <TagForm
         onClose={onClose}
         onSubmit={handleSubmit}
-        onDelete={handleDelete}
+        tagId={tag.id}
         register={register}
         formState={formState}
         setValue={setValue}

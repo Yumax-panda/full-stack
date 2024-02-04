@@ -7,6 +7,7 @@ import { Container, Header, RowContainer } from '../../../_components/Table'
 import { useState } from 'react'
 import { CreateTagForm } from '../CreateTagForm'
 import { UpdateTagForm } from '../UpdateTagForm'
+import { useDeleteTag } from '../hooks/useDeleteTag'
 import { Tag } from '@/app/(index)/_components/Tag'
 
 type TableRowProps = {
@@ -17,6 +18,14 @@ const TableRow = ({ tag }: TableRowProps) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+  const { onDelete: onDeleteConfirmed } = useDeleteTag({ tagId: tag.id })
+  const onDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (
+      window.confirm('本当に削除しますか？一度削除すると元には戻せません。')
+    ) {
+      await onDeleteConfirmed(e)
+    }
+  }
 
   return open ? (
     <UpdateTagForm onClose={handleClose} tag={tag} />
@@ -31,7 +40,7 @@ const TableRow = ({ tag }: TableRowProps) => {
           <IconButton onClick={handleOpen} type='button'>
             <Edit />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={onDelete} type='button'>
             <Delete />
           </IconButton>
         </Box>

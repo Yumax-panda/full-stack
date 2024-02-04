@@ -29,7 +29,6 @@ export const CreateTagForm = ({ onClose }: Props) => {
         isLoading={isLoading}
         current={current}
         regenerateColor={regenerateColor}
-        onDelete={null}
       />
     </Box>
   )

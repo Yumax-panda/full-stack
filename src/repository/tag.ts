@@ -4,7 +4,7 @@ import { prisma } from '@/lib/client'
 import { tag } from '@/lib/routes'
 import type { CreateTag, UpdateTag } from '@/models'
 
-export async function getTagsByUserIdwithoutCache(userId: string) {
+export async function getTagsByUserIdWithoutCache(userId: string) {
   console.info(`called get tags by user id: ${userId}`)
   return await prisma.tag.findMany({
     where: {
@@ -14,7 +14,7 @@ export async function getTagsByUserIdwithoutCache(userId: string) {
 }
 
 export const getTagsByUserId = cache(
-  getTagsByUserIdwithoutCache,
+  getTagsByUserIdWithoutCache,
   ['getTagsByUserId'],
   { tags: [tag.tag] },
 )
@@ -33,4 +33,12 @@ export async function updateTag({
 }: UpdateTag & { userId: string }) {
   console.info(`called update tag by user id: ${userId}`)
   return await prisma.tag.update({ where: { id }, data })
+}
+
+export async function deleteTag(id: string) {
+  console.info(`called delete tag by id: ${id}`)
+  await Promise.all([
+    prisma.tag.deleteMany({ where: { id } }),
+    prisma.skillTagRelation.deleteMany({ where: { tagId: id } }),
+  ])
 }
