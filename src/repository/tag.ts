@@ -34,3 +34,11 @@ export async function updateTag({
   console.info(`called update tag by user id: ${userId}`)
   return await prisma.tag.update({ where: { id }, data })
 }
+
+export async function deleteTag(id: string) {
+  console.info(`called delete tag by id: ${id}`)
+  await Promise.all([
+    prisma.tag.deleteMany({ where: { id } }),
+    prisma.skillTagRelation.deleteMany({ where: { tagId: id } }),
+  ])
+}
