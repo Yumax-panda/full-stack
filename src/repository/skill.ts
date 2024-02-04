@@ -38,7 +38,7 @@ export async function getSkillsWithTagsByUserIdWithOutCache(
 export const getSkillsWithTagsByUserId = cache(
   getSkillsWithTagsByUserIdWithOutCache,
   ['getSkillsWithTagsByUserId'],
-  { tags: [tag.skill] },
+  { tags: [tag.skill, tag.tag] },
 )
 
 export async function createSkill({
