@@ -4,6 +4,8 @@ import { prisma } from '@/lib/client'
 import { createSkill as create } from '@/repository/skill'
 
 import type { UpdateSkillProps, CreateSkillProps } from '@/models'
+
+// FIXME: タグが2つ以上指定されるとエラーになる
 type IsSkillNameDuplicateProps = {
   userId: string
   skillId?: string
@@ -55,36 +57,14 @@ export async function updateSkillWithTagIds({
   await prisma.skillTagRelation.deleteMany({
     where: {
       skillId: id,
-      tag: {
-        userId,
-        NOT: {
-          id: {
-            in: tagIds,
-          },
-        },
-      },
     },
   })
 
-  await Promise.all(
-    tagIds.map((tagId) =>
-      prisma.skillTagRelation.upsert({
-        where: {
-          skillId_tagId: {
-            skillId: id,
-            tagId,
-          },
-        },
-        update: {},
-        create: {
-          skillId: id,
-          tagId,
-        },
-      }),
-    ),
-  ).catch((error) => {
-    console.error(error)
-    throw new Error('Failed to update skill.')
+  await prisma.skillTagRelation.createMany({
+    data: tagIds.map((tagId) => ({
+      skillId: id,
+      tagId,
+    })),
   })
 }
 
