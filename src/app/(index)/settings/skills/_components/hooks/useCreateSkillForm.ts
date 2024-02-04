@@ -1,22 +1,26 @@
-import { useForm, useFieldArray, type UseFormReturn } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import type { UseFormReturn } from 'react-hook-form'
 import { useState, type FormEventHandler } from 'react'
 import { useRouter } from 'next/navigation'
 import { createSkillSchema, type CreateSkillProps } from '@/models'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import { getImage } from '@/constants/skills'
 
 type Props = {
   onClose: () => void
 }
 
-type FormValues = CreateSkillProps
+type FormValues = Omit<CreateSkillProps, 'image'>
 
-type UseCreateSkillFormReturn = Pick<
+export type UseCreateSkillFormReturn = Pick<
   UseFormReturn<FormValues>,
-  'register' | 'formState' | 'setValue'
+  'register' | 'formState'
 > & {
   handleSubmit: FormEventHandler<HTMLFormElement>
   isLoading: boolean
+  handleChangeTagIds: (id: string | string[]) => void
+  selectedTags: string[]
 }
 
 export const useCreateSkillForm = ({
@@ -28,19 +32,13 @@ export const useCreateSkillForm = ({
     formState,
     setValue,
     watch,
-    control,
   } = useForm<FormValues>({
     defaultValues: {
       name: '',
       level: 0,
-      image: null,
       tags: [],
     },
     resolver: zodResolver(createSkillSchema),
-  })
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'tags',
   })
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
@@ -48,7 +46,10 @@ export const useCreateSkillForm = ({
     pending: 'スキルを新規作成中...',
     success: 'スキルを作成しました',
     action: async (data: FormValues) => {
-      await createSkill(data)
+      await createSkill({
+        ...data,
+        image: getImage(data.name),
+      })
       router.refresh()
       onClose()
     },
@@ -71,11 +72,18 @@ export const useCreateSkillForm = ({
     return
   }
 
+  const handleChangeTagIds = (value: string | string[]) => {
+    setValue('tags', typeof value === 'string' ? value.split(',') : value)
+  }
+
+  const selectedTags = watch('tags')
+
   return {
     register,
     handleSubmit: defaultHandleSubmit(task),
     formState,
-    setValue,
     isLoading,
+    handleChangeTagIds,
+    selectedTags,
   }
 }
