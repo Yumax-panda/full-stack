@@ -8,6 +8,7 @@ import { StarField } from '@/app/(index)/_components/StarField'
 import { Add, Edit, Delete } from '@mui/icons-material'
 import { Box, Button, IconButton } from '@mui/material'
 
+import { useDeleteSkill } from '../hooks/useDeleteSkill'
 import { CreateSkillForm } from '../CreateSkillForm'
 import { UpdateSkillForm } from '../UpdateSkillForm'
 import { Container, Header, RowContainer } from '../../../_components/Table'
@@ -21,7 +22,13 @@ const TableRow = ({ skill, tags }: TableRowProps) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  const onDelete = console.log
+  const { onDelete: onDeleted } = useDeleteSkill({ skillId: skill.id })
+
+  const onDelete = () => {
+    if (confirm('スキルを削除しますか？一度削除すると元に戻せません。')) {
+      onDeleted()
+    }
+  }
 
   return open ? (
     <UpdateSkillForm
@@ -46,10 +53,6 @@ const TableRow = ({ skill, tags }: TableRowProps) => {
       </Box>
     </RowContainer>
   )
-}
-
-type CreateSkillButtonProps = {
-  onClick: () => void
 }
 
 type Props = {
