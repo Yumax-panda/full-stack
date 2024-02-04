@@ -16,7 +16,7 @@ type Props = {
 
 type FormValues = Omit<CreateSkillProps, 'image'>
 
-export type UseCreateSkillFormReturn = Pick<
+export type UseUpdateSkillFormReturn = Pick<
   UseFormReturn<FormValues>,
   'register' | 'formState'
 > & {
@@ -26,10 +26,10 @@ export type UseCreateSkillFormReturn = Pick<
   selectedTags: string[]
 }
 
-export const useCreateSkillForm = ({
+export const useUpdateSkillForm = ({
   onClose,
   skill,
-}: Props): UseCreateSkillFormReturn => {
+}: Props): UseUpdateSkillFormReturn => {
   const {
     register,
     handleSubmit: defaultHandleSubmit,
