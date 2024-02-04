@@ -20,9 +20,14 @@ export const useDeleteTag = ({ tagId }: Props): UseDeleteTagReturn => {
     success: 'タグを削除しました',
     setIsLoading: setIsDeleting,
     action: async (_: any) => {
-      await fetch(`/api/tags/${tagId}`, {
+      const res = await fetch(`/api/tags/${tagId}`, {
         method: 'DELETE',
       })
+      if (!res.ok) {
+        const data = await res.json()
+        console.error('failed to delete tag', data)
+        throw new Error('タグの削除に失敗しました')
+      }
       router.refresh()
     },
   })
