@@ -11,7 +11,7 @@ import type { UpdateWorkInServer } from '@/models'
 
 import type { Work } from '@prisma/client'
 
-export async function getOrCreateEmptyWorkWithutCache(
+export async function getOrCreateEmptyWorkWithoutCache(
   userId: string,
 ): Promise<Work> {
   console.info(`called get or create empty work by user id: ${userId}`)
@@ -25,7 +25,7 @@ export async function getOrCreateEmptyWorkWithutCache(
 }
 
 export const getOrCreateEmptyWork = cache(
-  getOrCreateEmptyWorkWithutCache,
+  getOrCreateEmptyWorkWithoutCache,
   ['getOrCreateEmptyWork'],
   { tags: [tag.work] },
 )

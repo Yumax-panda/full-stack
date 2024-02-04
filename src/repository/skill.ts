@@ -51,24 +51,27 @@ export const getSkillsWithTagsByUserId = cache(
   { tags: [tag.skill, tag.tag] },
 )
 
+// ref: https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/many-to-many-relations#explicit-many-to-many-relations
 export async function createSkill({
   tagIds,
   ...data
 }: CreateSkillProps): Promise<Skill> {
-  const skill = await prisma.skill.create({
-    data,
+  return await prisma.skill.create({
+    data: {
+      ...data,
+      tags: {
+        create: tagIds.map((tagId) => ({
+          createdAt: new Date(),
+          tag: {
+            connect: {
+              id: tagId,
+              userId: data.userId,
+            },
+          },
+        })),
+      },
+    },
   })
-
-  const relations = tagIds.map((tagId) => ({
-    skillId: skill.id,
-    tagId,
-  }))
-
-  await prisma.skillTagRelation.createMany({
-    data: relations,
-  })
-
-  return skill
 }
 
 type DeleteSkillProps = {
