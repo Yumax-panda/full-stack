@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 
 type Props = {
-  tagId: string
+  tagId?: string
 }
 
 type UseDeleteTagReturn = {
@@ -20,6 +20,9 @@ export const useDeleteTag = ({ tagId }: Props): UseDeleteTagReturn => {
     success: 'タグを削除しました',
     setIsLoading: setIsDeleting,
     action: async (_: any) => {
+      if (!tagId) {
+        throw new Error('タグのIDが指定されていません')
+      }
       const res = await fetch(`/api/tags/${tagId}`, {
         method: 'DELETE',
       })

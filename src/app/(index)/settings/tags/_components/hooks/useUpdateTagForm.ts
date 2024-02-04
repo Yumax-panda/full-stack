@@ -25,7 +25,6 @@ type UseUpdateTagFormReturn = Pick<
   'register' | 'formState' | 'setValue'
 > & {
   handleSubmit: FormEventHandler<HTMLFormElement>
-  handleDelete: () => void
   isLoading: boolean
   current: FormValues
   regenerateColor: () => void
@@ -89,11 +88,6 @@ export const useUpdateTagForm = ({
     setValue('color', generateRandomColor())
   }
 
-  const handleDelete = async () => {
-    confirm('本当に削除しますか？') && console.log('削除')
-    router.refresh()
-  }
-
   return {
     register,
     handleSubmit: defaultHandleSubmit(task),
@@ -102,6 +96,5 @@ export const useUpdateTagForm = ({
     isLoading,
     current,
     regenerateColor,
-    handleDelete,
   }
 }
