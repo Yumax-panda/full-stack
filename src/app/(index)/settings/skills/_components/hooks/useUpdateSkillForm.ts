@@ -3,11 +3,10 @@ import type { UseFormReturn } from 'react-hook-form'
 import { useState, useCallback, type FormEventHandler } from 'react'
 import { useRouter } from 'next/navigation'
 import { createSkillSchema } from '@/models'
-import type { CreateSkillProps } from '@/models'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 import { getImage } from '@/constants/skills'
-import type { SkillWithTags } from '@/models'
+import type { CreateSkillProps, SkillWithTags } from '@/models'
 
 type Props = {
   onClose: () => void
