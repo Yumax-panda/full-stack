@@ -8,7 +8,13 @@ export type SkillWithTags = Omit<Skill, 'tags'> & {
 export const updateSkillSchema = z.object({
   id: z.string(),
   name: z.string(),
-  tagIds: z.array(z.string()),
+  tagIds: z.array(z.string()).transform((v) => {
+    const actual: string[] = []
+    for (const tagId of v) {
+      actual.push(...tagId.split(','))
+    }
+    return actual.filter(Boolean)
+  }),
   level: z.number().min(0).max(3),
   image: z.string().nullable(),
   userId: z.string(),
@@ -16,12 +22,6 @@ export const updateSkillSchema = z.object({
 
 export type UpdateSkillProps = z.infer<typeof updateSkillSchema>
 
-export const createSkillSchema = z.object({
-  name: z.string(),
-  tagIds: z.array(z.string()),
-  image: z.string().nullable(),
-  userId: z.string(),
-  level: z.number().min(0).max(3),
-})
+export const createSkillSchema = updateSkillSchema.omit({ id: true })
 
 export type CreateSkillProps = z.infer<typeof createSkillSchema>
