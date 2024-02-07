@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Work" ALTER COLUMN "title" DROP NOT NULL,
-ALTER COLUMN "content" DROP NOT NULL;

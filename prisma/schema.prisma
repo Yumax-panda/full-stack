@@ -1,10 +1,12 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Account {
@@ -23,6 +25,7 @@ model Account {
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -31,6 +34,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model Skill {
@@ -43,6 +48,9 @@ model Skill {
   userId    String
   user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   tags      SkillTagRelation[]
+
+  @@unique([userId, name])
+  @@index([userId])
 }
 
 model Tag {
@@ -55,6 +63,9 @@ model Tag {
   brief     String?
   skills    SkillTagRelation[]
   user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, name])
+  @@index([userId])
 }
 
 model SkillTagRelation {
@@ -66,6 +77,8 @@ model SkillTagRelation {
   tag       Tag      @relation(fields: [tagId], references: [id])
 
   @@id([skillId, tagId])
+  @@index([skillId])
+  @@index([tagId])
 }
 
 model Work {
@@ -79,6 +92,8 @@ model Work {
   userId    String
   isPrivate Boolean  @default(false)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model ArticleToken {
@@ -88,6 +103,7 @@ model ArticleToken {
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, userId])
+  @@index([userId])
 }
 
 model User {
