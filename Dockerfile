@@ -27,7 +27,14 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# RUN yarn build
+ENV NEXT_PUBLIC_FIREBASE_API_KEY $firebase_api_key
+ENV NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN $firebase_auth_domain
+ENV NEXT_PUBLIC_FIREBASE_PROJECT_ID $firebase_project_id
+ENV NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET $firebase_storage_bucket
+ENV NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID $firebase_messaging_sender_id
+ENV NEXT_PUBLIC_FIREBASE_APP_ID $firebase_app_id
+ENV NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID $firebase_measurement_id
+ENV DATABASE_URL $database_url
 
 # If using npm comment out above and use below instead
 RUN npm run build
@@ -53,6 +60,7 @@ RUN chown nextjs:nodejs .next
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 USER nextjs
 
