@@ -6,3 +6,6 @@ README.md
 .next
 .git
 full-stack-dev*
+/build
+.DS_Store
+.env*
