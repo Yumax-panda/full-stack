@@ -27,16 +27,32 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-ENV NEXT_PUBLIC_FIREBASE_API_KEY $firebase_api_key
-ENV NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN $firebase_auth_domain
-ENV NEXT_PUBLIC_FIREBASE_PROJECT_ID $firebase_project_id
-ENV NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET $firebase_storage_bucket
-ENV NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID $firebase_messaging_sender_id
-ENV NEXT_PUBLIC_FIREBASE_APP_ID $firebase_app_id
-ENV NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID $firebase_measurement_id
-ENV DATABASE_URL $database_url
+ARG firebase_api_key
+ARG firebase_auth_domain
+ARG firebase_project_id
+ARG firebase_storage_bucket
+ARG firebase_messaging_sender_id
+ARG firebase_app_id
+ARG firebase_measurement_id
+ARG nextauth_secret
+ARG database_url
+ARG github_client_id
+ARG github_client_secret
+
+ENV NEXT_PUBLIC_FIREBASE_API_KEY=$firebase_api_key
+ENV NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=$firebase_auth_domain
+ENV NEXT_PUBLIC_FIREBASE_PROJECT_ID=$firebase_project_id
+ENV NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=$firebase_storage_bucket
+ENV NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=$firebase_messaging_sender_id
+ENV NEXT_PUBLIC_FIREBASE_APP_ID=$firebase_app_id
+ENV NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=$firebase_measurement_id
+ENV NEXTAUTH_SECRET=$nextauth_secret
+ENV DATABASE_URL=$database_url
+ENV GITHUB_CLIENT_ID=$github_client_id
+ENV GITHUB_CLIENT_SECRET=$github_client_secret
 
 # If using npm comment out above and use below instead
+RUN npx prisma generate
 RUN npm run build
 
 # Production image, copy all the files and run next
@@ -60,15 +76,12 @@ RUN chown nextjs:nodejs .next
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 USER nextjs
 
 EXPOSE 3000
 
 ENV PORT 3000
-# set hostname to localhost
-ENV HOSTNAME "0.0.0.0"
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
