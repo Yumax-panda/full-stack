@@ -77,3 +77,11 @@ $ npx prisma migrate dev
 ```bash
 $ npx prisma studio
 ```
+
+## デプロイ
+
+以下のコマンドを実行
+
+```bash
+$ gcloud builds submit --config cloudbuild.yaml
+```
