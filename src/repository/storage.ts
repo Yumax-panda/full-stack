@@ -25,9 +25,6 @@ type PathProps<T extends StringMap> = {
 
 type UploadPathProps<T extends StringMap> = PathProps<T> & FileProps
 
-const getUrlSafeString = (text: string) =>
-  btoa(text).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_')
-
 class StorageService<T extends StringMap> {
   storage: FirebaseStorage
   getUploadPath: (props: UploadPathProps<T>) => string
@@ -37,8 +34,8 @@ class StorageService<T extends StringMap> {
     this.getUploadPath = (props) => {
       const path = getPath(props)
       const ext = props.file.name.split('.').pop()
-      const fileName = getUrlSafeString(props.file.name)
-      return `${path}/${fileName}.${ext}`
+      const uuid = crypto.randomUUID()
+      return `${path}/${uuid}.${ext}`
     }
   }
 
