@@ -14,9 +14,11 @@ steps:
         --build-arg=firebase_app_id=$$NEXT_PUBLIC_FIREBASE_APP_ID
         --build-arg=firebase_measurement_id=$$NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
         --build-arg=nextauth_secret=$$NEXTAUTH_SECRET
+        --build-arg=nextauth_url=$$NEXTAUTH_URL
         --build-arg=database_url=$$DATABASE_URL
         --build-arg=github_client_id=$$GITHUB_CLIENT_ID
         --build-arg=github_client_secret=$$GITHUB_CLIENT_SECRET
+        -t gcr.io/$PROJECT_ID/${_IMAGE_NAME}
         .
     secretEnv:
       [
@@ -28,10 +30,32 @@ steps:
         'NEXT_PUBLIC_FIREBASE_APP_ID',
         'NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID',
         'NEXTAUTH_SECRET',
+        'NEXTAUTH_URL',
         'DATABASE_URL',
         'GITHUB_CLIENT_ID',
         'GITHUB_CLIENT_SECRET',
       ]
+  - name: gcr.io/cloud-builders/docker
+    args: ['push', 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}']
+  - name: gcr.io/cloud-builders/gcloud
+    id: 'deploy-cloud-run'
+    args:
+      [
+        'beta',
+        'run',
+        'deploy',
+        '${_SERVICE_NAME}',
+        '--image',
+        'gcr.io/$PROJECT_ID/${_IMAGE_NAME}',
+        '--platform',
+        'managed',
+        '--region',
+        'asia-northeast1',
+        '--allow-unauthenticated',
+      ]
+substitutions:
+  _IMAGE_NAME: 'full-stack'
+  _SERVICE_NAME: 'full-stack'
 availableSecrets:
   secretManager:
     - versionName: projects/$PROJECT_ID/secrets/NEXT_PUBLIC_FIREBASE_API_KEY/versions/latest
@@ -50,6 +74,8 @@ availableSecrets:
       env: 'NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID'
     - versionName: projects/$PROJECT_ID/secrets/NEXTAUTH_SECRET/versions/latest
       env: 'NEXTAUTH_SECRET'
+    - versionName: projects/$PROJECT_ID/secrets/NEXTAUTH_URL/versions/latest
+      env: 'NEXTAUTH_URL'
     - versionName: projects/$PROJECT_ID/secrets/DATABASE_URL/versions/latest
       env: 'DATABASE_URL'
     - versionName: projects/$PROJECT_ID/secrets/GITHUB_CLIENT_ID/versions/latest
