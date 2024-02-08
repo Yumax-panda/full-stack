@@ -2,10 +2,9 @@
 
 import type { ArticleToken } from '@prisma/client'
 import { SectionTitle } from '@/app/_components/Text/SectionTitle'
-import { Button, Stack, TextField, Typography } from '@mui/material'
+import { Button, Stack, TextField, InputLabel } from '@mui/material'
 import { useServerForm } from '@/app/_components/hooks/useServerForm'
 import { Alert } from '@/app/_components/Alert'
-import { InputLabel } from '@mui/material'
 
 import { updateTokenAction } from './action'
 
