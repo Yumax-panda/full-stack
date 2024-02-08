@@ -1,5 +1,5 @@
 import type { Control, FormState, FieldErrors } from 'react-hook-form'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -80,8 +80,19 @@ export const useEdit = ({
     setValue('thumbnail', null)
   }
 
+  const uploadThumbnail = useCallback(
+    async (file: File) => {
+      return await workImageStorage.upload({
+        file,
+        userId: rest.userId,
+        workId: rest.id,
+      })
+    },
+    [rest.id, rest.userId],
+  )
+
   const submitHandler = async (data: FormValues) => {
-    const { id, userId, thumbnail } = data
+    const { id, thumbnail } = data
 
     // データを値渡しでコピー
     const updatePayload: UpdateWork = { ...data }
@@ -97,11 +108,7 @@ export const useEdit = ({
     else if (thumbnailFile) {
       const tasks: Promise<void>[] = [
         (async () => {
-          const url = await workImageStorage.upload({
-            file: thumbnailFile,
-            userId,
-            workId: id,
-          })
+          const url = await uploadThumbnail(thumbnailFile)
           updatePayload.thumbnail = url
           setInitialThumbnail(url)
         })(),
@@ -112,7 +119,7 @@ export const useEdit = ({
       await Promise.all(tasks)
     }
 
-    await fetch(`/api/works/${id}`, {
+    const res = await fetch(`/api/works/${id}`, {
       cache: 'no-cache',
       method: 'PATCH',
       headers: {
@@ -120,6 +127,11 @@ export const useEdit = ({
       },
       body: JSON.stringify(updatePayload),
     })
+
+    if (!res.ok) {
+      const { error } = await res.json()
+      throw new Error(error)
+    }
   }
 
   const getErrorMessage = (e: FieldErrors<FormValues>) => {
