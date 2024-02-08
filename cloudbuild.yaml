@@ -52,6 +52,8 @@ steps:
         '--region',
         'asia-northeast1',
         '--allow-unauthenticated',
+        '--port',
+        '3000',
       ]
 substitutions:
   _IMAGE_NAME: 'full-stack'

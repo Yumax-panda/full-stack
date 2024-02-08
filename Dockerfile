@@ -53,6 +53,9 @@ ENV DATABASE_URL=$database_url
 ENV GITHUB_CLIENT_ID=$github_client_id
 ENV GITHUB_CLIENT_SECRET=$github_client_secret
 
+# set redirect url for next-auth
+RUN echo "NEXTAUTH_URL=$nextauth_url" > .env
+
 # If using npm comment out above and use below instead
 RUN npx prisma generate
 RUN npm run build
@@ -84,8 +87,6 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT 3000
-
-ENV HOSTNAME "0.0.0.0"
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
