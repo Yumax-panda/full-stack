@@ -3,9 +3,10 @@
 import type { Tag as TagType } from '@prisma/client'
 import type { SkillWithTags } from '@/models'
 import { useState } from 'react'
-
+import Link from 'next/link'
+import { routes } from '@/lib/routes'
 import { StarField } from '@/app/(index)/_components/StarField'
-import { Add, Edit, Delete } from '@mui/icons-material'
+import { Add, Edit, Delete, LocalOfferOutlined } from '@mui/icons-material'
 import { Box, Button, IconButton } from '@mui/material'
 
 import { useDeleteSkill } from '../hooks/useDeleteSkill'
@@ -85,8 +86,18 @@ export const SkillsTable = ({ skills, tags }: Props) => {
   const [open, setOpen] = useState(false)
 
   return (
-    <Box>
+    <div>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: '1rem' }}>
+        <Link href={routes.tag()}>
+          <Button
+            startIcon={<LocalOfferOutlined />}
+            variant='contained'
+            sx={{ mr: '1rem' }}
+            href={routes.tag()}
+          >
+            タグを編集する
+          </Button>
+        </Link>
         <Button
           onClick={() => setOpen(true)}
           startIcon={<Add />}
@@ -110,6 +121,6 @@ export const SkillsTable = ({ skills, tags }: Props) => {
             ))}
         </Box>
       </Container>
-    </Box>
+    </div>
   )
 }
