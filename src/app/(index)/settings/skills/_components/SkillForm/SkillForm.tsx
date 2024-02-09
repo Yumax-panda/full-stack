@@ -142,7 +142,7 @@ export const SkillForm = ({
           <Box
             sx={{
               display: 'flex',
-              justifyContent: { xs: 'flex-start', md: 'flex-end' },
+              justifyContent: { xs: 'flex-start', sm: 'flex-end' },
             }}
           >
             <Button
