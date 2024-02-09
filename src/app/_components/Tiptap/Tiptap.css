@@ -14,18 +14,23 @@
   pointer-events: none;
 }
 
+.tiptap h1,
+.tiptap h2 {
+  border-bottom: 2px solid #e9ecef;
+}
+
 .tiptap h1 {
   font-size: clamp(1.4rem, calc(1.2rem + 0.625vw), 2rem);
   margin-top: 5rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e9ecef;
 }
 
 .tiptap h2 {
-  font-size: clamp(1.2rem, calc(1rem + 0.625vw), 1.7rem);
+  font-size: clamp(1.2rem, calc(1.1rem + 0.625vw), 1.7rem);
   margin-top: 3rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
 .tiptap h3 {
