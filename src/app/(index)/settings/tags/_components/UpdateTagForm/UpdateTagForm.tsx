@@ -20,7 +20,7 @@ export const UpdateTagForm = ({ onClose, tag }: Props) => {
   } = useUpdateTagForm({ ...tag, onCanceled: onClose })
 
   return (
-    <Box sx={{ py: '0.25rem', borderRadius: '4px' }}>
+    <Box sx={{ borderTop: '0.5px solid lightgray' }}>
       <TagForm
         onClose={onClose}
         onSubmit={handleSubmit}
