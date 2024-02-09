@@ -10,9 +10,12 @@ type Props = {
 export const AddButton = ({ onClick, text, type = 'button' }: Props) => (
   <Tooltip title={text} arrow placement='top-end'>
     <IconButton
-      color='inherit'
       onClick={onClick}
-      sx={{ border: '1px solid lightGray' }}
+      sx={{
+        border: '1px solid lightGray',
+        backgroundColor: 'white',
+        '&:hover': { backgroundColor: 'lightGray' },
+      }}
       type={type}
     >
       <Add sx={{ color: 'GrayText' }} />
