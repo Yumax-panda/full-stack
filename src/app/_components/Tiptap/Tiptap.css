@@ -14,6 +14,10 @@
   pointer-events: none;
 }
 
+.tiptap p {
+  line-height: 1.8;
+}
+
 .tiptap h1,
 .tiptap h2 {
   border-bottom: 2px solid #e9ecef;
