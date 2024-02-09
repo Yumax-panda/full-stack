@@ -9,7 +9,6 @@ export const Container = ({ children }: Props) => (
     sx={{
       border: '1px solid gray',
       borderRadius: '0.5rem',
-      borderBottom: 0,
     }}
   >
     {children}

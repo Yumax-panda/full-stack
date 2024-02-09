@@ -9,8 +9,8 @@ export const RowContainer = ({ children }: Props) => (
     sx={{
       display: 'flex',
       width: '100%',
-      py: '0.5rem',
-      borderBottom: '1px solid lightgray',
+      py: '0.25rem',
+      borderTop: '0.5px solid lightgray',
     }}
   >
     {children}

@@ -16,7 +16,7 @@ export const UpdateSkillForm = ({ skill, onClose, tags, onDelete }: Props) => {
   const props = useUpdateSkillForm({ skill, onClose })
 
   return (
-    <Box sx={{ py: '0.25rem', borderRadius: '4px' }}>
+    <Box sx={{ borderTop: '0.5px solid lightgray' }}>
       <SkillForm
         {...props}
         tags={tags}
