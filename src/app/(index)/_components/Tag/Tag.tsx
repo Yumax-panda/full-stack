@@ -9,7 +9,7 @@ export const Tag = ({ name, color, brief }: Props) => {
   const bgcolor = `rgba(${bgColorRGB.r}, ${bgColorRGB.g}, ${bgColorRGB.b}, 0.18)`
 
   return (
-    <Tooltip title={brief} placement='bottom'>
+    <Tooltip title={brief} placement='bottom' arrow>
       <Chip
         label={name}
         sx={{ bgcolor, color, fontWeight: 'bold', borderColor: color }}

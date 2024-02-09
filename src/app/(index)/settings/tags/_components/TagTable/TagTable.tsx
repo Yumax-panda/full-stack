@@ -32,11 +32,11 @@ const TableRow = ({ tag }: TableRowProps) => {
   ) : (
     <div>
       <RowContainer>
-        <Box sx={{ width: '20%', pl: '1rem' }}>
+        <Box sx={{ pl: '1rem', my: 'auto', width: 100 }}>
           <Tag {...tag} />
         </Box>
-        <Box sx={{ flexGrow: 1 }}>{tag.brief}</Box>
-        <Box sx={{ flexGrow: 0 }}>
+        <Box sx={{ flexGrow: 1, my: 'auto', pl: '1rem' }}>{tag.brief}</Box>
+        <Box sx={{ flexGrow: 0, my: 'auto' }}>
           <IconButton onClick={handleOpen} type='button'>
             <Edit />
           </IconButton>

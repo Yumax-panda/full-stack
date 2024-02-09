@@ -13,6 +13,8 @@ import { CreateSkillForm } from '../CreateSkillForm'
 import { UpdateSkillForm } from '../UpdateSkillForm'
 import { Container, Header, RowContainer } from '../../../_components/Table'
 
+import { Tag } from '@/app/(index)/_components/Tag'
+
 type TableRowProps = {
   skill: SkillWithTags
   tags: TagType[]
@@ -39,11 +41,30 @@ const TableRow = ({ skill, tags }: TableRowProps) => {
     />
   ) : (
     <RowContainer>
-      <Box sx={{ width: '20%', pl: '1rem' }}>{skill.name}</Box>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ width: 100, pl: '1rem', my: 'auto' }}>{skill.name}</Box>
+      <Box sx={{ width: 'fit-content', my: 'auto' }}>
         <StarField level={skill.level} />
       </Box>
-      <Box sx={{ flexGrow: 0 }}>
+      <Box
+        sx={{
+          flexGrow: 3,
+          my: 'auto',
+          ml: '1rem',
+          display: { xs: 'none', md: 'initial' },
+        }}
+      >
+        {skill.tags.map((t) => (
+          <Tag key={t.id} {...t} />
+        ))}
+      </Box>
+      <Box
+        sx={{
+          flexGrow: 1,
+          my: 'auto',
+          justifyContent: 'flex-end',
+          display: 'flex',
+        }}
+      >
         <IconButton onClick={handleOpen} type='button'>
           <Edit />
         </IconButton>
