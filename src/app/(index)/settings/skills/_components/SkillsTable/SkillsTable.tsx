@@ -39,11 +39,11 @@ const TableRow = ({ skill, tags }: TableRowProps) => {
     />
   ) : (
     <RowContainer>
-      <Box sx={{ width: '20%', pl: '1rem' }}>{skill.name}</Box>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ width: '20%', pl: '1rem', my: 'auto' }}>{skill.name}</Box>
+      <Box sx={{ flexGrow: 1, my: 'auto' }}>
         <StarField level={skill.level} />
       </Box>
-      <Box sx={{ flexGrow: 0 }}>
+      <Box sx={{ flexGrow: 0, my: 'auto' }}>
         <IconButton onClick={handleOpen} type='button'>
           <Edit />
         </IconButton>
