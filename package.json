@@ -23,6 +23,7 @@
     "@gsap/react": "^2.1.0",
     "@hookform/resolvers": "^3.3.4",
     "@mui/icons-material": "^5.15.2",
+    "@mui/lab": "^5.0.0-alpha.165",
     "@mui/material": "^5.15.2",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@planetscale/database": "^1.15.0",
