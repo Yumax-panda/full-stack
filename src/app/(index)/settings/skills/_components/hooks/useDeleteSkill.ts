@@ -20,7 +20,7 @@ export const useDeleteSkill = ({ skillId }: Props): UseDeleteSkillReturn => {
       throw new Error(data.error)
     }
     router.refresh()
-  }, [skillId])
+  }, [skillId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return { onDelete }
 }
