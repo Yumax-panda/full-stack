@@ -27,8 +27,9 @@ const TitleField = forwardRef<HTMLInputElement, Props>((props, ref) => {
       label={undefined}
       sx={{
         '& .MuiInputBase-root': {
-          fontSize: '2rem',
-          fontWeight: 700,
+          fontWeight: 'bold',
+          color: 'GrayText',
+          fontSize: (t) => t.typography.h5.fontSize,
         },
       }}
     />

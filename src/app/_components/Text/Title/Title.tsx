@@ -11,10 +11,10 @@ export const Title = ({ title, sx }: Props) => (
   <Typography
     sx={{
       fontWeight: 'bold',
-      fontSize: '2rem',
       color: 'GrayText',
       ...sx,
     }}
+    variant='h5'
   >
     {title}
   </Typography>
