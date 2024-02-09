@@ -15,12 +15,16 @@ type Props = {
 
 export const Tiptap = ({
   content,
-  onChange = () => {},
+  onChange = () => { },
   editable = true,
 }: Props) => {
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        heading: {
+          levels: [1, 2, 3],
+        }
+      }),
       Image,
       Placeholder.configure({ placeholder: '制作物の説明を入力しましょう！' }),
     ],
