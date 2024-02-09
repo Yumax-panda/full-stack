@@ -1,8 +1,10 @@
 'use client'
 
 import type { Tag as TagType } from '@prisma/client'
+import Link from 'next/link'
+import { routes } from '@/lib/routes'
 import { Box, Button, IconButton } from '@mui/material'
-import { Edit, Delete, Add } from '@mui/icons-material'
+import { Edit, Delete, Add, BrushOutlined } from '@mui/icons-material'
 import { Container, Header, RowContainer } from '../../../_components/Table'
 import { useState } from 'react'
 import { CreateTagForm } from '../CreateTagForm'
@@ -57,8 +59,18 @@ export const TagTable = ({ tags }: Props) => {
   const [open, setOpen] = useState(false)
 
   return (
-    <Box>
+    <div>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: '1rem' }}>
+        <Link href={routes.userSkillEdit()}>
+          <Button
+            startIcon={<BrushOutlined />}
+            variant='contained'
+            sx={{ mr: '1rem' }}
+            href={routes.userSkillEdit()}
+          >
+            スキルを編集する
+          </Button>
+        </Link>
         <Button
           onClick={() => setOpen(true)}
           startIcon={<Add />}
@@ -78,6 +90,6 @@ export const TagTable = ({ tags }: Props) => {
           <TableRow key={tag.id} tag={tag} />
         ))}
       </Container>
-    </Box>
+    </div>
   )
 }
