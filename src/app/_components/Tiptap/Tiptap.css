@@ -1,5 +1,6 @@
 .tiptap {
   min-height: 80vh;
+  margin-bottom: 5vh;
 }
 
 .tiptap:focus-visible {
