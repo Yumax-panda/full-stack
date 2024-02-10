@@ -1,5 +1,6 @@
 .tiptap {
   min-height: 80vh;
+  margin-bottom: 5vh;
 }
 
 .tiptap:focus-visible {
@@ -41,4 +42,8 @@
   font-size: clamp(1.1rem, calc(1rem + 0.625vw), 1.2rem);
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.tiptap ul {
+  padding-left: clamp(1rem, calc(0.9rem + 0.625vw), 1.5rem);
 }

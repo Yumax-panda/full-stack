@@ -95,10 +95,12 @@ export const Header = ({
   return (
     <nav
       style={{
-        backgroundColor: 'inherit',
+        backgroundColor: 'white',
         marginBottom: '2rem',
         position: 'sticky',
         top: 0,
+        zIndex: 100,
+        borderBottom: '1px solid #e0e0e0',
       }}
     >
       <Box
