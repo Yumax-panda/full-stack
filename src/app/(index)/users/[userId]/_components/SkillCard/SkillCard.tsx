@@ -20,7 +20,10 @@ export const SkillCard = ({ name, level, image, tags = [] }: Props) => {
   } as const
 
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', padding: '1rem' }}>
+    <Card
+      sx={{ display: 'flex', flexDirection: 'column', padding: '1rem' }}
+      raised
+    >
       <Box sx={{ display: 'flex' }}>
         {image ? (
           <CardMedia image={image} sx={cardStyle} />
