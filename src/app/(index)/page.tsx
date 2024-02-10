@@ -5,18 +5,28 @@ import { FeatureSection } from './_components/FeatureSection'
 
 export default function Home() {
   return (
-    <Box>
-      <Box sx={{ margin: 'auto', textAlign: 'center' }}>
-        <Typography variant='h4' sx={{ fontWeight: 'bold' }}>
-          Full Stack
-        </Typography>
-        <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>
-          全てのエンジニアのためのポートフォリオ作成サービス
-        </Typography>
-        <SignInButton />
-        <Typography variant='caption'>About</Typography>
-        <FeatureSection />
-      </Box>
+    <Box sx={{ margin: 'auto', textAlign: 'center' }}>
+      <Typography variant='h4' sx={{ fontWeight: 'bold' }}>
+        Full Stack
+      </Typography>
+      <Typography
+        variant='subtitle1'
+        sx={{
+          fontWeight: 'bold',
+          flexDirection: {
+            xs: 'column',
+            sm: 'row',
+          },
+          display: 'flex',
+          justifyContent: 'center',
+          my: "0.5rem"
+        }}
+      >
+        <div>全てのエンジニアのための</div>
+        <div>ポートフォリオ作成サービス</div>
+      </Typography>
+      <SignInButton />
+      <FeatureSection />
     </Box>
   )
 }

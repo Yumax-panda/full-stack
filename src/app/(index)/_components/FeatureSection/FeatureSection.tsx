@@ -19,15 +19,20 @@ export const FeatureSection = () => {
       Icon: IosShare,
       title: '簡単に共有',
       description:
-        '作成したポートフォリオを簡単に共有できます。また、本サービスのおすすめポートフォリオへの掲載も可能です。(開発中)',
+        '作成したポートフォリオを簡単に共有できます。また、本サービスのおすすめ一覧へ掲載も可能です。(開発中)',
     },
   ]
 
   return (
-    <Grid container spacing={4} sx={{ marginTop: 4, display: 'flex' }}>
-      {features.map((feature) => (
-        <Feature key={feature.title} {...feature} />
-      ))}
-    </Grid>
+    <Box sx={{ my: '2rem' }}>
+      <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2 }}>
+        本サービスの特徴
+      </Typography>
+      <Grid container spacing={4} sx={{ display: 'flex' }}>
+        {features.map((feature) => (
+          <Feature key={feature.title} {...feature} />
+        ))}
+      </Grid>
+    </Box>
   )
 }
