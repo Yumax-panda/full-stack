@@ -13,7 +13,7 @@ export const Tabs = ({ userId }: Props) => {
   const pathname = usePathname()
   const router = useRouter()
 
-  const pathes = {
+  const paths = {
     技術: routes.userSkill(userId),
     制作物: routes.userWork(userId),
     執筆記事: routes.userArticle(userId),
@@ -28,7 +28,7 @@ export const Tabs = ({ userId }: Props) => {
       onChange={handleChange}
       sx={{ borderBottom: 1, borderColor: 'lightgray' }}
     >
-      {Object.entries(pathes).map(([label, href]) => (
+      {Object.entries(paths).map(([label, href]) => (
         <Tab
           key={href}
           label={label}

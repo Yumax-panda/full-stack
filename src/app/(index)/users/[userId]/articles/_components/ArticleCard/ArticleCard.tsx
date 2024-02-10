@@ -50,7 +50,7 @@ export const ArticleCard = ({
     href={articleUrl}
     style={{ textDecoration: 'none', height: '100%', display: 'flex' }}
   >
-    <Card sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+    <Card sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }} raised>
       <Media ogp={ogp} articleUrl={articleUrl} />
       <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Text text={getProviderNick(provider)} />

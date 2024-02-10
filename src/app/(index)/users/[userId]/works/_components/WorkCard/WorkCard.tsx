@@ -39,7 +39,7 @@ export const WorkCard = ({
     passHref
     style={{ textDecoration: 'none' }}
   >
-    <Card sx={{ maxWidth: 368, position: 'relative' }}>
+    <Card sx={{ maxWidth: 368, position: 'relative' }} raised>
       {isPrivate && (
         <Avatar
           sx={{
