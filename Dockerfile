@@ -37,6 +37,10 @@ ARG firebase_measurement_id
 ARG nextauth_secret
 ARG nextauth_url
 ARG database_url
+ARG discord_client_id
+ARG discord_client_secret
+ARG google_client_id
+ARG google_client_secret
 ARG github_client_id
 ARG github_client_secret
 
@@ -50,6 +54,10 @@ ENV NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=$firebase_measurement_id
 ENV NEXTAUTH_SECRET=$nextauth_secret
 ENV NEXTAUTH_URL=$nextauth_url
 ENV DATABASE_URL=$database_url
+ENV DISCORD_CLIENT_ID=$discord_client_id
+ENV DISCORD_CLIENT_SECRET=$discord_client_secret
+ENV GOOGLE_CLIENT_ID=$google_client_id
+ENV GOOGLE_CLIENT_SECRET=$google_client_secret
 ENV GITHUB_CLIENT_ID=$github_client_id
 ENV GITHUB_CLIENT_SECRET=$github_client_secret
 

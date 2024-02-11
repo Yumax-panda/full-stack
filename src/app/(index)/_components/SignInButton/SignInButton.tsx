@@ -13,7 +13,7 @@ export const SignInButton = () => {
 
   const onClick = user
     ? () => router.push(routes.userSkill(user.id))
-    : () => signIn('github')
+    : () => signIn()
   const message = user ? 'マイページへ' : 'ログイン / 新規登録'
 
   return (
