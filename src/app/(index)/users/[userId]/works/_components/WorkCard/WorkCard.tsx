@@ -72,6 +72,7 @@ export const WorkCard = ({
             width={368}
             height={230}
             component='img'
+            sx={{ borderBottom: '1px solid lightgray' }}
           />
         </Box>
       ) : (
