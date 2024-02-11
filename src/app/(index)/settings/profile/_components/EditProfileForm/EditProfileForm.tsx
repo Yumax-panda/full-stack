@@ -1,7 +1,12 @@
 'use client'
 import type { User as Props } from '@prisma/client'
 import { SectionTitle } from '@/app/_components/Text/SectionTitle'
-import { CorporateFare, Email, LocationOn } from '@mui/icons-material'
+import {
+  BadgeOutlined,
+  CorporateFare,
+  Email,
+  LocationOn,
+} from '@mui/icons-material'
 import {
   Avatar,
   Box,
@@ -14,6 +19,8 @@ import {
   Typography,
 } from '@mui/material'
 import { Alert } from '@/app/_components/Alert'
+import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
 
 import { updateUserAction } from './action'
 import { useServerForm } from '@/app/_components/hooks/useServerForm'
@@ -48,6 +55,16 @@ export const EditProfileForm = ({
     dispatch,
     status: { pending },
   } = useServerForm({ action, initialState: null })
+  const { data: session, update } = useSession()
+  const sessionUserName = session?.user?.name || null
+
+  // 名前が変更された場合に更新する
+  useEffect(() => {
+    if (!sessionUserName) return
+    if (sessionUserName !== name) {
+      update()
+    }
+  }, [sessionUserName, formState])
 
   return (
     <Box component='form' action={dispatch}>
@@ -64,8 +81,23 @@ export const EditProfileForm = ({
         <Grid item xs={12} md={8}>
           <Stack spacing={2}>
             <Typography sx={readOnlyStyle}>ID: {id}</Typography>
-            <Typography sx={readOnlyStyle}>名前: {name}</Typography>
             <Field icon={<Email />} text={email || 'N/A'} />
+            <InputLabel htmlFor='name'>名前</InputLabel>
+            <TextField
+              id='name'
+              name='name'
+              fullWidth
+              defaultValue={name}
+              variant='standard'
+              placeholder='John Doe'
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <BadgeOutlined />
+                  </InputAdornment>
+                ),
+              }}
+            />
             <InputLabel htmlFor='location'>居住地</InputLabel>
             <TextField
               id='location'
