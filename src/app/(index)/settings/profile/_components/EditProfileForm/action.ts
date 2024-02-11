@@ -12,17 +12,23 @@ export async function updateUserAction(
   _: any,
   formData: FormData,
 ): Promise<FormState> {
+  const name = formData.get('name') || null
   const data: any = {
     id: userId,
+    name,
     location: formData.get('location') || null,
     organization: formData.get('organization') || null,
+  }
+
+  if (name === null) {
+    return { message: '名前を入力してください', success: false }
   }
 
   const parsed = updateUserSchema.safeParse(data)
 
   if (!parsed.success) {
-    // おそらく起こりえない
-    return { message: '入力内容に誤りがあります。', success: false }
+    const message = parsed.error.errors[0].message
+    return { message, success: false }
   }
 
   await updateUser(parsed.data)
