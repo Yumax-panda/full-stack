@@ -39,7 +39,18 @@ export const WorkCard = ({
     passHref
     style={{ textDecoration: 'none' }}
   >
-    <Card sx={{ maxWidth: 368, position: 'relative' }} raised>
+    <Card
+      sx={{
+        maxWidth: 368,
+        position: 'relative',
+        transition: 'transform 0.3s',
+        ':hover': {
+          transform: 'translateY(-5px)',
+          boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
+        },
+        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+      }}
+    >
       {isPrivate && (
         <Avatar
           sx={{
@@ -61,12 +72,6 @@ export const WorkCard = ({
             width={368}
             height={230}
             component='img'
-            sx={{
-              transition: 'transform 0.3s ease',
-              ':hover': {
-                transform: 'scale(1.1)',
-              },
-            }}
           />
         </Box>
       ) : (
