@@ -42,7 +42,7 @@ export const nonEmptyHtml = z
 
 export const NullishHtml = z.string().transform((v) => (isEmpty(v) ? null : v))
 
-export const trimedNullableTitle = z
+export const trimmedNullableTitle = z
   .string()
   .max(titleMaxLength, {
     message: `タイトルは${titleMaxLength}文字以内で入力してください。`,
@@ -59,7 +59,7 @@ export const nonEmptyTitle = z
   .transform((v) => v.trim())
 
 export const privateContentSchema = z.object({
-  title: trimedNullableTitle,
+  title: trimmedNullableTitle,
   content: NullishHtml,
   thumbnail: thumbnailSchema,
   isPrivate: z.literal(true),
