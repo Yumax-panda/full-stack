@@ -64,7 +64,7 @@ export const EditProfileForm = ({
     if (sessionUserName !== name) {
       update()
     }
-  }, [sessionUserName, formState])
+  }, [sessionUserName, formState]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box component='form' action={dispatch}>
