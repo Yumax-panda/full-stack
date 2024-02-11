@@ -93,7 +93,6 @@ export const SkillsTable = ({ skills, tags }: Props) => {
             startIcon={<LocalOfferOutlined />}
             variant='contained'
             sx={{ mr: '1rem' }}
-            href={routes.tag()}
           >
             タグを編集する
           </Button>

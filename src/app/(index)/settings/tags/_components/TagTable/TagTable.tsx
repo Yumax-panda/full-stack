@@ -66,7 +66,6 @@ export const TagTable = ({ tags }: Props) => {
             startIcon={<BrushOutlined />}
             variant='contained'
             sx={{ mr: '1rem' }}
-            href={routes.userSkillEdit()}
           >
             スキルを編集する
           </Button>

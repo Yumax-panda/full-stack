@@ -46,7 +46,7 @@ export async function getAllPartialWorksByUserIdWithoutCache(
   return prisma.work.findMany({
     where: {
       userId,
-      title: { not: null },
+      NOT: { title: null, content: null, thumbnail: null },
     },
     select: {
       id: true,

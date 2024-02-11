@@ -73,32 +73,34 @@ export const SkillForm = ({
         onSubmit={handleSubmit}
       >
         <Box sx={{ flexGrow: 2 }}>
-          <InputLabel htmlFor='name'>スキル名</InputLabel>
           <Autocomplete
             options={skills.map((skill) => skill.name)}
             renderInput={(params) => (
-              <TextField
-                {...params}
-                {...register('name')}
-                variant='standard'
-                required
-                fullWidth
-                error={!!errors.name}
-                helperText={errors.name?.message}
-                placeholder='スキル名'
-                size='small'
-                defaultValue={value.name}
-              />
+              <div>
+                <InputLabel htmlFor={params.id}>スキル名</InputLabel>
+                <TextField
+                  {...params}
+                  {...register('name')}
+                  variant='standard'
+                  required
+                  fullWidth
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
+                  placeholder='スキル名'
+                  size='small'
+                />
+              </div>
             )}
             freeSolo
             fullWidth
             sx={{ flexGrow: 2 }}
-            defaultValue={value.name}
+            value={value.name}
           />
         </Box>
         <div style={{ flexGrow: 2 }}>
-          <InputLabel id='level'>熟練度</InputLabel>
+          <InputLabel htmlFor='level'>熟練度</InputLabel>
           <Slider
+            id='level'
             min={0}
             max={3}
             step={1}
@@ -110,11 +112,9 @@ export const SkillForm = ({
           />
         </div>
         <div style={{ flexGrow: 2 }}>
-          <InputLabel id='tags'>タグ</InputLabel>
+          <InputLabel htmlFor='tags'>タグ</InputLabel>
           <Select
             id='tags'
-            name='tags'
-            labelId='tags'
             multiple
             fullWidth
             error={!!errors.tags}
