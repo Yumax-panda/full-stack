@@ -15,7 +15,7 @@ export const SignInIconButton = () => (
     <IconButton
       size='large'
       aria-label='sign in'
-      onClick={() => signIn('github')}
+      onClick={() => signIn()}
       color='inherit'
     >
       <LoginOutlined />
