@@ -1,7 +1,9 @@
+import { BuildOutlined } from '@mui/icons-material'
 import { getSkillsWithTagsByUserId } from '@/repository/skill'
 
 import { AddSkillButton } from './_components/AddSkillButton'
 import { SkillSection } from './_components/SkillSection'
+import { Empty } from './_components/Empty'
 
 export default async function Page({
   params: { userId },
@@ -13,7 +15,11 @@ export default async function Page({
   return (
     <>
       <AddSkillButton userId={userId} />
-      <SkillSection skills={skills} />
+      {skills.length === 0 ? (
+        <Empty Icon={BuildOutlined} title='まだスキルが登録されていません' />
+      ) : (
+        <SkillSection skills={skills} />
+      )}
     </>
   )
 }
