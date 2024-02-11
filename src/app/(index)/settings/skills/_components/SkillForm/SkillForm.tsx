@@ -14,7 +14,6 @@ import {
 
 import type { UseCreateSkillFormReturn } from '../hooks/useCreateSkillForm'
 import { Tag } from '@/app/(index)/_components/Tag'
-import { PanoramaWideAngle } from '@mui/icons-material'
 
 type Props = {
   tags: TagType[]
@@ -116,8 +115,6 @@ export const SkillForm = ({
           <InputLabel htmlFor='tags'>タグ</InputLabel>
           <Select
             id='tags'
-            name='tags'
-            labelId='tags'
             multiple
             fullWidth
             error={!!errors.tags}
