@@ -17,21 +17,25 @@ export async function PATCH(
     return NextResponse.json({ error: message.unauthorized }, { status: 401 })
   }
 
+  const body = await req.json()
+  const result = updateTagSchema.safeParse({
+    name: body.name,
+    brief: body.brief,
+    color: body.color,
+    id: tagId,
+  })
+
+  if (!result.success) {
+    const errors = result.error.errors.map((e) => e.message)
+    return NextResponse.json({ error: errors[0] }, { status: 400 })
+  }
+
   try {
-    const body = await req.json()
-    const tagPayload = updateTagSchema.parse({
-      name: body.name,
-      brief: body.brief,
-      color: body.color,
-      id: tagId,
-    })
-    await updateTag({ ...tagPayload, userId: session.user.id })
+    const payload = { ...result.data, userId: session.user.id }
+    await updateTag(payload)
     revalidateTag(tag.tag)
     return NextResponse.json({}, { status: 200 })
   } catch (e) {
-    if (e instanceof Error) {
-      return NextResponse.json({ error: e.message }, { status: 400 })
-    }
     console.error('failed to update tag', e)
     return NextResponse.json({ error: message.unknown }, { status: 500 })
   }
