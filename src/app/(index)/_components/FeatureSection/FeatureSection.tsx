@@ -7,26 +7,26 @@ export const FeatureSection = () => {
   const features = [
     {
       Icon: ElectricBolt,
-      title: '素早く作成',
-      description: '簡単な手順でポートフォリオをすぐに作れます',
+      title: '手軽に作れる',
+      description: '簡単な操作でポートフォリオを作成することができます。',
     },
     {
       Icon: CreditCardOff,
-      title: '無料で使用',
+      title: '無料で使える',
       description: '本サービスの主要な機能は無料で使うことができます。',
     },
     {
       Icon: IosShare,
-      title: '簡単に共有',
+      title: 'ポートフォリオのシェア',
       description:
-        '作成したポートフォリオを簡単に共有できます。また、本サービスのおすすめ一覧へ掲載も可能です。(開発中)',
+        '作成したポートフォリオのURLを共有するだけで簡単に公開できます。また、自分のポートフォリオはMarkdown形式へ出力することも可能です。(開発中)',
     },
   ]
 
   return (
     <Box sx={{ my: '2rem' }}>
       <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2 }}>
-        本サービスの特徴
+        どんなサービス ?
       </Typography>
       <Grid container spacing={4} sx={{ display: 'flex' }}>
         {features.map((feature) => (
