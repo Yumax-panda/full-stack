@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
 type Props = {
@@ -11,7 +10,7 @@ type UseDeleteSkillReturn = {
 
 export const useDeleteSkill = ({ skillId }: Props): UseDeleteSkillReturn => {
   const router = useRouter()
-  const onDelete = useCallback(async () => {
+  const onDelete = async () => {
     const res = await fetch(`/api/skills/${skillId}`, {
       method: 'DELETE',
     })
@@ -20,7 +19,7 @@ export const useDeleteSkill = ({ skillId }: Props): UseDeleteSkillReturn => {
       throw new Error(data.error)
     }
     router.refresh()
-  }, [skillId]) // eslint-disable-line react-hooks/exhaustive-deps
+  }
 
   return { onDelete }
 }
