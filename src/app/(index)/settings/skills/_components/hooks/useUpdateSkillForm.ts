@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import type { UseFormReturn } from 'react-hook-form'
-import { useState, useCallback, type FormEventHandler } from 'react'
+import { useState, type FormEventHandler } from 'react'
 import { useRouter } from 'next/navigation'
 import { createSkillSchema } from '@/models'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -59,24 +59,21 @@ export const useUpdateSkillForm = ({
     setIsLoading,
   })
 
-  const updateSkill = useCallback(
-    async (data: CreateSkillProps) => {
-      const apiUrl = `/api/skills/${skill.id}`
-      const res = await fetch(apiUrl, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      if (!res.ok) {
-        const error = await res.json()
-        throw new Error(error.error)
-      }
-      return
-    },
-    [skill.id],
-  )
+  const updateSkill = async (data: CreateSkillProps) => {
+    const apiUrl = `/api/skills/${skill.id}`
+    const res = await fetch(apiUrl, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) {
+      const error = await res.json()
+      throw new Error(error.error)
+    }
+    return
+  }
 
   const handleChangeTagIds = (value: string | string[]) => {
     setValue('tags', typeof value === 'string' ? value.split(',') : value)

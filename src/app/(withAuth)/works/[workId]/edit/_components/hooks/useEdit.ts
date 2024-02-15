@@ -1,5 +1,5 @@
 import type { Control, FormState, FieldErrors } from 'react-hook-form'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -80,16 +80,13 @@ export const useEdit = ({
     setValue('thumbnail', null)
   }
 
-  const uploadThumbnail = useCallback(
-    async (file: File) => {
-      return await workImageStorage.upload({
-        file,
-        userId: rest.userId,
-        workId: rest.id,
-      })
-    },
-    [rest.id, rest.userId],
-  )
+  const uploadThumbnail = async (file: File) => {
+    return await workImageStorage.upload({
+      file,
+      userId: rest.userId,
+      workId: rest.id,
+    })
+  }
 
   const submitHandler = async (data: FormValues) => {
     const { id, thumbnail } = data

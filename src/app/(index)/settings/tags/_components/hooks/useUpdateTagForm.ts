@@ -1,5 +1,5 @@
 import { useForm, type UseFormReturn } from 'react-hook-form'
-import { useState, useCallback, type FormEventHandler } from 'react'
+import { useState, type FormEventHandler } from 'react'
 import { useRouter } from 'next/navigation'
 import { createTagSchema, type CreateTag } from '@/models'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -65,24 +65,21 @@ export const useUpdateTagForm = ({
     setIsLoading,
   })
 
-  const updateTag = useCallback(
-    async (data: CreateTag) => {
-      const apiUrl = `/api/tags/${tagId}`
-      const res = await fetch(apiUrl, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      if (!res.ok) {
-        const error = await res.json()
-        throw new Error(error.error)
-      }
-      return
-    },
-    [tagId],
-  )
+  const updateTag = async (data: CreateTag) => {
+    const apiUrl = `/api/tags/${tagId}`
+    const res = await fetch(apiUrl, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) {
+      const error = await res.json()
+      throw new Error(error.error)
+    }
+    return
+  }
 
   const regenerateColor = () => {
     setValue('color', generateRandomColor())
