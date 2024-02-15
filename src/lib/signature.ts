@@ -1,11 +1,10 @@
-import 'server-only'
 import { env } from './env.mjs'
 
 function getMessage(data: string): string {
   return `${env.PRIVATE_KEY}.${data}`
 }
 
-export async function getHashedMessage(data: string): Promise<string> {
+export async function sign(data: string): Promise<string> {
   const algorithm = 'SHA-256'
   const encoder = new TextEncoder()
   const uint8 = encoder.encode(getMessage(data))
@@ -19,6 +18,6 @@ export async function verify(
   data: string,
   signature: string,
 ): Promise<boolean> {
-  const hashedMessage = await getHashedMessage(data)
+  const hashedMessage = await sign(data)
   return hashedMessage === signature
 }
