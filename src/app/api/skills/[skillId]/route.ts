@@ -6,6 +6,7 @@ import { message } from '@/lib/message'
 import { updateSkillWithTagIds, deleteSkill } from '@/usecase/skills'
 import { tag } from '@/lib/routes'
 import { updateSkillSchema } from '@/models'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 
 export async function PATCH(
   req: NextRequest,
@@ -26,6 +27,13 @@ export async function PATCH(
     revalidateTag(tag.skill)
     return NextResponse.json({}, { status: 200 })
   } catch (e) {
+    if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
+      return NextResponse.json(
+        { error: '同じスキル名は登録できません' },
+        { status: 400 },
+      )
+    }
+
     if (e instanceof Error) {
       return NextResponse.json({ error: e.message }, { status: 400 })
     }

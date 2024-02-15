@@ -3,10 +3,10 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { getSession } from '@/lib/auth'
 import { message } from '@/lib/message'
-import { updateTag } from '@/usecase/tags'
+import { updateTag, deleteTag } from '@/repository/tag'
 import { tag } from '@/lib/routes'
 import { updateTagSchema } from '@/models'
-import { deleteTag } from '@/repository/tag'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 
 export async function PATCH(
   req: NextRequest,
@@ -36,6 +36,13 @@ export async function PATCH(
     revalidateTag(tag.tag)
     return NextResponse.json({}, { status: 200 })
   } catch (e) {
+    if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
+      return NextResponse.json(
+        { error: '同じタグ名は登録できません' },
+        { status: 400 },
+      )
+    }
+
     console.error('failed to update tag', e)
     return NextResponse.json({ error: message.unknown }, { status: 500 })
   }
