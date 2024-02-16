@@ -13,7 +13,7 @@ export const Feature = ({ Icon, title, description }: Props) => (
       sx={{
         textAlign: 'left',
         p: '1rem',
-        border: '2px solid  rgb(99 102 241)',
+        border: '2px solid rgb(99 102 241)',
         borderRadius: 'calc(1rem + 2px)',
         height: '100%',
       }}
@@ -21,7 +21,7 @@ export const Feature = ({ Icon, title, description }: Props) => (
       <Icon
         sx={{
           fontSize: '24px',
-          color: ' rgb(99 102 241)',
+          color: 'rgb(99 102 241)',
           opacity: 0.8,
         }}
       />

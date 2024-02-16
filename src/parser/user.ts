@@ -1,5 +1,5 @@
 import type { Parser } from './common'
-import { fromQueryString, toQueryString } from './common'
+import { toQueryString } from './common'
 
 type User = {
   name: string | null
@@ -8,11 +8,10 @@ type User = {
 
 export const userParser: Parser<User> = {
   toString: ({ name, image }) => toQueryString({ name, image }),
-  fromString: (value) => {
-    const obj = fromQueryString(value)
+  fromSearchParams: (searchParams) => {
     return {
-      name: obj.name ?? null,
-      image: obj.image ?? null,
+      name: searchParams.get('name'),
+      image: searchParams.get('image'),
     }
   },
 }

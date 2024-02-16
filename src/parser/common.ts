@@ -1,6 +1,6 @@
 export type Parser<T> = {
   toString: (value: T) => string
-  fromString: (value: string) => T
+  fromSearchParams: (searchParams: URLSearchParams) => T | null
 }
 
 export const toQueryString = (
@@ -14,15 +14,4 @@ export const toQueryString = (
         )}`,
     )
     .join('&')
-}
-
-export const fromQueryString = (
-  queryString: string,
-): Record<string, string | null> => {
-  const params = new URLSearchParams(queryString)
-  const result: Record<string, string | null> = {}
-  params.forEach((value, key) => {
-    result[decodeURIComponent(key)] = decodeURIComponent(value) || null
-  })
-  return result
 }
