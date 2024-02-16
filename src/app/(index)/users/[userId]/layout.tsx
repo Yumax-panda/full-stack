@@ -7,7 +7,7 @@ import { getUserById } from '@/repository/user'
 import { userParser } from '@/parser'
 import { getSignedUrl } from '@/lib/signature'
 import { env } from '@/lib/env.mjs'
-import { routes } from '@/lib/routes'
+import { routes, ogImagePaths } from '@/lib/routes'
 
 export default async function Layout({
   children,
@@ -46,7 +46,7 @@ export async function generateMetadata({
       siteName: 'Full Stack',
       images: [
         {
-          url: `${env.NEXTAUTH_URL}/api/og-image/${signedUrl}`,
+          url: ogImagePaths.skill(signedUrl),
           width: 500,
           height: 500,
           alt: `${user.name}さんのポートフォリオ`,
