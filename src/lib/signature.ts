@@ -4,6 +4,11 @@ function getMessage(data: string): string {
   return `${env.PRIVATE_KEY}.${data}`
 }
 
+export async function getSignedUrl(data: string): Promise<string> {
+  const signature = await sign(data)
+  return `${signature}?${data}`
+}
+
 export async function sign(data: string): Promise<string> {
   const algorithm = 'SHA-256'
   const encoder = new TextEncoder()
