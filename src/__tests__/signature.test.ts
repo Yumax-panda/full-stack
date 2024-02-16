@@ -29,13 +29,19 @@ test('verify multibyte characters', async () => {
   expect(await verify(data, signature)).toBe(true)
 })
 
-test('verity invalid multibyte characters', async () => {
+test('verify invalid multibyte characters', async () => {
   const data = '🍣'
   expect(await verify(data, 'invalid')).toBe(false)
 })
 
-test('verity url unsafe characters', async () => {
+test('verify url unsafe characters', async () => {
   const data = "https://e  x　ample.com/?q=🍣__|||ああああ____###''}*"
   const signature = await sign(data)
   expect(await verify(data, signature)).toBe(true)
+})
+
+test('verify whether the hashed signature is different from the original data', async () => {
+  const data = '🍣'
+  const signature = await sign(data)
+  expect(signature).not.toBe(data)
 })
