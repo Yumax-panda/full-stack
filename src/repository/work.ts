@@ -1,4 +1,4 @@
-import type { Work } from '@prisma/client'
+import type { Work, User } from '@prisma/client'
 import { unstable_cache as cache } from 'next/cache'
 
 import { prisma } from '@/lib/client'
@@ -66,11 +66,14 @@ export const getAllPartialWorksByUserId = cache(
 
 export async function getWorkByIdWithoutCache(
   workId: string,
-): Promise<Work | null> {
+): Promise<(Work & { user: User }) | null> {
   console.info(`called get work by id: ${workId}`)
   return prisma.work.findUnique({
     where: {
       id: workId,
+    },
+    include: {
+      user: true,
     },
   })
 }
