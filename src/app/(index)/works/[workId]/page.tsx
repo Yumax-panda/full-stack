@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { getSession } from '@/lib/auth'
@@ -7,6 +8,11 @@ import { Box } from '@mui/material'
 import { BackButton } from '../../_components/BackButton'
 import { Content } from './_components/Content'
 import { EditButton } from './_components/EditButton'
+import { userParser } from '@/parser'
+import { getSignedUrl } from '@/lib/signature'
+import { env } from '@/lib/env.mjs'
+import { routes, ogImagePaths } from '@/lib/routes'
+import { formatDate } from '@/lib/formatDate'
 
 export default async function WorkDetailPage({
   params: { workId },
@@ -44,4 +50,43 @@ export default async function WorkDetailPage({
       <Content {...work} />
     </>
   )
+}
+
+export async function generateMetadata({
+  params: { workId },
+}: {
+  params: {
+    workId: string
+  }
+}): Promise<Metadata> {
+  const work = await getWorkById(workId)
+  if (!work) notFound()
+
+  const { user } = work
+  const signedUrl = await getSignedUrl(userParser.toString(user))
+
+  return {
+    metadataBase: new URL(env.NEXTAUTH_URL),
+    title: `${work.title || '無題'} | ${user.name}`,
+    description: `更新日 ${formatDate(work.updatedAt)}`,
+    openGraph: {
+      title: `${work.title || '無題'} | ${user.name}`,
+      description: `更新日 ${formatDate(work.updatedAt)}`,
+      url: `${env.NEXTAUTH_URL}${routes.workDetail(work.id)}`,
+      siteName: 'Full Stack',
+      images: [
+        {
+          url: ogImagePaths.base(signedUrl),
+          width: 500,
+          height: 500,
+          alt: `${work.title || '無題'} | ${user.name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary',
+      title: `${work.title || '無題'} | ${user.name}`,
+      description: `更新日 ${formatDate(work.updatedAt)}`,
+    },
+  }
 }
