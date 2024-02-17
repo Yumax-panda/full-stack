@@ -1,3 +1,5 @@
+// @vitest-environment happy-dom
+
 import { expect, test } from 'vitest'
 
 import { isEmpty } from '@/models'

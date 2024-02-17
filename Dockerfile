@@ -35,6 +35,7 @@ ARG firebase_messaging_sender_id
 ARG firebase_app_id
 ARG firebase_measurement_id
 ARG nextauth_secret
+ARG private_key
 ARG nextauth_url
 ARG database_url
 ARG discord_client_id
@@ -52,6 +53,7 @@ ENV NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=$firebase_messaging_sender_id
 ENV NEXT_PUBLIC_FIREBASE_APP_ID=$firebase_app_id
 ENV NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=$firebase_measurement_id
 ENV NEXTAUTH_SECRET=$nextauth_secret
+ENV PRIVATE_KEY=$private_key
 ENV NEXTAUTH_URL=$nextauth_url
 ENV DATABASE_URL=$database_url
 ENV DISCORD_CLIENT_ID=$discord_client_id

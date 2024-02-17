@@ -1,3 +1,5 @@
+import { env } from '@/lib/env.mjs'
+
 export const routes = {
   top: () => '/',
   userSkill: (userId: string) => `/users/${userId}`,
@@ -32,4 +34,8 @@ export const tag = {
   partial: 'partial',
   token: 'token',
   profile: 'profile',
+} as const
+
+export const ogImagePaths = {
+  skill: (signature: string) => `${env.NEXTAUTH_URL}/api/og-image/${signature}`,
 } as const
