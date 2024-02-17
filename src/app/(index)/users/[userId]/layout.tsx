@@ -46,7 +46,7 @@ export async function generateMetadata({
       siteName: 'Full Stack',
       images: [
         {
-          url: ogImagePaths.skill(signedUrl),
+          url: ogImagePaths.base(signedUrl),
           width: 500,
           height: 500,
           alt: `${user.name}さんのポートフォリオ`,

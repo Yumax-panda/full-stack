@@ -37,5 +37,5 @@ export const tag = {
 } as const
 
 export const ogImagePaths = {
-  skill: (signature: string) => `${env.NEXTAUTH_URL}/api/og-image/${signature}`,
+  base: (signature: string) => `${env.NEXTAUTH_URL}/api/og-image/${signature}`,
 } as const
