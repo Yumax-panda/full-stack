@@ -67,10 +67,10 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(env.NEXTAUTH_URL),
-    title: `${work.title} | ${user.name}`,
+    title: `${work.title || '無題'} | ${user.name}`,
     description: `更新日 ${formatDate(work.updatedAt)}`,
     openGraph: {
-      title: `${work.title} | ${user.name}`,
+      title: `${work.title || '無題'} | ${user.name}`,
       description: `更新日 ${formatDate(work.updatedAt)}`,
       url: `${env.NEXTAUTH_URL}${routes.workDetail(work.id)}`,
       siteName: 'Full Stack',
@@ -79,13 +79,13 @@ export async function generateMetadata({
           url: ogImagePaths.base(signedUrl),
           width: 500,
           height: 500,
-          alt: `${work.title} | ${user.name}`,
+          alt: `${work.title || '無題'} | ${user.name}`,
         },
       ],
     },
     twitter: {
       card: 'summary',
-      title: `${work.title} | ${user.name}`,
+      title: `${work.title || '無題'} | ${user.name}`,
       description: `更新日 ${formatDate(work.updatedAt)}`,
     },
   }
