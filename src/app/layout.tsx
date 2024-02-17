@@ -8,13 +8,26 @@ import { CssBaseline } from '@mui/material'
 
 import { AuthProvider } from './_components/Provider/AuthProvider'
 import { ThemeProvider } from './_components/Provider/ThemeProvider'
+import { env } from '@/lib/env.mjs'
 
 import type { Metadata } from 'next'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Full Stack',
-  description: 'A portfolio site for engineers',
+  description: '全てのエンジニアのためのポートフォリオ作成サービス',
+  metadataBase: new URL(env.NEXTAUTH_URL),
+  twitter: {
+    card: 'summary',
+    title: 'Full Stack',
+    description: '全てのエンジニアのためのポートフォリオ作成サービス',
+  },
+  openGraph: {
+    type: 'website',
+    url: env.NEXTAUTH_URL,
+    title: 'Full Stack',
+    description: '全てのエンジニアのためのポートフォリオ作成サービス',
+  },
 }
 
 export default function RootLayout({
