@@ -31,6 +31,7 @@ export default defineConfig({
       GOOGLE_CLIENT_SECRET: 'test',
       DATABASE_URL: 'test',
       PRIVATE_KEY: 'test',
+      NEXTAUTH_URL: 'http://localhost:3000',
     },
   },
 })
