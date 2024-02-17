@@ -40,7 +40,7 @@ export async function generateMetadata({
     title: `${user.name} | Full Stack`,
     description: `${user.name}さんのポートフォリオ`,
     openGraph: {
-      title: `${user.name}さんのポートフォリオ`,
+      title: `${user.name} | Full Stack`,
       description: `${user.name}さんのポートフォリオ`,
       url: `${env.NEXTAUTH_URL}${routes.userSkill(params.userId)}`,
       siteName: 'Full Stack',
