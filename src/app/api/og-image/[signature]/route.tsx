@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { ImageResponse } from 'next/og'
 import { verify } from '@/lib/signature'
 import { userParser } from '@/parser'
+import { colorTheme } from '@/constants/colorTheme'
 
 export async function GET(
   req: NextRequest,
@@ -34,36 +35,51 @@ export async function GET(
           justifyContent: 'center',
           width: '100%',
           height: '100%',
-          backgroundColor: '#f4f4f4',
-          color: 'black',
+          backgroundImage: colorTheme.special,
+          padding: 20,
         }}
       >
         <div
           style={{
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            borderRadius: 320,
-            border: '2px solid lightgray',
+            justifyContent: 'center',
+            backgroundColor: '#f4f4f4',
+            width: '100%',
+            height: '100%',
+            borderRadius: 20,
+            border: '5px solid lightgray',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
           }}
         >
-          <img
-            src={user.image ?? undefined}
+          <div
             style={{
-              width: 300,
-              height: 300,
-              borderRadius: 200,
-              margin: 20,
+              display: 'flex',
+              alignItems: 'center',
+              borderRadius: 320,
+              border: '2px solid lightgray',
             }}
-          />
+          >
+            <img
+              src={user.image ?? undefined}
+              style={{
+                width: 300,
+                height: 300,
+                borderRadius: 200,
+                margin: 20,
+              }}
+            />
+          </div>
+          <h1
+            style={{
+              textDecoration: 'underline',
+              textDecorationColor: 'rgb(99, 102, 241, 0.5)',
+            }}
+          >
+            {user.name ?? '名前未設定'}
+          </h1>
         </div>
-        <h1
-          style={{
-            textDecoration: 'underline',
-            textDecorationColor: 'rgb(99, 102, 241, 0.5)',
-          }}
-        >
-          {user.name ?? '名前未設定'}
-        </h1>
       </div>
     ),
     {
