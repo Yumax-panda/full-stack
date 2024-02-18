@@ -1,5 +1,4 @@
 import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material'
-import { NavigateNext } from '@mui/icons-material'
 import Link from 'next/link'
 import { routes } from '@/lib/routes'
 
@@ -12,10 +11,7 @@ export const Breadcrumbs = ({ links: original }: Props) => {
   const last = links.pop()
   if (!last) return null
   return (
-    <MuiBreadcrumbs
-      separator={<NavigateNext fontSize='small' />}
-      aria-label='breadcrumb'
-    >
+    <MuiBreadcrumbs aria-label='breadcrumb'>
       {links.map(({ href, label }) => (
         <Link
           key={href}
