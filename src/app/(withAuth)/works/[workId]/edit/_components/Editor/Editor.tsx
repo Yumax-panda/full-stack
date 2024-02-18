@@ -1,7 +1,8 @@
 'use client'
 import { Controller } from 'react-hook-form'
 
-import { Container } from '@/app/_components/Container/Container'
+import { Container } from '@/app/_components/Container'
+import { EditorContainer } from '@/app/_components/EditorContainer'
 import { Thumbnail } from '@/app/_components/Thumbnail'
 import { Tiptap } from '@/app/_components/Tiptap'
 import { Box } from '@mui/material'
@@ -38,26 +39,32 @@ export const Editor = ({ work }: Props) => {
         onThumbnailAdd={onThumbnailUpload}
       />
       <Container>
-        <Controller
-          name='title'
-          control={control}
-          render={({ field: { value, ...rest } }) => (
-            <TitleField value={value ?? ''} placeholder='タイトル' {...rest} />
-          )}
-        />
-        <Box sx={{ display: 'flex' }}>
-          <Thumbnail url={thumbnail} onClick={onThumbnailRemove} />
-        </Box>
-        <Controller
-          name='content'
-          control={control}
-          render={({ field: { value, ...rest } }) => (
-            <Tiptap
-              content={value ?? ''}
-              onChange={(content) => rest.onChange(content)}
-            />
-          )}
-        />
+        <EditorContainer>
+          <Controller
+            name='title'
+            control={control}
+            render={({ field: { value, ...rest } }) => (
+              <TitleField
+                value={value ?? ''}
+                placeholder='タイトル'
+                {...rest}
+              />
+            )}
+          />
+          <Box sx={{ display: 'flex' }}>
+            <Thumbnail url={thumbnail} onClick={onThumbnailRemove} />
+          </Box>
+          <Controller
+            name='content'
+            control={control}
+            render={({ field: { value, ...rest } }) => (
+              <Tiptap
+                content={value ?? ''}
+                onChange={(content) => rest.onChange(content)}
+              />
+            )}
+          />
+        </EditorContainer>
       </Container>
     </Box>
   )
