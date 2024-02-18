@@ -15,17 +15,19 @@ type Props = {
 } & Pick<Work, 'title' | 'content' | 'thumbnail'>
 
 export const Content = ({ title, content, thumbnail, user }: Props) => (
-  <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto' }}>
-    <EditorContainer sx={{ m: 0 }}>
-      <Title title={title || '無題'} />
-      <Thumbnail url={thumbnail} onClick={() => {}} omitDeleteButton />
-      <Tiptap content={content || ''} editable={false} />
-      <Box sx={{ borderTop: '1px solid lightgray', pt: '1rem' }}>
-        <UserSummary user={user} />
-      </Box>
-    </EditorContainer>
-    <div style={{ width: '300px' }}>
-      <UserCard user={user} />
-    </div>
-  </Box>
+  <div>
+    <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto' }}>
+      <EditorContainer sx={{ m: 0 }}>
+        <Title title={title || '無題'} />
+        <Thumbnail url={thumbnail} onClick={() => {}} omitDeleteButton />
+        <Tiptap content={content || ''} editable={false} />
+      </EditorContainer>
+      <div style={{ width: '300px' }}>
+        <UserCard user={user} />
+      </div>
+    </Box>
+    <Box sx={{ borderTop: '1px solid lightgray', pt: '1rem' }}>
+      <UserSummary user={user} />
+    </Box>
+  </div>
 )
