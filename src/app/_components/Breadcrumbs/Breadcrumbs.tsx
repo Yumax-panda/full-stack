@@ -1,12 +1,14 @@
 import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material'
 import { NavigateNext } from '@mui/icons-material'
 import Link from 'next/link'
+import { routes } from '@/lib/routes'
 
 type Props = {
   links: { href: string; label: string }[]
 }
 
-export const Breadcrumbs = ({ links }: Props) => {
+export const Breadcrumbs = ({ links: original }: Props) => {
+  const links = [{ href: routes.top(), label: 'ホーム' }, ...original]
   const last = links.pop()
   if (!last) return null
   return (
