@@ -29,6 +29,7 @@ export const Editor = ({ work }: Props) => {
     onThumbnailRemove,
   } = useEdit(work)
 
+  // FIXME: maxWidth: 728pxを効かせる
   return (
     <Box component='form' onSubmit={onSubmit}>
       <Header
@@ -38,34 +39,28 @@ export const Editor = ({ work }: Props) => {
         toggleIsPrivate={toggleIsPrivate}
         onThumbnailAdd={onThumbnailUpload}
       />
-      <Container>
-        <EditorContainer>
-          <Controller
-            name='title'
-            control={control}
-            render={({ field: { value, ...rest } }) => (
-              <TitleField
-                value={value ?? ''}
-                placeholder='タイトル'
-                {...rest}
-              />
-            )}
-          />
-          <Box sx={{ display: 'flex' }}>
-            <Thumbnail url={thumbnail} onClick={onThumbnailRemove} />
-          </Box>
-          <Controller
-            name='content'
-            control={control}
-            render={({ field: { value, ...rest } }) => (
-              <Tiptap
-                content={value ?? ''}
-                onChange={(content) => rest.onChange(content)}
-              />
-            )}
-          />
-        </EditorContainer>
-      </Container>
+      <EditorContainer>
+        <Controller
+          name='title'
+          control={control}
+          render={({ field: { value, ...rest } }) => (
+            <TitleField value={value ?? ''} placeholder='タイトル' {...rest} />
+          )}
+        />
+        <Box sx={{ display: 'flex' }}>
+          <Thumbnail url={thumbnail} onClick={onThumbnailRemove} />
+        </Box>
+        <Controller
+          name='content'
+          control={control}
+          render={({ field: { value, ...rest } }) => (
+            <Tiptap
+              content={value ?? ''}
+              onChange={(content) => rest.onChange(content)}
+            />
+          )}
+        />
+      </EditorContainer>
     </Box>
   )
 }

@@ -6,6 +6,7 @@ import { EditorContainer } from '@/app/_components/EditorContainer'
 import { Title } from '@/app/_components/Text/Title'
 import { Thumbnail } from '@/app/_components/Thumbnail'
 import { Tiptap } from '@/app/_components/Tiptap'
+import { UserCard } from '../UserCard'
 import { UserSummary } from '../UserSummary'
 import type { ComponentProps } from 'react'
 
@@ -23,6 +24,8 @@ export const Content = ({ title, content, thumbnail, user }: Props) => (
         <UserSummary user={user} />
       </Box>
     </EditorContainer>
-    <div style={{ flexGrow: 1 }}>test</div>
+    <div style={{ width: '300px' }}>
+      <UserCard user={user} />
+    </div>
   </Box>
 )
