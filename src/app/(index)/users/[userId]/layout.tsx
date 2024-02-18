@@ -24,7 +24,6 @@ export default async function Layout({
     <Box>
       <Breadcrumbs
         links={[
-          { href: routes.top(), label: 'ホーム' },
           { href: routes.userSkill(user.id), label: user.name || '無名' },
         ]}
       />

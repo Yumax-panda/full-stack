@@ -5,6 +5,7 @@ import { getSession } from '@/lib/auth'
 import { getWorkById } from '@/repository/work'
 import { Box } from '@mui/material'
 
+import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
 import { BackButton } from '../../_components/BackButton'
 import { Content } from './_components/Content'
 import { EditButton } from './_components/EditButton'
@@ -42,10 +43,23 @@ export default async function WorkDetailPage({
           width: '100%',
           justifyContent: 'space-between',
           my: '1rem',
+          borderBottom: '1px solid lightgray',
+          pb: '1rem',
         }}
       >
         <BackButton userId={work.userId} />
         {isMyWork && <EditButton workId={work.id} />}
+      </Box>
+      <Box sx={{ mb: '2rem' }}>
+        <Breadcrumbs
+          links={[
+            {
+              href: routes.userSkill(work.userId),
+              label: work.user.name || '無名',
+            },
+            { href: routes.workDetail(work.id), label: work.title || '無題' },
+          ]}
+        />
       </Box>
       <Content {...work} />
     </>
