@@ -9,7 +9,7 @@ export type Props = {
 
 export const UserSummary = ({ user: { id, name, image, bio } }: Props) => {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'row' }}>
       <Link href={routes.userSkill(id)} prefetch>
         <Avatar
           src={image || undefined}
@@ -21,17 +21,19 @@ export const UserSummary = ({ user: { id, name, image, bio } }: Props) => {
           }}
         />
       </Link>
-      <Box sx={{ pl: '1rem', display: 'flex' }}>
-        <Typography variant='h4' sx={{ my: 'auto' }}>
+      <Box sx={{ pl: '1rem', display: 'flex', flexDirection: 'column' }}>
+        <Typography variant='h6' sx={{ my: 'auto' }}>
           {name}
         </Typography>
 
-        <Typography
-          variant='body1'
-          sx={{ color: 'text.secondary', my: 'auto' }}
-        >
-          {bio}
-        </Typography>
+        {bio && (
+          <Typography
+            variant='caption'
+            sx={{ color: 'text.secondary', my: 'auto' }}
+          >
+            {bio}
+          </Typography>
+        )}
       </Box>
     </Box>
   )
