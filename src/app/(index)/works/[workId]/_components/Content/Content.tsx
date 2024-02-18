@@ -1,6 +1,7 @@
 'use client'
 
 import type { Work } from '@prisma/client'
+import { Box } from '@mui/material'
 import { Title } from '@/app/_components/Text/Title'
 import { Thumbnail } from '@/app/_components/Thumbnail'
 import { Tiptap } from '@/app/_components/Tiptap'
@@ -16,6 +17,8 @@ export const Content = ({ title, content, thumbnail, user }: Props) => (
     <Title title={title || '無題'} />
     <Thumbnail url={thumbnail} onClick={() => {}} omitDeleteButton />
     <Tiptap content={content || ''} editable={false} />
-    <UserSummary user={user} />
+    <Box sx={{ borderTop: '1px solid lightgray', pt: '1rem' }}>
+      <UserSummary user={user} />
+    </Box>
   </div>
 )
