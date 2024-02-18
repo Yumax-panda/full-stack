@@ -114,6 +114,7 @@ model User {
   image         String?        @db.Text()
   location      String?        @db.Text()
   organization  String?        @db.Text()
+  bio           String?        @db.Text()
   accounts      Account[]
   apiTokens     ArticleToken[]
   sessions      Session[]
