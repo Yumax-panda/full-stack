@@ -22,7 +22,8 @@ async function getSkillsByUserIdWithoutCache(userId: string) {
 export const getSkillsByUserId = cache(
   getSkillsByUserIdWithoutCache,
   ['getSkillsByUserId'],
-  { tags: [tag.skill] },
+  // tagを含めているため、tagのキャッシュも更新する
+  { tags: [tag.skill, tag.tag] },
 )
 
 export async function getSkillsWithTagsByUserIdWithoutCache(
