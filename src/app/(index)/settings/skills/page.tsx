@@ -31,7 +31,10 @@ export default async function Page() {
       <Box sx={{ my: '1.5rem' }}>
         <Breadcrumbs
           links={[
-            { href: routes.userSkill(session.user.id), label: session.user.name || '無名' },
+            {
+              href: routes.userSkill(session.user.id),
+              label: session.user.name || '無名',
+            },
             { href: routes.userSkillEdit(), label: 'スキルを編集' },
           ]}
         />

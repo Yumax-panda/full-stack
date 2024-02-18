@@ -44,6 +44,7 @@ export const EditProfileForm = ({
   email,
   location,
   organization,
+  bio,
 }: Props) => {
   const readOnlyStyle = {
     textAlign: 'left',
@@ -130,6 +131,17 @@ export const EditProfileForm = ({
                   </InputAdornment>
                 ),
               }}
+            />
+            <InputLabel htmlFor='bio'>自己紹介</InputLabel>
+            <TextField
+              id='bio'
+              name='bio'
+              fullWidth
+              multiline
+              rows={2}
+              defaultValue={bio}
+              variant='standard'
+              placeholder='Developer'
             />
           </Stack>
         </Grid>
