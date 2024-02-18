@@ -9,6 +9,7 @@ export const updateUserSchema = z.object({
     .transform((v) => v.trim()),
   location: z.string().nullable(),
   organization: z.string().nullable(),
+  bio: z.string().max(160, '自己紹介は100文字までです').nullable(),
 })
 
 export type UpdateUserProps = z.infer<typeof updateUserSchema>
