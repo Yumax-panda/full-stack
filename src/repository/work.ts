@@ -79,7 +79,8 @@ export async function getWorkByIdWithoutCache(
 }
 
 export const getWorkById = cache(getWorkByIdWithoutCache, ['getWorkById'], {
-  tags: [tag.work],
+  // includeでuserを指定しているため、profileキャッシュも更新する
+  tags: [tag.work, tag.profile],
 })
 
 export async function getWorksByUserIdWithoutCache(
