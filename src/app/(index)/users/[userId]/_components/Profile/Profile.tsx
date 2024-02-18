@@ -1,11 +1,14 @@
 import { CorporateFare, LocationOn } from '@mui/icons-material'
-import { Avatar, Box, Grid, Typography } from '@mui/material'
+import { Avatar, Box, Stack, Typography } from '@mui/material'
 
 import { Tabs } from '../Tabs'
 
 import type { User } from '@prisma/client'
 
-type Props = Pick<User, 'name' | 'location' | 'organization' | 'image' | 'id'>
+type Props = Pick<
+  User,
+  'name' | 'location' | 'organization' | 'image' | 'id' | 'bio'
+>
 type FieldProps = {
   icon: React.ReactNode
   text: string
@@ -13,59 +16,61 @@ type FieldProps = {
 
 const Field = ({ icon, text }: FieldProps) => (
   <Box sx={{ display: 'flex' }}>
-    <Box sx={{ mr: '0.5rem' }}>{icon}</Box>
-    <Typography>{text}</Typography>
+    <Box>{icon}</Box>
+    <Typography variant='body1'>{text}</Typography>
   </Box>
 )
 
-export const Profile = ({ name, location, organization, image, id }: Props) => (
+export const Profile = ({
+  name,
+  location,
+  organization,
+  image,
+  id,
+  bio,
+}: Props) => (
   <div>
-    <Grid container sx={{ py: '2rem' }}>
-      <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
+    <Box
+      sx={{
+        py: '2rem',
+        display: 'flex',
+        flexDirection: {
+          xs: 'column',
+          sm: 'row',
+        },
+      }}
+    >
+      <Box sx={{ display: 'flex' }}>
         <Avatar
           sx={{
-            margin: 'auto',
+            margin: { xs: 0, sm: 'auto' },
             width: '8rem',
             height: '8rem',
             fontSize: '4rem',
           }}
           src={image || undefined}
         />
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        md={6}
+      </Box>
+      <Stack
+        spacing={1}
         sx={{
-          textAlign: {
-            xs: 'center',
-            md: 'left',
+          textAlign: 'left',
+          ml: {
+            xs: 0,
+            sm: '5%',
           },
-          margin: 'auto',
+          m: 'auto',
+          p: '1rem',
         }}
       >
-        <Typography
-          sx={{
-            fontSize: '2rem',
-            fontWeight: 'bold',
-            lineHeight: '3rem',
-          }}
-        >
+        <Typography sx={{ fontWeight: 'bold' }} variant='h4'>
           {name}
         </Typography>
+        {bio && <Typography variant='body1'>{bio}</Typography>}
         {location && <Field icon={<LocationOn />} text={location} />}
         {organization && <Field icon={<CorporateFare />} text={organization} />}
-        <Typography
-          sx={{
-            fontSize: '1.2rem',
-            lineHeight: '2rem',
-            textAlign: 'left',
-          }}
-        >
-          ID: {id}
-        </Typography>
-      </Grid>
-    </Grid>
+      </Stack>
+    </Box>
     <Tabs userId={id} />
   </div>
 )

@@ -18,6 +18,7 @@ export async function updateUserAction(
     name,
     location: formData.get('location') || null,
     organization: formData.get('organization') || null,
+    bio: formData.get('bio') || null,
   }
 
   if (name === null) {
