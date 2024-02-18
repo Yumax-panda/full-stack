@@ -7,7 +7,7 @@ import { Tiptap } from '@/app/_components/Tiptap'
 
 export const Content = ({ title, content, thumbnail }: Props) => (
   <div>
-    <Title title={title || ''} />
+    <Title title={title || '無題'} />
     <Thumbnail url={thumbnail} onClick={() => {}} omitDeleteButton />
     <Tiptap content={content || ''} editable={false} />
   </div>

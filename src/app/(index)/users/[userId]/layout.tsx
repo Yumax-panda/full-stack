@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Box } from '@mui/material'
 import { notFound } from 'next/navigation'
 
+import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
 import { Profile } from './_components/Profile'
 import { getUserById } from '@/repository/user'
 import { userParser } from '@/parser'
@@ -21,6 +22,11 @@ export default async function Layout({
 
   return (
     <Box>
+      <Breadcrumbs
+        links={[
+          { href: routes.userSkill(user.id), label: user.name || '無名' },
+        ]}
+      />
       <Profile {...user} />
       <Box sx={{ py: '2rem' }}>{children}</Box>
     </Box>
