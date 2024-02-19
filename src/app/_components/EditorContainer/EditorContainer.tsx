@@ -1,4 +1,4 @@
-import { Container as Container, type ContainerProps } from '@mui/material'
+import { Container, type ContainerProps } from '@mui/material'
 
 export const EditorContainer = (props: ContainerProps) => {
   const { children, ...rest } = props
