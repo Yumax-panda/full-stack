@@ -5,7 +5,7 @@ import { Box, IconButton, Tooltip } from '@mui/material'
 
 type Props = {
   url?: string | null
-  onClick: () => void
+  onClick?: () => void
   omitDeleteButton?: boolean
 }
 

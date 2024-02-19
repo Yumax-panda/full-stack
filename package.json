@@ -31,6 +31,7 @@
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tiptap/extension-image": "^2.1.13",
     "@tiptap/extension-placeholder": "^2.1.13",
+    "@tiptap/html": "^2.2.3",
     "@tiptap/pm": "^2.1.13",
     "@tiptap/react": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",

@@ -2,10 +2,8 @@
 
 import './Tiptap.css'
 
-import Image from '@tiptap/extension-image' // eslint-disable-line import/no-named-as-default
-import Placeholder from '@tiptap/extension-placeholder' // eslint-disable-line import/no-named-as-default
 import { EditorContent, useEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit' // eslint-disable-line import/no-named-as-default
+import { extensions } from '@/lib/editor'
 
 type Props = {
   content: string
@@ -19,19 +17,9 @@ export const Tiptap = ({
   editable = true,
 }: Props) => {
   const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        heading: {
-          levels: [1, 2, 3],
-        },
-      }),
-      Image,
-      Placeholder.configure({ placeholder: '制作物の説明を入力しましょう！' }),
-    ],
+    extensions,
     content,
-    onUpdate: ({ editor }) => {
-      onChange(editor.getHTML())
-    },
+    onUpdate: ({ editor }) => onChange(editor.getHTML()),
     editable,
   })
 

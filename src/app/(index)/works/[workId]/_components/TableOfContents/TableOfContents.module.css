@@ -1,0 +1,12 @@
+.heading1,
+.heading2 {
+  font-size: 16px;
+}
+
+.heading1 {
+  font-weight: bold;
+}
+
+.heading3 {
+  display: none;
+}

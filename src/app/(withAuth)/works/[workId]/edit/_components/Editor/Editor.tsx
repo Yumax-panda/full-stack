@@ -1,7 +1,7 @@
 'use client'
 import { Controller } from 'react-hook-form'
 
-import { Container } from '@/app/_components/Container/Container'
+import { EditorContainer } from '@/app/_components/EditorContainer'
 import { Thumbnail } from '@/app/_components/Thumbnail'
 import { Tiptap } from '@/app/_components/Tiptap'
 import { Box } from '@mui/material'
@@ -37,7 +37,7 @@ export const Editor = ({ work }: Props) => {
         toggleIsPrivate={toggleIsPrivate}
         onThumbnailAdd={onThumbnailUpload}
       />
-      <Container>
+      <EditorContainer>
         <Controller
           name='title'
           control={control}
@@ -58,7 +58,7 @@ export const Editor = ({ work }: Props) => {
             />
           )}
         />
-      </Container>
+      </EditorContainer>
     </Box>
   )
 }
