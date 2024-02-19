@@ -2,6 +2,7 @@ import type { User } from '@prisma/client'
 import { Avatar, Box, Typography } from '@mui/material'
 import { routes } from '@/lib/routes'
 import Link from 'next/link'
+import { CardContainer } from '../CardContainer'
 
 type Props = {
   user: Pick<User, 'id' | 'name' | 'image' | 'bio'>
@@ -9,7 +10,7 @@ type Props = {
 
 export const UserCard = ({ user: { id, name, image, bio } }: Props) => {
   return (
-    <Box sx={{ backgroundColor: '#F8F9FC', p: '7px', borderRadius: '7px' }}>
+    <CardContainer>
       <Box sx={{ display: 'flex' }}>
         <Link href={routes.userSkill(id)} prefetch>
           <Avatar
@@ -27,6 +28,6 @@ export const UserCard = ({ user: { id, name, image, bio } }: Props) => {
           {bio}
         </Typography>
       )}
-    </Box>
+    </CardContainer>
   )
 }

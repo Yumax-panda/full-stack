@@ -19,7 +19,7 @@ export const Content = ({ title, content, thumbnail, user }: Props) => (
     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto' }}>
       <EditorContainer sx={{ m: 0 }}>
         <Title title={title || '無題'} />
-        <Thumbnail url={thumbnail} onClick={() => { }} omitDeleteButton />
+        <Thumbnail url={thumbnail} onClick={() => {}} omitDeleteButton />
         <Tiptap content={content || ''} editable={false} />
       </EditorContainer>
       <div style={{ width: '300px' }}>
