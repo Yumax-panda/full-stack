@@ -1,7 +1,6 @@
 'use client'
 import { Controller } from 'react-hook-form'
 
-import { Container } from '@/app/_components/Container'
 import { EditorContainer } from '@/app/_components/EditorContainer'
 import { Thumbnail } from '@/app/_components/Thumbnail'
 import { Tiptap } from '@/app/_components/Tiptap'
@@ -29,7 +28,6 @@ export const Editor = ({ work }: Props) => {
     onThumbnailRemove,
   } = useEdit(work)
 
-  // FIXME: maxWidth: 728pxを効かせる
   return (
     <Box component='form' onSubmit={onSubmit}>
       <Header
