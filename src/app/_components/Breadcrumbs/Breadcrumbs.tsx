@@ -17,7 +17,7 @@ export const Breadcrumbs = ({ links: original }: Props) => {
           key={href}
           href={href}
           prefetch
-          style={{ textDecoration: 'none' }}
+          style={{ textDecoration: 'none', color: 'inherit' }}
         >
           {label}
         </Link>

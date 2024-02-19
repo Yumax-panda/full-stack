@@ -1,10 +1,17 @@
 .heading1,
 .heading2 {
   font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .heading1 {
   font-weight: bold;
+}
+
+.heading2 {
+  margin-left: 10px;
 }
 
 .heading3 {
