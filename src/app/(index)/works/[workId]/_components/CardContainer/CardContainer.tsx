@@ -1,11 +1,12 @@
-import { Box } from '@mui/material'
+import { Box, type BoxProps } from '@mui/material'
 
-type Props = {
-  children: React.ReactNode
-}
+type Props = BoxProps
 
-export const CardContainer = ({ children }: Props) => (
-  <Box sx={{ backgroundColor: '#F8F9FC', p: '7px', borderRadius: '7px' }}>
+export const CardContainer = ({ children, ...rest }: Props) => (
+  <Box
+    sx={{ backgroundColor: '#F8F9FC', p: '7px', borderRadius: '7px' }}
+    {...rest}
+  >
     {children}
   </Box>
 )
