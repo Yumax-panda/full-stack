@@ -1,5 +1,6 @@
 'use client'
 import { Controller } from 'react-hook-form'
+import { useEffect } from 'react'
 
 import { EditorContainer } from '@/app/_components/EditorContainer'
 import { Thumbnail } from '@/app/_components/Thumbnail'
@@ -27,6 +28,18 @@ export const Editor = ({ work }: Props) => {
     thumbnail,
     onThumbnailRemove,
   } = useEdit(work)
+
+  // ショートカットキーで保存
+  useEffect(() => {
+    const saveShortcut = (e: KeyboardEvent) => {
+      if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        onSubmit()
+      }
+    }
+    window.addEventListener('keydown', saveShortcut)
+    return () => window.removeEventListener('keydown', saveShortcut)
+  }, [])
 
   return (
     <Box component='form' onSubmit={onSubmit}>
