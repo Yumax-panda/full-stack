@@ -10,7 +10,7 @@ export const extensions = [
     },
   }),
   Image,
-  Placeholder.configure({ placeholder: '制作物の説明を入力しましょう！' }),
+  Placeholder.configure({ placeholder: '活動記録の説明を入力しましょう！' }),
 ]
 
 export const generateJSON = (html: string) => {

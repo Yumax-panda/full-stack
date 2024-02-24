@@ -21,7 +21,7 @@ export const WorkAddButton = ({ userId }: Props) => {
 
   return (
     <form action={action}>
-      <AddButtonBase text='制作物を追加' type='submit' />
+      <AddButtonBase text='活動記録を追加' type='submit' />
     </form>
   )
 }
