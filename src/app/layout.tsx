@@ -15,18 +15,18 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Full Stack',
-  description: '全てのエンジニアのためのポートフォリオ作成サービス',
+  description: '全ての人のためのポートフォリオ作成サービス',
   metadataBase: new URL(env.NEXTAUTH_URL),
   twitter: {
     card: 'summary',
     title: 'Full Stack',
-    description: '全てのエンジニアのためのポートフォリオ作成サービス',
+    description: '全ての人のためのポートフォリオ作成サービス',
   },
   openGraph: {
     type: 'website',
     url: env.NEXTAUTH_URL,
     title: 'Full Stack',
-    description: '全てのエンジニアのためのポートフォリオ作成サービス',
+    description: '全ての人のためのポートフォリオ作成サービス',
   },
 }
 

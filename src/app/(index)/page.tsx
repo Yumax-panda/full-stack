@@ -22,7 +22,7 @@ export default function Home() {
           my: '0.5rem',
         }}
       >
-        <div>全てのエンジニアのための</div>
+        <div>全ての人のための</div>
         <div>ポートフォリオ作成サービス</div>
       </Typography>
       <SignInButton />

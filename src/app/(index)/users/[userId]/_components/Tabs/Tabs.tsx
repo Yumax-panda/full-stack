@@ -15,7 +15,7 @@ export const Tabs = ({ userId }: Props) => {
 
   const paths = {
     技術: routes.userSkill(userId),
-    制作物: routes.userWork(userId),
+    活動記録: routes.userWork(userId),
     執筆記事: routes.userArticle(userId),
   }
   const handleChange = (_: React.SyntheticEvent, href: string) => {
