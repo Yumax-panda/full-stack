@@ -2,10 +2,11 @@
 
 import { revalidateTag } from 'next/cache'
 
+import type { FormState } from './types'
+
 import { tag } from '@/lib/routes'
 import { updateUserSchema } from '@/models/user'
 import { updateUser } from '@/repository/user'
-import type { FormState } from './types'
 
 export async function updateUserAction(
   userId: string,

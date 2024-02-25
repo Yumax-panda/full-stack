@@ -1,11 +1,12 @@
-import { tag } from '@/lib/routes'
-import { revalidateTag } from 'next/cache'
-import { getSession } from '@/lib/auth'
-import { createSkill } from '@/repository/skill'
-import { NextRequest, NextResponse } from 'next/server'
-import { message } from '@/lib/message'
-import { createSkillSchema } from '@/models'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
+import { revalidateTag } from 'next/cache'
+import { NextRequest, NextResponse } from 'next/server'
+
+import { getSession } from '@/lib/auth'
+import { message } from '@/lib/message'
+import { tag } from '@/lib/routes'
+import { createSkillSchema } from '@/models'
+import { createSkill } from '@/repository/skill'
 
 export async function POST(req: NextRequest) {
   const session = await getSession()

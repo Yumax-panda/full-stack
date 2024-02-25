@@ -1,6 +1,8 @@
 import { Chip, Tooltip } from '@mui/material'
-import { hexToRgb } from '@/lib/color'
+
 import type { Tag as TagType } from '@prisma/client'
+
+import { hexToRgb } from '@/lib/color'
 
 type Props = Pick<TagType, 'name' | 'color' | 'brief'>
 

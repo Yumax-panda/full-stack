@@ -2,10 +2,11 @@
 
 import { revalidateTag } from 'next/cache'
 
+import type { FormState } from './types'
+
 import { tag } from '@/lib/routes'
 import { updateArticleTokenSchema } from '@/models/articleToken'
 import { updateArticleToken } from '@/repository/articleToken'
-import type { FormState } from './types'
 
 export async function updateTokenAction(
   userId: string,

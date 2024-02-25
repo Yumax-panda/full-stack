@@ -1,16 +1,20 @@
 'use client'
 
-import type { Tag as TagType } from '@prisma/client'
-import Link from 'next/link'
-import { routes } from '@/lib/routes'
-import { Box, Button, IconButton } from '@mui/material'
-import { Edit, Delete, Add, BrushOutlined } from '@mui/icons-material'
-import { Container, Header, RowContainer } from '../../../_components/Table'
 import { useState } from 'react'
+
+import { Edit, Delete, Add, BrushOutlined } from '@mui/icons-material'
+import { Box, Button, IconButton } from '@mui/material'
+import Link from 'next/link'
+
+import { Container, Header, RowContainer } from '../../../_components/Table'
 import { CreateTagForm } from '../CreateTagForm'
-import { UpdateTagForm } from '../UpdateTagForm'
 import { useDeleteTag } from '../hooks/useDeleteTag'
+import { UpdateTagForm } from '../UpdateTagForm'
+
+import type { Tag as TagType } from '@prisma/client'
+
 import { Tag } from '@/app/(index)/_components/Tag'
+import { routes } from '@/lib/routes'
 
 type TableRowProps = {
   tag: TagType

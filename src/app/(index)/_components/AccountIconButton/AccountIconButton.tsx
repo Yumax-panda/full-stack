@@ -1,7 +1,3 @@
-import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-
-import { routes } from '@/lib/routes'
 import {
   AccountCircleOutlined,
   LogoutOutlined,
@@ -15,10 +11,14 @@ import {
   MenuItem,
   Typography,
 } from '@mui/material'
+import { useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 
 import { useMenu } from '../hooks/useMenu'
 
 import type { Session } from 'next-auth'
+
+import { routes } from '@/lib/routes'
 
 type User = NonNullable<Session['user']>
 type Props = Pick<User, 'id' | 'name' | 'image'>

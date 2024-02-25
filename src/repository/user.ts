@@ -2,12 +2,11 @@ import 'server-only'
 
 import { unstable_cache as cache } from 'next/cache'
 
+import type { UpdateUserProps } from '@/models/user'
+import type { User } from '@prisma/client'
+
 import { prisma } from '@/lib/client'
 import { tag } from '@/lib/routes'
-
-import type { UpdateUserProps } from '@/models/user'
-
-import type { User } from '@prisma/client'
 
 export async function getUserByIdWithoutCache(
   userId: string,

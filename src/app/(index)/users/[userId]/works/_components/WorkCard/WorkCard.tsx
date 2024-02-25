@@ -1,8 +1,3 @@
-import type { PartialWork as Props } from '@/repository/work'
-import Link from 'next/link'
-
-import { formatDate } from '@/lib/formatDate'
-import { routes } from '@/lib/routes'
 import { AutoAwesomeOutlined, LockOutlined } from '@mui/icons-material'
 import {
   Avatar,
@@ -12,6 +7,12 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material'
+import Link from 'next/link'
+
+import type { PartialWork as Props } from '@/repository/work'
+
+import { formatDate } from '@/lib/formatDate'
+import { routes } from '@/lib/routes'
 
 const ThumbnailWithoutImage = () => (
   <Box

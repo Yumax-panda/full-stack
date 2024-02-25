@@ -2,8 +2,8 @@ import { revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { getSession } from '@/lib/auth'
-import { tag } from '@/lib/routes'
 import { message } from '@/lib/message'
+import { tag } from '@/lib/routes'
 import { updateWorkInServer } from '@/models'
 import { updateWork } from '@/usecase/work'
 

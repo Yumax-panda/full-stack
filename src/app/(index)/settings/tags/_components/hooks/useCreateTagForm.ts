@@ -1,10 +1,12 @@
-import { useForm, type UseFormReturn } from 'react-hook-form'
 import { useState, useEffect, type FormEventHandler } from 'react'
-import { useRouter } from 'next/navigation'
-import { createTagSchema, type CreateTag } from '@/models'
+
 import { zodResolver } from '@hookform/resolvers/zod'
-import { generateRandomColor } from '@/lib/color'
+import { useRouter } from 'next/navigation'
+import { useForm, type UseFormReturn } from 'react-hook-form'
+
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import { generateRandomColor } from '@/lib/color'
+import { createTagSchema, type CreateTag } from '@/models'
 
 type Props = {
   onCanceled: () => void

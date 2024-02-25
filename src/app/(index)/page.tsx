@@ -1,7 +1,7 @@
 import { Box, Container, Typography } from '@mui/material'
 
-import { SignInButton } from './_components/SignInButton'
 import { FeatureSection } from './_components/FeatureSection'
+import { SignInButton } from './_components/SignInButton'
 
 export default function Home() {
   return (

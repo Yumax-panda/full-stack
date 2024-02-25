@@ -1,8 +1,8 @@
 import 'server-only'
 
-import { prisma } from '@/lib/client'
-
 import type { UpdateSkillProps } from '@/models'
+
+import { prisma } from '@/lib/client'
 
 export async function updateSkillWithTagIds({
   id,

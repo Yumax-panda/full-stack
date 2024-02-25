@@ -1,10 +1,10 @@
 'use client'
 
-import { signIn, useSession } from 'next-auth/react'
+import { Button } from '@mui/material'
 import { useRouter } from 'next/navigation'
+import { signIn, useSession } from 'next-auth/react'
 
 import { routes } from '@/lib/routes'
-import { Button } from '@mui/material'
 
 export const SignInButton = () => {
   const { data: session } = useSession()

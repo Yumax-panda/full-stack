@@ -1,5 +1,6 @@
-import type { SvgIconComponent } from '@mui/icons-material'
 import { Box, Typography } from '@mui/material'
+
+import type { SvgIconComponent } from '@mui/icons-material'
 
 export interface EmptyProps {
   Icon: SvgIconComponent

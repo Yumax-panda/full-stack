@@ -1,7 +1,8 @@
-import type { PartialWork } from '@/repository/work'
 import { Grid } from '@mui/material'
 
 import { WorkCard } from '../WorkCard'
+
+import type { PartialWork } from '@/repository/work'
 
 type Props = {
   works: PartialWork[]

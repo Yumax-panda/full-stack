@@ -1,5 +1,6 @@
-import { BackButton } from '@/app/(index)/_components/BackButton'
 import { Box } from '@mui/material'
+
+import { BackButton } from '@/app/(index)/_components/BackButton'
 
 type Props = {
   userId: string | undefined

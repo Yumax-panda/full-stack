@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
 import { ImageResponse } from 'next/og'
+import { NextRequest, NextResponse } from 'next/server'
+
+import { colorTheme } from '@/constants/colorTheme'
 import { verify } from '@/lib/signature'
 import { userParser } from '@/parser'
-import { colorTheme } from '@/constants/colorTheme'
 
 export async function GET(
   req: NextRequest,

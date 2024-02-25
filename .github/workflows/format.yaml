@@ -2,6 +2,8 @@ name: format
 
 on:
   push:
+    branches:
+      - main
   pull_request:
     types: [opened, reopened, synchronize]
 
@@ -23,3 +25,4 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - run: npm run format
+      - run: npm run lint:fix

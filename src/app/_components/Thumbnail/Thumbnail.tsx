@@ -1,7 +1,6 @@
-import Image from 'next/image'
-
 import { Close } from '@mui/icons-material'
 import { Box, IconButton, Tooltip } from '@mui/material'
+import Image from 'next/image'
 
 type Props = {
   url?: string | null

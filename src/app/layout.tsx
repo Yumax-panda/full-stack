@@ -1,16 +1,17 @@
 import 'ress'
 import 'react-toastify/dist/ReactToastify.css'
 
+import { CssBaseline } from '@mui/material'
 import { Inter } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
 
-import { CssBaseline } from '@mui/material'
-
 import { AuthProvider } from './_components/Provider/AuthProvider'
 import { ThemeProvider } from './_components/Provider/ThemeProvider'
-import { env } from '@/lib/env.mjs'
 
 import type { Metadata } from 'next'
+
+import { env } from '@/lib/env.mjs'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

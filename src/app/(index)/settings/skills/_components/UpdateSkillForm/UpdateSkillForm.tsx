@@ -1,9 +1,10 @@
 import { Box } from '@mui/material'
-import type { Tag as TagType } from '@prisma/client'
+
 import { useUpdateSkillForm } from '../hooks/useUpdateSkillForm'
 import { SkillForm } from '../SkillForm'
 
 import type { SkillWithTags } from '@/models'
+import type { Tag as TagType } from '@prisma/client'
 
 type Props = {
   tags: TagType[]

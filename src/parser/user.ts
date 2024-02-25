@@ -1,5 +1,6 @@
-import type { Parser } from './common'
 import { toQueryString } from './common'
+
+import type { Parser } from './common'
 
 type User = {
   name: string | null

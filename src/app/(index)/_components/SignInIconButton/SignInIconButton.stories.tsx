@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { SignInIconButton } from './SignInIconButton'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 export default {
   title: 'UI/SignInIconButton',

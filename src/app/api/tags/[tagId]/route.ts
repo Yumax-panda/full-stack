@@ -1,12 +1,12 @@
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { getSession } from '@/lib/auth'
 import { message } from '@/lib/message'
-import { updateTag, deleteTag } from '@/repository/tag'
 import { tag } from '@/lib/routes'
 import { updateTagSchema } from '@/models'
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
+import { updateTag, deleteTag } from '@/repository/tag'
 
 export async function PATCH(
   req: NextRequest,

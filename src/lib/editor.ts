@@ -1,8 +1,8 @@
+import Heading from '@tiptap/extension-heading' // eslint-disable-line import/no-named-as-default
 import Image from '@tiptap/extension-image' // eslint-disable-line import/no-named-as-default
 import Placeholder from '@tiptap/extension-placeholder' // eslint-disable-line import/no-named-as-default
-import StarterKit from '@tiptap/starter-kit' // eslint-disable-line import/no-named-as-default
-import Heading from '@tiptap/extension-heading' // eslint-disable-line import/no-named-as-default
 import { generateJSON as originalGenerateJSON } from '@tiptap/html'
+import StarterKit from '@tiptap/starter-kit' // eslint-disable-line import/no-named-as-default
 
 export const extensions = [
   StarterKit.configure({

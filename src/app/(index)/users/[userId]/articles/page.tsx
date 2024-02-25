@@ -1,7 +1,9 @@
 import { AutoStoriesOutlined } from '@mui/icons-material'
 
 import { Empty } from '../_components/Empty'
+
 import { ArticleSection } from './_components/ArticleSection'
+
 import { getArticlesByUserId } from '@/usecase/article'
 
 export default async function Article({

@@ -1,13 +1,13 @@
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import NextAuth from 'next-auth/next'
 import DiscordProvider from 'next-auth/providers/discord'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 
+import type { NextAuthOptions } from 'next-auth'
+
 import { prisma } from '@/lib/client'
 import { env } from '@/lib/env.mjs'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-
-import type { NextAuthOptions } from 'next-auth'
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),

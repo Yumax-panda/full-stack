@@ -2,6 +2,7 @@ import { Client } from '@planetscale/database'
 import { PrismaPlanetScale } from '@prisma/adapter-planetscale'
 import { PrismaClient } from '@prisma/client'
 import { fetch as undiciFetch } from 'undici'
+
 import { env } from './env.mjs'
 
 const generatePrismaClient = (): PrismaClient => {

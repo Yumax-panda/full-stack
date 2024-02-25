@@ -1,8 +1,11 @@
-import type { User } from '@prisma/client'
 import { Avatar, Box, Typography } from '@mui/material'
-import { routes } from '@/lib/routes'
 import Link from 'next/link'
+
 import { CardContainer } from '../CardContainer'
+
+import type { User } from '@prisma/client'
+
+import { routes } from '@/lib/routes'
 
 type Props = {
   user: Pick<User, 'id' | 'name' | 'image' | 'bio'>

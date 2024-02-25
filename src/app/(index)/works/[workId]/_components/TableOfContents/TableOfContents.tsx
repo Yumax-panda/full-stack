@@ -1,7 +1,9 @@
 import { Typography } from '@mui/material'
-import { CardContainer } from '../CardContainer'
-import styles from './TableOfContents.module.css'
 import Link from 'next/link'
+
+import { CardContainer } from '../CardContainer'
+
+import styles from './TableOfContents.module.css'
 
 type Props = {
   headings: { text: string; level: number }[]

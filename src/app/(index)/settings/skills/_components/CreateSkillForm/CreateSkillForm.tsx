@@ -1,9 +1,11 @@
 'use client'
 
-import type { Tag as TagType } from '@prisma/client'
-import { SkillForm } from '../SkillForm'
-import { useCreateSkillForm } from '../hooks/useCreateSkillForm'
 import { Box } from '@mui/material'
+
+import { useCreateSkillForm } from '../hooks/useCreateSkillForm'
+import { SkillForm } from '../SkillForm'
+
+import type { Tag as TagType } from '@prisma/client'
 
 type Props = {
   tags: TagType[]
