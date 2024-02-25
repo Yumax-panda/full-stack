@@ -1,13 +1,30 @@
 import Image from '@tiptap/extension-image' // eslint-disable-line import/no-named-as-default
 import Placeholder from '@tiptap/extension-placeholder' // eslint-disable-line import/no-named-as-default
 import StarterKit from '@tiptap/starter-kit' // eslint-disable-line import/no-named-as-default
+import Heading from '@tiptap/extension-heading' // eslint-disable-line import/no-named-as-default
 import { generateJSON as originalGenerateJSON } from '@tiptap/html'
 
 export const extensions = [
   StarterKit.configure({
-    heading: {
-      levels: [1, 2, 3],
+    heading: false,
+  }),
+  Heading.extend({
+    addAttributes() {
+      return {
+        ...this.parent?.(),
+        id: {
+          default: null,
+          parseHTML: (element) => ({
+            id: element.textContent,
+          }),
+          renderHTML: (attributes) => attributes.id,
+        },
+      }
     },
+    // extendした後にconfigureしないとオプションが反映されない
+    // ref: https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/Node.ts#L581
+  }).configure({
+    levels: [1, 2, 3],
   }),
   Image,
   Placeholder.configure({ placeholder: '活動記録の説明を入力しましょう！' }),
