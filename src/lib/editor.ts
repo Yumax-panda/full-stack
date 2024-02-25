@@ -8,9 +8,7 @@ export const extensions = [
   StarterKit.configure({
     heading: false,
   }),
-  Heading.configure({
-    levels: [1, 2, 3],
-  }).extend({
+  Heading.extend({
     addAttributes() {
       return {
         ...this.parent?.(),
@@ -23,6 +21,10 @@ export const extensions = [
         },
       }
     },
+    // extendした後にconfigureしないとオプションが反映されない
+    // ref: https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/Node.ts#L581
+  }).configure({
+    levels: [1, 2, 3],
   }),
   Image,
   Placeholder.configure({ placeholder: '活動記録の説明を入力しましょう！' }),
