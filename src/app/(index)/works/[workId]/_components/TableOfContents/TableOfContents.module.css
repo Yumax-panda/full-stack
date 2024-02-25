@@ -17,3 +17,8 @@
 .heading3 {
   display: none;
 }
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
