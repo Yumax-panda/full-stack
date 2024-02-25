@@ -1,7 +1,8 @@
 // @vitest-environment node
 
-import { sign, verify } from '@/lib/signature'
 import { expect, test } from 'vitest'
+
+import { sign, verify } from '@/lib/signature'
 
 test('sign and verify', async () => {
   const data = '__payload__'

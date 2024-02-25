@@ -1,7 +1,9 @@
-import type { User } from '@prisma/client'
-import { routes } from '@/lib/routes'
 import { Avatar, Box, Typography } from '@mui/material'
 import Link from 'next/link'
+
+import type { User } from '@prisma/client'
+
+import { routes } from '@/lib/routes'
 
 export type Props = {
   user: Pick<User, 'id' | 'name' | 'image' | 'bio'>

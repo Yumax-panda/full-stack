@@ -1,5 +1,6 @@
-import type { Work, User } from '@prisma/client'
 import { unstable_cache as cache } from 'next/cache'
+
+import type { Work, User } from '@prisma/client'
 
 import { prisma } from '@/lib/client'
 import { tag } from '@/lib/routes'

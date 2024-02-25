@@ -1,5 +1,3 @@
-import { getLevelHelperText, skills } from '@/constants/skills'
-import type { Tag as TagType } from '@prisma/client'
 import {
   Autocomplete,
   Button,
@@ -13,7 +11,10 @@ import {
 } from '@mui/material'
 
 import type { UseCreateSkillFormReturn } from '../hooks/useCreateSkillForm'
+import type { Tag as TagType } from '@prisma/client'
+
 import { Tag } from '@/app/(index)/_components/Tag'
+import { getLevelHelperText, skills } from '@/constants/skills'
 
 type Props = {
   tags: TagType[]

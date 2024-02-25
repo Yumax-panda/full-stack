@@ -1,11 +1,12 @@
-import type { Skill, Tag } from '@prisma/client'
 import { unstable_cache as cache } from 'next/cache'
 
-import { prisma } from '@/lib/client'
-import { tag } from '@/lib/routes'
 import { getTagsByUserId } from './tag'
 
 import type { SkillWithTags, CreateSkillProps } from '@/models'
+import type { Skill, Tag } from '@prisma/client'
+
+import { prisma } from '@/lib/client'
+import { tag } from '@/lib/routes'
 
 async function getSkillsByUserIdWithoutCache(userId: string) {
   console.info(`called get skills by user id: ${userId}`)

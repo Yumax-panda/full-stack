@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { StarField } from './'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 export default {
   title: 'StarField',

@@ -1,5 +1,6 @@
-import type { StoryObj, Meta } from '@storybook/react'
 import { SaveButton } from './'
+
+import type { StoryObj, Meta } from '@storybook/react'
 
 export default {
   title: 'UI/SaveButton',

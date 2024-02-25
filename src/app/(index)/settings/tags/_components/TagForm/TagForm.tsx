@@ -1,16 +1,20 @@
 import { FormEventHandler, MouseEventHandler, useState } from 'react'
-import { Box, InputLabel, TextField, Tooltip, Button } from '@mui/material'
-import type { SxProps, Theme } from '@mui/material'
+
 import { Replay } from '@mui/icons-material'
-import { Tag } from '@/app/(index)/_components/Tag'
-import { useDeleteTag } from '../hooks/useDeleteTag'
+import { Box, InputLabel, TextField, Tooltip, Button } from '@mui/material'
+
 import { ColorPallet } from '../ColorPallet'
-import { hexToRgb } from '@/lib/color'
+import { useDeleteTag } from '../hooks/useDeleteTag'
+
+import type { SxProps, Theme } from '@mui/material'
 import type {
   UseFormRegister,
   FormState,
   UseFormSetValue,
 } from 'react-hook-form'
+
+import { Tag } from '@/app/(index)/_components/Tag'
+import { hexToRgb } from '@/lib/color'
 
 type FormValues = {
   name: string

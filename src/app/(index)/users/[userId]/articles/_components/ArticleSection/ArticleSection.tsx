@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material'
 
 import { ArticleCard } from '../ArticleCard'
+
 import type { ArticleWithOgp } from '@/usecase/article'
 
 type Props = {

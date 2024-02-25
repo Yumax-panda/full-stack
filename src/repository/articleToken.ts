@@ -1,10 +1,10 @@
-import { unstable_cache as cache } from 'next/cache'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
+import { unstable_cache as cache } from 'next/cache'
+
+import type { UpdateArticleToken } from '@/models/articleToken'
 
 import { prisma } from '@/lib/client'
 import { tag } from '@/lib/routes'
-
-import type { UpdateArticleToken } from '@/models/articleToken'
 
 export async function getArticleTokenByUserIdWithoutCache(userId: string) {
   console.info(`called get article token by user id: ${userId}`)

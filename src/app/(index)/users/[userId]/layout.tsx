@@ -1,14 +1,16 @@
-import type { Metadata } from 'next'
 import { Box } from '@mui/material'
 import { notFound } from 'next/navigation'
 
-import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
 import { Profile } from './_components/Profile'
-import { getUserById } from '@/repository/user'
-import { userParser } from '@/parser'
-import { getSignedUrl } from '@/lib/signature'
+
+import type { Metadata } from 'next'
+
+import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
 import { env } from '@/lib/env.mjs'
 import { routes, ogImagePaths } from '@/lib/routes'
+import { getSignedUrl } from '@/lib/signature'
+import { userParser } from '@/parser'
+import { getUserById } from '@/repository/user'
 
 export default async function Layout({
   children,

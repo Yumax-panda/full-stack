@@ -1,14 +1,18 @@
-import type { Work } from '@prisma/client'
+import type { ComponentProps } from 'react'
+
 import { Box } from '@mui/material'
+
+import { TableOfContents } from '../TableOfContents'
+import { UserCard } from '../UserCard'
+import { UserSummary } from '../UserSummary'
+
+import type { Work } from '@prisma/client'
+
 import { EditorContainer } from '@/app/_components/EditorContainer'
 import { Title } from '@/app/_components/Text/Title'
 import { Thumbnail } from '@/app/_components/Thumbnail'
 import { Tiptap } from '@/app/_components/Tiptap'
 import { getHeadings } from '@/lib/editor'
-import { TableOfContents } from '../TableOfContents'
-import { UserCard } from '../UserCard'
-import { UserSummary } from '../UserSummary'
-import type { ComponentProps } from 'react'
 
 type Props = {
   user: ComponentProps<typeof UserSummary>['user']

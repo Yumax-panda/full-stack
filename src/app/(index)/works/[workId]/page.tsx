@@ -1,19 +1,21 @@
-import type { Metadata } from 'next'
+import { Box } from '@mui/material'
 import { notFound } from 'next/navigation'
 
-import { getSession } from '@/lib/auth'
-import { getWorkById } from '@/repository/work'
-import { Box } from '@mui/material'
-
-import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
 import { BackButton } from '../../_components/BackButton'
+
 import { Content } from './_components/Content'
 import { EditButton } from './_components/EditButton'
-import { userParser } from '@/parser'
-import { getSignedUrl } from '@/lib/signature'
+
+import type { Metadata } from 'next'
+
+import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
+import { getSession } from '@/lib/auth'
 import { env } from '@/lib/env.mjs'
-import { routes, ogImagePaths } from '@/lib/routes'
 import { formatDate } from '@/lib/formatDate'
+import { routes, ogImagePaths } from '@/lib/routes'
+import { getSignedUrl } from '@/lib/signature'
+import { userParser } from '@/parser'
+import { getWorkById } from '@/repository/work'
 
 export default async function WorkDetailPage({
   params: { workId },

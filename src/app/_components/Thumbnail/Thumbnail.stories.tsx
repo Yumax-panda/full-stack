@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { Thumbnail } from './'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 export default {
   title: 'UI/Thumbnail',

@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og'
+
 import { colorTheme } from '@/constants/colorTheme'
 
 export const runtime = 'edge'

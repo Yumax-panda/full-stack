@@ -1,5 +1,6 @@
 import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material'
 import Link from 'next/link'
+
 import { routes } from '@/lib/routes'
 
 type Props = {

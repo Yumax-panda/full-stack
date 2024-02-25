@@ -1,7 +1,6 @@
-import { signIn } from 'next-auth/react'
-
 import { LoginOutlined } from '@mui/icons-material'
 import { IconButton, Tooltip } from '@mui/material'
+import { signIn } from 'next-auth/react'
 
 export const SignInIconButton = () => (
   <Tooltip

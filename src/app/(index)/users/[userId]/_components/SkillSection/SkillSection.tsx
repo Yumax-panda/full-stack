@@ -1,7 +1,8 @@
 import { Grid } from '@mui/material'
-import type { Props as SkillCardProps } from '../SkillCard'
 
 import { SkillCard } from '../SkillCard'
+
+import type { Props as SkillCardProps } from '../SkillCard'
 
 type Props = {
   skills: SkillCardProps[]

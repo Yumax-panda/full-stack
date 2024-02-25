@@ -1,10 +1,10 @@
 'use client'
 
+import { ArrowBackOutlined } from '@mui/icons-material'
+import { IconButton, Tooltip } from '@mui/material'
 import { useRouter } from 'next/navigation'
 
 import { routes } from '@/lib/routes'
-import { ArrowBackOutlined } from '@mui/icons-material'
-import { IconButton, Tooltip } from '@mui/material'
 
 type Props = {
   userId: string

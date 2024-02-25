@@ -1,8 +1,9 @@
 import { unstable_cache as cache } from 'next/cache'
 
+import type { CreateTag, UpdateTag } from '@/models'
+
 import { prisma } from '@/lib/client'
 import { tag } from '@/lib/routes'
-import type { CreateTag, UpdateTag } from '@/models'
 
 export async function getTagsByUserIdWithoutCache(userId: string) {
   console.info(`called get tags by user id: ${userId}`)

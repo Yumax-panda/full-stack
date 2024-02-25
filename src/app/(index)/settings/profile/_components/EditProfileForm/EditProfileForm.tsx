@@ -1,6 +1,6 @@
 'use client'
-import type { User as Props } from '@prisma/client'
-import { SectionTitle } from '@/app/_components/Text/SectionTitle'
+import { useEffect } from 'react'
+
 import {
   BadgeOutlined,
   CorporateFare,
@@ -18,12 +18,15 @@ import {
   InputLabel,
   Typography,
 } from '@mui/material'
-import { Alert } from '@/app/_components/Alert'
 import { useSession } from 'next-auth/react'
-import { useEffect } from 'react'
 
 import { updateUserAction } from './action'
+
+import type { User as Props } from '@prisma/client'
+
+import { Alert } from '@/app/_components/Alert'
 import { useServerForm } from '@/app/_components/hooks/useServerForm'
+import { SectionTitle } from '@/app/_components/Text/SectionTitle'
 
 type FieldProps = {
   icon: React.ReactNode

@@ -3,6 +3,7 @@
 import './Tiptap.css'
 
 import { EditorContent, useEditor } from '@tiptap/react'
+
 import { extensions } from '@/lib/editor'
 
 type Props = {

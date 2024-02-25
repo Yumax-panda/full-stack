@@ -1,20 +1,22 @@
 'use client'
 
-import type { Tag as TagType } from '@prisma/client'
-import type { SkillWithTags } from '@/models'
 import { useState } from 'react'
-import Link from 'next/link'
-import { routes } from '@/lib/routes'
-import { StarField } from '@/app/(index)/_components/StarField'
+
 import { Add, Edit, Delete, LocalOfferOutlined } from '@mui/icons-material'
 import { Box, Button, IconButton } from '@mui/material'
+import Link from 'next/link'
 
-import { useDeleteSkill } from '../hooks/useDeleteSkill'
-import { CreateSkillForm } from '../CreateSkillForm'
-import { UpdateSkillForm } from '../UpdateSkillForm'
 import { Container, Header, RowContainer } from '../../../_components/Table'
+import { CreateSkillForm } from '../CreateSkillForm'
+import { useDeleteSkill } from '../hooks/useDeleteSkill'
+import { UpdateSkillForm } from '../UpdateSkillForm'
 
+import type { SkillWithTags } from '@/models'
+import type { Tag as TagType } from '@prisma/client'
+
+import { StarField } from '@/app/(index)/_components/StarField'
 import { Tag } from '@/app/(index)/_components/Tag'
+import { routes } from '@/lib/routes'
 
 type TableRowProps = {
   skill: SkillWithTags
