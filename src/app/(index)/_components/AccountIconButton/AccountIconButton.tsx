@@ -11,13 +11,13 @@ import {
   MenuItem,
   Typography,
 } from '@mui/material'
-import NextLink from 'next/link'
 import { signOut } from 'next-auth/react'
 
 import { useMenu } from '../hooks/useMenu'
 
 import type { Session } from 'next-auth'
 
+import { Link } from '@/app/_components/Link'
 import { routes } from '@/lib/routes'
 
 type User = NonNullable<Session['user']>
@@ -25,23 +25,6 @@ type Props = Pick<User, 'id' | 'name' | 'image'>
 
 export const AccountIconButton = ({ id, name, image }: Props) => {
   const { anchorEl, handleOpenMenu, handleCloseMenu } = useMenu()
-
-  const Link = ({
-    children,
-    href,
-  }: {
-    children: React.ReactNode
-    href: string
-  }) => (
-    <NextLink
-      href={href}
-      style={{ textDecoration: 'none', color: 'inherit' }}
-      onClick={handleCloseMenu}
-      prefetch
-    >
-      {children}
-    </NextLink>
-  )
 
   const handleSignOut = () => {
     signOut()
@@ -110,19 +93,19 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
           },
         }}
       >
-        <Link href={routes.userSkill(id)}>
+        <Link href={routes.userSkill(id)} onClick={handleCloseMenu}>
           <MenuItem>
             <Typography>{name}</Typography>
           </MenuItem>
         </Link>
         <Divider />
-        <Link href={routes.userSkill(id)}>
+        <Link href={routes.userSkill(id)} onClick={handleCloseMenu}>
           <MenuItem>
             <AccountCircleOutlined sx={{ mr: 1 }} />
             マイページ
           </MenuItem>
         </Link>
-        <Link href={routes.userProfileSettings()}>
+        <Link href={routes.userProfileSettings()} onClick={handleCloseMenu}>
           <MenuItem>
             <SettingsOutlined sx={{ mr: 1 }} />
             設定

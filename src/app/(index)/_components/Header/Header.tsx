@@ -1,27 +1,14 @@
 'use client'
 
 import { AppBar, Box, Toolbar, Typography } from '@mui/material'
-import OriginalLink from 'next/link'
 import { useSession } from 'next-auth/react'
 
 import { AccountIconButton } from '../AccountIconButton'
 import { SignInIconButton } from '../SignInIconButton'
 
 import { Container } from '@/app/_components/Container/Container'
+import { Link } from '@/app/_components/Link'
 import { routes } from '@/lib/routes'
-
-type LinkProps = {
-  children: React.ReactNode
-}
-
-const Link = ({ children }: LinkProps) => (
-  <OriginalLink
-    href={routes.top()}
-    style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}
-  >
-    {children}
-  </OriginalLink>
-)
 
 export const Header = () => {
   const { data: session } = useSession()
@@ -31,7 +18,7 @@ export const Header = () => {
     <AppBar position='static'>
       <Container>
         <Toolbar disableGutters>
-          <Link>
+          <Link href={routes.top()} style={{ flexGrow: 1 }}>
             <Typography
               variant='h6'
               noWrap
@@ -47,7 +34,7 @@ export const Header = () => {
             </Typography>
           </Link>
 
-          <Link>
+          <Link href={routes.top()} style={{ flexGrow: 1 }}>
             <Typography
               variant='h5'
               noWrap
