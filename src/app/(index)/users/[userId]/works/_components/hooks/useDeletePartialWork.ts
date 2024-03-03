@@ -1,5 +1,6 @@
-import { partialWorksAtom } from '@/store/partialWorksAtom'
 import { atom } from 'jotai'
+
+import { partialWorksAtom } from '@/store/partialWorksAtom'
 
 type Props = {
   workId: string
