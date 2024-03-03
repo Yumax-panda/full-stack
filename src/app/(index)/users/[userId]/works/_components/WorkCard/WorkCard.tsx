@@ -4,10 +4,10 @@ import {
   Box,
   Card,
   CardContent,
-  CardMedia,
   Typography,
 } from '@mui/material'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import type { PartialWork as Props } from '@/repository/work'
 
@@ -66,15 +66,13 @@ export const WorkCard = ({
         </Avatar>
       )}
       {thumbnail ? (
-        <Box sx={{ width: 368, height: 230, overflow: 'hidden' }}>
-          <CardMedia
-            image={thumbnail}
-            alt={title}
-            width={368}
-            height={230}
-            component='img'
-          />
-        </Box>
+        <Image
+          src={thumbnail}
+          alt={title}
+          width={368}
+          height={230}
+          style={{ objectFit: 'cover' }}
+        />
       ) : (
         <ThumbnailWithoutImage />
       )}
