@@ -1,13 +1,7 @@
 import { AutoAwesomeOutlined, LockOutlined } from '@mui/icons-material'
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  Typography,
-} from '@mui/material'
-import Link from 'next/link'
+import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import type { PartialWork as Props } from '@/repository/work'
 
