@@ -1,5 +1,5 @@
 import { atom } from 'jotai'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 
 import { partialWorksAtom } from '@/store/partialWorksAtom'
@@ -28,8 +28,8 @@ export const useDeletePartialWork = ({
 
   const { task } = useToastPromise({
     pending: '制作物を削除中',
-    success: '制作物を削除しました',
-    action: async (_: any) => {
+    success: '',
+    action: async () => {
       const resp = await fetch(`/api/works/${workId}`, {
         method: 'DELETE',
       })
@@ -41,7 +41,11 @@ export const useDeletePartialWork = ({
     setIsLoading,
   })
 
-  const onDelete = useCallback(() => task(null), [task])
+  const onDelete = () => {
+    if (confirm('本当に制作物を削除しますか? この操作は取り消せません')) {
+      task(null)
+    }
+  }
 
   return {
     onDelete,
