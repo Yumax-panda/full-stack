@@ -1,5 +1,3 @@
-'use client'
-
 import { BusinessCenterOutlined } from '@mui/icons-material'
 import { Grid } from '@mui/material'
 
