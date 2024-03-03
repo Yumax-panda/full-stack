@@ -3,7 +3,9 @@ import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import type { PartialWork as Props } from '@/repository/work'
+import { WorkMenu } from '../WorkMenu'
+
+import type { PartialWork } from '@/repository/work'
 
 import { formatDate } from '@/lib/formatDate'
 import { routes } from '@/lib/routes'
@@ -28,44 +30,58 @@ export const WorkCard = ({
   thumbnail,
   updatedAt,
   isPrivate,
-}: Props) => (
-  <Link
-    href={routes.workDetail(id)}
-    passHref
-    style={{ textDecoration: 'none' }}
+  isMine,
+}: PartialWork & {
+  isMine: boolean
+}) => (
+  <Card
+    sx={{
+      maxWidth: 368,
+      position: 'relative',
+      transition: 'transform 0.3s',
+      ':hover': {
+        transform: 'translateY(-5px)',
+        boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
+      },
+      boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+    }}
   >
-    <Card
-      sx={{
-        maxWidth: 368,
-        position: 'relative',
-        transition: 'transform 0.3s',
-        ':hover': {
-          transform: 'translateY(-5px)',
-          boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
-        },
-        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
-      }}
+    {isPrivate && (
+      <Avatar
+        sx={{
+          position: 'absolute',
+          top: '0.5rem',
+          left: '0.5rem',
+          fontSize: '2rem',
+          zIndex: 1,
+        }}
+      >
+        <LockOutlined />
+      </Avatar>
+    )}
+    {isMine && (
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '0.5rem',
+          right: '0.5rem',
+          zIndex: 1,
+        }}
+      >
+        <WorkMenu workId={id} />
+      </Box>
+    )}
+    <Link
+      href={routes.workDetail(id)}
+      style={{ textDecoration: 'none', color: 'inherit' }}
     >
-      {isPrivate && (
-        <Avatar
-          sx={{
-            position: 'absolute',
-            top: '0.5rem',
-            left: '0.5rem',
-            fontSize: '2rem',
-            zIndex: 1,
-          }}
-        >
-          <LockOutlined />
-        </Avatar>
-      )}
       {thumbnail ? (
         <Image
           src={thumbnail}
           alt={title}
           width={368}
           height={230}
-          style={{ objectFit: 'cover' }}
+          style={{ objectFit: 'cover', borderBottom: '1px solid lightgray' }}
         />
       ) : (
         <ThumbnailWithoutImage />
@@ -86,6 +102,6 @@ export const WorkCard = ({
           最終更新：{formatDate(updatedAt)}
         </Typography>
       </CardContent>
-    </Card>
-  </Link>
+    </Link>
+  </Card>
 )

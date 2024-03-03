@@ -17,22 +17,19 @@ export default async function Work({
   params: { userId: string }
 }) {
   const session = await getSession()
-  const fetcher =
-    session?.user?.id === userId
-      ? getAllPartialWorksByUserId
-      : getPublicPartialWorksByUserId
+  const isMine = session?.user?.id === userId
+  const fetcher = isMine
+    ? getAllPartialWorksByUserId
+    : getPublicPartialWorksByUserId
   const works = await fetcher(userId)
 
   return (
     <>
       <WorkAddButton userId={userId} />
       {works.length === 0 ? (
-        <Empty
-          Icon={BusinessCenterOutlined}
-          title='まだ作品が登録されていません'
-        />
+        <Empty Icon={BusinessCenterOutlined} title='制作物がありません' />
       ) : (
-        <WorkSection works={works} />
+        <WorkSection works={works} isMine={isMine} />
       )}
     </>
   )

@@ -62,3 +62,11 @@ export async function updateWork({
 
   return work
 }
+
+export async function deleteWork(workId: string) {
+  return await prisma.work.delete({
+    where: {
+      id: workId,
+    },
+  })
+}
