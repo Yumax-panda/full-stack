@@ -18,10 +18,9 @@ export default async function Work({
 }) {
   const session = await getSession()
   const isMine = session?.user?.id === userId
-  const fetcher =
-    isMine
-      ? getAllPartialWorksByUserId
-      : getPublicPartialWorksByUserId
+  const fetcher = isMine
+    ? getAllPartialWorksByUserId
+    : getPublicPartialWorksByUserId
   const works = await fetcher(userId)
 
   return (

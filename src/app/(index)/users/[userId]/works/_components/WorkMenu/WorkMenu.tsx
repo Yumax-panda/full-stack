@@ -1,5 +1,5 @@
 import { MoreVert } from '@mui/icons-material'
-import { IconButton, Menu, MenuItem, Tooltip } from '@mui/material'
+import { Avatar, IconButton, Menu, MenuItem, Tooltip } from '@mui/material'
 import Link from 'next/link'
 
 import { useDeletePartialWork } from '../hooks/useDeletePartialWork'
@@ -21,7 +21,7 @@ export const WorkMenu = ({ workId }: Props) => {
 
   return (
     <div>
-      <Tooltip title='メニュー'>
+      <Tooltip title='メニュー' arrow sx={{ bgcolor: "lightgray" }}>
         <IconButton onClick={handleOpenMenu}>
           <MoreVert />
         </IconButton>

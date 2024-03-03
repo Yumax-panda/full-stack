@@ -43,6 +43,7 @@ export async function DELETE(
   try {
     await deleteWork(workId)
     revalidateTag(tag.work)
+    return NextResponse.json({}, { status: 200 })
   } catch (e) {
     if (e instanceof Error) {
       return NextResponse.json({ error: e.message }, { status: 400 })

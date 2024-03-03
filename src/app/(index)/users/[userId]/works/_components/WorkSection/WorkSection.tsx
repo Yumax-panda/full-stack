@@ -18,8 +18,10 @@ type Props = {
 
 export const WorkSection = ({ works: worksFromServer, isMine }: Props) => {
   // ref: https://jotai.org/docs/utilities/ssr
-  useHydrateAtoms([[partialWorksAtom, worksFromServer]])
+  // サーバーから取得したデータと同期したいので、dangerouslyForceHydrateをtrueにする
+  useHydrateAtoms([[partialWorksAtom, worksFromServer]], { dangerouslyForceHydrate: true })
   const [hydratedWorks] = useAtom(partialWorksAtom)
+  console.log('hydratedWorks', hydratedWorks)
 
   return (
     <Grid container spacing={2}>
