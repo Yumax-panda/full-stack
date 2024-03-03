@@ -46,7 +46,6 @@ export const Profile = ({
             margin: { xs: 0, sm: 'auto' },
             width: '8rem',
             height: '8rem',
-            fontSize: '4rem',
           }}
           src={image || undefined}
         />
