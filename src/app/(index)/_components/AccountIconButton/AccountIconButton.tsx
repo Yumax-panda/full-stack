@@ -137,4 +137,3 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
     </div>
   )
 }
-
