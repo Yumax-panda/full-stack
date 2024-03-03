@@ -17,8 +17,9 @@ export default async function Work({
   params: { userId: string }
 }) {
   const session = await getSession()
+  const isMine = session?.user?.id === userId
   const fetcher =
-    session?.user?.id === userId
+    isMine
       ? getAllPartialWorksByUserId
       : getPublicPartialWorksByUserId
   const works = await fetcher(userId)
@@ -32,7 +33,7 @@ export default async function Work({
           title='まだ作品が登録されていません'
         />
       ) : (
-        <WorkSection works={works} />
+        <WorkSection works={works} isMine={isMine} />
       )}
     </>
   )

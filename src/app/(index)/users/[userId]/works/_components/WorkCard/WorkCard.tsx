@@ -3,7 +3,7 @@ import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import type { PartialWork as Props } from '@/repository/work'
+import type { PartialWork } from '@/repository/work'
 
 import { formatDate } from '@/lib/formatDate'
 import { routes } from '@/lib/routes'
@@ -28,7 +28,10 @@ export const WorkCard = ({
   thumbnail,
   updatedAt,
   isPrivate,
-}: Props) => (
+  isMine
+}: PartialWork & {
+  isMine: boolean
+}) => (
   <Link
     href={routes.workDetail(id)}
     passHref

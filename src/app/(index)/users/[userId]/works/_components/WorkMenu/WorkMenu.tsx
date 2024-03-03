@@ -34,9 +34,7 @@ export const WorkMenu = ({ workId }: Props) => {
         <Link href={routes.createNewWork(workId)}>
           <MenuItem onClick={handleCloseMenu}>編集</MenuItem>
         </Link>
-        <MenuItem onClick={handleDelete}>
-          削除
-        </MenuItem>
+        <MenuItem onClick={handleDelete}>削除</MenuItem>
       </Menu>
     </div>
   )

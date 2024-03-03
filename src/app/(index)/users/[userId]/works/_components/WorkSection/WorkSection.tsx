@@ -12,9 +12,11 @@ import { partialWorksAtom } from '@/store/partialWorksAtom'
 
 type Props = {
   works: PartialWork[]
+  // 自分のページの場合、詳細ボタンを表示する
+  isMine: boolean
 }
 
-export const WorkSection = ({ works: worksFromServer }: Props) => {
+export const WorkSection = ({ works: worksFromServer, isMine }: Props) => {
   // ref: https://jotai.org/docs/utilities/ssr
   useHydrateAtoms([[partialWorksAtom, worksFromServer]])
   const [hydratedWorks] = useAtom(partialWorksAtom)
@@ -23,7 +25,7 @@ export const WorkSection = ({ works: worksFromServer }: Props) => {
     <Grid container spacing={2}>
       {hydratedWorks.map((work) => (
         <Grid key={work.id} item xs={12} sm={6} md={4}>
-          <WorkCard {...work} />
+          <WorkCard {...work} isMine={isMine} />
         </Grid>
       ))}
     </Grid>
