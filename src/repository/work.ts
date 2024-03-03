@@ -114,3 +114,11 @@ export async function getEmptyWork(userId: string): Promise<Work | null> {
     where: { userId, title: null, content: null, thumbnail: null },
   })
 }
+
+export async function deleteWork(workId: string): Promise<Work> {
+  return prisma.work.delete({
+    where: {
+      id: workId,
+    },
+  })
+}
