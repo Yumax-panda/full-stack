@@ -1,7 +1,8 @@
-import { atom } from 'jotai'
 import { useState } from 'react'
-import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 
+import { atom } from 'jotai'
+
+import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 import { partialWorksAtom } from '@/store/partialWorksAtom'
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 }
 
 type UseDeletePartialWorksReturn = {
-  onDelete: () => void
+  onDelete: () => Promise<void>
   isLoading: boolean
 }
 
@@ -41,9 +42,9 @@ export const useDeletePartialWork = ({
     setIsLoading,
   })
 
-  const onDelete = () => {
+  const onDelete = async () => {
     if (confirm('本当に制作物を削除しますか? この操作は取り消せません')) {
-      task(null)
+      await task(null)
     }
   }
 
