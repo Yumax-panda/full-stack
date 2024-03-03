@@ -2,9 +2,9 @@ import 'ress'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { CssBaseline } from '@mui/material'
+import { Provider as JotaiProvider } from 'jotai'
 import { Inter } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
-import { Provider as JotaiProvider } from 'jotai'
 
 import { AuthProvider } from './_components/Provider/AuthProvider'
 import { ThemeProvider } from './_components/Provider/ThemeProvider'
