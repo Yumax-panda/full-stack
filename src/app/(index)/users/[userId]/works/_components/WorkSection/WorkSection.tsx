@@ -1,14 +1,14 @@
 'use client'
 
 import { Grid } from '@mui/material'
+import { useAtom } from 'jotai'
+import { useHydrateAtoms } from 'jotai/utils'
 
 import { WorkCard } from '../WorkCard'
 
 import type { PartialWork } from '@/repository/work'
 
 import { partialWorksAtom } from '@/store/partialWorksAtom'
-import { useHydrateAtoms } from "jotai/utils"
-import { useAtom } from 'jotai'
 
 type Props = {
   works: PartialWork[]
