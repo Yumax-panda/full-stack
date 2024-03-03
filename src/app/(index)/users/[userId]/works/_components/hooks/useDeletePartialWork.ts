@@ -1,13 +1,11 @@
 import { useState } from 'react'
-import type { Dispatch, SetStateAction } from 'react'
 
-import type { PartialWork } from '@/repository/work'
+import { useRouter } from 'next/navigation'
 
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 
 type Props = {
   workId: string
-  setWorks: Dispatch<SetStateAction<PartialWork[]>>
 }
 
 type UseDeletePartialWorksReturn = {
@@ -17,9 +15,9 @@ type UseDeletePartialWorksReturn = {
 
 export const useDeletePartialWork = ({
   workId,
-  setWorks,
 }: Props): UseDeletePartialWorksReturn => {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
   const { task } = useToastPromise({
     pending: '制作物を削除中',
     success: '制作物を削除しました',
@@ -30,7 +28,8 @@ export const useDeletePartialWork = ({
       if (!resp.ok) {
         throw new Error('制作物の削除に失敗しました')
       }
-      setWorks((prevWorks) => prevWorks.filter((work) => work.id !== workId))
+      // HACK: 本当はdispatchを使って更新したいが、propsのバケツリレーを避けるためにリロードする
+      router.refresh()
     },
     setIsLoading,
   })

@@ -1,3 +1,7 @@
+import { BusinessCenterOutlined } from '@mui/icons-material'
+
+import { Empty } from '../_components/Empty'
+
 import { WorkAddButton } from './_components/WorkAddButton'
 import { WorkSection } from './_components/WorkSection'
 
@@ -22,7 +26,11 @@ export default async function Work({
   return (
     <>
       <WorkAddButton userId={userId} />
-      <WorkSection works={works} isMine={isMine} />
+      {works.length === 0 ? (
+        <Empty Icon={BusinessCenterOutlined} title='制作物がありません' />
+      ) : (
+        <WorkSection works={works} isMine={isMine} />
+      )}
     </>
   )
 }

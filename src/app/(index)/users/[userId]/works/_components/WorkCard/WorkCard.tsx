@@ -1,5 +1,3 @@
-import type { Dispatch, SetStateAction } from 'react'
-
 import { AutoAwesomeOutlined, LockOutlined } from '@mui/icons-material'
 import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import Image from 'next/image'
@@ -33,10 +31,8 @@ export const WorkCard = ({
   updatedAt,
   isPrivate,
   isMine,
-  setWorks,
 }: PartialWork & {
   isMine: boolean
-  setWorks: Dispatch<SetStateAction<PartialWork[]>>
 }) => (
   <Card
     sx={{
@@ -72,7 +68,7 @@ export const WorkCard = ({
           zIndex: 1,
         }}
       >
-        <WorkMenu workId={id} setWorks={setWorks} />
+        <WorkMenu workId={id} />
       </Box>
     )}
     <Link

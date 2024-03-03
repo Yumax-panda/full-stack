@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 import { BusinessCenterOutlined } from '@mui/icons-material'
 import { Grid } from '@mui/material'
 
@@ -16,16 +14,14 @@ type Props = {
   isMine: boolean
 }
 
-export const WorkSection = ({ works: worksFromServer, isMine }: Props) => {
-  const [works, setWorks] = useState(worksFromServer)
-
+export const WorkSection = ({ works, isMine }: Props) => {
   return works.length === 0 ? (
     <Empty Icon={BusinessCenterOutlined} title='制作物がありません' />
   ) : (
     <Grid container spacing={2}>
       {works.map((work) => (
         <Grid key={work.id} item xs={12} sm={6} md={4}>
-          <WorkCard {...work} isMine={isMine} setWorks={setWorks} />
+          <WorkCard {...work} isMine={isMine} />
         </Grid>
       ))}
     </Grid>
