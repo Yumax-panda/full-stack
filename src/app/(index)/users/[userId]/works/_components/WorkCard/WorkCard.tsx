@@ -1,12 +1,6 @@
 import { AutoAwesomeOutlined, LockOutlined } from '@mui/icons-material'
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from '@mui/material'
+import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import type { PartialWork as Props } from '@/repository/work'
@@ -66,16 +60,13 @@ export const WorkCard = ({
         </Avatar>
       )}
       {thumbnail ? (
-        <Box sx={{ width: 368, height: 230, overflow: 'hidden' }}>
-          <CardMedia
-            image={thumbnail}
-            alt={title}
-            width={368}
-            height={230}
-            component='img'
-            sx={{ borderBottom: '1px solid lightgray' }}
-          />
-        </Box>
+        <Image
+          src={thumbnail}
+          alt={title}
+          width={368}
+          height={230}
+          style={{ objectFit: 'cover', borderBottom: '1px solid lightgray' }}
+        />
       ) : (
         <ThumbnailWithoutImage />
       )}
