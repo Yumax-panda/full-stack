@@ -2,6 +2,7 @@ import { AutoAwesomeOutlined, LockOutlined } from '@mui/icons-material'
 import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
+import { WorkMenu } from '../WorkMenu'
 
 import type { PartialWork } from '@/repository/work'
 
@@ -28,40 +29,51 @@ export const WorkCard = ({
   thumbnail,
   updatedAt,
   isPrivate,
-  isMine
+  isMine,
 }: PartialWork & {
   isMine: boolean
 }) => (
-  <Link
-    href={routes.workDetail(id)}
-    passHref
-    style={{ textDecoration: 'none' }}
+  <Card
+    sx={{
+      maxWidth: 368,
+      position: 'relative',
+      transition: 'transform 0.3s',
+      ':hover': {
+        transform: 'translateY(-5px)',
+        boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
+      },
+      boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+    }}
   >
-    <Card
-      sx={{
-        maxWidth: 368,
-        position: 'relative',
-        transition: 'transform 0.3s',
-        ':hover': {
-          transform: 'translateY(-5px)',
-          boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
-        },
-        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
-      }}
+    {isPrivate && (
+      <Avatar
+        sx={{
+          position: 'absolute',
+          top: '0.5rem',
+          left: '0.5rem',
+          fontSize: '2rem',
+          zIndex: 1,
+        }}
+      >
+        <LockOutlined />
+      </Avatar>
+    )}
+    {isMine && (
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '0.5rem',
+          right: '0.5rem',
+          zIndex: 1,
+        }}
+      >
+        <WorkMenu workId={id} />
+      </Box>
+    )}
+    <Link
+      href={routes.createNewWork(id)}
+      style={{ textDecoration: 'none', color: 'inherit' }}
     >
-      {isPrivate && (
-        <Avatar
-          sx={{
-            position: 'absolute',
-            top: '0.5rem',
-            left: '0.5rem',
-            fontSize: '2rem',
-            zIndex: 1,
-          }}
-        >
-          <LockOutlined />
-        </Avatar>
-      )}
       {thumbnail ? (
         <Image
           src={thumbnail}
@@ -89,6 +101,6 @@ export const WorkCard = ({
           最終更新：{formatDate(updatedAt)}
         </Typography>
       </CardContent>
-    </Card>
-  </Link>
+    </Link>
+  </Card>
 )

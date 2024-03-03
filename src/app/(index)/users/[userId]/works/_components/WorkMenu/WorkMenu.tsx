@@ -21,7 +21,7 @@ export const WorkMenu = ({ workId }: Props) => {
 
   return (
     <div>
-      <Tooltip title='メニュー' arrow sx={{ bgcolor: "lightgray" }}>
+      <Tooltip title='メニュー' arrow>
         <IconButton onClick={handleOpenMenu}>
           <MoreVert />
         </IconButton>
