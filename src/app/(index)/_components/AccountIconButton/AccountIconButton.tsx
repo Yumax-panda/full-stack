@@ -53,7 +53,10 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
         onClick={handleOpenMenu}
         color='inherit'
       >
-        <Avatar src={image || undefined} />
+        <Avatar src={image || undefined} alt="user icon" sx={{
+          width: 40,
+          height: 40
+        }} />
       </IconButton>
       <Menu
         id='menu-appbar'
