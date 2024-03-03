@@ -18,7 +18,7 @@ export const EditButton = ({ workId }: Props) => (
       color='primary'
       startIcon={<Edit />}
       sx={{ fontSize: '1.2rem' }}
-      size="small"
+      size='small'
     >
       編集
     </Button>
