@@ -2,7 +2,6 @@ import 'ress'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { CssBaseline } from '@mui/material'
-import { Provider as JotaiProvider } from 'jotai'
 import { Inter } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
 
@@ -38,20 +37,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <JotaiProvider>
-      <AuthProvider>
-        <ThemeProvider>
-          <html lang='ja'>
-            <body className={inter.className}>
-              <CssBaseline />
-              <div style={{ color: '#696f73' }}>
-                <ToastContainer position='top-center' autoClose={5000} />
-                {children}
-              </div>
-            </body>
-          </html>
-        </ThemeProvider>
-      </AuthProvider>
-    </JotaiProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <html lang='ja'>
+          <body className={inter.className}>
+            <CssBaseline />
+            <div style={{ color: '#696f73' }}>
+              <ToastContainer position='top-center' autoClose={5000} />
+              {children}
+            </div>
+          </body>
+        </html>
+      </ThemeProvider>
+    </AuthProvider>
   )
 }
