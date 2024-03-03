@@ -48,6 +48,7 @@ export const Profile = ({
             height: '8rem',
           }}
           src={image || undefined}
+          alt={name || "user's icon"}
         />
       </Box>
       <Stack
