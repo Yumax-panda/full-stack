@@ -1,12 +1,12 @@
 import { useState } from 'react'
-
-import { atom } from 'jotai'
+import type { Dispatch, SetStateAction } from 'react'
+import type { PartialWork } from '@/repository/work'
 
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
-import { partialWorksAtom } from '@/store/partialWorksAtom'
 
 type Props = {
   workId: string
+  setWorks: Dispatch<SetStateAction<PartialWork[]>>
 }
 
 type UseDeletePartialWorksReturn = {
@@ -16,20 +16,12 @@ type UseDeletePartialWorksReturn = {
 
 export const useDeletePartialWork = ({
   workId,
+  setWorks,
 }: Props): UseDeletePartialWorksReturn => {
   const [isLoading, setIsLoading] = useState(false)
-
-  const deleteWorkAtom = () =>
-    atom(null, (get, set) =>
-      set(
-        partialWorksAtom,
-        get(partialWorksAtom).filter((work) => work.id !== workId),
-      ),
-    )
-
   const { task } = useToastPromise({
     pending: '制作物を削除中',
-    success: '',
+    success: '制作物を削除しました',
     action: async () => {
       const resp = await fetch(`/api/works/${workId}`, {
         method: 'DELETE',
@@ -37,7 +29,7 @@ export const useDeletePartialWork = ({
       if (!resp.ok) {
         throw new Error('制作物の削除に失敗しました')
       }
-      deleteWorkAtom()
+      setWorks((prevWorks) => prevWorks.filter((work) => work.id !== workId))
     },
     setIsLoading,
   })

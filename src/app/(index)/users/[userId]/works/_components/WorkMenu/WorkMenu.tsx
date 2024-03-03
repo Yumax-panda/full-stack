@@ -1,5 +1,5 @@
 import { MoreVert } from '@mui/icons-material'
-import { Avatar, IconButton, Menu, MenuItem, Tooltip } from '@mui/material'
+import { IconButton, Menu, MenuItem, Tooltip } from '@mui/material'
 import Link from 'next/link'
 
 import { useDeletePartialWork } from '../hooks/useDeletePartialWork'
@@ -7,13 +7,11 @@ import { useDeletePartialWork } from '../hooks/useDeletePartialWork'
 import { useMenu } from '@/app/(index)/_components/hooks/useMenu'
 import { routes } from '@/lib/routes'
 
-type Props = {
-  workId: string
-}
+type Props = Parameters<typeof useDeletePartialWork>[0]
 
-export const WorkMenu = ({ workId }: Props) => {
+export const WorkMenu = ({ workId, setWorks }: Props) => {
   const { anchorEl, handleOpenMenu, handleCloseMenu } = useMenu()
-  const { onDelete } = useDeletePartialWork({ workId })
+  const { onDelete } = useDeletePartialWork({ workId, setWorks })
   const handleDelete = async () => {
     await onDelete()
     handleCloseMenu()
