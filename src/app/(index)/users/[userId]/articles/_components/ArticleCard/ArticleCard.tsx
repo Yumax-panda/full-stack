@@ -1,9 +1,9 @@
 import { HistoryEdu } from '@mui/icons-material'
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
-import Link from 'next/link'
 
 import type { ArticleWithOgp as Props } from '@/usecase/article'
 
+import { Link } from '@/app/_components/Link'
 import { formatDate } from '@/lib/formatDate'
 import { getProviderNick } from '@/usecase/article'
 
@@ -46,10 +46,7 @@ export const ArticleCard = ({
   ogp,
   articleUrl,
 }: Props) => (
-  <Link
-    href={articleUrl}
-    style={{ textDecoration: 'none', height: '100%', display: 'flex' }}
-  >
+  <Link href={articleUrl} style={{ height: '100%', display: 'flex' }}>
     <Card
       sx={{
         maxWidth: 368,

@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 import { Add, Edit, Delete, LocalOfferOutlined } from '@mui/icons-material'
 import { Box, Button, IconButton } from '@mui/material'
-import Link from 'next/link'
 
 import { Container, Header, RowContainer } from '../../../_components/Table'
 import { CreateSkillForm } from '../CreateSkillForm'
@@ -16,6 +15,7 @@ import type { Tag as TagType } from '@prisma/client'
 
 import { StarField } from '@/app/(index)/_components/StarField'
 import { Tag } from '@/app/(index)/_components/Tag'
+import { Link } from '@/app/_components/Link'
 import { routes } from '@/lib/routes'
 
 type TableRowProps = {

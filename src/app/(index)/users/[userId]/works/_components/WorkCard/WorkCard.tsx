@@ -1,12 +1,12 @@
 import { AutoAwesomeOutlined, LockOutlined } from '@mui/icons-material'
 import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import { WorkMenu } from '../WorkMenu'
 
 import type { PartialWork } from '@/repository/work'
 
+import { Link } from '@/app/_components/Link'
 import { formatDate } from '@/lib/formatDate'
 import { routes } from '@/lib/routes'
 
@@ -71,10 +71,7 @@ export const WorkCard = ({
         <WorkMenu workId={id} />
       </Box>
     )}
-    <Link
-      href={routes.workDetail(id)}
-      style={{ textDecoration: 'none', color: 'inherit' }}
-    >
+    <Link href={routes.workDetail(id)}>
       {thumbnail ? (
         <Image
           src={thumbnail}

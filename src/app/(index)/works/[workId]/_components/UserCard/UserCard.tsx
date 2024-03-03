@@ -1,10 +1,10 @@
 import { Avatar, Box, Typography } from '@mui/material'
-import Link from 'next/link'
 
 import { CardContainer } from '../CardContainer'
 
 import type { User } from '@prisma/client'
 
+import { Link } from '@/app/_components/Link'
 import { routes } from '@/lib/routes'
 
 type Props = {
@@ -15,7 +15,7 @@ export const UserCard = ({ user: { id, name, image, bio } }: Props) => {
   return (
     <CardContainer>
       <Box sx={{ display: 'flex' }}>
-        <Link href={routes.userSkill(id)} prefetch>
+        <Link href={routes.userSkill(id)}>
           <Avatar
             src={image || undefined}
             alt={name || 'user name'}

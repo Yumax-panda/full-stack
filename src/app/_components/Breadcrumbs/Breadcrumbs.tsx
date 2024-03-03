@@ -1,5 +1,6 @@
 import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material'
-import Link from 'next/link'
+
+import { Link } from '../Link'
 
 import { routes } from '@/lib/routes'
 
@@ -14,12 +15,7 @@ export const Breadcrumbs = ({ links: original }: Props) => {
   return (
     <MuiBreadcrumbs aria-label='breadcrumb'>
       {links.map(({ href, label }) => (
-        <Link
-          key={href}
-          href={href}
-          prefetch
-          style={{ textDecoration: 'none', color: 'inherit' }}
-        >
+        <Link key={href} href={href}>
           {label}
         </Link>
       ))}
