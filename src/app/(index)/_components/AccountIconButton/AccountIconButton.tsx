@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import {
   AccountCircleOutlined,
   LogoutOutlined,
@@ -9,7 +7,7 @@ import {
   Avatar,
   Divider,
   IconButton,
-  Menu as MuiMenu,
+  Menu,
   MenuItem,
   Typography,
 } from '@mui/material'
@@ -27,6 +25,23 @@ type Props = Pick<User, 'id' | 'name' | 'image'>
 
 export const AccountIconButton = ({ id, name, image }: Props) => {
   const { anchorEl, handleOpenMenu, handleCloseMenu } = useMenu()
+
+  const Link = ({
+    children,
+    href,
+  }: {
+    children: React.ReactNode
+    href: string
+  }) => (
+    <NextLink
+      href={href}
+      style={{ textDecoration: 'none', color: 'inherit' }}
+      onClick={handleCloseMenu}
+      prefetch
+    >
+      {children}
+    </NextLink>
+  )
 
   const handleSignOut = () => {
     signOut()
@@ -53,43 +68,6 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
         />
       </IconButton>
       <Menu
-        anchorEl={anchorEl}
-        handleCloseMenu={handleCloseMenu}
-        handleSignOut={handleSignOut}
-        user={{ id, name }}
-      />
-    </div>
-  )
-}
-
-type MenuProps = {
-  anchorEl: HTMLElement | null
-  handleCloseMenu: () => void
-  handleSignOut: () => void
-  user: Pick<User, 'id' | 'name'>
-}
-
-const Menu = memo<MenuProps>(
-  ({ anchorEl, handleCloseMenu, handleSignOut, user: { name, id } }) => {
-    const Link = ({
-      children,
-      href,
-    }: {
-      children: React.ReactNode
-      href: string
-    }) => (
-      <NextLink
-        href={href}
-        style={{ textDecoration: 'none', color: 'inherit' }}
-        onClick={handleCloseMenu}
-        prefetch
-      >
-        {children}
-      </NextLink>
-    )
-
-    return (
-      <MuiMenu
         id='menu-appbar'
         anchorEl={anchorEl}
         anchorOrigin={{
@@ -155,9 +133,8 @@ const Menu = memo<MenuProps>(
           <LogoutOutlined sx={{ mr: 1 }} />
           ログアウト
         </MenuItem>
-      </MuiMenu>
-    )
-  },
-)
+      </Menu>
+    </div>
+  )
+}
 
-Menu.displayName = 'AccountMenu'
