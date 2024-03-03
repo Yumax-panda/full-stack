@@ -11,7 +11,7 @@ import {
   MenuItem,
   Typography,
 } from '@mui/material'
-import { useRouter } from 'next/navigation'
+import NextLink from 'next/link'
 import { signOut } from 'next-auth/react'
 
 import { useMenu } from '../hooks/useMenu'
@@ -26,20 +26,25 @@ type Props = Pick<User, 'id' | 'name' | 'image'>
 export const AccountIconButton = ({ id, name, image }: Props) => {
   const { anchorEl, handleOpenMenu, handleCloseMenu } = useMenu()
 
-  const router = useRouter()
-
-  const redirectToMyPage = () => {
-    router.push(routes.userSkill(id))
-    handleCloseMenu()
-  }
+  const Link = ({
+    children,
+    href,
+  }: {
+    children: React.ReactNode
+    href: string
+  }) => (
+    <NextLink
+      href={href}
+      style={{ textDecoration: 'none', color: 'inherit' }}
+      onClick={handleCloseMenu}
+      prefetch
+    >
+      {children}
+    </NextLink>
+  )
 
   const handleSignOut = () => {
     signOut()
-    handleCloseMenu()
-  }
-
-  const redirectToSettings = () => {
-    router.push(routes.userProfileSettings())
     handleCloseMenu()
   }
 
@@ -105,18 +110,25 @@ export const AccountIconButton = ({ id, name, image }: Props) => {
           },
         }}
       >
-        <MenuItem onClick={redirectToMyPage}>
-          <Typography>{name}</Typography>
-        </MenuItem>
+        <Link href={routes.userSkill(id)}>
+          <MenuItem>
+            <Typography>{name}</Typography>
+          </MenuItem>
+        </Link>
         <Divider />
-        <MenuItem onClick={redirectToMyPage}>
-          <AccountCircleOutlined sx={{ mr: 1 }} />
-          マイページ
-        </MenuItem>
-        <MenuItem onClick={redirectToSettings}>
-          <SettingsOutlined sx={{ mr: 1 }} />
-          設定
-        </MenuItem>
+        <Link href={routes.userSkill(id)}>
+          <MenuItem>
+            <AccountCircleOutlined sx={{ mr: 1 }} />
+            マイページ
+          </MenuItem>
+        </Link>
+        <Link href={routes.userProfileSettings()}>
+          <MenuItem>
+            <SettingsOutlined sx={{ mr: 1 }} />
+            設定
+          </MenuItem>
+        </Link>
+
         <MenuItem onClick={handleSignOut}>
           <LogoutOutlined sx={{ mr: 1 }} />
           ログアウト
