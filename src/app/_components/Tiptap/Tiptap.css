@@ -47,3 +47,13 @@
 .tiptap ul {
   padding-left: clamp(1rem, calc(0.9rem + 0.625vw), 1.5rem);
 }
+
+.tiptap a {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  color: inherit;
+  text-decoration-thickness: 0.1em;
+  text-decoration-color: lightgray;
+  text-underline-offset: 0.3em;
+  text-decoration-skip-ink: none;
+}
