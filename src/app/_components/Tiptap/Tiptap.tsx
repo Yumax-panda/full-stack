@@ -2,7 +2,8 @@
 
 import './Tiptap.css'
 
-import { Button } from '@mui/material'
+import { Link } from '@mui/icons-material'
+import { IconButton } from '@mui/material'
 import { EditorContent, useEditor, BubbleMenu } from '@tiptap/react'
 
 import { useBubbleMenu } from '../hooks/useBubbleMenu'
@@ -37,7 +38,9 @@ export const Tiptap = ({
             placement: 'bottom',
           }}
         >
-          <Button onClick={setLink}>リンク</Button>
+          <IconButton onClick={setLink}>
+            <Link />
+          </IconButton>
         </BubbleMenu>
       )}
       <EditorContent editor={editor} />
