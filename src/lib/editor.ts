@@ -29,7 +29,9 @@ export const extensions = [
   }),
   Image,
   Placeholder.configure({ placeholder: '活動記録の説明を入力しましょう！' }),
-  Link,
+  Link.configure({
+    autolink: false,
+  }),
 ]
 
 export const generateJSON = (html: string) => {
