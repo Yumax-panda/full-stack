@@ -17,14 +17,14 @@ type Props = {
 
 export const Tiptap = ({
   content,
-  onChange = () => {},
+  onChange = () => { },
   editable = true,
 }: Props) => {
   const editor = useEditor({
-    extensions,
     content,
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
     editable,
+    extensions
   })
   const { setLink } = useBubbleMenu({ editor })
 
