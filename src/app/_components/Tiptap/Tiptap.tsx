@@ -31,7 +31,12 @@ export const Tiptap = ({
   return (
     <>
       {editor && editable && (
-        <BubbleMenu editor={editor}>
+        <BubbleMenu
+          editor={editor}
+          tippyOptions={{
+            placement: 'bottom',
+          }}
+        >
           <Button onClick={setLink}>リンク</Button>
         </BubbleMenu>
       )}
