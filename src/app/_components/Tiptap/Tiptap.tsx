@@ -7,7 +7,9 @@ import { IconButton } from '@mui/material'
 import { isTextSelection } from '@tiptap/core'
 import { EditorContent, useEditor, BubbleMenu } from '@tiptap/react'
 
+import { EditorMenu } from '../EditorMenu'
 import { useBubbleMenu } from '../hooks/useBubbleMenu'
+import { useEditorMenu } from '../hooks/useEditorMenu'
 
 import { extensions } from '@/lib/editor'
 
@@ -24,11 +26,15 @@ export const Tiptap = ({
 }: Props) => {
   const editor = useEditor({
     content,
-    onUpdate: ({ editor }) => onChange(editor.getHTML()),
+    onUpdate: ({ editor }) => {
+      console.log('json', editor.getJSON())
+      onChange(editor.getHTML())
+    },
     editable,
     extensions,
   })
   const { setLink } = useBubbleMenu({ editor })
+  const { onLinkEmbedAdd } = useEditorMenu({ editor })
 
   return (
     <>
@@ -64,6 +70,7 @@ export const Tiptap = ({
           </IconButton>
         </BubbleMenu>
       )}
+      {editor && editable && <EditorMenu onLinkEmbedAdd={onLinkEmbedAdd} />}
       <EditorContent editor={editor} />
     </>
   )
