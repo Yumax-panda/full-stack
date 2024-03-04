@@ -39,12 +39,6 @@ Next.jsのApp Routerで構成。認証機能はAuth.js。
 
 ## Dev
 
-### Dockerの起動
-
-```bash
-$ docker-compose up
-```
-
 ### アプリの起動
 
 ```bash
@@ -65,12 +59,6 @@ $ npm run storybook
 ```
 
 ### データベース管理
-
-マイグレーション
-
-```bash
-$ npx prisma migrate dev
-```
 
 データベースの管理画面を起動
 
