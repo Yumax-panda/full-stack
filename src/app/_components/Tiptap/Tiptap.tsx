@@ -2,7 +2,10 @@
 
 import './Tiptap.css'
 
-import { EditorContent, useEditor } from '@tiptap/react'
+import { Button } from '@mui/material'
+import { EditorContent, useEditor, BubbleMenu } from '@tiptap/react'
+
+import { useBubbleMenu } from '../hooks/useBubbleMenu'
 
 import { extensions } from '@/lib/editor'
 
@@ -23,6 +26,16 @@ export const Tiptap = ({
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
     editable,
   })
+  const { setLink } = useBubbleMenu({ editor })
 
-  return <EditorContent editor={editor} />
+  return (
+    <>
+      {editor && editable && (
+        <BubbleMenu editor={editor}>
+          <Button onClick={setLink}>リンク</Button>
+        </BubbleMenu>
+      )}
+      <EditorContent editor={editor} />
+    </>
+  )
 }
