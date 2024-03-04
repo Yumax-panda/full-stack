@@ -8,8 +8,8 @@ import {
   SaveAsOutlined,
 } from '@mui/icons-material'
 import { Box, IconButton, List, Tooltip } from '@mui/material'
-import { useRouter } from 'next/navigation'
 
+import { Link } from '@/app/_components/Link'
 import { routes } from '@/lib/routes'
 
 type ButtonWithIconProps = {
@@ -91,8 +91,6 @@ export const Header = ({
   toggleIsPrivate,
   onThumbnailAdd,
 }: Props) => {
-  const router = useRouter()
-
   return (
     <nav
       style={{
@@ -113,11 +111,12 @@ export const Header = ({
         }}
       >
         <List sx={{ display: 'flex' }}>
-          <ButtonWithIcon
-            icon={<CloseOutlined />}
-            text='プレビュー画面へ戻る'
-            onClick={() => router.push(routes.workDetail(workId))}
-          />
+          <Link href={routes.workDetail(workId)}>
+            <ButtonWithIcon
+              icon={<CloseOutlined />}
+              text='プレビュー画面へ戻る'
+            />
+          </Link>
         </List>
         <List sx={{ display: 'flex' }}>
           <AddThumbnailButton onThumbnailAdd={onThumbnailAdd} />
