@@ -30,6 +30,7 @@
     "@prisma/adapter-planetscale": "^5.9.1",
     "@prisma/client": "^5.9.1",
     "@t3-oss/env-nextjs": "^0.7.1",
+    "@tiptap/extension-bubble-menu": "^2.2.4",
     "@tiptap/extension-image": "^2.1.13",
     "@tiptap/extension-link": "^2.2.2",
     "@tiptap/extension-placeholder": "^2.1.13",
