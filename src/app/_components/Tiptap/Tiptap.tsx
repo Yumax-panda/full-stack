@@ -59,7 +59,7 @@ export const Tiptap = ({
             const isRangeSelected =
               hasEditorFocus && !empty && !isEmptyTextBlock && editor.isEditable
 
-            const ignoredNodes = ['heading', 'image']
+            const ignoredNodes = ['heading', 'image', 'embed']
 
             return (
               !ignoredNodes.some((v) => editor.isActive(v)) && isRangeSelected
