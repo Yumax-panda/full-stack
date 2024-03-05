@@ -57,7 +57,7 @@ const Embed = Node.create<EmbedOptions>({
   parseHTML() {
     return [
       {
-        tag: 'div[data-embed] a',
+        tag: 'a[data-embed]',
         getAttrs: (dom) => {
           const a = dom as HTMLAnchorElement
           return {
@@ -75,28 +75,25 @@ const Embed = Node.create<EmbedOptions>({
   renderHTML({ HTMLAttributes }) {
     const { url, siteName, favicon, title, image } = HTMLAttributes
     return [
-      'div',
-      mergeAttributes(this.options.HTMLAttributes, { 'data-embed': '' }),
+      'a',
+      mergeAttributes(this.options.HTMLAttributes, {
+        href: url,
+        target: '_blank',
+        rel: 'noopener noreferrer nofollow',
+        class: 'embed-link',
+        'data-embed': '',
+      }),
       [
-        'a',
-        {
-          href: url,
-          target: '_blank',
-          rel: 'noopener noreferrer nofollow',
-          class: 'embed',
-        },
+        'div',
+        { class: 'content' },
+        ['div', { class: 'title' }, title],
         [
           'div',
-          { class: 'content' },
-          ['div', { class: 'title' }, title],
-          [
-            'div',
-            { class: 'meta' },
-            ['img', { src: favicon, alt: siteName, class: 'favicon' }],
-            ['div', { class: 'siteName' }, siteName],
-          ],
-          ['img', { src: image, alt: siteName }],
+          { class: 'meta' },
+          ['img', { src: favicon, alt: siteName, class: 'favicon' }],
+          ['div', { class: 'siteName' }, siteName],
         ],
+        ['img', { src: image, alt: siteName }],
       ],
     ]
   },
