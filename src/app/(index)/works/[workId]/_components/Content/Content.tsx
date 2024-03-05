@@ -12,19 +12,24 @@ import { EditorContainer } from '@/app/_components/EditorContainer'
 import { Title } from '@/app/_components/Text/Title'
 import { Thumbnail } from '@/app/_components/Thumbnail'
 import { Tiptap } from '@/app/_components/Tiptap'
-import { getHeadings } from '@/lib/editor'
+import { getHeadings } from '@/lib/editor/editor'
 
 type Props = {
   user: ComponentProps<typeof UserSummary>['user']
-} & Pick<Work, 'title' | 'content' | 'thumbnail'>
+} & Pick<Work, 'title' | 'content' | 'thumbnail' | 'id'>
 
-export const Content = ({ title, content, thumbnail, user }: Props) => (
+export const Content = ({ title, content, thumbnail, user, id }: Props) => (
   <div>
     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto' }}>
       <EditorContainer sx={{ m: { xs: 'auto', lg: 0 } }}>
         <Title title={title || '無題'} />
         <Thumbnail url={thumbnail} omitDeleteButton />
-        <Tiptap content={content || ''} editable={false} />
+        <Tiptap
+          content={content || ''}
+          editable={false}
+          workId={id}
+          userId={user.id}
+        />
       </EditorContainer>
       <Box sx={{ width: '300px', display: { xs: 'none', lg: 'initial' } }}>
         <UserCard user={user} />

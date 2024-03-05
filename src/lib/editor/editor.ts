@@ -5,6 +5,8 @@ import Placeholder from '@tiptap/extension-placeholder' // eslint-disable-line i
 import { generateJSON as originalGenerateJSON } from '@tiptap/html'
 import StarterKit from '@tiptap/starter-kit' // eslint-disable-line import/no-named-as-default
 
+import Embed from './ext/embed'
+
 export const extensions = [
   StarterKit.configure({
     heading: false,
@@ -32,6 +34,7 @@ export const extensions = [
   Link.configure({
     autolink: false,
   }),
+  Embed,
 ]
 
 export const generateJSON = (html: string) => {

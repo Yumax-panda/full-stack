@@ -43,7 +43,7 @@ export const Editor = ({ work }: Props) => {
   }, [])
 
   return (
-    <Box component='form' onSubmit={onSubmit}>
+    <Box component='form' onSubmit={onSubmit} sx={{ position: 'relative' }}>
       <Header
         workId={work.id}
         isLoading={isLoading}
@@ -69,6 +69,8 @@ export const Editor = ({ work }: Props) => {
             <Tiptap
               content={value ?? ''}
               onChange={(content) => rest.onChange(content)}
+              workId={work.id}
+              userId={work.userId}
             />
           )}
         />

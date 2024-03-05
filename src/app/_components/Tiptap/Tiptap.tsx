@@ -7,12 +7,17 @@ import { IconButton } from '@mui/material'
 import { isTextSelection } from '@tiptap/core'
 import { EditorContent, useEditor, BubbleMenu } from '@tiptap/react'
 
+import { EditorMenu } from '../EditorMenu'
 import { useBubbleMenu } from '../hooks/useBubbleMenu'
+import { useEditorMenu } from '../hooks/useEditorMenu'
 
-import { extensions } from '@/lib/editor'
+import { extensions } from '@/lib/editor/editor'
 
 type Props = {
   content: string
+  // workIdとuserIdはeditableがfalseのとき不要だが、整合性を保つためにundefinedを許容していない
+  workId: string
+  userId: string
   onChange?: (content: string) => void
   editable?: boolean
 }
@@ -21,6 +26,8 @@ export const Tiptap = ({
   content,
   onChange = () => {},
   editable = true,
+  workId,
+  userId,
 }: Props) => {
   const editor = useEditor({
     content,
@@ -29,6 +36,11 @@ export const Tiptap = ({
     extensions,
   })
   const { setLink } = useBubbleMenu({ editor })
+  const { onLinkEmbedAdd, onImageAdd } = useEditorMenu({
+    editor,
+    workId,
+    userId,
+  })
 
   return (
     <>
@@ -56,13 +68,20 @@ export const Tiptap = ({
             const isRangeSelected =
               hasEditorFocus && !empty && !isEmptyTextBlock && editor.isEditable
 
-            return !editor.isActive('heading') && isRangeSelected
+            const ignoredNodes = ['heading', 'image', 'embed']
+
+            return (
+              !ignoredNodes.some((v) => editor.isActive(v)) && isRangeSelected
+            )
           }}
         >
           <IconButton onClick={setLink}>
             <Link />
           </IconButton>
         </BubbleMenu>
+      )}
+      {editor && editable && (
+        <EditorMenu onLinkEmbedAdd={onLinkEmbedAdd} onImageAdd={onImageAdd} />
       )}
       <EditorContent editor={editor} />
     </>

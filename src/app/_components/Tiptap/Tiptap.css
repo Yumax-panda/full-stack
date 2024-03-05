@@ -57,3 +57,66 @@
   text-underline-offset: 0.3em;
   text-decoration-skip-ink: none;
 }
+
+.tiptap img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* リンクの埋め込み */
+.embed-link {
+  display: flex;
+  text-decoration: none !important;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid lightgray;
+  margin: 1rem auto;
+}
+
+.embed-link:focus-visible {
+  outline: 2px solid aqua;
+}
+
+.embed-link:hover {
+  background-color: #f8f9fa;
+}
+
+.content {
+  padding: 1rem;
+  flex-grow: 1;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+}
+
+.embed-link .thumbnail {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.embed-link .title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.meta {
+  flex-grow: 1;
+  display: flex;
+  font-size: 14px;
+}
+
+.embed-link .favicon {
+  width: 14px;
+  height: 14px;
+  margin: auto 10px auto auto;
+  flex-grow: 0;
+}
+
+.meta .site-name {
+  margin: auto;
+  flex-grow: 1;
+}
