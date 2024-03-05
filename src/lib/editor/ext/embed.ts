@@ -62,7 +62,7 @@ const Embed = Node.create<EmbedOptions>({
           const a = dom as HTMLAnchorElement
           return {
             url: a.href,
-            siteName: a.querySelector('.siteName')?.textContent,
+            siteName: a.querySelector('.site-name')?.textContent,
             favicon: a.querySelector('.favicon')?.getAttribute('src'),
             title: a.querySelector('.title')?.textContent,
             image: a.querySelector('img')?.getAttribute('src'),
@@ -91,10 +91,10 @@ const Embed = Node.create<EmbedOptions>({
           'div',
           { class: 'meta' },
           ['img', { src: favicon, alt: siteName, class: 'favicon' }],
-          ['div', { class: 'siteName' }, siteName],
+          ['div', { class: 'site-name' }, siteName],
         ],
-        ['img', { src: image, alt: siteName }],
       ],
+      ['img', { src: image, alt: siteName }],
     ]
   },
 
