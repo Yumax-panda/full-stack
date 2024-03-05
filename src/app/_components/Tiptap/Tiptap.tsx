@@ -34,7 +34,7 @@ export const Tiptap = ({
     extensions,
   })
   const { setLink } = useBubbleMenu({ editor })
-  const { onLinkEmbedAdd } = useEditorMenu({ editor })
+  const { onLinkEmbedAdd, onImageAdd } = useEditorMenu({ editor })
 
   return (
     <>
@@ -70,7 +70,9 @@ export const Tiptap = ({
           </IconButton>
         </BubbleMenu>
       )}
-      {editor && editable && <EditorMenu onLinkEmbedAdd={onLinkEmbedAdd} />}
+      {editor && editable && (
+        <EditorMenu onLinkEmbedAdd={onLinkEmbedAdd} onImageAdd={onImageAdd} />
+      )}
       <EditorContent editor={editor} />
     </>
   )
