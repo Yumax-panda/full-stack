@@ -62,7 +62,11 @@ export const Tiptap = ({
             const isRangeSelected =
               hasEditorFocus && !empty && !isEmptyTextBlock && editor.isEditable
 
-            return !editor.isActive('heading') && isRangeSelected
+            const ignoredNodes = ['heading', 'image']
+
+            return (
+              !ignoredNodes.some((v) => editor.isActive(v)) && isRangeSelected
+            )
           }}
         >
           <IconButton onClick={setLink}>
