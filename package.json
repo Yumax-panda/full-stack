@@ -38,6 +38,7 @@
     "@tiptap/pm": "^2.1.13",
     "@tiptap/react": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
+    "axios": "^1.6.7",
     "dayjs": "^1.11.10",
     "firebase": "^10.7.1",
     "next": "14.0.1",
