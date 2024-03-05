@@ -11,7 +11,7 @@ import { EditorMenu } from '../EditorMenu'
 import { useBubbleMenu } from '../hooks/useBubbleMenu'
 import { useEditorMenu } from '../hooks/useEditorMenu'
 
-import { extensions } from '@/lib/editor'
+import { extensions } from '@/lib/editor/editor'
 
 type Props = {
   content: string
@@ -26,10 +26,7 @@ export const Tiptap = ({
 }: Props) => {
   const editor = useEditor({
     content,
-    onUpdate: ({ editor }) => {
-      console.log('json', editor.getJSON())
-      onChange(editor.getHTML())
-    },
+    onUpdate: ({ editor }) => onChange(editor.getHTML()),
     editable,
     extensions,
   })
