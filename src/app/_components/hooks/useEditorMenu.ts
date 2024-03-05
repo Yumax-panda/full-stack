@@ -2,8 +2,12 @@ import { useCallback } from 'react'
 
 import type { Editor } from '@tiptap/react'
 
+import { workImageStorage } from '@/repository/storage'
+
 type Props = {
   editor: Editor | null
+  workId: string
+  userId: string
 }
 
 type UseEditorMenuReturn = {
@@ -11,7 +15,11 @@ type UseEditorMenuReturn = {
   onImageAdd: () => void
 }
 
-export const useEditorMenu = ({ editor }: Props): UseEditorMenuReturn => {
+export const useEditorMenu = ({
+  editor,
+  workId,
+  userId,
+}: Props): UseEditorMenuReturn => {
   const onLinkEmbedAdd = async () => {
     const url = window.prompt('URLを入力してください')
     if (!url) return
@@ -23,7 +31,6 @@ export const useEditorMenu = ({ editor }: Props): UseEditorMenuReturn => {
       window.alert('OGPデータの取得に失敗しました')
       return
     }
-    // FIXME: ここにOGPを埋め込む処理を書く
     // ref: https://github.com/ueberdosis/tiptap/blob/main/packages/extension-youtube/src/youtube.ts
     editor
       ?.chain()

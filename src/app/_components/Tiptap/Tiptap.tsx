@@ -15,6 +15,9 @@ import { extensions } from '@/lib/editor/editor'
 
 type Props = {
   content: string
+  // workIdとuserIdはeditableがfalseのとき不要だが、整合性を保つためにundefinedを許容していない
+  workId: string
+  userId: string
   onChange?: (content: string) => void
   editable?: boolean
 }
@@ -23,6 +26,8 @@ export const Tiptap = ({
   content,
   onChange = () => {},
   editable = true,
+  workId,
+  userId,
 }: Props) => {
   const editor = useEditor({
     content,
@@ -31,7 +36,11 @@ export const Tiptap = ({
     extensions,
   })
   const { setLink } = useBubbleMenu({ editor })
-  const { onLinkEmbedAdd, onImageAdd } = useEditorMenu({ editor })
+  const { onLinkEmbedAdd, onImageAdd } = useEditorMenu({
+    editor,
+    workId,
+    userId,
+  })
 
   return (
     <>

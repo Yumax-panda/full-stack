@@ -69,6 +69,8 @@ export const Editor = ({ work }: Props) => {
             <Tiptap
               content={value ?? ''}
               onChange={(content) => rest.onChange(content)}
+              workId={work.id}
+              userId={work.userId}
             />
           )}
         />
