@@ -60,7 +60,7 @@ const Embed = Node.create<EmbedOptions>({
         tag: 'div[data-embed]',
         getAttrs: (dom) => {
           // NOTE: dom instanceof HTMLElement はnode.jsランタイムで未定義のエラーになるため、typeofで型ガードする
-          if (!(typeof dom !== 'string')) {
+          if (typeof dom == 'string') {
             return null
           }
           return {
