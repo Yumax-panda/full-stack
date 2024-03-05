@@ -1,12 +1,12 @@
-import { Link } from '@mui/icons-material'
+import { Link, Image } from '@mui/icons-material'
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material'
 
 type Props = {
   onLinkEmbedAdd: () => void
-  // onImageAdd: () => void
+  onImageAdd: () => void
 }
 
-export const EditorMenu = ({ onLinkEmbedAdd }: Props) => {
+export const EditorMenu = ({ onLinkEmbedAdd, onImageAdd }: Props) => {
   return (
     <SpeedDial
       ariaLabel='Editor Menu'
@@ -24,11 +24,11 @@ export const EditorMenu = ({ onLinkEmbedAdd }: Props) => {
         tooltipTitle='リンク埋め込み'
         onClick={onLinkEmbedAdd}
       />
-      {/* <SpeedDialAction
+      <SpeedDialAction
         icon={<Image />}
         tooltipTitle='画像'
         onClick={onImageAdd}
-      /> */}
+      />
     </SpeedDial>
   )
 }

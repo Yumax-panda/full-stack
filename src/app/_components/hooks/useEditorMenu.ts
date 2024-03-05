@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import type { Editor } from '@tiptap/react'
 
 import { fetchSiteData } from '@/lib/ogp'
@@ -8,6 +10,7 @@ type Props = {
 
 type UseEditorMenuReturn = {
   onLinkEmbedAdd: () => Promise<void>
+  onImageAdd: () => void
 }
 
 export const useEditorMenu = ({ editor }: Props): UseEditorMenuReturn => {
@@ -16,7 +19,8 @@ export const useEditorMenu = ({ editor }: Props): UseEditorMenuReturn => {
     if (!url) return
     try {
       const ogpData = await fetchSiteData(url)
-      editor?.commands.insertContent({})
+      // FIXME: ここにOGPを埋め込む処理を書く
+      // ref: https://github.com/ueberdosis/tiptap/blob/main/packages/extension-youtube/src/youtube.ts
       return
     } catch (e) {
       console.error(e)
@@ -24,5 +28,14 @@ export const useEditorMenu = ({ editor }: Props): UseEditorMenuReturn => {
     }
   }
 
-  return { onLinkEmbedAdd }
+  const onImageAdd = useCallback(() => {
+    const url = window.prompt('URLを入力してください')
+    if (!url) return
+    if (editor) {
+      // FIXME: Cloud Storageへアップロードするロジックを追加する
+      editor.chain().focus().setImage({ src: url }).run()
+    }
+  }, [editor])
+
+  return { onLinkEmbedAdd, onImageAdd }
 }
