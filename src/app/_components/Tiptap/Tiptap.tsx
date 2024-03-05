@@ -21,7 +21,7 @@ type Props = {
 
 export const Tiptap = ({
   content,
-  onChange = () => { },
+  onChange = () => {},
   editable = true,
 }: Props) => {
   const editor = useEditor({

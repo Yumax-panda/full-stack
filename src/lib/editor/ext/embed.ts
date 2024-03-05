@@ -57,15 +57,18 @@ const Embed = Node.create<EmbedOptions>({
   parseHTML() {
     return [
       {
-        tag: 'a[data-embed]',
+        tag: 'div[data-embed]',
         getAttrs: (dom) => {
-          const a = dom as HTMLAnchorElement
+          // NOTE: dom instanceof HTMLElement はnode.jsランタイムで未定義のエラーになるため、typeofで型ガードする
+          if (!(typeof dom !== 'string')) {
+            return null
+          }
           return {
-            url: a.href,
-            siteName: a.querySelector('.site-name')?.textContent,
-            favicon: a.querySelector('.favicon')?.getAttribute('src'),
-            title: a.querySelector('.title')?.textContent,
-            image: a.querySelector('img')?.getAttribute('src'),
+            url: dom.querySelector('a')?.getAttribute('href'),
+            siteName: dom.querySelector('.site-name')?.textContent,
+            favicon: dom.querySelector('.favicon')?.getAttribute('src'),
+            title: dom.querySelector('.title')?.textContent,
+            image: dom.querySelector('.thumbnail')?.getAttribute('src'),
           }
         },
       },
@@ -75,26 +78,29 @@ const Embed = Node.create<EmbedOptions>({
   renderHTML({ HTMLAttributes }) {
     const { url, siteName, favicon, title, image } = HTMLAttributes
     return [
-      'a',
-      mergeAttributes(this.options.HTMLAttributes, {
-        href: url,
-        target: '_blank',
-        rel: 'noopener noreferrer nofollow',
-        class: 'embed-link',
-        'data-embed': '',
-      }),
+      'div',
+      { 'data-embed': '' },
       [
-        'div',
-        { class: 'content' },
-        ['div', { class: 'title' }, title],
+        'a',
+        mergeAttributes(this.options.HTMLAttributes, {
+          href: url,
+          target: '_blank',
+          rel: 'noopener noreferrer nofollow',
+          class: 'embed-link',
+        }),
         [
           'div',
-          { class: 'meta' },
-          ['img', { src: favicon, alt: siteName, class: 'favicon' }],
-          ['div', { class: 'site-name' }, siteName],
+          { class: 'content' },
+          ['div', { class: 'title' }, title],
+          [
+            'div',
+            { class: 'meta' },
+            ['img', { src: favicon, alt: siteName, class: 'favicon' }],
+            ['div', { class: 'site-name' }, siteName],
+          ],
         ],
+        ['img', { src: image, alt: siteName, class: 'thumbnail' }],
       ],
-      ['img', { src: image, alt: siteName }],
     ]
   },
 
