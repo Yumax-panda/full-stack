@@ -91,7 +91,7 @@
   font-size: 24px;
 }
 
-.embed-link img {
+.embed-link .thumbnail {
   width: 120px;
   height: 120px;
   object-fit: cover;
