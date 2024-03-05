@@ -14,7 +14,7 @@ export const EditorMenu = ({ onLinkEmbedAdd, onImageAdd }: Props) => {
       openIcon={<SpeedDialIcon />}
       direction='right'
       sx={{
-        position: 'absolute',
+        position: 'fixed',
         bottom: 16,
         left: 16,
       }}
