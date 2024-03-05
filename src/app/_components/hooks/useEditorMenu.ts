@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { ChangeEvent, useCallback } from 'react'
 
 import type { Editor } from '@tiptap/react'
 
@@ -12,7 +12,7 @@ type Props = {
 
 type UseEditorMenuReturn = {
   onLinkEmbedAdd: () => Promise<void>
-  onImageAdd: () => void
+  onImageAdd: (e: ChangeEvent<HTMLInputElement>) => Promise<void>
 }
 
 export const useEditorMenu = ({
@@ -46,14 +46,24 @@ export const useEditorMenu = ({
     return
   }
 
-  const onImageAdd = useCallback(() => {
-    const url = window.prompt('URLを入力してください')
-    if (!url) return
-    if (editor) {
-      // FIXME: Cloud Storageへアップロードするロジックを追加する
-      editor.chain().focus().setImage({ src: url }).blur().run()
-    }
-  }, [editor])
+  const onImageAdd = useCallback(
+    async (e: ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0]
+      if (!file) return
+      try {
+        const url = await workImageStorage.upload({
+          file,
+          userId,
+          workId,
+        })
+        editor?.chain().setImage({ src: url }).run()
+      } catch (error) {
+        console.error(error)
+        window.alert('画像のアップロードに失敗しました')
+      }
+    },
+    [editor, workId, userId],
+  )
 
   return { onLinkEmbedAdd, onImageAdd }
 }
