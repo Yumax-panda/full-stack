@@ -12,7 +12,7 @@ import { EditorContainer } from '@/app/_components/EditorContainer'
 import { Title } from '@/app/_components/Text/Title'
 import { Thumbnail } from '@/app/_components/Thumbnail'
 import { Tiptap } from '@/app/_components/Tiptap'
-import { getHeadings } from '@/lib/editor'
+import { getHeadings } from '@/lib/editor/editor'
 
 type Props = {
   user: ComponentProps<typeof UserSummary>['user']
