@@ -33,7 +33,7 @@ export const useEditorMenu = ({ editor }: Props): UseEditorMenuReturn => {
     if (!url) return
     if (editor) {
       // FIXME: Cloud Storageへアップロードするロジックを追加する
-      editor.chain().focus().setImage({ src: url }).run()
+      editor.chain().focus().setImage({ src: url }).blur().run()
     }
   }, [editor])
 
