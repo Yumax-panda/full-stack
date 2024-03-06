@@ -16,7 +16,7 @@ import {
 const prisma = new PrismaClient()
 initialize({ prisma })
 
-async function seed() {
+export function createFactory() {
   const UserFactory = defineUserFactory()
   const AccountFactory = defineAccountFactory({
     defaultData: {
@@ -55,4 +55,16 @@ async function seed() {
     },
   })
   const VerificationTokenFactory = defineVerificationTokenFactory()
+
+  return {
+    UserFactory,
+    AccountFactory,
+    WorkFactory,
+    SkillFactory,
+    TagFactory,
+    SkillTagRelationFactory,
+    SessionFactory,
+    ArticleTokenFactory,
+    VerificationTokenFactory,
+  }
 }
