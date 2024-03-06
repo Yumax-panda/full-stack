@@ -40,5 +40,6 @@
         "newlines-between": "always"
       }
     ]
-  }
+  },
+  "ignorePatterns": ["node_modules", ".next", "out", "src/__generated__"]
 }
