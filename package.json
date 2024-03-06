@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "next lint --dir src",
     "lint:fix": "yarn lint --fix",
-    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
+    "format": "prettier --write --ignore-path .gitignore  --ignore-path ./.prettierignore './**/*.{js,jsx,ts,tsx,json}'",
     "fix": "yarn lint:fix && yarn format",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
