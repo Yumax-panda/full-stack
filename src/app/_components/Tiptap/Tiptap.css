@@ -66,7 +66,8 @@
 
 /* リンクの埋め込み */
 .embed-link {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 120px;
   text-decoration: none !important;
   overflow: hidden;
   border-radius: 1rem;
@@ -86,8 +87,8 @@
   padding: 1rem;
   flex-grow: 1;
   height: 120px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   font-size: 24px;
 }
 
@@ -97,14 +98,20 @@
   object-fit: cover;
 }
 
-.embed-link .title {
-  font-size: 1.2rem;
+.embed-link .title-wrapper {
+  font-size: clamp(16px, calc(14px + 0.625vw), 24px);
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  overflow: hidden;
+  margin: auto 0;
+}
+
+.embed-link .title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .meta {
-  flex-grow: 1;
   display: flex;
   font-size: 14px;
 }

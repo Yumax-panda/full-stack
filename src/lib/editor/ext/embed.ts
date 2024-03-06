@@ -77,6 +77,22 @@ const Embed = Node.create<EmbedOptions>({
 
   renderHTML({ HTMLAttributes }) {
     const { url, siteName, favicon, title, image } = HTMLAttributes
+    /**
+     * <div data-embed>
+     *  <a href="url" target="_blank" rel="noopener noreferrer nofollow" class="embed-link">
+     *   <div class="content">
+     *     <div class="title-wrapper">
+     *        <div class="title">title</div>
+     *      </div>
+     *     <div class="meta">
+     *       <img src="favicon" alt="siteName" class="favicon">
+     *       <div class="site-name">siteName</div>
+     *     </div>
+     *    </div>
+     *    <img src="image" alt="siteName" class="thumbnail">
+     *  </a>
+     * </div>
+     */
     return [
       'div',
       { 'data-embed': '' },
@@ -91,7 +107,11 @@ const Embed = Node.create<EmbedOptions>({
         [
           'div',
           { class: 'content' },
-          ['div', { class: 'title' }, title],
+          [
+            'div',
+            { class: 'title-wrapper' },
+            ['div', { class: 'title' }, title],
+          ],
           [
             'div',
             { class: 'meta' },
