@@ -1,18 +1,7 @@
-import path from 'path'
-
-import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-      '~': path.resolve(__dirname, './src'),
-    },
-  },
   test: {
-    setupFiles: ['./src/__tests__/setup.ts'],
     env: {
       NEXT_PUBLIC_FIREBASE_API_KEY: 'test',
       NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: 'test',
