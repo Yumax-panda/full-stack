@@ -1,18 +1,14 @@
-import path from 'path'
-
-import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
+import { loadEnvConfig } from '@next/env'
+
+try {
+  loadEnvConfig(process.cwd())
+} catch (e) {
+  console.error(e)
+}
 
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-      '~': path.resolve(__dirname, './src'),
-    },
-  },
   test: {
-    setupFiles: ['./src/__tests__/setup.ts'],
     env: {
       NEXT_PUBLIC_FIREBASE_API_KEY: 'test',
       NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: 'test',
@@ -28,7 +24,11 @@ export default defineConfig({
       GITHUB_CLIENT_SECRET: 'test',
       GOOGLE_CLIENT_ID: 'test',
       GOOGLE_CLIENT_SECRET: 'test',
-      DATABASE_URL: 'test',
+      /*
+       * データベース操作が重複しないようにGitHub Actionsではデータベースのテストをしない
+       * そのため、環境変数はローカルの場合のみ読み込む
+       */
+      DATABASE_URL: process.env.DATABASE_URL || 'test',
       PRIVATE_KEY: 'test',
       NEXTAUTH_URL: 'http://localhost:3000',
     },

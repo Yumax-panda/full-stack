@@ -3,6 +3,13 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
+generator fabbrica {
+  provider    = "prisma-fabbrica"
+  output      = "../src/__generated__/fabbrica"
+  tsconfig    = "../tsconfig.json"
+  noTranspile = true
+}
+
 datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
