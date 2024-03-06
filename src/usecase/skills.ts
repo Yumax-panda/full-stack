@@ -1,5 +1,3 @@
-import 'server-only'
-
 import type { UpdateSkillProps } from '@/models'
 
 import { prisma } from '@/lib/client'

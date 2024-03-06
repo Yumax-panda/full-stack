@@ -15,7 +15,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint-staged": "yarn lint:fix && yarn format",
-    "test": "vitest"
+    "test": "vitest --project client --project server --project shared",
+    "test:database": "prisma generate && vitest --project database"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -48,7 +49,6 @@
     "react-hook-form": "^7.49.2",
     "react-toastify": "^9.1.3",
     "ress": "^5.0.2",
-    "server-only": "^0.0.1",
     "undici": "^6.6.1",
     "zod": "^3.22.4"
   },
