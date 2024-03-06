@@ -45,6 +45,7 @@ const databaseConfig = defineConfig({
     root: './src/__tests__/database',
     name: 'database',
     environment: 'node',
+    setupFiles: ['seed.ts'],
   },
 })
 
