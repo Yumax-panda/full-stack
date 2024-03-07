@@ -1,17 +1,43 @@
 import { expect, test } from 'vitest'
 
-import { createFactory } from './seed'
+import { userCreatedTest } from './utils'
 
 import { prisma } from '@/lib/client'
 import { getOrCreateEmptyWorkWithoutCache } from '@/usecase/work'
 
-const { UserFactory } = createFactory()
+test(
+  '空のページがあれば、新規追加の際はそれを割り当てる',
+  userCreatedTest(async ({ user }) => {
+    const work = await getOrCreateEmptyWorkWithoutCache(user.id)
+    const work2 = await getOrCreateEmptyWorkWithoutCache(user.id)
+    expect(work.id, '取得したページが同じか').toBe(work2.id)
+    expect(work.title, '空のページのタイトルがnullになっているか').toBeNull()
+    expect(work.content, '空のページの内容がnullになっているか').toBeNull()
+    expect(
+      work.thumbnail,
+      '空のページのサムネイルがnullになっているか',
+    ).toBeNull()
+  }),
+)
 
-test('空のページがあれば、新規追加の際はそれを割り当てる', async () => {
-  const user = await UserFactory.create()
-  const work = await getOrCreateEmptyWorkWithoutCache(user.id)
-  const work2 = await getOrCreateEmptyWorkWithoutCache(user.id)
-  // テストが終わったらデータを削除
-  await prisma.user.delete({ where: { id: user.id } })
-  expect(work.id).toBe(work2.id)
-})
+test(
+  '空のページがなければ、新規追加する: タイトルが設定されている',
+  userCreatedTest(async ({ user }) => {
+    const nonEmptyWork = await prisma.work.create({
+      data: {
+        title: 'test',
+        userId: user.id,
+      },
+    })
+    const work = await getOrCreateEmptyWorkWithoutCache(user.id)
+    expect(work.id, '空でないページを取得していないか').not.toBe(
+      nonEmptyWork.id,
+    )
+    expect(work.title, '空のページのタイトルがnullになっているか').toBeNull()
+    expect(work.content, '空のページの内容がnullになっているか').toBeNull()
+    expect(
+      work.thumbnail,
+      '空のページのサムネイルがnullになっているか',
+    ).toBeNull()
+  }),
+)
