@@ -58,7 +58,7 @@ DockerでPostgreSQLを使います
 $ docker compose up -d --build
 ```
 
-### 起動(2回目移行)
+### 起動(2回目以降)
 
 ```bash
 $ docker compose up -d
