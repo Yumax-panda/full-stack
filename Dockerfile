@@ -38,6 +38,7 @@ ARG nextauth_secret
 ARG private_key
 ARG nextauth_url
 ARG database_url
+ARG direct_url
 ARG discord_client_id
 ARG discord_client_secret
 ARG google_client_id
@@ -56,6 +57,7 @@ ENV NEXTAUTH_SECRET=$nextauth_secret
 ENV PRIVATE_KEY=$private_key
 ENV NEXTAUTH_URL=$nextauth_url
 ENV DATABASE_URL=$database_url
+ENV DIRECT_URL=$direct_url
 ENV DISCORD_CLIENT_ID=$discord_client_id
 ENV DISCORD_CLIENT_SECRET=$discord_client_secret
 ENV GOOGLE_CLIENT_ID=$google_client_id
@@ -65,6 +67,10 @@ ENV GITHUB_CLIENT_SECRET=$github_client_secret
 
 # set redirect url for next-auth
 RUN echo "NEXTAUTH_URL=$nextauth_url" > .env
+
+# set database url for prisma
+RUN echo "DATABASE_URL=$database_url" >> .env
+RUN echo "DIRECT_URL=$direct_url" >> .env
 
 # If using npm comment out above and use below instead
 RUN npx prisma generate

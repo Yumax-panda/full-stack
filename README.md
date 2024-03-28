@@ -37,12 +37,70 @@ Next.jsのApp Routerで構成。認証機能はAuth.js。
 - PostgreSQL (データベース)
 - Firebase Storage (オブジェクトストレージ)
 
-## Dev
+## プラグインのインストール
+
+バージョン管理には[asdf](https://asdf-vm.com)を使うことを想定していますが、[.tool-versions](./.tool-versions)へ記載されたバージョンがインストールされていれば動くと思います。
+
+```bash
+$ asdf install
+$ corepack enable
+$ asdf reshim nodejs
+$ asdf reshim java
+```
+
+## DB
+
+DockerでPostgreSQLを使います
+
+### 起動(初回)
+
+```bash
+$ docker compose up -d --build
+```
+
+### 起動(2回目移行)
+
+```bash
+$ docker compose up -d
+```
+
+### データベースの管理画面を起動
+
+```bash
+$ npx prisma studio
+```
+
+### 停止
+
+```bash
+$ docker compose down
+```
+
+### Storageの起動
+
+Emulatorを使ってFirebase storageをローカルで実行します
+
+### インストール
+
+```bash
+$ npm install -g firebase-tools
+```
+
+### 起動
+
+```bash
+$ npm run emu:storage
+```
 
 ### アプリの起動
 
+**DBとエミュレータが起動していることを確認してください**
+
+[`.env.sample`](./.env.sample)を`.env`となおし、環境変数を書き換えてください。
+
 ```bash
 $ npm install
+$ npx prisma generate
 $ npm run dev
 ```
 
@@ -56,14 +114,6 @@ $ npm run dev:nocache
 
 ```bash
 $ npm run storybook
-```
-
-### データベース管理
-
-データベースの管理画面を起動
-
-```bash
-$ npx prisma studio
 ```
 
 ## デプロイ
