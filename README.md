@@ -39,7 +39,7 @@ Next.jsのApp Routerで構成。認証機能はAuth.js。
 
 ## プラグインのインストール
 
-バージョン管理には[asdf](https://asdf-vm.com)を使うことを想定していますが、[.tool-versions](.tool-versions)へ記載されたバージョンがインストールされていれば動くと思います。
+バージョン管理には[asdf](https://asdf-vm.com)を使うことを想定していますが、[.tool-versions](./.tool-versions)へ記載されたバージョンがインストールされていれば動くと思います。
 
 ```bash
 $ asdf install
@@ -95,6 +95,8 @@ $ npm run emu:storage
 ### アプリの起動
 
 **DBとエミュレータが起動していることを確認してください**
+
+[`.env.sample`](./.env.sample)を`.env`となおし、環境変数を書き換えてください。
 
 ```bash
 $ npm install
