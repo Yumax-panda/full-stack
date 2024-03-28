@@ -8,15 +8,16 @@
     "postinstall": "prisma generate",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir src",
-    "lint:fix": "yarn lint --fix",
-    "format": "prettier --write --ignore-path .gitignore  --ignore-path ./.prettierignore './**/*.{js,jsx,ts,tsx,json}'",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier . --write --ignore-path .gitignore  --ignore-path ./.prettierignore",
     "fix": "yarn lint:fix && yarn format",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint-staged": "yarn lint:fix && yarn format",
     "test": "vitest --project client --project server --project shared",
-    "test:database": "prisma generate && vitest --project database"
+    "test:database": "prisma generate && vitest --project database",
+    "db-push:prod": "prisma db push --env-file .env.database.local"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
