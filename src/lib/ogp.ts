@@ -3,7 +3,7 @@ import { parse } from 'node-html-parser'
 export async function fetchOgp(url: string): Promise<string | undefined> {
   const response = await fetch(url, {
     headers: {
-      'Allow-Cross-Origin-Origin': '*',
+      'Access-Control-Allow-Origin': '*',
     },
     next: { revalidate: 259200 }, // 1month
   })
