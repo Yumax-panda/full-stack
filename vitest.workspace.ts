@@ -1,7 +1,7 @@
-import { defineWorkspace, defineConfig, mergeConfig } from 'vitest/config'
 import path from 'path'
 
 import react from '@vitejs/plugin-react'
+import { defineWorkspace, defineConfig, mergeConfig } from 'vitest/config'
 
 const baseConfig = defineConfig({
   resolve: {
