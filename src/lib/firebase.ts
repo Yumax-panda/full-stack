@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from 'firebase/app'
-import { getStorage } from 'firebase/storage'
+import { getStorage, connectStorageEmulator } from 'firebase/storage'
 
 import { env } from './env.mjs'
 
@@ -17,4 +17,11 @@ export const app = getApps().length
   ? getApps()[0]
   : initializeApp(firebaseConfig)
 
-export const storage = getStorage(app)
+const storage = getStorage(app)
+
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Connecting to the storage emulator')
+  connectStorageEmulator(storage, '127.0.0.1', 9199)
+}
+
+export { storage }
