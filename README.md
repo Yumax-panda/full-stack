@@ -116,6 +116,24 @@ $ npm run dev:nocache
 $ npm run storybook
 ```
 
+### lint (型チェック等)
+
+```bash
+$ npm run lint
+```
+
+### format (コード整形)
+
+```bash
+$ npm run format
+```
+
+### fix (lint & コード整形)
+
+```bash
+$ npm run fix
+```
+
 ## デプロイ
 
 以下のコマンドを実行
