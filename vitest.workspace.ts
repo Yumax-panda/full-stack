@@ -15,7 +15,7 @@ const baseConfig = defineConfig({
 const clientConfig = defineConfig({
   plugins: [react()],
   test: {
-    root: './src/__tests__/client',
+    root: './src/__tests__/unit/client',
     name: 'client',
     environment: 'happy-dom',
   },
@@ -23,7 +23,7 @@ const clientConfig = defineConfig({
 
 const serverConfig = defineConfig({
   test: {
-    root: './src/__tests__/server',
+    root: './src/__tests__/unit/server',
     name: 'server',
     environment: 'node',
     setupFiles: ['setup.ts'],
@@ -33,7 +33,7 @@ const serverConfig = defineConfig({
 const sharedConfig = defineConfig({
   plugins: [react()],
   test: {
-    root: './src/__tests__/shared',
+    root: './src/__tests__/unit/shared',
     name: 'shared',
     environment: 'happy-dom',
     setupFiles: ['setup.ts'],
@@ -42,7 +42,7 @@ const sharedConfig = defineConfig({
 
 const databaseConfig = defineConfig({
   test: {
-    root: './src/__tests__/database',
+    root: './src/__tests__/unit/database',
     name: 'database',
     environment: 'node',
     setupFiles: ['seed.ts'],
