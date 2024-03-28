@@ -130,10 +130,10 @@ $ npm run emu:storage
 `.env`を新たに作成し、[`.env.sample`](./.env.sample)の内容をコピーした後、必要な部分を書き換えてください。
 
 ```bash
-$ npm install
-$ npx prisma generate
 $ npm run dev
 ```
+
+http://localhost:3000 へアクセスするとトップページが出るはずです。
 
 キャッシュなしで実行する場合は2つめのコマンドを以下に置き換えてください。
 

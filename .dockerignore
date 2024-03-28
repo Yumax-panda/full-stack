@@ -17,6 +17,7 @@ src/stories
 .prettier*
 .tool-versions
 firebase.json
+LICENSE
 README.md
 storage.rules
 *.log
