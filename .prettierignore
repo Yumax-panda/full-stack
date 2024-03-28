@@ -1,2 +1,5 @@
-*__generated__
-
+/node_modules
+*__generated__*
+.next
+.storybook
+*stories*
