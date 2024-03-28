@@ -4,6 +4,7 @@
     "esbenp.prettier-vscode",
     "ms-azuretools.vscode-docker",
     "streetsidesoftware.code-spell-checker",
-    "prisma.prisma"
+    "prisma.prisma",
+    "toba.vsfire"
   ]
 }
