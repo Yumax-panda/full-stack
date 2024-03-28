@@ -39,10 +39,39 @@ Next.jsのApp Routerで構成。認証機能はAuth.js。
 
 ## Dev
 
+DockerでPostgreSQLを使います
+
+### 起動(初回)
+
+```bash
+$ docker compose up -d --build
+```
+
+### 起動(2回目移行)
+
+```bash
+$ docker compose up
+```
+
+### データベースの管理画面を起動
+
+```bash
+$ npx prisma studio
+```
+
+### 停止
+
+```bash
+$ docker compose down
+```
+
 ### アプリの起動
+
+**DBが起動していることを確認してください**
 
 ```bash
 $ npm install
+$ npx prisma generate
 $ npm run dev
 ```
 
@@ -56,14 +85,6 @@ $ npm run dev:nocache
 
 ```bash
 $ npm run storybook
-```
-
-### データベース管理
-
-データベースの管理画面を起動
-
-```bash
-$ npx prisma studio
 ```
 
 ## デプロイ
