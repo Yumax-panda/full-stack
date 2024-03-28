@@ -43,6 +43,7 @@ const ImageAddButton = ({
   const inputRef = useRef<HTMLInputElement>(null)
   return (
     <label htmlFor='image-upload'>
+      {/* eslint-disable-next-line */}
       <Image />
       <input
         id='image-upload'

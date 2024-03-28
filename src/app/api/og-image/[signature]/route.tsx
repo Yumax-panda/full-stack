@@ -62,8 +62,10 @@ export async function GET(
               border: '2px solid lightgray',
             }}
           >
+            {/* eslint-disable-next-line */}
             <img
               src={user.image ?? undefined}
+              alt='user image'
               style={{
                 width: 300,
                 height: 300,
