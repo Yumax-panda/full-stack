@@ -98,7 +98,7 @@ $ npm run emu:storage
 
 **DBとエミュレータが起動していることを確認してください**
 
-[`.env.sample`](./.env.sample)を`.env`となおし、環境変数を書き換えてください。
+`.env`を新たに作成し、[`.env.sample`](./.env.sample)の内容をコピーした後、必要な部分を書き換えてください。
 
 ```bash
 $ npm install
