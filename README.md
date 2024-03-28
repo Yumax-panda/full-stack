@@ -39,7 +39,29 @@ Next.jsのApp Routerで構成。認証機能はAuth.js。
 
 ## 開発する方へ
 
-### プラグインのインストール
+### 環境構築
+
+#### リポジトリのクローン
+
+以下のコマンドでクローンしてください。
+
+```bash
+$ git clone https://github.com/Yumax-panda/full-stack.git
+```
+
+SSHを使う場合は以下のようになります。
+
+```bash
+$ git clone git@github.com:Yumax-panda/full-stack.git
+```
+
+プロジェクト内へ入ります。
+
+```bash
+$ cd full-stack
+```
+
+#### プラグインのインストール
 
 バージョン管理には[asdf](https://asdf-vm.com)を使うことを想定していますが、[.tool-versions](./.tool-versions)へ記載されたバージョンがインストールされていれば動くと思います。
 
@@ -48,6 +70,13 @@ $ asdf install
 $ corepack enable
 $ asdf reshim nodejs
 $ asdf reshim java
+```
+
+プラグインのバージョンを揃えた後に依存関係をインストールします。
+
+```bash
+$ npm install
+$ npx prisma generate
 ```
 
 ### DB
@@ -82,7 +111,7 @@ $ docker compose down
 
 Emulatorを使ってFirebase storageをローカルで実行します
 
-#### インストール
+#### Firebase-CLIのインストール
 
 ```bash
 $ npm install -g firebase-tools
@@ -98,7 +127,7 @@ $ npm run emu:storage
 
 **DBとエミュレータが起動していることを確認してください**
 
-[`.env.sample`](./.env.sample)を`.env`となおし、環境変数を書き換えてください。
+`.env`を新たに作成し、[`.env.sample`](./.env.sample)の内容をコピーした後、必要な部分を書き換えてください。
 
 ```bash
 $ npm install
