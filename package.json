@@ -18,7 +18,7 @@
     "test": "vitest --project client --project server --project shared",
     "test:database": "prisma generate && vitest --project database",
     "db-push:prod": "prisma db push --env-file .env.database.local",
-    "emu:storage": "firebase emulators:start --only storage --import=./firebase --export-on-exit"
+    "emu:storage": "firebase emulators:start --project demo-project --only storage --import=./firebase --export-on-exit"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
