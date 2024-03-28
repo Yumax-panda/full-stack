@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "full-stack-dev-82d28"
+    "default": "full-stack-dev-82d28",
+    "prod": "full-stack-prod-12e7f"
   }
 }
