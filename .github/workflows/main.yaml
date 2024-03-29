@@ -99,6 +99,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-        env:
-          DATABASE_URL: postgres://root:secret@localhost:5432/mydb
-          DIRECT_URL: postgres://root:secret@localhost:5432/mydb
+    env:
+      DATABASE_URL: postgres://root:secret@localhost:5432/mydb
+      DIRECT_URL: postgres://root:secret@localhost:5432/mydb
