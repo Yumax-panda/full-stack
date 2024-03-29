@@ -6,6 +6,7 @@
 .next
 .storybook
 .vscode
+docker/postgres
 firebase
 node_modules
 src/__generated__

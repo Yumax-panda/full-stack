@@ -54,7 +54,7 @@ jobs:
         run: npm ci
       - name: run format
         run: npx prettier --check .
-  test:
+  test-unit:
     name: run test
     runs-on: ubuntu-latest
     needs: [packages]
@@ -69,4 +69,33 @@ jobs:
       - name: npm ci
         run: npm ci
       - name: run test
-        run: npm run test
+        run: npm run test:unit
+  test-e2e:
+    name: run e2e test
+    runs-on: ubuntu-latest
+    needs: [packages]
+    timeout-minutes: 60
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ./.tool-versions
+          cache: npm
+      - name: npm ci
+        run: npm ci
+      - name: install playwright browsers
+        run: npx playwright install --with-deps
+      - name: setup db
+        run: docker-compose -f docker-compose.ci.yaml up -d
+      - name: Push schema to db
+        run: npx prisma db push
+      - name: run e2e test
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

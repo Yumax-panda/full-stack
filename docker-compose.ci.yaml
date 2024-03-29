@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:12-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=mydb
+    ports:
+      - 5432:5432
+  firebase:
+    build:
+      context: .
+      dockerfile: ./docker/firebase/Dockerfile
+    container_name: firebase
+    volumes:
+      - ./.firebaserc:/opt/firebase/.firebaserc
+      - ./firebase.json:/opt/firebase/firebase.json
+      - ./storage.rules:/opt/firebase/storage.rules
+      - ./docker/firebase/bin/:/root/.cache:cached
+      - ./docker/firebase/config/:/root/.config:cached
+    ports:
+      - 9199:9199 # Cloud Storage
+      - 4000:4000 # Emulator UI
+    working_dir: /opt/firebase
+    command: firebase emulators:start --project demo-project --only storage
+    tty: true
+volumes:
+  postgres:
