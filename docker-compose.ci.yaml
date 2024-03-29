@@ -23,8 +23,9 @@ services:
       - ./docker/firebase/config/:/root/.config:cached
     ports:
       - 9199:9199 # Cloud Storage
+      - 4000:4000 # Emulator UI
     working_dir: /opt/firebase
-    command: firebase emulators:start --project demo-project --only storage --import=./data --export-on-exit
+    command: firebase emulators:start --project demo-project --only storage
     tty: true
 volumes:
   postgres:
