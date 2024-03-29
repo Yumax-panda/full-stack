@@ -87,6 +87,10 @@ jobs:
         run: npm ci
       - name: install playwright browsers
         run: npx playwright install --with-deps
+      - name: setup db
+        run: docker-compose -f docker-compose.ci.yaml up -d
+      - name: Push schema to db
+        run: npx prisma db push
       - name: run e2e test
         run: npm run test:e2e
       - uses: actions/upload-artifact@v4
