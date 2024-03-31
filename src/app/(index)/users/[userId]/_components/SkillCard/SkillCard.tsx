@@ -7,7 +7,7 @@ import { StarField } from '@/app/(index)/_components/StarField'
 import { Tag } from '@/app/(index)/_components/Tag'
 
 type Skill = Pick<SkillPayload, 'name' | 'level' | 'image'>
-type Tag = Pick<TagPayload, 'name' | 'color' | 'brief'>
+type Tag = Pick<TagPayload, 'name' | 'color' | 'brief' | 'id'>
 export type Props = Skill & {
   tags: Tag[]
 }
