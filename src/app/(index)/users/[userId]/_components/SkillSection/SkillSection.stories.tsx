@@ -11,13 +11,13 @@ type Story = StoryObj<typeof SkillSection>
 
 const tags = [
   {
-    id: 1,
+    id: '1',
     name: 'JavaScript',
     color: 'skyblue',
     brief: 'Frontend',
   },
   {
-    id: 2,
+    id: '2',
     name: 'TypeScript',
     color: 'blue',
     brief: null,

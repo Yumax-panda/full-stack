@@ -17,16 +17,19 @@ export const Default: Story = {
       'https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg',
     tags: [
       {
+        id: '1',
         name: 'Frontend',
         color: 'skyblue',
         brief: 'Frontend',
       },
       {
+        id: '2',
         name: 'Backend',
         color: 'grey',
         brief: 'Backend',
       },
       {
+        id: '3',
         name: 'JavaScript',
         color: 'yellow',
         brief: null,
