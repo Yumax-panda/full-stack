@@ -30,7 +30,7 @@ export const useSkillSection = ({
   // タグが選択されている場合は、選択されたタグを持つスキルのみ表示する
   const filteredSkills = initial.filter((skill) => {
     if (selectedTags.length === 0) return true
-    return selectedTags.some((tag) => skill.tags.some((t) => t.id === tag.id))
+    return selectedTags.every((tag) => skill.tags.some((t) => t.id === tag.id))
   })
 
   const optionTags = Object.values(tagMap)
