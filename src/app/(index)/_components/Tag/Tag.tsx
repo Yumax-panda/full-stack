@@ -1,3 +1,5 @@
+import type { EventHandler } from 'react'
+
 import { Chip, Tooltip } from '@mui/material'
 
 import type { Tag as TagType } from '@prisma/client'
@@ -5,7 +7,7 @@ import type { Tag as TagType } from '@prisma/client'
 import { hexToRgb } from '@/lib/color'
 
 type Props = Pick<TagType, 'name' | 'color' | 'brief'> & {
-  onDelete?: () => void
+  onDelete?: EventHandler<any>
 }
 
 export const Tag = ({ name, color, brief, onDelete }: Props) => {
