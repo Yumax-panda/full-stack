@@ -16,7 +16,7 @@ type FieldProps = {
 
 const Field = ({ icon, text }: FieldProps) => (
   <Box sx={{ display: 'flex' }}>
-    <Box>{icon}</Box>
+    <Box sx={{ mr: 1 }}>{icon}</Box>
     <Typography variant='body1'>{text}</Typography>
   </Box>
 )
@@ -61,9 +61,13 @@ export const Profile = ({
           },
           m: 'auto',
           p: '1rem',
+          fontSize: '.95rem',
         }}
       >
-        <Typography sx={{ fontWeight: 'bold' }} variant='h4'>
+        <Typography
+          sx={{ fontWeight: 'bold', fontSize: '1.4rem' }}
+          variant='h4'
+        >
           {name}
         </Typography>
         {bio && <Typography variant='body1'>{bio}</Typography>}
