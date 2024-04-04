@@ -9,44 +9,31 @@ type Props = {
 type Tag = SkillCardProps['tags'][0]
 
 type UseSkillSectionReturn = {
+  optionTags: Tag[]
   selectedTags: Tag[]
-  skills: SkillCardProps[]
-  onTagRemoved: (tagId: string) => () => void
+  filteredSkills: SkillCardProps[]
+  setSelectedTags: (tags: Tag[]) => void
 }
 
 export const useSkillSection = ({
   skills: initial,
 }: Props): UseSkillSectionReturn => {
-  const tagsMap: Record<string, Tag> = {}
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([])
+  const tagMap: Record<string, Tag> = {}
 
-  initial.forEach(({ tags }) => {
-    tags.forEach((tag) => {
-      tagsMap[tag.id] = tag
+  initial.forEach((skill) => {
+    skill.tags.forEach((tag) => {
+      tagMap[tag.id] = tag
     })
   })
 
-  const initialTagIds = Array.from(
-    new Set(initial.flatMap(({ tags }) => tags.map(({ id }) => id))),
-  )
+  // タグが選択されている場合は、選択されたタグを持つスキルのみ表示する
+  const filteredSkills = initial.filter((skill) => {
+    if (selectedTags.length === 0) return true
+    return selectedTags.some((tag) => skill.tags.some((t) => t.id === tag.id))
+  })
 
-  const [selectedTagIds, setSelectedTagIds] = useState<string[]>(initialTagIds)
-  const selectedTags = selectedTagIds.map((id) => tagsMap[id])
+  const optionTags = Object.values(tagMap)
 
-  // タグが選択されていない場合は全てのスキルを表示
-  const skills = initial.filter(({ tags }) =>
-    tags.some(({ id }) => selectedTagIds.includes(id)),
-  )
-
-  const onTagRemoved = (tagId: string) => () => {
-    setSelectedTagIds((prev) => {
-      const next = prev.filter((id) => id !== tagId)
-      return next.length === 0 ? initialTagIds : next
-    })
-  }
-
-  return {
-    selectedTags,
-    onTagRemoved,
-    skills,
-  }
+  return { selectedTags, filteredSkills, setSelectedTags, optionTags }
 }
