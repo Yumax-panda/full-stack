@@ -4,31 +4,31 @@ import { Grid } from '@mui/material'
 
 import { useSkillSection } from '../hooks/useSkillSection'
 import { SkillCard } from '../SkillCard'
+import { SkillTagFilterSelect } from '../SkillTagFilterSelect'
 
 import type { Props as SkillCardProps } from '../SkillCard'
-
-import { Tag } from '@/app/(index)/_components/Tag'
 
 type Props = {
   skills: SkillCardProps[]
 }
 
 export const SkillSection = ({ skills: initial }: Props) => {
-  const { skills, selectedTags, onTagRemoved } = useSkillSection({
-    skills: initial,
-  })
+  const { selectedTags, filteredSkills, setSelectedTags, optionTags } =
+    useSkillSection({
+      skills: initial,
+    })
 
   return (
     <div>
+      {optionTags.length > 0 && (
+        <SkillTagFilterSelect
+          options={optionTags}
+          selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
+        />
+      )}
       <Grid container spacing={2} sx={{ display: 'flex' }}>
-        {selectedTags.map((tag) => (
-          <Grid item key={tag.id}>
-            <Tag {...tag} onDelete={onTagRemoved(tag.id)} />
-          </Grid>
-        ))}
-      </Grid>
-      <Grid container spacing={2} sx={{ display: 'flex' }}>
-        {skills.map((skill) => (
+        {filteredSkills.map((skill) => (
           <Grid item xs={12} md={4} key={skill.name}>
             <SkillCard {...skill} />
           </Grid>
