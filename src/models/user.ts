@@ -20,4 +20,4 @@ export type UserSummary = Pick<User, 'id' | 'name' | 'bio' | 'image'>
 export type UserInfo = UserSummary & {
   careers: Career[]
   awards: Award[]
-} & Pick<User, 'description'>
+} & Pick<User, 'description' | 'thumbnail'>
