@@ -1,9 +1,8 @@
 import { QuestionMark } from '@mui/icons-material'
-import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Box, Typography, Paper, Grid, Rating, Avatar } from '@mui/material'
 
 import type { Skill as SkillPayload, Tag as TagPayload } from '@prisma/client'
 
-import { StarField } from '@/app/(index)/_components/StarField'
 import { Tag } from '@/app/(index)/_components/Tag'
 
 type Skill = Pick<SkillPayload, 'name' | 'level' | 'image'>
@@ -14,49 +13,67 @@ export type Props = Skill & {
 
 export const SkillCard = ({ name, level, image, tags = [] }: Props) => {
   const cardStyle = {
-    width: '6rem',
-    height: '6rem',
-    flexShrink: 0,
-    margin: 'auto',
+    marginX: 'auto',
+    width: '72px',
+    height: '72px',
+    objectFit: 'contain',
+    borderRadius: '0.5rem',
   } as const
 
   return (
-    <Card
-      sx={{ display: 'flex', flexDirection: 'column', padding: '1rem' }}
-      raised
+    <Paper
+      sx={{
+        borderRadius: '0.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: '1rem 0.5rem',
+        py: '0.5rem',
+      }}
     >
-      <Box sx={{ display: 'flex' }}>
-        {image ? (
-          <CardMedia image={image} sx={cardStyle} />
-        ) : (
-          <QuestionMark
-            sx={{
-              ...cardStyle,
-              color: 'lightgray',
-              bgcolor: 'rgba(0, 0, 0, 0.04)',
-              borderRadius: '1.5rem',
-            }}
-          />
-        )}
-        <CardContent sx={{ flex: '1 0 auto' }}>
+      <Grid
+        container
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+        }}
+      >
+        <Grid item xs={4}>
+          {image ? (
+            <Avatar src={image} sx={cardStyle} variant='square' />
+          ) : (
+            <Avatar sx={cardStyle} variant='square'>
+              <QuestionMark />
+            </Avatar>
+          )}
+        </Grid>
+        <Grid
+          item
+          xs={8}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            paddingLeft: '0.5rem',
+          }}
+        >
           <Typography
             sx={{
               fontSize: '1.4rem',
-              fontWeight: 'bold',
               color: 'rgba(0, 0, 0, 0.87)',
             }}
           >
             {name}
           </Typography>
-          <StarField level={level} />
-        </CardContent>
-      </Box>
+          <Rating max={3} value={level} readOnly />
+        </Grid>
+      </Grid>
       <Box
         sx={{
           display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '0.5rem',
-          margin: 'auto',
           height: '2rem',
         }}
       >
@@ -64,6 +81,6 @@ export const SkillCard = ({ name, level, image, tags = [] }: Props) => {
           <Tag key={tag.name} {...tag} />
         ))}
       </Box>
-    </Card>
+    </Paper>
   )
 }
