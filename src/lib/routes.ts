@@ -3,11 +3,13 @@ import { env } from '@/lib/env.mjs'
 export const routes = {
   top: () => '/',
   userSkill: (userId: string) => `/users/${userId}`,
+  userAbout: (userId: string) => `/users/${userId}/about`,
   userSkillEdit: () => '/settings/skills',
   tag: () => '/settings/tags',
   userArticle: (userId: string) => `/users/${userId}/articles`,
   userWork: (userId: string) => `/users/${userId}/works`,
   userProfileSettings: () => '/settings/profile',
+  userAboutSettings: () => '/settings/about',
   workDetail: (workId: string) => `/works/${workId}`,
   createNewWork: (workId: string) => `/works/${workId}/edit`,
 } as const
@@ -15,11 +17,13 @@ export const routes = {
 export const path: Record<keyof typeof routes, string> = {
   top: '/',
   userSkill: '(index)/users/[userId]',
+  userAbout: '(index)/users/[userId]/about',
   userSkillEdit: '(index)/settings/skills',
   tag: '(index)/settings/tags',
   userArticle: '(index)/users/[userId]/articles',
   userWork: '(index)/users/[userId]/works',
   userProfileSettings: '(index)/settings/profile',
+  userAboutSettings: '(index)/settings/about',
   workDetail: '(index)/works/[workId]',
   createNewWork: '(withAuth)/works/[workId]/edit',
 }
