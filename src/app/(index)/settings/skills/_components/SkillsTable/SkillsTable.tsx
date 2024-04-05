@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 import { Add, Edit, Delete, LocalOfferOutlined } from '@mui/icons-material'
-import { Box, Button, IconButton } from '@mui/material'
+import { Box, Button, IconButton, Rating } from '@mui/material'
 
 import { Container, Header, RowContainer } from '../../../_components/Table'
 import { CreateSkillForm } from '../CreateSkillForm'
@@ -13,7 +13,6 @@ import { UpdateSkillForm } from '../UpdateSkillForm'
 import type { SkillWithTags } from '@/models'
 import type { Tag as TagType } from '@prisma/client'
 
-import { StarField } from '@/app/(index)/_components/StarField'
 import { Tag } from '@/app/(index)/_components/Tag'
 import { Link } from '@/app/_components/Link'
 import { routes } from '@/lib/routes'
@@ -46,7 +45,7 @@ const TableRow = ({ skill, tags }: TableRowProps) => {
     <RowContainer>
       <Box sx={{ width: 100, pl: '1rem', my: 'auto' }}>{skill.name}</Box>
       <Box sx={{ width: 'fit-content', my: 'auto' }}>
-        <StarField level={skill.level} />
+        <Rating value={skill.level} max={3} readOnly />
       </Box>
       <Box
         sx={{
