@@ -6,6 +6,8 @@ import type { SkillTagRelation } from "@prisma/client";
 import type { Work } from "@prisma/client";
 import type { ArticleToken } from "@prisma/client";
 import type { User } from "@prisma/client";
+import type { Career } from "@prisma/client";
+import type { Award } from "@prisma/client";
 import type { VerificationToken } from "@prisma/client";
 import type { Provider } from "@prisma/client";
 import { Prisma } from "@prisma/client";
@@ -112,6 +114,28 @@ const modelFieldDefinitions: ModelWithFields[] = [{
                 name: "works",
                 type: "Work",
                 relationName: "UserToWork"
+            }, {
+                name: "careers",
+                type: "Career",
+                relationName: "CareerToUser"
+            }, {
+                name: "awards",
+                type: "Award",
+                relationName: "AwardToUser"
+            }]
+    }, {
+        name: "Career",
+        fields: [{
+                name: "user",
+                type: "User",
+                relationName: "CareerToUser"
+            }]
+    }, {
+        name: "Award",
+        fields: [{
+                name: "user",
+                type: "User",
+                relationName: "AwardToUser"
             }]
     }, {
         name: "VerificationToken",
@@ -1009,6 +1033,8 @@ type UserFactoryDefineInput = {
     email?: string | null;
     emailVerified?: Date | null;
     image?: string | null;
+    description?: string | null;
+    thumbnail?: string | null;
     location?: string | null;
     organization?: string | null;
     bio?: string | null;
@@ -1018,6 +1044,8 @@ type UserFactoryDefineInput = {
     skills?: Prisma.SkillCreateNestedManyWithoutUserInput;
     tags?: Prisma.TagCreateNestedManyWithoutUserInput;
     works?: Prisma.WorkCreateNestedManyWithoutUserInput;
+    careers?: Prisma.CareerCreateNestedManyWithoutUserInput;
+    awards?: Prisma.AwardCreateNestedManyWithoutUserInput;
 };
 
 type UserFactoryDefineOptions = {
@@ -1113,6 +1141,261 @@ function defineUserFactoryInternal<TOptions extends UserFactoryDefineOptions>({ 
  */
 export function defineUserFactory<TOptions extends UserFactoryDefineOptions>(options?: TOptions): UserFactoryInterface<TOptions> {
     return defineUserFactoryInternal(options ?? {});
+}
+
+type CareerScalarOrEnumFields = {
+    title: string;
+    brief: string;
+    from: Date;
+};
+
+type CareeruserFactory = {
+    [factoryFor]: "User";
+    build: () => PromiseLike<Prisma.UserCreateNestedOneWithoutCareersInput["create"]>;
+};
+
+type CareerFactoryDefineInput = {
+    id?: string;
+    title?: string;
+    brief?: string;
+    from?: Date;
+    to?: Date | null;
+    url?: string | null;
+    user: CareeruserFactory | Prisma.UserCreateNestedOneWithoutCareersInput;
+};
+
+type CareerFactoryDefineOptions = {
+    defaultData: Resolver<CareerFactoryDefineInput, BuildDataOptions>;
+    traits?: {
+        [traitName: string | symbol]: {
+            data: Resolver<Partial<CareerFactoryDefineInput>, BuildDataOptions>;
+        };
+    };
+};
+
+function isCareeruserFactory(x: CareeruserFactory | Prisma.UserCreateNestedOneWithoutCareersInput | undefined): x is CareeruserFactory {
+    return (x as any)?.[factoryFor] === "User";
+}
+
+type CareerTraitKeys<TOptions extends CareerFactoryDefineOptions> = keyof TOptions["traits"];
+
+export interface CareerFactoryInterfaceWithoutTraits {
+    readonly [factoryFor]: "Career";
+    build(inputData?: Partial<Prisma.CareerCreateInput>): PromiseLike<Prisma.CareerCreateInput>;
+    buildCreateInput(inputData?: Partial<Prisma.CareerCreateInput>): PromiseLike<Prisma.CareerCreateInput>;
+    buildList(inputData: number | readonly Partial<Prisma.CareerCreateInput>[]): PromiseLike<Prisma.CareerCreateInput[]>;
+    pickForConnect(inputData: Career): Pick<Career, "id">;
+    create(inputData?: Partial<Prisma.CareerCreateInput>): PromiseLike<Career>;
+    createList(inputData: number | readonly Partial<Prisma.CareerCreateInput>[]): PromiseLike<Career[]>;
+    createForConnect(inputData?: Partial<Prisma.CareerCreateInput>): PromiseLike<Pick<Career, "id">>;
+}
+
+export interface CareerFactoryInterface<TOptions extends CareerFactoryDefineOptions = CareerFactoryDefineOptions> extends CareerFactoryInterfaceWithoutTraits {
+    use(name: CareerTraitKeys<TOptions>, ...names: readonly CareerTraitKeys<TOptions>[]): CareerFactoryInterfaceWithoutTraits;
+}
+
+function autoGenerateCareerScalarsOrEnums({ seq }: {
+    readonly seq: number;
+}): CareerScalarOrEnumFields {
+    return {
+        title: getScalarFieldValueGenerator().String({ modelName: "Career", fieldName: "title", isId: false, isUnique: false, seq }),
+        brief: getScalarFieldValueGenerator().String({ modelName: "Career", fieldName: "brief", isId: false, isUnique: false, seq }),
+        from: getScalarFieldValueGenerator().DateTime({ modelName: "Career", fieldName: "from", isId: false, isUnique: false, seq })
+    };
+}
+
+function defineCareerFactoryInternal<TOptions extends CareerFactoryDefineOptions>({ defaultData: defaultDataResolver, traits: traitsDefs = {} }: TOptions): CareerFactoryInterface<TOptions> {
+    const getFactoryWithTraits = (traitKeys: readonly CareerTraitKeys<TOptions>[] = []) => {
+        const seqKey = {};
+        const getSeq = () => getSequenceCounter(seqKey);
+        const screen = createScreener("Career", modelFieldDefinitions);
+        const build = async (inputData: Partial<Prisma.CareerCreateInput> = {}) => {
+            const seq = getSeq();
+            const requiredScalarData = autoGenerateCareerScalarsOrEnums({ seq });
+            const resolveValue = normalizeResolver<CareerFactoryDefineInput, BuildDataOptions>(defaultDataResolver ?? {});
+            const defaultData = await traitKeys.reduce(async (queue, traitKey) => {
+                const acc = await queue;
+                const resolveTraitValue = normalizeResolver<Partial<CareerFactoryDefineInput>, BuildDataOptions>(traitsDefs[traitKey]?.data ?? {});
+                const traitData = await resolveTraitValue({ seq });
+                return {
+                    ...acc,
+                    ...traitData,
+                };
+            }, resolveValue({ seq }));
+            const defaultAssociations = {
+                user: isCareeruserFactory(defaultData.user) ? {
+                    create: await defaultData.user.build()
+                } : defaultData.user
+            };
+            const data: Prisma.CareerCreateInput = { ...requiredScalarData, ...defaultData, ...defaultAssociations, ...inputData };
+            return data;
+        };
+        const buildList = (inputData: number | readonly Partial<Prisma.CareerCreateInput>[]) => Promise.all(normalizeList(inputData).map(data => build(data)));
+        const pickForConnect = (inputData: Career) => ({
+            id: inputData.id
+        });
+        const create = async (inputData: Partial<Prisma.CareerCreateInput> = {}) => {
+            const data = await build(inputData).then(screen);
+            return await getClient<PrismaClient>().career.create({ data });
+        };
+        const createList = (inputData: number | readonly Partial<Prisma.CareerCreateInput>[]) => Promise.all(normalizeList(inputData).map(data => create(data)));
+        const createForConnect = (inputData: Partial<Prisma.CareerCreateInput> = {}) => create(inputData).then(pickForConnect);
+        return {
+            [factoryFor]: "Career" as const,
+            build,
+            buildList,
+            buildCreateInput: build,
+            pickForConnect,
+            create,
+            createList,
+            createForConnect,
+        };
+    };
+    const factory = getFactoryWithTraits();
+    const useTraits = (name: CareerTraitKeys<TOptions>, ...names: readonly CareerTraitKeys<TOptions>[]) => {
+        return getFactoryWithTraits([name, ...names]);
+    };
+    return {
+        ...factory,
+        use: useTraits,
+    };
+}
+
+/**
+ * Define factory for {@link Career} model.
+ *
+ * @param options
+ * @returns factory {@link CareerFactoryInterface}
+ */
+export function defineCareerFactory<TOptions extends CareerFactoryDefineOptions>(options: TOptions): CareerFactoryInterface<TOptions> {
+    return defineCareerFactoryInternal(options);
+}
+
+type AwardScalarOrEnumFields = {
+    title: string;
+    brief: string;
+    achievedAt: Date;
+};
+
+type AwarduserFactory = {
+    [factoryFor]: "User";
+    build: () => PromiseLike<Prisma.UserCreateNestedOneWithoutAwardsInput["create"]>;
+};
+
+type AwardFactoryDefineInput = {
+    id?: string;
+    title?: string;
+    brief?: string;
+    url?: string | null;
+    achievedAt?: Date;
+    user: AwarduserFactory | Prisma.UserCreateNestedOneWithoutAwardsInput;
+};
+
+type AwardFactoryDefineOptions = {
+    defaultData: Resolver<AwardFactoryDefineInput, BuildDataOptions>;
+    traits?: {
+        [traitName: string | symbol]: {
+            data: Resolver<Partial<AwardFactoryDefineInput>, BuildDataOptions>;
+        };
+    };
+};
+
+function isAwarduserFactory(x: AwarduserFactory | Prisma.UserCreateNestedOneWithoutAwardsInput | undefined): x is AwarduserFactory {
+    return (x as any)?.[factoryFor] === "User";
+}
+
+type AwardTraitKeys<TOptions extends AwardFactoryDefineOptions> = keyof TOptions["traits"];
+
+export interface AwardFactoryInterfaceWithoutTraits {
+    readonly [factoryFor]: "Award";
+    build(inputData?: Partial<Prisma.AwardCreateInput>): PromiseLike<Prisma.AwardCreateInput>;
+    buildCreateInput(inputData?: Partial<Prisma.AwardCreateInput>): PromiseLike<Prisma.AwardCreateInput>;
+    buildList(inputData: number | readonly Partial<Prisma.AwardCreateInput>[]): PromiseLike<Prisma.AwardCreateInput[]>;
+    pickForConnect(inputData: Award): Pick<Award, "id">;
+    create(inputData?: Partial<Prisma.AwardCreateInput>): PromiseLike<Award>;
+    createList(inputData: number | readonly Partial<Prisma.AwardCreateInput>[]): PromiseLike<Award[]>;
+    createForConnect(inputData?: Partial<Prisma.AwardCreateInput>): PromiseLike<Pick<Award, "id">>;
+}
+
+export interface AwardFactoryInterface<TOptions extends AwardFactoryDefineOptions = AwardFactoryDefineOptions> extends AwardFactoryInterfaceWithoutTraits {
+    use(name: AwardTraitKeys<TOptions>, ...names: readonly AwardTraitKeys<TOptions>[]): AwardFactoryInterfaceWithoutTraits;
+}
+
+function autoGenerateAwardScalarsOrEnums({ seq }: {
+    readonly seq: number;
+}): AwardScalarOrEnumFields {
+    return {
+        title: getScalarFieldValueGenerator().String({ modelName: "Award", fieldName: "title", isId: false, isUnique: false, seq }),
+        brief: getScalarFieldValueGenerator().String({ modelName: "Award", fieldName: "brief", isId: false, isUnique: false, seq }),
+        achievedAt: getScalarFieldValueGenerator().DateTime({ modelName: "Award", fieldName: "achievedAt", isId: false, isUnique: false, seq })
+    };
+}
+
+function defineAwardFactoryInternal<TOptions extends AwardFactoryDefineOptions>({ defaultData: defaultDataResolver, traits: traitsDefs = {} }: TOptions): AwardFactoryInterface<TOptions> {
+    const getFactoryWithTraits = (traitKeys: readonly AwardTraitKeys<TOptions>[] = []) => {
+        const seqKey = {};
+        const getSeq = () => getSequenceCounter(seqKey);
+        const screen = createScreener("Award", modelFieldDefinitions);
+        const build = async (inputData: Partial<Prisma.AwardCreateInput> = {}) => {
+            const seq = getSeq();
+            const requiredScalarData = autoGenerateAwardScalarsOrEnums({ seq });
+            const resolveValue = normalizeResolver<AwardFactoryDefineInput, BuildDataOptions>(defaultDataResolver ?? {});
+            const defaultData = await traitKeys.reduce(async (queue, traitKey) => {
+                const acc = await queue;
+                const resolveTraitValue = normalizeResolver<Partial<AwardFactoryDefineInput>, BuildDataOptions>(traitsDefs[traitKey]?.data ?? {});
+                const traitData = await resolveTraitValue({ seq });
+                return {
+                    ...acc,
+                    ...traitData,
+                };
+            }, resolveValue({ seq }));
+            const defaultAssociations = {
+                user: isAwarduserFactory(defaultData.user) ? {
+                    create: await defaultData.user.build()
+                } : defaultData.user
+            };
+            const data: Prisma.AwardCreateInput = { ...requiredScalarData, ...defaultData, ...defaultAssociations, ...inputData };
+            return data;
+        };
+        const buildList = (inputData: number | readonly Partial<Prisma.AwardCreateInput>[]) => Promise.all(normalizeList(inputData).map(data => build(data)));
+        const pickForConnect = (inputData: Award) => ({
+            id: inputData.id
+        });
+        const create = async (inputData: Partial<Prisma.AwardCreateInput> = {}) => {
+            const data = await build(inputData).then(screen);
+            return await getClient<PrismaClient>().award.create({ data });
+        };
+        const createList = (inputData: number | readonly Partial<Prisma.AwardCreateInput>[]) => Promise.all(normalizeList(inputData).map(data => create(data)));
+        const createForConnect = (inputData: Partial<Prisma.AwardCreateInput> = {}) => create(inputData).then(pickForConnect);
+        return {
+            [factoryFor]: "Award" as const,
+            build,
+            buildList,
+            buildCreateInput: build,
+            pickForConnect,
+            create,
+            createList,
+            createForConnect,
+        };
+    };
+    const factory = getFactoryWithTraits();
+    const useTraits = (name: AwardTraitKeys<TOptions>, ...names: readonly AwardTraitKeys<TOptions>[]) => {
+        return getFactoryWithTraits([name, ...names]);
+    };
+    return {
+        ...factory,
+        use: useTraits,
+    };
+}
+
+/**
+ * Define factory for {@link Award} model.
+ *
+ * @param options
+ * @returns factory {@link AwardFactoryInterface}
+ */
+export function defineAwardFactory<TOptions extends AwardFactoryDefineOptions>(options: TOptions): AwardFactoryInterface<TOptions> {
+    return defineAwardFactoryInternal(options);
 }
 
 type VerificationTokenScalarOrEnumFields = {
