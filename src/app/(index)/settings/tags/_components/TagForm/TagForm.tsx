@@ -193,7 +193,8 @@ export const TagForm = ({
               color='error'
               onClick={onClose}
               size='small'
-              sx={{ mr: 1 }}
+              // safariで開いた場合, 文言が折れてしまうためwhiteSpaceを指定
+              sx={{ mr: 1, whiteSpace: 'nowrap' }}
             >
               キャンセル
             </Button>
