@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import type { Career, Award, User } from '@prisma/client'
+
 export const updateUserSchema = z.object({
   id: z.string().refine(Boolean),
   name: z
@@ -13,3 +15,9 @@ export const updateUserSchema = z.object({
 })
 
 export type UpdateUserProps = z.infer<typeof updateUserSchema>
+
+export type UserSummary = Pick<User, 'id' | 'name' | 'bio' | 'image'>
+export type UserInfo = UserSummary & {
+  careers: Career[]
+  awards: Award[]
+} & Pick<User, 'description'>

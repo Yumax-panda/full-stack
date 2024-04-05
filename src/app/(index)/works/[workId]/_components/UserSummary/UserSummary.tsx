@@ -1,12 +1,12 @@
 import { Avatar, Box, Typography } from '@mui/material'
 
-import type { User } from '@prisma/client'
+import type { UserSummary as UserSummaryType } from '@/models/user'
 
 import { Link } from '@/app/_components/Link'
 import { routes } from '@/lib/routes'
 
-export type Props = {
-  user: Pick<User, 'id' | 'name' | 'image' | 'bio'>
+type Props = {
+  user: UserSummaryType
 }
 
 export const UserSummary = ({ user: { id, name, image, bio } }: Props) => {
