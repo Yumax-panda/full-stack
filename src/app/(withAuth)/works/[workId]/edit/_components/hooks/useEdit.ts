@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -36,6 +37,7 @@ export const useEdit = ({
     _initialThumbnail,
   )
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const { control, handleSubmit, formState, watch, setValue } =
     useForm<FormValues>({
@@ -130,6 +132,10 @@ export const useEdit = ({
       const { error } = await res.json()
       throw new Error(error)
     }
+
+    // これがないと編集した内容が反映されない
+    // ref: https://nextjs.org/docs/app/building-your-application/caching#routerrefresh
+    return router.refresh()
   }
 
   const getErrorMessage = (e: FieldErrors<FormValues>) => {
