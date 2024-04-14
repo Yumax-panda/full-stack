@@ -1,9 +1,11 @@
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth/next'
 
 import { Editor } from './_components/Editor/Editor'
 
 import type { Metadata } from 'next'
 
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { env } from '@/lib/env.mjs'
 import { getMyWorkByWorkIdWithoutCache } from '@/usecase/work'
 
@@ -20,8 +22,14 @@ export default async function Edit({
 }: {
   params: { workId: string }
 }) {
+  const session = await getServerSession(authOptions)
+  if (!session) {
+    redirect('/')
+  }
   const work = await getMyWorkByWorkIdWithoutCache(workId)
-  if (!work) notFound()
+  if (!work) {
+    notFound()
+  }
 
   return <Editor work={work} />
 }
