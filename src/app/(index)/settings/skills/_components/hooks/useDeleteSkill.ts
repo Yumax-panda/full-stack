@@ -17,8 +17,7 @@ export const useDeleteSkill = ({ skillId }: Props): UseDeleteSkillReturn => {
       param: { skillId },
     })
     if (!res.ok) {
-      const data = await res.json()
-      throw new Error(res.statusText)
+      throw new Error('スキルの削除に失敗しました.')
     }
     router.refresh()
   }
