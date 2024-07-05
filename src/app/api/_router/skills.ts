@@ -10,7 +10,7 @@ import type { Env } from '../types'
 import { tag } from '@/lib/routes'
 import { updateSkillSchema, createSkillSchema } from '@/models'
 import { createSkill } from '@/repository/skill'
-import { updateSkillWithTagIds } from '@/usecase/skills'
+import { updateSkillWithTagIds, deleteSkill } from '@/usecase/skills'
 
 export const skill = new Hono<Env>()
   .use('*', authMiddleware)
@@ -54,6 +54,19 @@ export const skill = new Hono<Env>()
         )
       }
       console.error('failed to update skill', e)
+      return c.json({ error: 'error' }, { status: 400 })
+    }
+  })
+  // DELETE /api/skills/:skillId
+  .delete('/:skillId', async (c) => {
+    const skillId = c.req.param('skillId')
+
+    try {
+      await deleteSkill(skillId)
+      revalidateTag(tag.skill)
+      return c.json({}, { status: 204 })
+    } catch (e) {
+      console.error('failed to delete skill', e)
       return c.json({ error: 'error' }, { status: 400 })
     }
   })
