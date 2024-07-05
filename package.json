@@ -21,10 +21,12 @@
     "emu:storage": "firebase emulators:start --project demo-project --only storage --import=./firebase --export-on-exit"
   },
   "dependencies": {
+    "@auth/core": "^0.34.1",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@fontsource/noto-sans-jp": "^5.0.17",
     "@gsap/react": "^2.1.0",
+    "@hono/auth-js": "^1.0.10",
     "@hookform/resolvers": "^3.3.4",
     "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.2",
@@ -41,6 +43,7 @@
     "@tiptap/starter-kit": "^2.1.13",
     "dayjs": "^1.11.10",
     "firebase": "^10.7.1",
+    "hono": "^4.4.11",
     "next": "14.0.1",
     "next-auth": "^4.24.5",
     "node-html-parser": "^6.1.12",
