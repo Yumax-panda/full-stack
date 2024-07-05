@@ -26,6 +26,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/noto-sans-jp": "^5.0.17",
     "@gsap/react": "^2.1.0",
+    "@hono/zod-validator": "^0.2.2",
     "@hookform/resolvers": "^3.3.4",
     "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.2",
