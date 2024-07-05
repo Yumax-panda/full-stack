@@ -1,10 +1,6 @@
 import { handler } from '../core'
 
-import type { PageConfig } from 'next'
-
-export const config: PageConfig = {
-  runtime: 'edge',
-}
+// NOTE: const runtime = "edge"とすると動かなくなる. 理由は不明.
 
 export {
   handler as GET,
