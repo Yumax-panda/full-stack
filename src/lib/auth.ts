@@ -4,8 +4,8 @@ import DiscordProvider from 'next-auth/providers/discord'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 
-import { prisma } from '@/lib/client'
 import { env } from '@/lib/env.mjs'
+import { prisma } from '@/lib/prisma'
 
 export const {
   handlers: { GET, POST },

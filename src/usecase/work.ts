@@ -4,7 +4,7 @@ import type { UpdateWorkInServer } from '@/models'
 import type { Work } from '@prisma/client'
 
 import { auth as getSession } from '@/lib/auth'
-import { prisma } from '@/lib/client'
+import { prisma } from '@/lib/prisma'
 import { tag } from '@/lib/routes'
 import { createNewWork, getEmptyWork } from '@/repository/work'
 

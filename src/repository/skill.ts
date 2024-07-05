@@ -5,7 +5,7 @@ import { getTagsByUserId } from './tag'
 import type { SkillWithTags, CreateSkillProps } from '@/models'
 import type { Skill, Tag } from '@prisma/client'
 
-import { prisma } from '@/lib/client'
+import { prisma } from '@/lib/prisma'
 import { tag } from '@/lib/routes'
 
 async function getSkillsByUserIdWithoutCache(userId: string) {

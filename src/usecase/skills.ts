@@ -1,6 +1,6 @@
 import type { UpdateSkillProps } from '@/models'
 
-import { prisma } from '@/lib/client'
+import { prisma } from '@/lib/prisma'
 
 export async function updateSkillWithTagIds({
   id,

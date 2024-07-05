@@ -3,7 +3,7 @@ import { unstable_cache as cache } from 'next/cache'
 
 import type { UpdateArticleToken } from '@/models/articleToken'
 
-import { prisma } from '@/lib/client'
+import { prisma } from '@/lib/prisma'
 import { tag } from '@/lib/routes'
 
 export async function getArticleTokenByUserIdWithoutCache(userId: string) {
