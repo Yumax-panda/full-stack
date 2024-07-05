@@ -9,7 +9,7 @@ import type { UseFormReturn } from 'react-hook-form'
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 import { getImage } from '@/constants/skills'
 import { client } from '@/lib/client'
-import { SKILL_ERROR, UNKNOWN_ERROR } from '@/lib/error'
+import { SKILL_ERROR } from '@/lib/error'
 import { createSkillSchema, type CreateSkillProps } from '@/models'
 
 type Props = {
