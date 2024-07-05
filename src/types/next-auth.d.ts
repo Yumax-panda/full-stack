@@ -1,8 +1,7 @@
-import type { User } from '@prisma/client'
-import type { DefaultUser } from 'next-auth'
+import type { User as PrismaUser } from '@prisma/client'
 
 declare module 'next-auth' {
   interface Session {
-    user?: DefaultUser & { id: string }
+    user?: PrismaUser & { id: string }
   }
 }
