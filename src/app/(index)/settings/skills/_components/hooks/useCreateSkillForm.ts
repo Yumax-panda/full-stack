@@ -8,6 +8,7 @@ import type { UseFormReturn } from 'react-hook-form'
 
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 import { getImage } from '@/constants/skills'
+import { client } from '@/lib/client'
 import { createSkillSchema, type CreateSkillProps } from '@/models'
 
 type Props = {
@@ -60,17 +61,10 @@ export const useCreateSkillForm = ({
   })
 
   const createSkill = async (data: CreateSkillProps) => {
-    const apiUrl = '/api/skills'
-    const res = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
+    const res = await client.api.skills.$post({ json: data })
     if (!res.ok) {
-      const error = await res.json()
-      throw new Error(error.error)
+      // TODO: エラーハンドリング
+      throw new Error(res.statusText)
     }
     return
   }

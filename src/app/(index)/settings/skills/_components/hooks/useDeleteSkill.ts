@@ -1,5 +1,7 @@
 import { useRouter } from 'next/navigation'
 
+import { client } from '@/lib/client'
+
 type Props = {
   skillId: string
 }
@@ -11,12 +13,12 @@ type UseDeleteSkillReturn = {
 export const useDeleteSkill = ({ skillId }: Props): UseDeleteSkillReturn => {
   const router = useRouter()
   const onDelete = async () => {
-    const res = await fetch(`/api/skills/${skillId}`, {
-      method: 'DELETE',
+    const res = await client.api.skills[':skillId'].$delete({
+      param: { skillId },
     })
     if (!res.ok) {
       const data = await res.json()
-      throw new Error(data.error)
+      throw new Error(res.statusText)
     }
     router.refresh()
   }
