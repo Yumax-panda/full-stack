@@ -3,7 +3,7 @@ import { unstable_cache as cache } from 'next/cache'
 import type { UpdateWorkInServer } from '@/models'
 import type { Work } from '@prisma/client'
 
-import { getSession } from '@/lib/auth'
+import { auth as getSession } from '@/lib/auth'
 import { prisma } from '@/lib/client'
 import { tag } from '@/lib/routes'
 import { createNewWork, getEmptyWork } from '@/repository/work'

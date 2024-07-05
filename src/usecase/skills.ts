@@ -27,6 +27,17 @@ export async function updateSkillWithTagIds({
       tagId,
     })),
   })
+
+  const updated = await prisma.skill.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      tags: true,
+    },
+  })
+
+  return updated
 }
 
 export async function deleteSkill(skillId: string) {
