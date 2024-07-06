@@ -30,3 +30,36 @@ export const tag = new Hono<Env>()
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
+  // PATCH /api/tags/:tagId
+  .patch('/:tagId', zValidator('json', updateTagSchema), async (c) => {
+    const tagId = c.req.param('tagId')
+    const tag = c.req.valid('json')
+
+    try {
+      const updated = await updateTag({
+        ...tag,
+        id: tagId,
+        userId: c.var.user.id,
+      })
+      revalidateTag(routeTag.tag)
+      return c.json(updated)
+    } catch (e) {
+      if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
+        return c.json({ error: DUPLICATED_NAME }, { status: 400 })
+      }
+      console.error('failed to update tag', e)
+      return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
+    }
+  })
+  // DELETE /api/tags/:tagId
+  .delete('/:tagId', async (c) => {
+    const tagId = c.req.param('tagId')
+
+    try {
+      await deleteTag(tagId)
+      return new Response(null, { status: 204 })
+    } catch (e) {
+      console.error('failed to delete tag', e)
+      return c.json({ error: UNKNOWN_ERROR }, { status: 500 })
+    }
+  })
