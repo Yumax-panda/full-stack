@@ -41,6 +41,9 @@ export const {
       return session
     },
   },
+  // Dockerコンテナでデプロイするため
+  // https://authjs.dev/getting-started/deployment#docker
+  trustHost: true,
 })
 
 export const getSession = auth
