@@ -7,7 +7,7 @@ import { authMiddleware } from '../_middlewares/auth'
 
 import type { Env } from '../types'
 
-import { SKILL_ERROR, UNKNOWN_ERROR } from '@/lib/error'
+import { DUPLICATED_NAME, UNKNOWN_ERROR } from '@/lib/error'
 import { tag } from '@/lib/routes'
 import { updateSkillSchema, createSkillSchema } from '@/models'
 import { createSkill } from '@/repository/skill'
@@ -25,7 +25,7 @@ export const skill = new Hono<Env>()
       return c.json(created, { status: 201 })
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
-        return c.json({ error: SKILL_ERROR.DUPLICATE_NAME }, { status: 400 })
+        return c.json({ error: DUPLICATED_NAME }, { status: 400 })
       }
       console.error('failed to create skill', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
@@ -46,7 +46,7 @@ export const skill = new Hono<Env>()
       return c.json(updated)
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
-        return c.json({ error: SKILL_ERROR.DUPLICATE_NAME }, { status: 400 })
+        return c.json({ error: DUPLICATED_NAME }, { status: 400 })
       }
       console.error('failed to update skill', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })

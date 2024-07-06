@@ -10,7 +10,7 @@ import type { UseFormReturn } from 'react-hook-form'
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 import { getImage } from '@/constants/skills'
 import { client } from '@/lib/client'
-import { SKILL_ERROR } from '@/lib/error'
+import { DUPLICATED_NAME } from '@/lib/error'
 import { createSkillSchema } from '@/models'
 
 type Props = {
@@ -72,7 +72,7 @@ export const useUpdateSkillForm = ({
     if (!res.ok) {
       const error = (await res.json()) as { error: string }
       switch (error.error) {
-        case SKILL_ERROR.DUPLICATE_NAME:
+        case DUPLICATED_NAME:
           throw new Error(`スキル名「${data.name}」は既に存在しています.`)
         default:
           throw new Error('スキルの更新に失敗しました.')
