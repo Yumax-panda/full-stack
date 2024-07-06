@@ -1,31 +1,22 @@
+import { Hono } from 'hono'
 import { ImageResponse } from 'next/og'
-import { NextRequest, NextResponse } from 'next/server'
 
 import { colorTheme } from '@/constants/colorTheme'
+import { INVALID_SIGNATURE } from '@/lib/error'
 import { verify } from '@/lib/signature'
 import { userParser } from '@/parser'
 
-export async function GET(
-  req: NextRequest,
-  {
-    params: { signature },
-  }: {
-    params: { signature: string }
-  },
-) {
-  if (!signature) {
-    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
-  }
-  const searchParams = new URLSearchParams(req.nextUrl.searchParams)
-  const user = userParser.fromSearchParams(searchParams)
-  if (!user) {
-    return NextResponse.json({ error: 'Invalid user' }, { status: 400 })
-  }
+export const ogp = new Hono().get('/:signature', async (c) => {
+  const signature = c.req.param('signature')
+  const { name, image } = c.req.query()
+  const user = { name, image }
+
   const query = userParser.toString(user)
   const isValid = await verify(query, signature)
   if (!isValid) {
-    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
+    return c.json({ error: INVALID_SIGNATURE }, { status: 400 })
   }
+
   return new ImageResponse(
     (
       <div
@@ -90,4 +81,4 @@ export async function GET(
       height: 500,
     },
   )
-}
+})
