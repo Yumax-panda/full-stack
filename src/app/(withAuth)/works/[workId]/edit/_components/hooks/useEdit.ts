@@ -5,13 +5,16 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import type { UpdateWork as FormValues, UpdateWork } from '@/models'
+import type { UpdateWork } from '@/models'
 import type { Work as Props } from '@prisma/client'
 import type { Control, FormState, FieldErrors } from 'react-hook-form'
 
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import { client } from '@/lib/client'
 import { updateWorkSchema as formSchema } from '@/models'
 import { workImageStorage } from '@/repository/storage'
+
+type FormValues = UpdateWork
 
 type UseEditReturn = {
   control: Control<FormValues>
@@ -92,7 +95,7 @@ export const useEdit = ({
   }
 
   const submitHandler = async (data: FormValues) => {
-    const { id, thumbnail } = data
+    const { thumbnail } = data
 
     // データを値渡しでコピー
     const updatePayload: UpdateWork = { ...data }
@@ -119,18 +122,13 @@ export const useEdit = ({
       await Promise.all(tasks)
     }
 
-    const res = await fetch(`/api/works/${id}`, {
-      cache: 'no-cache',
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatePayload),
+    const res = await client.api.works[':workId'].$patch({
+      param: { workId: rest.id },
+      json: updatePayload,
     })
 
     if (!res.ok) {
-      const { error } = await res.json()
-      throw new Error(error)
+      throw new Error('更新に失敗しました.')
     }
 
     // これがないと編集した内容が反映されない

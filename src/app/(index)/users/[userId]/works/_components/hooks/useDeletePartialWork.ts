@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import { client } from '@/lib/client'
 
 type Props = {
   workId: string
@@ -22,10 +23,10 @@ export const useDeletePartialWork = ({
     pending: '制作物を削除中',
     success: '制作物を削除しました',
     action: async () => {
-      const resp = await fetch(`/api/works/${workId}`, {
-        method: 'DELETE',
+      const res = await client.api.works[':workId'].$delete({
+        param: { workId },
       })
-      if (!resp.ok) {
+      if (!res.ok) {
         throw new Error('制作物の削除に失敗しました')
       }
       // HACK: 本当はdispatchを使って更新したいが、propsのバケツリレーを避けるためにリロードする

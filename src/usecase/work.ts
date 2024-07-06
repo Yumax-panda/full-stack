@@ -49,11 +49,17 @@ export async function getMyWorkByWorkIdWithoutCache(
 
 export async function updateWork({
   id: workId,
+  userId,
   ...data
-}: UpdateWorkInServer): Promise<Work | null> {
+}: UpdateWorkInServer & { id: string }): Promise<Work | null> {
+  console.info(`called update work by work id: ${workId}`)
+  console.log('data:', data)
+  console.log('userId:', userId)
+  console.log('workId:', workId)
   const work = await prisma.work.update({
     where: {
       id: workId,
+      userId,
     },
     data,
   })
