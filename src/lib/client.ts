@@ -1,3 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import { hc } from 'hono/client'
 
-export const prisma = new PrismaClient()
+import type { AppType } from '@/app/api/core'
+
+export const client = hc<AppType>('/')

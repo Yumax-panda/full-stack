@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
 import { userCreatedTest } from '@/__tests__/utils/factory'
-import { prisma } from '@/lib/client'
+import { prisma } from '@/lib/prisma'
 import { getOrCreateEmptyWorkWithoutCache } from '@/usecase/work'
 
 test(

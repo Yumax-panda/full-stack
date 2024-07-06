@@ -6,7 +6,6 @@ import { titleMaxLength } from '@/constants/works'
 // NOTE: for server isEmptyがクライアント専用なので、サーバー側のバリデーションを用意する。
 //       認証付けてサイト内のリクエストしか通さないので、サーバー側のバリデーションは少し緩くても問題ないかも
 export const updateWorkInServer = z.object({
-  id: z.string(),
   userId: z.string(),
   pinned: z.boolean(),
   title: z.string().nullable(),
@@ -23,8 +22,8 @@ export const thumbnailSchema = z
   .nullable()
   .transform((v) => (v?.trim().length ? v.trim() : null))
 
+// IDは変更できないので含めてはいけない
 export const updateWorkCommonSchema = z.object({
-  id: z.string(),
   userId: z.string(),
   pinned: z.boolean(),
 })
@@ -40,13 +39,17 @@ export const nonEmptyHtml = z
   .string()
   .refine((html) => !isEmpty(html), { message: '本文を入力してください。' })
 
-export const NullishHtml = z.string().transform((v) => (isEmpty(v) ? null : v))
+export const NullishHtml = z
+  .string()
+  .nullable()
+  .transform((v) => (isEmpty(v) ? null : v))
 
 export const trimmedNullableTitle = z
   .string()
   .max(titleMaxLength, {
     message: `タイトルは${titleMaxLength}文字以内で入力してください。`,
   })
+  .nullable()
   .transform((v) => (v?.trim().length ? v.trim() : null))
 
 export const nonEmptyTitle = z

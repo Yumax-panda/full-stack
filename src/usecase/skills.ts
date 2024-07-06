@@ -1,6 +1,6 @@
 import type { UpdateSkillProps } from '@/models'
 
-import { prisma } from '@/lib/client'
+import { prisma } from '@/lib/prisma'
 
 export async function updateSkillWithTagIds({
   id,
@@ -27,6 +27,17 @@ export async function updateSkillWithTagIds({
       tagId,
     })),
   })
+
+  const updated = await prisma.skill.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      tags: true,
+    },
+  })
+
+  return updated
 }
 
 export async function deleteSkill(skillId: string) {

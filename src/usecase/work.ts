@@ -3,8 +3,8 @@ import { unstable_cache as cache } from 'next/cache'
 import type { UpdateWorkInServer } from '@/models'
 import type { Work } from '@prisma/client'
 
-import { getSession } from '@/lib/auth'
-import { prisma } from '@/lib/client'
+import { auth as getSession } from '@/lib/auth'
+import { prisma } from '@/lib/prisma'
 import { tag } from '@/lib/routes'
 import { createNewWork, getEmptyWork } from '@/repository/work'
 
@@ -49,11 +49,17 @@ export async function getMyWorkByWorkIdWithoutCache(
 
 export async function updateWork({
   id: workId,
+  userId,
   ...data
-}: UpdateWorkInServer): Promise<Work | null> {
+}: UpdateWorkInServer & { id: string }): Promise<Work | null> {
+  console.info(`called update work by work id: ${workId}`)
+  console.log('data:', data)
+  console.log('userId:', userId)
+  console.log('workId:', workId)
   const work = await prisma.work.update({
     where: {
       id: workId,
+      userId,
     },
     data,
   })

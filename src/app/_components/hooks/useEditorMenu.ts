@@ -2,6 +2,7 @@ import { ChangeEvent, useCallback } from 'react'
 
 import type { Editor } from '@tiptap/react'
 
+import { client } from '@/lib/client'
 import { workImageStorage } from '@/repository/storage'
 
 type Props = {
@@ -23,11 +24,11 @@ export const useEditorMenu = ({
   const onLinkEmbedAdd = async () => {
     const url = window.prompt('URLを入力してください')
     if (!url) return
-    const encodedUrl = encodeURIComponent(url)
-    const apiUrl = `/api/embed?url=${encodedUrl}`
-    const ogpData = await fetch(apiUrl).then((res) => res.json())
-    const { error } = ogpData
-    if (error) {
+    // FIXME: データ取得にPOSTは不適切かも...?
+    const res = await client.api.embeds.$post({ json: { url } })
+    const data = await res.json()
+
+    if (!res.ok || 'error' in data) {
       window.alert('OGPデータの取得に失敗しました')
       return
     }
@@ -36,11 +37,7 @@ export const useEditorMenu = ({
       ?.chain()
       .setEmbed({
         HTMLAttributes: {},
-        siteName: ogpData.siteName || '',
-        url: ogpData.url,
-        favicon: ogpData.favicon || '',
-        title: ogpData.title || '',
-        image: ogpData.image || '',
+        ...data,
       })
       .run()
     return

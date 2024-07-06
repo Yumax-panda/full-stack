@@ -3,7 +3,7 @@ import { unstable_cache as cache } from 'next/cache'
 import type { UpdateUserProps } from '@/models/user'
 import type { User } from '@prisma/client'
 
-import { prisma } from '@/lib/client'
+import { prisma } from '@/lib/prisma'
 import { tag } from '@/lib/routes'
 
 export async function getUserByIdWithoutCache(
