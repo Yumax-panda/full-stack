@@ -15,6 +15,7 @@ const OGImageSchema = z.object({
 
 export const embed = new Hono<Env>()
   .use('*', authMiddleware)
+  // POST /api/embeds
   .post('/', zValidator('json', OGImageSchema), async (c) => {
     const { url } = c.req.valid('json')
 
