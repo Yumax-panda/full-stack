@@ -24,6 +24,7 @@ export const useEditorMenu = ({
   const onLinkEmbedAdd = async () => {
     const url = window.prompt('URLを入力してください')
     if (!url) return
+    // FIXME: データ取得にPOSTは不適切かも...?
     const res = await client.api.embeds.$post({ json: { url } })
     const data = await res.json()
 
