@@ -1,28 +1,28 @@
 import { PrismaClient } from '@prisma/client'
 
 import type {
-  User,
   Account,
+  ArticleToken,
   Session,
   Skill,
-  Tag,
   SkillTagRelation,
-  Work,
-  ArticleToken,
+  Tag,
+  User,
   VerificationToken,
+  Work,
 } from '@prisma/client'
 
 import {
-  initialize,
-  defineUserFactory,
   defineAccountFactory,
+  defineArticleTokenFactory,
   defineSessionFactory,
   defineSkillFactory,
-  defineTagFactory,
   defineSkillTagRelationFactory,
-  defineWorkFactory,
-  defineArticleTokenFactory,
+  defineTagFactory,
+  defineUserFactory,
   defineVerificationTokenFactory,
+  defineWorkFactory,
+  initialize,
 } from '@/__generated__/fabbrica'
 
 const prisma = new PrismaClient()

@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 
-import { Add, Edit, Delete, LocalOfferOutlined } from '@mui/icons-material'
+import { Add, Delete, Edit, LocalOfferOutlined } from '@mui/icons-material'
 import { Box, Button, IconButton, Rating } from '@mui/material'
 
 import { Container, Header, RowContainer } from '../../../_components/Table'
 import { CreateSkillForm } from '../CreateSkillForm'
-import { useDeleteSkill } from '../hooks/useDeleteSkill'
 import { UpdateSkillForm } from '../UpdateSkillForm'
+import { useDeleteSkill } from '../hooks/useDeleteSkill'
 
 import type { SkillWithTags } from '@/models'
 import type { Tag as TagType } from '@prisma/client'

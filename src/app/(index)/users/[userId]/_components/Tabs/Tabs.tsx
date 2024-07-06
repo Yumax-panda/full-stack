@@ -1,6 +1,6 @@
 'use client'
 
-import { Tab, Tabs as MuiTabs } from '@mui/material'
+import { Tabs as MuiTabs, Tab } from '@mui/material'
 import { usePathname, useRouter } from 'next/navigation'
 
 import { routes } from '@/lib/routes'

@@ -1,4 +1,4 @@
-import { ElectricBolt, IosShare, CreditCardOff } from '@mui/icons-material'
+import { CreditCardOff, ElectricBolt, IosShare } from '@mui/icons-material'
 import { Box, Grid, Typography } from '@mui/material'
 
 import { Feature } from '../Feature'

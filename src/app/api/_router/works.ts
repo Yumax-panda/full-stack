@@ -9,7 +9,7 @@ import type { Env } from '../types'
 import { UNKNOWN_ERROR } from '@/lib/error'
 import { tag } from '@/lib/routes'
 import { updateWorkInServer } from '@/models'
-import { updateWork, deleteWork } from '@/usecase/work'
+import { deleteWork, updateWork } from '@/usecase/work'
 
 export const work = new Hono<Env>()
   .use('*', authMiddleware)

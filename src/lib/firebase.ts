@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from 'firebase/app'
-import { getStorage, connectStorageEmulator } from 'firebase/storage'
+import { connectStorageEmulator, getStorage } from 'firebase/storage'
 
 import { env } from './env.mjs'
 

@@ -2,8 +2,8 @@
 
 import { Box } from '@mui/material'
 
-import { useCreateSkillForm } from '../hooks/useCreateSkillForm'
 import { SkillForm } from '../SkillForm'
+import { useCreateSkillForm } from '../hooks/useCreateSkillForm'
 
 import type { Tag as TagType } from '@prisma/client'
 

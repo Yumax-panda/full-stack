@@ -5,8 +5,8 @@ import { Box } from '@mui/material'
 import { Controller } from 'react-hook-form'
 
 import { Header } from '../Header/Header'
-import { useEdit } from '../hooks/useEdit'
 import { TitleField } from '../TitleField'
+import { useEdit } from '../hooks/useEdit'
 
 import type { Work } from '@prisma/client'
 

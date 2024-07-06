@@ -1,0 +1,57 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80,
+    "attributePosition": "auto"
+  },
+  "organizeImports": { "enabled": true },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": false,
+      "suspicious": { "noExplicitAny": "off" },
+      "complexity": { "noBannedTypes": "off" },
+      "style": { "useBlockStatements": "off" }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "single",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "all",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "attributePosition": "auto"
+    }
+  },
+  "overrides": [
+    {
+      "include": [
+        "*.stories.@(ts|tsx|js|jsx|mjs|cjs)",
+        "*.story.@(ts|tsx|js|jsx|mjs|cjs)"
+      ],
+      "linter": { "rules": {} }
+    },
+    {
+      "include": [".storybook/main.@(js|cjs|mjs|ts)"],
+      "linter": { "rules": {} }
+    }
+  ],
+  "files": {
+    "ignore": [
+      ".next",
+      "firebase",
+      "node_modules",
+      "playwright-report",
+      "test-results"
+    ]
+  }
+}

@@ -1,7 +1,6 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "biomejs.biome",
     "ms-azuretools.vscode-docker",
     "streetsidesoftware.code-spell-checker",
     "prisma.prisma",

@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react'
+import { type ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import { TextField } from '@mui/material'
 

@@ -1,4 +1,4 @@
-import type { Page, Browser } from '@playwright/test'
+import type { Browser, Page } from '@playwright/test'
 import type { User } from '@prisma/client'
 
 import { SessionFactory, userCreatedTest } from '@/__tests__/utils/factory'

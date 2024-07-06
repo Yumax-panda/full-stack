@@ -1,8 +1,0 @@
-/node_modules
-*__generated__*
-/src/stories
-.next
-.storybook
-/firebase
-LICENSE
-/docker

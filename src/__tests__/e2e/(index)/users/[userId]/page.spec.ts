@@ -1,11 +1,11 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
 import { authenticatedUserCreatedTest } from '@/__tests__/e2e/utils/auth'
 import {
-  userCreatedTest,
   SkillFactory,
-  TagFactory,
   SkillTagRelationFactory,
+  TagFactory,
+  userCreatedTest,
 } from '@/__tests__/utils/factory'
 import { routes } from '@/lib/routes'
 
@@ -71,8 +71,9 @@ test('スキルが登録されている & タグが登録されていないユ�
       waitUntil: 'domcontentloaded',
     })
     await expect(page).toHaveTitle(`${user.name} | Full Stack`)
-    const hasSkillCards =
-      await page.isVisible('text=スキルが登録されていません')
+    const hasSkillCards = await page.isVisible(
+      'text=スキルが登録されていません',
+    )
     expect(
       hasSkillCards,
       'スキルが登録されている場合はカードが表示される',
@@ -99,8 +100,9 @@ test('スキルが登録されている & タグが登録されているユー�
       waitUntil: 'domcontentloaded',
     })
     await expect(page).toHaveTitle(`${user.name} | Full Stack`)
-    const hasSkillCards =
-      await page.isVisible('text=スキルが登録されていません')
+    const hasSkillCards = await page.isVisible(
+      'text=スキルが登録されていません',
+    )
     expect(
       hasSkillCards,
       'スキルが登録されている場合はカードが表示される',
@@ -123,8 +125,9 @@ test('スキルが登録されている & タグが登録されているがス�
       waitUntil: 'domcontentloaded',
     })
     await expect(page).toHaveTitle(`${user.name} | Full Stack`)
-    const hasSkillCards =
-      await page.isVisible('text=スキルが登録されていません')
+    const hasSkillCards = await page.isVisible(
+      'text=スキルが登録されていません',
+    )
     expect(
       hasSkillCards,
       'スキルが登録されている場合はカードが表示される',
