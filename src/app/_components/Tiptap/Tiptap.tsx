@@ -5,7 +5,7 @@ import './Tiptap.css'
 import { Link } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 import { isTextSelection } from '@tiptap/core'
-import { EditorContent, useEditor, BubbleMenu } from '@tiptap/react'
+import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react'
 
 import { EditorMenu } from '../EditorMenu'
 import { useBubbleMenu } from '../hooks/useBubbleMenu'

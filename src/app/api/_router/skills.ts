@@ -9,9 +9,9 @@ import type { Env } from '../types'
 
 import { DUPLICATED_NAME, UNKNOWN_ERROR } from '@/lib/error'
 import { tag } from '@/lib/routes'
-import { updateSkillSchema, createSkillSchema } from '@/models'
+import { createSkillSchema, updateSkillSchema } from '@/models'
 import { createSkill } from '@/repository/skill'
-import { updateSkillWithTagIds, deleteSkill } from '@/usecase/skills'
+import { deleteSkill, updateSkillWithTagIds } from '@/usecase/skills'
 
 export const skill = new Hono<Env>()
   .use('*', authMiddleware)

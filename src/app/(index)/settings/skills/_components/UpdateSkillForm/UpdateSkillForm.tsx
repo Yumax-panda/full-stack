@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 
-import { useUpdateSkillForm } from '../hooks/useUpdateSkillForm'
 import { SkillForm } from '../SkillForm'
+import { useUpdateSkillForm } from '../hooks/useUpdateSkillForm'
 
 import type { SkillWithTags } from '@/models'
 import type { Tag as TagType } from '@prisma/client'

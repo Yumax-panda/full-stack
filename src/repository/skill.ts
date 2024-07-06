@@ -2,7 +2,7 @@ import { unstable_cache as cache } from 'next/cache'
 
 import { getTagsByUserId } from './tag'
 
-import type { SkillWithTags, CreateSkillProps } from '@/models'
+import type { CreateSkillProps, SkillWithTags } from '@/models'
 import type { Skill, Tag } from '@prisma/client'
 
 import { prisma } from '@/lib/prisma'

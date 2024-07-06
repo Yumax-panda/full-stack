@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 import type { UpdateWork } from '@/models'
 import type { Work as Props } from '@prisma/client'
-import type { Control, FormState, FieldErrors } from 'react-hook-form'
+import type { Control, FieldErrors, FormState } from 'react-hook-form'
 
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 import { client } from '@/lib/client'

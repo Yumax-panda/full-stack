@@ -1,5 +1,5 @@
 import { QuestionMark } from '@mui/icons-material'
-import { Box, Typography, Paper, Grid, Rating, Avatar } from '@mui/material'
+import { Avatar, Box, Grid, Paper, Rating, Typography } from '@mui/material'
 
 import type { Skill as SkillPayload, Tag as TagPayload } from '@prisma/client'
 

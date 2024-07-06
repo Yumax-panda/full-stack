@@ -1,7 +1,7 @@
 import {
   Autocomplete,
-  Button,
   Box,
+  Button,
   Input,
   InputLabel,
   MenuItem,
@@ -10,8 +10,8 @@ import {
   TextField,
 } from '@mui/material'
 
-import type { UseCreateSkillFormReturn } from '../hooks/useCreateSkillForm'
 import type { Tag as TagType } from '@prisma/client'
+import type { UseCreateSkillFormReturn } from '../hooks/useCreateSkillForm'
 
 import { Tag } from '@/app/(index)/_components/Tag'
 import { getLevelHelperText, skills } from '@/constants/skills'

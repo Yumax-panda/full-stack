@@ -1,4 +1,4 @@
-import { useState, type FormEventHandler } from 'react'
+import { type FormEventHandler, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
@@ -10,7 +10,7 @@ import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 import { getImage } from '@/constants/skills'
 import { client } from '@/lib/client'
 import { DUPLICATED_NAME } from '@/lib/error'
-import { createSkillSchema, type CreateSkillProps } from '@/models'
+import { type CreateSkillProps, createSkillSchema } from '@/models'
 
 type Props = {
   onClose: () => void

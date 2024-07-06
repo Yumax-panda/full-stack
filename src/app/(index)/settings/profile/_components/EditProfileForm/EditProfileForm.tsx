@@ -13,9 +13,9 @@ import {
   Button,
   Grid,
   InputAdornment,
+  InputLabel,
   Stack,
   TextField,
-  InputLabel,
   Typography,
 } from '@mui/material'
 import { useSession } from 'next-auth/react'
@@ -25,8 +25,8 @@ import { updateUserAction } from './action'
 import type { User as Props } from '@prisma/client'
 
 import { Alert } from '@/app/_components/Alert'
-import { useServerForm } from '@/app/_components/hooks/useServerForm'
 import { SectionTitle } from '@/app/_components/Text/SectionTitle'
+import { useServerForm } from '@/app/_components/hooks/useServerForm'
 
 type FieldProps = {
   icon: React.ReactNode

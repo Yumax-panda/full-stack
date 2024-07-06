@@ -2,9 +2,9 @@
 
 import { Grid } from '@mui/material'
 
-import { useSkillSection } from '../hooks/useSkillSection'
 import { SkillCard } from '../SkillCard'
 import { SkillTagFilterSelect } from '../SkillTagFilterSelect'
+import { useSkillSection } from '../hooks/useSkillSection'
 
 import type { Props as SkillCardProps } from '../SkillCard'
 

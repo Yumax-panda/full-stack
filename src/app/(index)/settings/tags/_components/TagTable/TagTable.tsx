@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 
-import { Edit, Delete, Add, BrushOutlined } from '@mui/icons-material'
+import { Add, BrushOutlined, Delete, Edit } from '@mui/icons-material'
 import { Box, Button, IconButton } from '@mui/material'
 
 import { Container, Header, RowContainer } from '../../../_components/Table'
 import { CreateTagForm } from '../CreateTagForm'
-import { useDeleteTag } from '../hooks/useDeleteTag'
 import { UpdateTagForm } from '../UpdateTagForm'
+import { useDeleteTag } from '../hooks/useDeleteTag'
 
 import type { Tag as TagType } from '@prisma/client'
 

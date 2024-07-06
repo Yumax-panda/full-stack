@@ -9,8 +9,8 @@ import type { Env } from '../types'
 
 import { DUPLICATED_NAME, UNKNOWN_ERROR } from '@/lib/error'
 import { tag as routeTag } from '@/lib/routes'
-import { updateTagSchema, createTagSchema } from '@/models'
-import { createTag, updateTag, deleteTag } from '@/repository/tag'
+import { createTagSchema, updateTagSchema } from '@/models'
+import { createTag, deleteTag, updateTag } from '@/repository/tag'
 
 export const tag = new Hono<Env>()
   .use('*', authMiddleware)

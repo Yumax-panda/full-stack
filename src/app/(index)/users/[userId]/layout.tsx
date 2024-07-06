@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
 import { env } from '@/lib/env.mjs'
-import { routes, ogImagePaths } from '@/lib/routes'
+import { ogImagePaths, routes } from '@/lib/routes'
 import { getSignedUrl } from '@/lib/signature'
 import { userParser } from '@/parser'
 import { getUserById } from '@/repository/user'

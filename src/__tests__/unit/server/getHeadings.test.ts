@@ -1,4 +1,4 @@
-import { test, expect } from 'vitest'
+import { expect, test } from 'vitest'
 
 import { getHeadings } from '@/lib/editor/editor'
 

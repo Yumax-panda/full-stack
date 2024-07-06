@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 
-import { useUpdateTagForm } from '../hooks/useUpdateTagForm'
 import { TagForm } from '../TagForm'
+import { useUpdateTagForm } from '../hooks/useUpdateTagForm'
 
 import type { Tag } from '@prisma/client'
 

@@ -1,4 +1,4 @@
-import { Typography, Menu } from '@mui/material'
+import { Menu, Typography } from '@mui/material'
 
 type ColorPalletProps = {
   onSelect: (color: string) => void

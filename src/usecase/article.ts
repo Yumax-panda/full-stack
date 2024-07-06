@@ -1,13 +1,12 @@
+import { fetchOgp } from '@/lib/ogp'
 import type {
   Article,
   NoteArticleResponse,
-  ZennArticleResponse,
   QiitaArticleResponse,
+  ZennArticleResponse,
 } from '@/models/article'
-import type { ArticleToken, Provider } from '@prisma/client'
-
-import { fetchOgp } from '@/lib/ogp'
 import { getArticleTokenByUserId } from '@/repository/articleToken'
+import type { ArticleToken, Provider } from '@prisma/client'
 
 type Fetcher = (token: ArticleToken) => Promise<Article[]>
 export type ArticleWithOgp = Article & { ogp?: string }

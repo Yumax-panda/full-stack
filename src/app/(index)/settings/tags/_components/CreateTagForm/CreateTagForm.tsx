@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 
-import { useCreateTagForm } from '../hooks/useCreateTagForm'
 import { TagForm } from '../TagForm'
+import { useCreateTagForm } from '../hooks/useCreateTagForm'
 
 type Props = {
   onClose: () => void

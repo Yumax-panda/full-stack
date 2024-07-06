@@ -1,14 +1,14 @@
-import { useState, type FormEventHandler } from 'react'
+import { type FormEventHandler, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { useForm, type UseFormReturn } from 'react-hook-form'
+import { type UseFormReturn, useForm } from 'react-hook-form'
 
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
 import { client } from '@/lib/client'
 import { generateRandomColor } from '@/lib/color'
 import { DUPLICATED_NAME } from '@/lib/error'
-import { createTagSchema, type CreateTag } from '@/models'
+import { type CreateTag, createTagSchema } from '@/models'
 
 type Props = {
   onCanceled: () => void

@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Close } from '@mui/icons-material'
-import { Alert as MuiAlert, IconButton } from '@mui/material'
+import { IconButton, Alert as MuiAlert } from '@mui/material'
 
 type State = {
   message: string

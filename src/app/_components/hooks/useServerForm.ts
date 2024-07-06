@@ -1,4 +1,4 @@
-import { useFormState, useFormStatus, type FormStatus } from 'react-dom'
+import { type FormStatus, useFormState, useFormStatus } from 'react-dom'
 
 type Props<T> = {
   action: (state: T, formData: FormData) => Promise<T>

@@ -1,15 +1,15 @@
-import { FormEventHandler, MouseEventHandler, useState } from 'react'
+import { type FormEventHandler, type MouseEventHandler, useState } from 'react'
 
 import { Replay } from '@mui/icons-material'
-import { Box, InputLabel, TextField, Tooltip, Button } from '@mui/material'
+import { Box, Button, InputLabel, TextField, Tooltip } from '@mui/material'
 
 import { ColorPallet } from '../ColorPallet'
 import { useDeleteTag } from '../hooks/useDeleteTag'
 
 import type { SxProps, Theme } from '@mui/material'
 import type {
-  UseFormRegister,
   FormState,
+  UseFormRegister,
   UseFormSetValue,
 } from 'react-hook-form'
 

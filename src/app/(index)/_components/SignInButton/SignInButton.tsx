@@ -1,8 +1,8 @@
 'use client'
 
 import { Button } from '@mui/material'
-import { useRouter } from 'next/navigation'
 import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 import { routes } from '@/lib/routes'
 
