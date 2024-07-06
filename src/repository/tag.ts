@@ -31,7 +31,7 @@ export async function updateTag({
   id,
   userId,
   ...data
-}: UpdateTag & { userId: string }) {
+}: UpdateTag & { userId: string; id: string }) {
   console.info(`called update tag by user id: ${userId}`)
   return await prisma.tag.update({ where: { id }, data })
 }

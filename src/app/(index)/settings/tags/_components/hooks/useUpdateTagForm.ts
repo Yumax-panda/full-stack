@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation'
 import { useForm, type UseFormReturn } from 'react-hook-form'
 
 import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import { client } from '@/lib/client'
 import { generateRandomColor } from '@/lib/color'
+import { DUPLICATED_NAME } from '@/lib/error'
 import { createTagSchema, type CreateTag } from '@/models'
 
 type Props = {
@@ -69,16 +71,18 @@ export const useUpdateTagForm = ({
 
   const updateTag = async (data: CreateTag) => {
     const apiUrl = `/api/tags/${tagId}`
-    const res = await fetch(apiUrl, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+    const res = await client.api.tags[':tagId'].$patch({
+      param: { tagId },
+      json: data,
     })
     if (!res.ok) {
-      const error = await res.json()
-      throw new Error(error.error)
+      const error = (await res.json()) as { error: string }
+      switch (error.error) {
+        case DUPLICATED_NAME:
+          throw new Error(`タグ名「${data.name}」は既に存在しています.`)
+        default:
+          throw new Error('タグの更新に失敗しました.')
+      }
     }
     return
   }

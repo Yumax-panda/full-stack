@@ -42,7 +42,7 @@ export const tag = new Hono<Env>()
         userId: c.var.user.id,
       })
       revalidateTag(routeTag.tag)
-      return c.json(updated)
+      return c.json(updated, { status: 200 })
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
         return c.json({ error: DUPLICATED_NAME }, { status: 400 })
