@@ -79,6 +79,7 @@ export const WorkCard = ({
           width={368}
           height={230}
           style={{ objectFit: 'cover', borderBottom: '1px solid lightgray' }}
+          priority
         />
       ) : (
         <ThumbnailWithoutImage />
