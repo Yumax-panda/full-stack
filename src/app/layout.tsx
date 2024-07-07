@@ -1,8 +1,7 @@
 import 'ress'
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 import { CssBaseline } from '@mui/material'
-import { Inter } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
 
 import { AuthProvider } from './_components/Provider/AuthProvider'
@@ -11,8 +10,6 @@ import { ThemeProvider } from './_components/Provider/ThemeProvider'
 import type { Metadata } from 'next'
 
 import { env } from '@/lib/env.mjs'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Full Stack',
@@ -40,7 +37,7 @@ export default function RootLayout({
     <AuthProvider>
       <ThemeProvider>
         <html lang='ja'>
-          <body className={inter.className}>
+          <body>
             <CssBaseline />
             <div style={{ color: '#696f73' }}>
               <ToastContainer position='top-center' autoClose={5000} />
