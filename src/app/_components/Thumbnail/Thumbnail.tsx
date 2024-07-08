@@ -31,6 +31,7 @@ export const Thumbnail = ({ url, onClick, omitDeleteButton }: Props) => {
           objectFit: 'cover',
           boxShadow: '0 0 0.5rem rgba(0, 0, 0, 0.2)',
         }}
+        priority
       />
       {!omitDeleteButton ? (
         <Tooltip title='削除'>
