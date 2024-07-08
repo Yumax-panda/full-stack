@@ -2,6 +2,7 @@ import 'ress'
 import 'react-toastify/dist/ReactToastify.min.css'
 
 import { CssBaseline } from '@mui/material'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import { ToastContainer } from 'react-toastify'
 
 import { AuthProvider } from './_components/Provider/AuthProvider'
@@ -35,17 +36,19 @@ export default function RootLayout({
 }) {
   return (
     <AuthProvider>
-      <ThemeProvider>
-        <html lang='ja'>
-          <body>
-            <CssBaseline />
-            <div style={{ color: '#696f73' }}>
-              <ToastContainer position='top-center' autoClose={5000} />
-              {children}
-            </div>
-          </body>
-        </html>
-      </ThemeProvider>
+      <AppRouterCacheProvider>
+        <ThemeProvider>
+          <html lang='ja'>
+            <body>
+              <CssBaseline />
+              <div style={{ color: '#696f73' }}>
+                <ToastContainer position='top-center' autoClose={5000} />
+                {children}
+              </div>
+            </body>
+          </html>
+        </ThemeProvider>
+      </AppRouterCacheProvider>
     </AuthProvider>
   )
 }

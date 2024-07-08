@@ -38,9 +38,6 @@ const nextConfig = {
   images: {
     remotePatterns,
   },
-  experimental: {
-    forceSwcTransforms: true,
-  },
 }
 
 // https://nextjs.org/docs/app/building-your-application/optimizing/bundle-analyzer#installation
