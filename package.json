@@ -30,6 +30,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.2",
+    "@next/bundle-analyzer": "^14.2.4",
     "@prisma/client": "^5.9.1",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tiptap/extension-bubble-menu": "^2.2.4",
