@@ -133,6 +133,15 @@ $ npm run emu:storage
 $ npm run dev
 ```
 
+プロダクションビルドは以下のようにする
+
+```bash
+$ npm run build
+$ npm run start
+```
+
+バンドルサイズを確認したいときは`npm run build`を`npm run build:analyze`へ置き換えてください。
+
 http://localhost:3000 へアクセスするとトップページが出るはずです。
 
 キャッシュなしで実行する場合は2つめのコマンドを以下に置き換えてください。
