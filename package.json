@@ -7,6 +7,7 @@
     "dev:nocache": "rm -rf .next && yarn dev",
     "postinstall": "prisma generate",
     "build": "next build",
+    "build:analyze": "ANALYZE=true npm run build",
     "start": "next start",
     "lint": "biome lint .",
     "lint:fix": "biome lint --write .",
@@ -30,7 +31,6 @@
     "@hookform/resolvers": "^3.3.4",
     "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.2",
-    "@next/bundle-analyzer": "^14.2.4",
     "@prisma/client": "^5.9.1",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tiptap/extension-bubble-menu": "^2.2.4",
@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
+    "@next/bundle-analyzer": "^14.2.4",
     "@playwright/test": "^1.42.1",
     "@quramy/prisma-fabbrica": "^2.1.0",
     "@storybook/addon-essentials": "^7.6.6",

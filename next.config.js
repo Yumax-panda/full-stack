@@ -40,4 +40,12 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+// https://nextjs.org/docs/app/building-your-application/optimizing/bundle-analyzer#installation
+const withBundleAnalyzer =
+  process.env.ANALYZE === 'true'
+    ? require('@next/bundle-analyzer')({
+        enabled: true,
+      })
+    : (config) => config
+
+module.exports = withBundleAnalyzer(nextConfig)
