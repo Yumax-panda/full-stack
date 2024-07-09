@@ -18,7 +18,6 @@ const Text = ({ text }: { text: string }) => (
   </Typography>
 )
 
-// TODO: 画像がない場合の表示を考える
 const Media = ({ ogp, articleUrl }: { ogp?: string; articleUrl: string }) =>
   ogp ? (
     <CardMedia
