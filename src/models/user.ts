@@ -17,12 +17,18 @@ export const updateUserSchema = z.object({
   location: z
     .string()
     .max(100, UpdateUserSchemaErrors.TOO_LONG_LOCATION)
-    .nullable(),
+    .nullable()
+    .transform((v) => (v?.trim() ? v.trim() : null)),
   organization: z
     .string()
     .max(100, UpdateUserSchemaErrors.TOO_LONG_ORGANIZATION)
-    .nullable(),
-  bio: z.string().max(100, UpdateUserSchemaErrors.TOO_LONG_BIO).nullable(),
+    .nullable()
+    .transform((v) => (v?.trim() ? v.trim() : null)),
+  bio: z
+    .string()
+    .max(100, UpdateUserSchemaErrors.TOO_LONG_BIO)
+    .nullable()
+    .transform((v) => (v?.trim() ? v.trim() : null)),
 })
 
 export type UpdateUserProps = z.infer<typeof updateUserSchema> & { id: string }

@@ -1,5 +1,4 @@
 'use client'
-import { useEffect } from 'react'
 
 import {
   BadgeOutlined,
@@ -18,15 +17,11 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { useSession } from 'next-auth/react'
-
-import { updateUserAction } from './action'
+import { useEditProfileForm } from '../hooks/useEditProfileForm'
 
 import type { User as Props } from '@prisma/client'
 
-import { Alert } from '@/app/_components/Alert'
 import { SectionTitle } from '@/app/_components/Text/SectionTitle'
-import { useServerForm } from '@/app/_components/hooks/useServerForm'
 
 type FieldProps = {
   icon: React.ReactNode
@@ -49,31 +44,16 @@ export const EditProfileForm = ({
   organization,
   bio,
 }: Props) => {
-  const readOnlyStyle = {
-    textAlign: 'left',
-  } as const
-
-  const action = updateUserAction.bind(null, id)
-  const {
-    formState,
-    dispatch,
-    status: { pending },
-  } = useServerForm({ action, initialState: null })
-  const { data: session, update } = useSession()
-  const sessionUserName = session?.user?.name || null
-
-  // 名前が変更された場合に更新する
-  useEffect(() => {
-    if (!sessionUserName) return
-    if (sessionUserName !== name) {
-      update()
-    }
-  }, [sessionUserName, formState]) // eslint-disable-line react-hooks/exhaustive-deps
+  const { isLoading, handleSubmit, register } = useEditProfileForm({
+    name,
+    location,
+    organization,
+    bio,
+  })
 
   return (
-    <Box component='form' action={dispatch}>
+    <Box component='form' onSubmit={handleSubmit}>
       <SectionTitle text='プロフィール' />
-      <Alert state={formState} />
       <Grid
         container
         sx={{
@@ -84,14 +64,13 @@ export const EditProfileForm = ({
       >
         <Grid item xs={12} md={8}>
           <Stack spacing={2}>
-            <Typography sx={readOnlyStyle}>ID: {id}</Typography>
+            <Typography sx={{ textAlign: 'left' }}>ID: {id}</Typography>
             <Field icon={<Email />} text={email || 'N/A'} />
             <InputLabel htmlFor='name'>名前</InputLabel>
             <TextField
+              {...register('name')}
               id='name'
-              name='name'
               fullWidth
-              defaultValue={name}
               variant='standard'
               placeholder='John Doe'
               InputProps={{
@@ -104,10 +83,9 @@ export const EditProfileForm = ({
             />
             <InputLabel htmlFor='location'>居住地</InputLabel>
             <TextField
+              {...register('location')}
               id='location'
-              name='location'
               fullWidth
-              defaultValue={location}
               variant='standard'
               placeholder='Tokyo'
               InputProps={{
@@ -120,11 +98,10 @@ export const EditProfileForm = ({
             />
             <InputLabel htmlFor='organization'>所属</InputLabel>
             <TextField
+              {...register('organization')}
               id='organization'
               fullWidth
-              name='organization'
               autoComplete='organization'
-              defaultValue={organization}
               variant='standard'
               placeholder='Full Stack Inc.'
               InputProps={{
@@ -137,12 +114,11 @@ export const EditProfileForm = ({
             />
             <InputLabel htmlFor='bio'>自己紹介</InputLabel>
             <TextField
+              {...register('bio')}
               id='bio'
-              name='bio'
               fullWidth
               multiline
               rows={2}
-              defaultValue={bio}
               variant='standard'
               placeholder='Developer'
             />
@@ -155,7 +131,7 @@ export const EditProfileForm = ({
         </Grid>
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: '2rem' }}>
-        <Button variant='contained' type='submit' disabled={pending}>
+        <Button variant='contained' type='submit' disabled={isLoading}>
           更新
         </Button>
       </Box>
