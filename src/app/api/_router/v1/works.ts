@@ -1,14 +1,19 @@
-import { zValidator } from '@hono/zod-validator'
-import { revalidateTag } from 'next/cache'
-import { factory } from './utils'
-
 import { UNKNOWN_ERROR } from '@/lib/error'
 import { tag } from '@/lib/routes'
 import { updateWorkInServer } from '@/models'
 import { deleteWork, updateWork } from '@/usecase/work'
+import { getOrCreateEmptyWork } from '@/usecase/work'
+import { zValidator } from '@hono/zod-validator'
+import { revalidateTag } from 'next/cache'
+import { factory } from './utils'
 
 export const work = factory
   .createApp()
+  .post('/', async (c) => {
+    const userId = c.var.user.id
+    const work = await getOrCreateEmptyWork(userId)
+    return c.json(work, { status: 201 })
+  })
   // PATCH /works/:workId
   .patch('/:workId', zValidator('json', updateWorkInServer), async (c) => {
     const workId = c.req.param('workId')
