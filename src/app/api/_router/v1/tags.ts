@@ -1,20 +1,16 @@
 import { zValidator } from '@hono/zod-validator'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
-import { Hono } from 'hono'
 import { revalidateTag } from 'next/cache'
-
-import { authMiddleware } from '../_middlewares/auth'
-
-import type { Env } from '../types'
+import { factory } from './utils'
 
 import { DUPLICATED_NAME, UNKNOWN_ERROR } from '@/lib/error'
 import { tag as routeTag } from '@/lib/routes'
 import { createTagSchema, updateTagSchema } from '@/models'
 import { createTag, deleteTag, updateTag } from '@/repository/tag'
 
-export const tag = new Hono<Env>()
-  .use('*', authMiddleware)
-  // POST /api/tags
+export const tag = factory
+  .createApp()
+  // POST /tags
   .post('/', zValidator('json', createTagSchema), async (c) => {
     const tag = c.req.valid('json')
 
@@ -30,7 +26,7 @@ export const tag = new Hono<Env>()
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
-  // PATCH /api/tags/:tagId
+  // PATCH /tags/:tagId
   .patch('/:tagId', zValidator('json', updateTagSchema), async (c) => {
     const tagId = c.req.param('tagId')
     const tag = c.req.valid('json')
@@ -51,7 +47,7 @@ export const tag = new Hono<Env>()
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
-  // DELETE /api/tags/:tagId
+  // DELETE /tags/:tagId
   .delete('/:tagId', async (c) => {
     const tagId = c.req.param('tagId')
 

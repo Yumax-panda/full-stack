@@ -3,9 +3,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { Hono } from 'hono'
 import { revalidateTag } from 'next/cache'
 
-import { authMiddleware } from '../_middlewares/auth'
-
-import type { Env } from '../types'
+import { factory } from './utils'
 
 import { DUPLICATED_NAME, UNKNOWN_ERROR } from '@/lib/error'
 import { tag } from '@/lib/routes'
@@ -13,9 +11,9 @@ import { createSkillSchema, updateSkillSchema } from '@/models'
 import { createSkill } from '@/repository/skill'
 import { deleteSkill, updateSkillWithTagIds } from '@/usecase/skills'
 
-export const skill = new Hono<Env>()
-  .use('*', authMiddleware)
-  // POST /api/skills
+export const skill = factory
+  .createApp()
+  // POST /skills
   .post('/', zValidator('json', createSkillSchema), async (c) => {
     const skill = c.req.valid('json')
 
@@ -31,7 +29,7 @@ export const skill = new Hono<Env>()
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
-  // PATCH /api/skills/:skillId
+  // PATCH /skills/:skillId
   .patch('/:skillId', zValidator('json', updateSkillSchema), async (c) => {
     const skillId = c.req.param('skillId')
     const skill = c.req.valid('json')
@@ -52,7 +50,7 @@ export const skill = new Hono<Env>()
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
-  // DELETE /api/skills/:skillId
+  // DELETE /skills/:skillId
   .delete('/:skillId', async (c) => {
     const skillId = c.req.param('skillId')
 

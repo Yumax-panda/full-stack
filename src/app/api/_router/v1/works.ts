@@ -1,19 +1,15 @@
 import { zValidator } from '@hono/zod-validator'
-import { Hono } from 'hono'
 import { revalidateTag } from 'next/cache'
-
-import { authMiddleware } from '../_middlewares/auth'
-
-import type { Env } from '../types'
+import { factory } from './utils'
 
 import { UNKNOWN_ERROR } from '@/lib/error'
 import { tag } from '@/lib/routes'
 import { updateWorkInServer } from '@/models'
 import { deleteWork, updateWork } from '@/usecase/work'
 
-export const work = new Hono<Env>()
-  .use('*', authMiddleware)
-  // PATCH /api/works/:workId
+export const work = factory
+  .createApp()
+  // PATCH /works/:workId
   .patch('/:workId', zValidator('json', updateWorkInServer), async (c) => {
     const workId = c.req.param('workId')
     const work = c.req.valid('json')
@@ -31,7 +27,7 @@ export const work = new Hono<Env>()
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
-  // DELETE /api/works/:workId
+  // DELETE /works/:workId
   .delete('/:workId', async (c) => {
     const workId = c.req.param('workId')
 

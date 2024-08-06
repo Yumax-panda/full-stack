@@ -1,13 +1,14 @@
-import { Hono } from 'hono'
 import { ImageResponse } from 'next/og'
+import { factory } from './utils'
 
 import { colorTheme } from '@/constants/colorTheme'
 import { INVALID_SIGNATURE } from '@/lib/error'
 import { verify } from '@/lib/signature'
 import { userParser } from '@/parser'
 
-export const ogp = new Hono()
-  // GET /api/ogp/:signature
+export const ogp = factory
+  .createApp()
+  // GET /api/v1/ogp/:signature
   // Query: name, image
   .get('/:signature', async (c) => {
     const signature = c.req.param('signature')

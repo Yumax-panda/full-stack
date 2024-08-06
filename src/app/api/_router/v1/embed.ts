@@ -1,11 +1,9 @@
 import { zValidator } from '@hono/zod-validator'
-import { Hono } from 'hono'
+
 import { parse } from 'node-html-parser'
 import z from 'zod'
 
-import { authMiddleware } from '../_middlewares/auth'
-
-import type { Env } from '../types'
+import { factory } from './utils'
 
 import { UNKNOWN_ERROR } from '@/lib/error'
 
@@ -13,9 +11,9 @@ const OGImageSchema = z.object({
   url: z.string(),
 })
 
-export const embed = new Hono<Env>()
-  .use('*', authMiddleware)
-  // POST /api/embeds
+export const embed = factory
+  .createApp()
+  // POST /api/v1/embeds
   .post('/', zValidator('json', OGImageSchema), async (c) => {
     const { url } = c.req.valid('json')
 
