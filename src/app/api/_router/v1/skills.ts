@@ -25,7 +25,6 @@ export const skill = factory
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
         return c.json({ error: DUPLICATED_NAME }, { status: 400 })
       }
-      console.error('failed to create skill', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
@@ -46,7 +45,6 @@ export const skill = factory
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
         return c.json({ error: DUPLICATED_NAME }, { status: 400 })
       }
-      console.error('failed to update skill', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
@@ -59,7 +57,6 @@ export const skill = factory
       revalidateTag(tag.skill)
       return new Response(null, { status: 204 })
     } catch (e) {
-      console.error('failed to delete skill', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })

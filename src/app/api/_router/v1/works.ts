@@ -23,7 +23,6 @@ export const work = factory
       revalidateTag(tag.work)
       return c.json(updated, { status: 200 })
     } catch (e) {
-      console.error('failed to update work', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
@@ -36,7 +35,6 @@ export const work = factory
       revalidateTag(tag.work)
       return new Response(null, { status: 204 })
     } catch (e) {
-      console.error('failed to delete work', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })

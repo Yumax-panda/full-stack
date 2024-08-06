@@ -55,7 +55,6 @@ export const useEditorMenu = ({
         })
         editor?.chain().setImage({ src: url }).run()
       } catch (error) {
-        console.error(error)
         window.alert('画像のアップロードに失敗しました')
       }
     },

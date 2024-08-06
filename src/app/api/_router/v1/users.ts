@@ -1,11 +1,13 @@
 import { tag } from '@/lib/routes'
-import { updateArticleToken as updateArticleTokenSchema } from '@/models/articleToken'
+import { updateArticleTokenSchema } from '@/models/articleToken'
 import { updateUserSchema } from '@/models/user'
 import { updateArticleToken } from '@/repository/articleToken'
 import { updateUser } from '@/repository/user'
 import { zValidator } from '@hono/zod-validator'
 import { revalidateTag } from 'next/cache'
 import { factory } from './utils'
+
+import type { ArticleToken } from '@prisma/client'
 
 const me = factory
   .createApp()
@@ -19,7 +21,6 @@ const me = factory
       revalidateTag(tag.profile)
       return new Response(null, { status: 204 })
     } catch (e) {
-      console.error('failed to update user', e)
       return new Response(null, { status: 400 })
     }
   })
@@ -28,16 +29,23 @@ const me = factory
     const userId = c.var.user.id
     const tokens = c.req.valid('json')
 
+    const PROVIDERS: Record<keyof typeof tokens, ArticleToken['provider']> = {
+      qiita: 'QIITA',
+      zenn: 'ZENN',
+      note: 'NOTE',
+    }
+
     for (const [name, token] of Object.entries(tokens)) {
-      if (name === 'QIITA' || name === 'ZENN' || name === 'NOTE') {
+      if (name === 'qiita' || name === 'zenn' || name === 'note') {
+        const provider = PROVIDERS[name]
+
         try {
           await updateArticleToken({
             userId,
-            provider: name,
-            token: !!token ? token : null,
+            provider,
+            token,
           })
         } catch (e) {
-          console.error('failed to update article token', e)
           return new Response(null, { status: 400 })
         }
       }

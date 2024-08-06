@@ -42,7 +42,6 @@ export const embed = factory
         { status: 200 },
       )
     } catch (e) {
-      console.error('Failed to fetch OGP data', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 500 })
     }
   })

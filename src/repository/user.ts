@@ -9,7 +9,6 @@ import { tag } from '@/lib/routes'
 export async function getUserByIdWithoutCache(
   userId: string,
 ): Promise<User | null> {
-  console.info(`called get user by id: ${userId}`)
   return await prisma.user.findUnique({
     where: {
       id: userId,

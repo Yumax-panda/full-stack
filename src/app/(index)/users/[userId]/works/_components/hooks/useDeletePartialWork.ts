@@ -37,7 +37,7 @@ export const useDeletePartialWork = ({
 
   const onDelete = async () => {
     if (confirm('本当に制作物を削除しますか? この操作は取り消せません')) {
-      await task(null)
+      await task()
     }
   }
 

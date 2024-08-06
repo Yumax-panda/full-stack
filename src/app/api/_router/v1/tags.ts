@@ -22,7 +22,6 @@ export const tag = factory
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
         return c.json({ error: DUPLICATED_NAME }, { status: 400 })
       }
-      console.error('failed to create tag', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
@@ -43,7 +42,6 @@ export const tag = factory
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
         return c.json({ error: DUPLICATED_NAME }, { status: 400 })
       }
-      console.error('failed to update tag', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
@@ -55,7 +53,6 @@ export const tag = factory
       await deleteTag(tagId)
       return new Response(null, { status: 204 })
     } catch (e) {
-      console.error('failed to delete tag', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 500 })
     }
   })
