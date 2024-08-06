@@ -63,7 +63,7 @@ export const useCreateTagForm = ({
   })
 
   const createTag = async (data: CreateTag) => {
-    const res = await client.api.tags.$post({ json: data })
+    const res = await client.api.v1.tags.$post({ json: data })
     if (!res.ok) {
       const error = (await res.json()) as { error: string }
       switch (error.error) {

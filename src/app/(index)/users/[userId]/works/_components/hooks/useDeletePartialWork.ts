@@ -23,7 +23,7 @@ export const useDeletePartialWork = ({
     pending: '制作物を削除中',
     success: '制作物を削除しました',
     action: async () => {
-      const res = await client.api.works[':workId'].$delete({
+      const res = await client.api.v1.works[':workId'].$delete({
         param: { workId },
       })
       if (!res.ok) {

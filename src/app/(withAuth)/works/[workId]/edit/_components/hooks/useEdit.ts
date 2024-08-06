@@ -122,7 +122,7 @@ export const useEdit = ({
       await Promise.all(tasks)
     }
 
-    const res = await client.api.works[':workId'].$patch({
+    const res = await client.api.v1.works[':workId'].$patch({
       param: { workId: rest.id },
       json: updatePayload,
     })

@@ -62,7 +62,7 @@ export const useCreateSkillForm = ({
   })
 
   const createSkill = async (data: CreateSkillProps) => {
-    const res = await client.api.skills.$post({ json: data })
+    const res = await client.api.v1.skills.$post({ json: data })
     if (!res.ok) {
       const error = (await res.json()) as { error: string }
       switch (error.error) {

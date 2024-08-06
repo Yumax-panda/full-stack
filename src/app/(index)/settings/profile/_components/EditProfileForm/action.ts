@@ -33,7 +33,7 @@ export async function updateUserAction(
     return { message, success: false }
   }
 
-  await updateUser(parsed.data)
+  await updateUser({ id: userId, ...data })
   revalidateTag(tag.profile)
   return { message: 'プロフィールを更新しました。', success: true }
 }

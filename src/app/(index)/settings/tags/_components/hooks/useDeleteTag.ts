@@ -26,7 +26,9 @@ export const useDeleteTag = ({ tagId }: Props): UseDeleteTagReturn => {
       if (!tagId) {
         throw new Error('タグのIDが指定されていません')
       }
-      const res = await client.api.tags[':tagId'].$delete({ param: { tagId } })
+      const res = await client.api.v1.tags[':tagId'].$delete({
+        param: { tagId },
+      })
       if (!res.ok) {
         throw new Error('タグの削除に失敗しました')
       }

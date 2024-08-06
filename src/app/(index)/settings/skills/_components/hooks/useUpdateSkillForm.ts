@@ -65,7 +65,7 @@ export const useUpdateSkillForm = ({
   })
 
   const updateSkill = async (data: CreateSkillProps) => {
-    const res = await client.api.skills[':skillId'].$patch({
+    const res = await client.api.v1.skills[':skillId'].$patch({
       param: { skillId: skill.id },
       json: data,
     })

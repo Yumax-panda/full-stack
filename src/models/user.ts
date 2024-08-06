@@ -1,15 +1,28 @@
 import { z } from 'zod'
 
+export enum UpdateUserSchemaErrors {
+  NAME_REQUIRED = 'name is required.',
+  TOO_LONG_NAME = 'name is up to 30 characters.',
+  TOO_LONG_LOCATION = 'location is up to 100 characters.',
+  TOO_LONG_ORGANIZATION = 'organization is up to 100 characters.',
+  TOO_LONG_BIO = 'bio is up to 100 characters.',
+}
+
 export const updateUserSchema = z.object({
-  id: z.string().refine(Boolean),
   name: z
     .string()
-    .min(1, '1文字以上で名前を入力してください')
-    .max(30, '名前は30文字までです')
+    .min(1, UpdateUserSchemaErrors.NAME_REQUIRED)
+    .max(30, UpdateUserSchemaErrors.TOO_LONG_NAME)
     .transform((v) => v.trim()),
-  location: z.string().max(100, '居住地は100文字までです').nullable(),
-  organization: z.string().max(100, '所属は100文字までです').nullable(),
-  bio: z.string().max(100, '自己紹介は100文字までです').nullable(),
+  location: z
+    .string()
+    .max(100, UpdateUserSchemaErrors.TOO_LONG_LOCATION)
+    .nullable(),
+  organization: z
+    .string()
+    .max(100, UpdateUserSchemaErrors.TOO_LONG_ORGANIZATION)
+    .nullable(),
+  bio: z.string().max(100, UpdateUserSchemaErrors.TOO_LONG_BIO).nullable(),
 })
 
-export type UpdateUserProps = z.infer<typeof updateUserSchema>
+export type UpdateUserProps = z.infer<typeof updateUserSchema> & { id: string }

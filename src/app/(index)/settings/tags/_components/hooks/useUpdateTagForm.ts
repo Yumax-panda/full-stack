@@ -71,7 +71,7 @@ export const useUpdateTagForm = ({
 
   const updateTag = async (data: CreateTag) => {
     const apiUrl = `/api/tags/${tagId}`
-    const res = await client.api.tags[':tagId'].$patch({
+    const res = await client.api.v1.tags[':tagId'].$patch({
       param: { tagId },
       json: data,
     })
