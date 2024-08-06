@@ -9,7 +9,10 @@ import type { UpdateWork } from '@/models'
 import type { Work as Props } from '@prisma/client'
 import type { Control, FieldErrors, FormState } from 'react-hook-form'
 
-import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import {
+  ToastError,
+  useToastPromise,
+} from '@/app/_components/hooks/useToastPromise'
 import { client } from '@/lib/client'
 import { updateWorkSchema as formSchema } from '@/models'
 import { workImageStorage } from '@/repository/storage'
@@ -128,7 +131,7 @@ export const useEdit = ({
     })
 
     if (!res.ok) {
-      throw new Error('更新に失敗しました.')
+      throw new ToastError('更新に失敗しました.')
     }
 
     // これがないと編集した内容が反映されない

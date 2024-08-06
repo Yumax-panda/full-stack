@@ -2,7 +2,10 @@ import { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import {
+  ToastError,
+  useToastPromise,
+} from '@/app/_components/hooks/useToastPromise'
 import { client } from '@/lib/client'
 
 type Props = {
@@ -27,7 +30,7 @@ export const useDeletePartialWork = ({
         param: { workId },
       })
       if (!res.ok) {
-        throw new Error('制作物の削除に失敗しました')
+        throw new ToastError('制作物の削除に失敗しました')
       }
       // HACK: 本当はdispatchを使って更新したいが、propsのバケツリレーを避けるためにリロードする
       router.refresh()

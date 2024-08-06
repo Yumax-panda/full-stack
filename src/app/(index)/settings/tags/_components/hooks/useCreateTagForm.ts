@@ -4,7 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { type UseFormReturn, useForm } from 'react-hook-form'
 
-import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import {
+  ToastError,
+  useToastPromise,
+} from '@/app/_components/hooks/useToastPromise'
 import { client } from '@/lib/client'
 import { generateRandomColor } from '@/lib/color'
 import { DUPLICATED_NAME } from '@/lib/error'
@@ -68,9 +71,9 @@ export const useCreateTagForm = ({
       const error = (await res.json()) as { error: string }
       switch (error.error) {
         case DUPLICATED_NAME:
-          throw new Error(`タグ名「${data.name}」は既に存在しています.`)
+          throw new ToastError(`タグ名「${data.name}」は既に存在しています.`)
         default:
-          throw new Error('タグの作成に失敗しました.')
+          throw new ToastError('タグの作成に失敗しました.')
       }
     }
     return

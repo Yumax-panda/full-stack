@@ -13,12 +13,9 @@ type UseDeleteSkillReturn = {
 export const useDeleteSkill = ({ skillId }: Props): UseDeleteSkillReturn => {
   const router = useRouter()
   const onDelete = async () => {
-    const res = await client.api.v1.skills[':skillId'].$delete({
+    await client.api.v1.skills[':skillId'].$delete({
       param: { skillId },
     })
-    if (!res.ok) {
-      throw new Error('スキルの削除に失敗しました.')
-    }
     router.refresh()
   }
 
