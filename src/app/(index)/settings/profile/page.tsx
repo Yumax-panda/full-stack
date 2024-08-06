@@ -44,7 +44,7 @@ export default async function Page() {
         />
       </Box>
       <EditProfileForm {...user} />
-      <TokenForm tokens={tokens} userId={user.id} />
+      <TokenForm tokens={tokens} />
     </Box>
   )
 }
