@@ -1,5 +1,4 @@
 import type { Dispatch, SetStateAction } from 'react'
-import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 
 import { message } from '@/lib/message'
@@ -27,38 +26,35 @@ export const useToastPromise = <T extends Callback>({
   action,
   setIsLoading,
 }: Props<T>): UseToastPromiseReturn<T> => {
-  const task = useCallback(
-    async (...data: Parameters<T>) =>
-      toast
-        .promise(
-          async () => {
-            setIsLoading(true)
-            try {
-              await action(...data)
-            } finally {
-              setIsLoading(false)
-            }
-          },
-          {
-            pending,
-            success,
-            error: {
-              // task実行時にErrorが発生した場合, そのエラーメッセージを表示する.
-              render: ({ data }) => {
-                if (data instanceof ToastError) {
-                  return data.message
-                }
-                if (process.env.NODE_ENV === 'development') {
-                  console.error('unexpected error:', data)
-                }
-                return message.unknown
-              },
+  const task = async (...data: Parameters<T>) =>
+    toast
+      .promise(
+        async () => {
+          setIsLoading(true)
+          try {
+            await action(...data)
+          } finally {
+            setIsLoading(false)
+          }
+        },
+        {
+          pending,
+          success,
+          error: {
+            // task実行時にErrorが発生した場合, そのエラーメッセージを表示する.
+            render: ({ data }) => {
+              if (data instanceof ToastError) {
+                return data.message
+              }
+              if (process.env.NODE_ENV === 'development') {
+                console.error('unexpected error:', data)
+              }
+              return message.unknown
             },
           },
-        )
-        .catch(() => {}),
-    [pending, success, action, setIsLoading],
-  )
+        },
+      )
+      .catch(() => {})
 
   return { task }
 }
