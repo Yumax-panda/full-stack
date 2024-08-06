@@ -18,7 +18,7 @@ export const Default: Story = {
   },
 }
 
-export const Error: Story = {
+export const ErrorAlert: Story = {
   args: {
     state: {
       message: '更新に失敗しました',

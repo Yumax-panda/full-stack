@@ -78,7 +78,7 @@ export const useCreateTagForm = ({
 
   useEffect(() => {
     setValue('color', generateRandomColor())
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [setValue])
 
   const regenerateColor = () => {
     setValue('color', generateRandomColor())

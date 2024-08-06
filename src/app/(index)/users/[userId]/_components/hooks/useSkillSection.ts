@@ -21,11 +21,11 @@ export const useSkillSection = ({
   const [selectedTags, setSelectedTags] = useState<Tag[]>([])
   const tagMap: Record<string, Tag> = {}
 
-  initial.forEach((skill) => {
-    skill.tags.forEach((tag) => {
+  for (const skill of initial) {
+    for (const tag of skill.tags) {
       tagMap[tag.id] = tag
-    })
-  })
+    }
+  }
 
   // タグが選択されている場合は、選択されたタグを持つスキルのみ表示する
   const filteredSkills = initial.filter((skill) => {

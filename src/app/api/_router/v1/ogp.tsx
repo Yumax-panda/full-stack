@@ -59,7 +59,7 @@ export const ogp = factory
             {/* eslint-disable-next-line */}
             <img
               src={user.image ?? undefined}
-              alt='user image'
+              alt='user profile icon'
               style={{
                 width: 300,
                 height: 300,
