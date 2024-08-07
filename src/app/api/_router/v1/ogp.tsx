@@ -1,13 +1,12 @@
-import { Hono } from 'hono'
-import { ImageResponse } from 'next/og'
-
 import { colorTheme } from '@/constants/colorTheme'
 import { INVALID_SIGNATURE } from '@/lib/error'
 import { verify } from '@/lib/signature'
 import { userParser } from '@/parser'
+import { Hono } from 'hono'
+import { ImageResponse } from 'next/og'
 
 export const ogp = new Hono()
-  // GET /api/ogp/:signature
+  // GET /api/v1/ogp/:signature
   // Query: name, image
   .get('/:signature', async (c) => {
     const signature = c.req.param('signature')
@@ -58,7 +57,7 @@ export const ogp = new Hono()
             {/* eslint-disable-next-line */}
             <img
               src={user.image ?? undefined}
-              alt='user image'
+              alt='user profile icon'
               style={{
                 width: 300,
                 height: 300,

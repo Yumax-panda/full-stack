@@ -40,7 +40,7 @@ export const Editor = ({ work }: Props) => {
     }
     window.addEventListener('keydown', saveShortcut)
     return () => window.removeEventListener('keydown', saveShortcut)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [onSubmit])
 
   return (
     <Box component='form' onSubmit={onSubmit} sx={{ position: 'relative' }}>

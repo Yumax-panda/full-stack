@@ -16,7 +16,6 @@ export type PartialWork = {
 export async function getPublicPartialWorksByUserIdWithoutCache(
   userId: string,
 ): Promise<PartialWork[]> {
-  console.info(`called get public partial works by user id: ${userId}`)
   return prisma.work.findMany({
     where: {
       userId,
@@ -43,7 +42,6 @@ export const getPublicPartialWorksByUserId = cache(
 export async function getAllPartialWorksByUserIdWithoutCache(
   userId: string,
 ): Promise<PartialWork[]> {
-  console.info(`called get all partial works by user id: ${userId}`)
   return prisma.work.findMany({
     where: {
       userId,
@@ -68,7 +66,6 @@ export const getAllPartialWorksByUserId = cache(
 export async function getWorkByIdWithoutCache(
   workId: string,
 ): Promise<(Work & { user: User }) | null> {
-  console.info(`called get work by id: ${workId}`)
   return prisma.work.findUnique({
     where: {
       id: workId,
@@ -87,7 +84,6 @@ export const getWorkById = cache(getWorkByIdWithoutCache, ['getWorkById'], {
 export async function getWorksByUserIdWithoutCache(
   userId: string,
 ): Promise<Work[]> {
-  console.info(`called get works by user id: ${userId}`)
   return prisma.work.findMany({
     where: {
       userId,

@@ -2,7 +2,10 @@ import { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import {
+  ToastError,
+  useToastPromise,
+} from '@/app/_components/hooks/useToastPromise'
 import { client } from '@/lib/client'
 
 type Props = {
@@ -22,13 +25,15 @@ export const useDeleteTag = ({ tagId }: Props): UseDeleteTagReturn => {
     pending: 'タグを削除中...',
     success: 'タグを削除しました',
     setIsLoading: setIsDeleting,
-    action: async (_: any) => {
+    action: async () => {
       if (!tagId) {
-        throw new Error('タグのIDが指定されていません')
+        throw new ToastError('タグのIDが指定されていません')
       }
-      const res = await client.api.tags[':tagId'].$delete({ param: { tagId } })
+      const res = await client.api.v1.tags[':tagId'].$delete({
+        param: { tagId },
+      })
       if (!res.ok) {
-        throw new Error('タグの削除に失敗しました')
+        throw new ToastError('タグの削除に失敗しました')
       }
       router.refresh()
     },

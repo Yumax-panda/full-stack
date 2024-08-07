@@ -9,7 +9,6 @@ import { prisma } from '@/lib/prisma'
 import { tag } from '@/lib/routes'
 
 async function getSkillsByUserIdWithoutCache(userId: string) {
-  console.info(`called get skills by user id: ${userId}`)
   return await prisma.skill.findMany({
     where: {
       userId,
@@ -30,15 +29,14 @@ export const getSkillsByUserId = cache(
 export async function getSkillsWithTagsByUserIdWithoutCache(
   userId: string,
 ): Promise<SkillWithTags[]> {
-  console.info(`called get skills with tags by user id: ${userId}`)
   const [skills, tags] = await Promise.all([
     getSkillsByUserIdWithoutCache(userId),
     getTagsByUserId(userId),
   ])
   const tagMap: Record<string, Tag> = {}
-  tags.forEach((tag) => {
+  for (const tag of tags) {
     tagMap[tag.id] = tag
-  })
+  }
   return skills.map((skill) => {
     return {
       ...skill,

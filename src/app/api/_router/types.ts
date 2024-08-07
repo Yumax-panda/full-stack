@@ -1,6 +1,6 @@
 import type { User } from '@prisma/client'
 
-export type Env = {
+export type UserRelatedEnv = {
   Variables: {
     user: User
   }

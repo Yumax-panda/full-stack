@@ -4,7 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { type UseFormReturn, useForm } from 'react-hook-form'
 
-import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import {
+  ToastError,
+  useToastPromise,
+} from '@/app/_components/hooks/useToastPromise'
 import { client } from '@/lib/client'
 import { generateRandomColor } from '@/lib/color'
 import { DUPLICATED_NAME } from '@/lib/error'
@@ -70,8 +73,7 @@ export const useUpdateTagForm = ({
   })
 
   const updateTag = async (data: CreateTag) => {
-    const apiUrl = `/api/tags/${tagId}`
-    const res = await client.api.tags[':tagId'].$patch({
+    const res = await client.api.v1.tags[':tagId'].$patch({
       param: { tagId },
       json: data,
     })
@@ -79,9 +81,9 @@ export const useUpdateTagForm = ({
       const error = (await res.json()) as { error: string }
       switch (error.error) {
         case DUPLICATED_NAME:
-          throw new Error(`タグ名「${data.name}」は既に存在しています.`)
+          throw new ToastError(`タグ名「${data.name}」は既に存在しています.`)
         default:
-          throw new Error('タグの更新に失敗しました.')
+          throw new ToastError('タグの更新に失敗しました.')
       }
     }
     return

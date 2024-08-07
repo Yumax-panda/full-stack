@@ -7,7 +7,10 @@ import { useForm } from 'react-hook-form'
 import type { CreateSkillProps, SkillWithTags } from '@/models'
 import type { UseFormReturn } from 'react-hook-form'
 
-import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import {
+  ToastError,
+  useToastPromise,
+} from '@/app/_components/hooks/useToastPromise'
 import { getImage } from '@/constants/skills'
 import { client } from '@/lib/client'
 import { DUPLICATED_NAME } from '@/lib/error'
@@ -65,7 +68,7 @@ export const useUpdateSkillForm = ({
   })
 
   const updateSkill = async (data: CreateSkillProps) => {
-    const res = await client.api.skills[':skillId'].$patch({
+    const res = await client.api.v1.skills[':skillId'].$patch({
       param: { skillId: skill.id },
       json: data,
     })
@@ -73,9 +76,9 @@ export const useUpdateSkillForm = ({
       const error = (await res.json()) as { error: string }
       switch (error.error) {
         case DUPLICATED_NAME:
-          throw new Error(`スキル名「${data.name}」は既に存在しています.`)
+          throw new ToastError(`スキル名「${data.name}」は既に存在しています.`)
         default:
-          throw new Error('スキルの更新に失敗しました.')
+          throw new ToastError('スキルの更新に失敗しました.')
       }
     }
     return

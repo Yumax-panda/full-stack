@@ -7,7 +7,6 @@ import { prisma } from '@/lib/prisma'
 import { tag } from '@/lib/routes'
 
 export async function getArticleTokenByUserIdWithoutCache(userId: string) {
-  console.info(`called get article token by user id: ${userId}`)
   return await prisma.articleToken.findMany({
     where: {
       userId,

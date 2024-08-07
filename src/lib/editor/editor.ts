@@ -41,16 +41,16 @@ export const generateJSON = (html: string) => {
   return originalGenerateJSON(html, extensions)
 }
 
-type Heading = {
+type HeadingType = {
   text: string
   level: number
 }
 
-export const getHeadings = (html: string | null): Heading[] => {
+export const getHeadings = (html: string | null): HeadingType[] => {
   if (!html) return []
   const json = generateJSON(html)
   if (typeof json.content !== 'object') return []
-  const headings: Heading[] = []
+  const headings: HeadingType[] = []
   for (const node of json.content) {
     if (node.type === 'heading' && node.content && node.content.length > 0) {
       headings.push({

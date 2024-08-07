@@ -1,19 +1,20 @@
-import { zValidator } from '@hono/zod-validator'
-import { Hono } from 'hono'
-import { revalidateTag } from 'next/cache'
-
-import { authMiddleware } from '../_middlewares/auth'
-
-import type { Env } from '../types'
-
 import { UNKNOWN_ERROR } from '@/lib/error'
 import { tag } from '@/lib/routes'
 import { updateWorkInServer } from '@/models'
 import { deleteWork, updateWork } from '@/usecase/work'
+import { getOrCreateEmptyWork } from '@/usecase/work'
+import { zValidator } from '@hono/zod-validator'
+import { Hono } from 'hono'
+import { revalidateTag } from 'next/cache'
+import type { UserRelatedEnv } from '../types'
 
-export const work = new Hono<Env>()
-  .use('*', authMiddleware)
-  // PATCH /api/works/:workId
+export const work = new Hono<UserRelatedEnv>()
+  .post('/', async (c) => {
+    const userId = c.var.user.id
+    const work = await getOrCreateEmptyWork(userId)
+    return c.json(work, { status: 201 })
+  })
+  // PATCH /works/:workId
   .patch('/:workId', zValidator('json', updateWorkInServer), async (c) => {
     const workId = c.req.param('workId')
     const work = c.req.valid('json')
@@ -27,11 +28,10 @@ export const work = new Hono<Env>()
       revalidateTag(tag.work)
       return c.json(updated, { status: 200 })
     } catch (e) {
-      console.error('failed to update work', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })
-  // DELETE /api/works/:workId
+  // DELETE /works/:workId
   .delete('/:workId', async (c) => {
     const workId = c.req.param('workId')
 
@@ -40,7 +40,6 @@ export const work = new Hono<Env>()
       revalidateTag(tag.work)
       return new Response(null, { status: 204 })
     } catch (e) {
-      console.error('failed to delete work', e)
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
     }
   })

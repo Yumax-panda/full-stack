@@ -6,9 +6,9 @@ import type { Skill as SkillPayload, Tag as TagPayload } from '@prisma/client'
 import { Tag } from '@/app/(index)/_components/Tag'
 
 type Skill = Pick<SkillPayload, 'name' | 'level' | 'image'>
-type Tag = Pick<TagPayload, 'name' | 'color' | 'brief' | 'id'>
+type TagType = Pick<TagPayload, 'name' | 'color' | 'brief' | 'id'>
 export type Props = Skill & {
-  tags: Tag[]
+  tags: TagType[]
 }
 
 export const SkillCard = ({ name, level, image, tags = [] }: Props) => {

@@ -1,10 +1,8 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
-
 import { AddButtonBase } from '../../../_components/AddButtonBase'
-
-import { startNewWorkAction } from './action'
+import { useAddWork } from '../hooks/useAddWork'
 
 type Props = {
   userId: string
@@ -13,16 +11,17 @@ type Props = {
 export const WorkAddButton = ({ userId }: Props) => {
   const { data: session } = useSession()
   const isMyPage = session?.user?.id === userId && session?.user?.id
+  const { addNewWorkAndRedirect, isLoading } = useAddWork()
 
   if (!isMyPage) {
     return null
   }
 
-  const action = startNewWorkAction.bind(null, userId)
-
   return (
-    <form action={action}>
-      <AddButtonBase text='活動記録を追加' type='submit' />
-    </form>
+    <AddButtonBase
+      text='活動記録を追加'
+      onClick={addNewWorkAndRedirect}
+      disabled={isLoading}
+    />
   )
 }

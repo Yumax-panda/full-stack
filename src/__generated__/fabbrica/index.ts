@@ -8,11 +8,11 @@ import type { ArticleToken } from '@prisma/client'
 import type { User } from '@prisma/client'
 import type { VerificationToken } from '@prisma/client'
 import type { Provider } from '@prisma/client'
-import { Prisma } from '@prisma/client'
+import type { Prisma } from '@prisma/client'
 import type { PrismaClient } from '@prisma/client'
 import {
-  ModelWithFields,
-  Resolver,
+  type ModelWithFields,
+  type Resolver,
   createInitializer,
   createScreener,
   getScalarFieldValueGenerator,

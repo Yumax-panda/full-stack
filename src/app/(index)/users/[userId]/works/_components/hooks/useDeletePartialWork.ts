@@ -2,7 +2,10 @@ import { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import {
+  ToastError,
+  useToastPromise,
+} from '@/app/_components/hooks/useToastPromise'
 import { client } from '@/lib/client'
 
 type Props = {
@@ -23,11 +26,11 @@ export const useDeletePartialWork = ({
     pending: '制作物を削除中',
     success: '制作物を削除しました',
     action: async () => {
-      const res = await client.api.works[':workId'].$delete({
+      const res = await client.api.v1.works[':workId'].$delete({
         param: { workId },
       })
       if (!res.ok) {
-        throw new Error('制作物の削除に失敗しました')
+        throw new ToastError('制作物の削除に失敗しました')
       }
       // HACK: 本当はdispatchを使って更新したいが、propsのバケツリレーを避けるためにリロードする
       router.refresh()
@@ -37,7 +40,7 @@ export const useDeletePartialWork = ({
 
   const onDelete = async () => {
     if (confirm('本当に制作物を削除しますか? この操作は取り消せません')) {
-      await task(null)
+      await task()
     }
   }
 

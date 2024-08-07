@@ -16,7 +16,7 @@ const fetchNoteArticles: Fetcher = async (token) => {
   const res = await fetch(url)
   const json = (await res.json()) as NoteArticleResponse
   return json.data.contents.map((article) => ({
-    provider: `NOTE`,
+    provider: 'NOTE',
     publishedAt: article.publishAt,
     articleUrl: article.noteUrl,
   }))
@@ -27,14 +27,14 @@ const fetchZennArticles: Fetcher = async (token) => {
   const res = await fetch(url)
   const json = (await res.json()) as ZennArticleResponse
   return json.articles.map((article) => ({
-    provider: `ZENN`,
+    provider: 'ZENN',
     publishedAt: article.published_at,
     articleUrl: `https://zenn.dev/${article.path}`,
   }))
 }
 
 const fetchQiitaArticles: Fetcher = async (token) => {
-  const url = `https://qiita.com/api/v2/authenticated_user/items`
+  const url = 'https://qiita.com/api/v2/authenticated_user/items'
   const res = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token.token}`,
@@ -42,7 +42,7 @@ const fetchQiitaArticles: Fetcher = async (token) => {
   })
   const json = (await res.json()) as QiitaArticleResponse
   return json.map((article) => ({
-    provider: `QIITA`,
+    provider: 'QIITA',
     publishedAt: article.created_at,
     articleUrl: article.url,
   }))

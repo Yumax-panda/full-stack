@@ -25,7 +25,7 @@ export const useEditorMenu = ({
     const url = window.prompt('URLを入力してください')
     if (!url) return
     // FIXME: データ取得にPOSTは不適切かも...?
-    const res = await client.api.embeds.$post({ json: { url } })
+    const res = await client.api.v1.embeds.$post({ json: { url } })
     const data = await res.json()
 
     if (!res.ok || 'error' in data) {
@@ -55,7 +55,6 @@ export const useEditorMenu = ({
         })
         editor?.chain().setImage({ src: url }).run()
       } catch (error) {
-        console.error(error)
         window.alert('画像のアップロードに失敗しました')
       }
     },

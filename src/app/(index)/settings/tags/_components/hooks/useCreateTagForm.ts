@@ -4,7 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { type UseFormReturn, useForm } from 'react-hook-form'
 
-import { useToastPromise } from '@/app/_components/hooks/useToastPromise'
+import {
+  ToastError,
+  useToastPromise,
+} from '@/app/_components/hooks/useToastPromise'
 import { client } from '@/lib/client'
 import { generateRandomColor } from '@/lib/color'
 import { DUPLICATED_NAME } from '@/lib/error'
@@ -63,14 +66,14 @@ export const useCreateTagForm = ({
   })
 
   const createTag = async (data: CreateTag) => {
-    const res = await client.api.tags.$post({ json: data })
+    const res = await client.api.v1.tags.$post({ json: data })
     if (!res.ok) {
       const error = (await res.json()) as { error: string }
       switch (error.error) {
         case DUPLICATED_NAME:
-          throw new Error(`タグ名「${data.name}」は既に存在しています.`)
+          throw new ToastError(`タグ名「${data.name}」は既に存在しています.`)
         default:
-          throw new Error('タグの作成に失敗しました.')
+          throw new ToastError('タグの作成に失敗しました.')
       }
     }
     return
@@ -78,7 +81,7 @@ export const useCreateTagForm = ({
 
   useEffect(() => {
     setValue('color', generateRandomColor())
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [setValue])
 
   const regenerateColor = () => {
     setValue('color', generateRandomColor())

@@ -1,33 +1,38 @@
 import type { Dispatch, SetStateAction } from 'react'
-
 import { toast } from 'react-toastify'
 
 import { message } from '@/lib/message'
 
-type Props<T> = {
+type Callback = (...args: any[]) => any
+
+type Props<T extends Callback> = {
   pending: string
   success: string
-  action: (data: T) => Promise<void>
+  action: T
   setIsLoading: Dispatch<SetStateAction<boolean>>
 }
 
-type UseToastPromiseReturn<T> = {
-  task: (data: T) => Promise<void>
+type UseToastPromiseReturn<T extends Callback> = {
+  task: (...data: Parameters<T>) => Promise<void>
 }
 
-export const useToastPromise = <T>({
+// toast.promise内でエラーが発生し, ユーザーへエラーメッセージを表示するためのErrorクラス.
+// `message`プロパティが表示される。
+export class ToastError extends Error {}
+
+export const useToastPromise = <T extends Callback>({
   pending,
   success,
   action,
   setIsLoading,
 }: Props<T>): UseToastPromiseReturn<T> => {
-  const task = async (data: T) =>
+  const task = async (...data: Parameters<T>) =>
     toast
       .promise(
         async () => {
           setIsLoading(true)
           try {
-            await action(data)
+            await action(...data)
           } finally {
             setIsLoading(false)
           }
@@ -36,11 +41,14 @@ export const useToastPromise = <T>({
           pending,
           success,
           error: {
+            // task実行時にErrorが発生した場合, そのエラーメッセージを表示する.
             render: ({ data }) => {
-              if (data instanceof Error) {
+              if (data instanceof ToastError) {
                 return data.message
               }
-              console.error('failed to create tag', data)
+              if (process.env.NODE_ENV === 'development') {
+                console.error('unexpected error:', data)
+              }
               return message.unknown
             },
           },

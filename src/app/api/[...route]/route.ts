@@ -1,4 +1,4 @@
-import { handler } from '../core'
+import { handler } from '../_router/router'
 
 // NOTE: const runtime = "edge"とすると動かなくなる. 理由は不明.
 

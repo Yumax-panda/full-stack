@@ -11,7 +11,6 @@ import { createNewWork, getEmptyWork } from '@/repository/work'
 export async function getOrCreateEmptyWorkWithoutCache(
   userId: string,
 ): Promise<Work> {
-  console.info(`called get or create empty work by user id: ${userId}`)
   const emptyWork = await getEmptyWork(userId)
 
   if (emptyWork) {
@@ -30,7 +29,6 @@ export const getOrCreateEmptyWork = cache(
 export async function getMyWorkByWorkIdWithoutCache(
   workId: string,
 ): Promise<Work | null> {
-  console.info(`called get work by work id: ${workId}`)
   const [session, work] = await Promise.all([
     getSession(),
     prisma.work.findUnique({
@@ -40,7 +38,7 @@ export async function getMyWorkByWorkIdWithoutCache(
     }),
   ])
 
-  if (!(session && session.user && work && session.user.id === work.userId)) {
+  if (!(session?.user && work && session.user.id === work.userId)) {
     return null
   }
 
@@ -52,7 +50,6 @@ export async function updateWork({
   userId,
   ...data
 }: UpdateWorkInServer & { id: string }): Promise<Work | null> {
-  console.info(`called update work by work id: ${workId}`)
   const work = await prisma.work.update({
     where: {
       id: workId,

@@ -5,9 +5,15 @@ type Props = {
   onClick?: () => void
   text: string
   type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
 }
 
-export const AddButton = ({ onClick, text, type = 'button' }: Props) => (
+export const AddButton = ({
+  onClick,
+  text,
+  type = 'button',
+  disabled = false,
+}: Props) => (
   <Tooltip title={text} arrow placement='top-end'>
     <IconButton
       onClick={onClick}
@@ -17,6 +23,7 @@ export const AddButton = ({ onClick, text, type = 'button' }: Props) => (
         '&:hover': { backgroundColor: 'lightGray' },
       }}
       type={type}
+      disabled={disabled}
     >
       <Add sx={{ color: 'GrayText' }} />
     </IconButton>
