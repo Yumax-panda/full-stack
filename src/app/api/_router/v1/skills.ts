@@ -1,6 +1,5 @@
 import { zValidator } from '@hono/zod-validator'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
-import { Hono } from 'hono'
 import { revalidateTag } from 'next/cache'
 
 import { factory } from './utils'
