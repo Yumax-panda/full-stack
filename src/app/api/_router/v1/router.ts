@@ -1,8 +1,6 @@
 import { Hono } from 'hono'
-import { factory } from './utils'
-
-import { auth } from '@/lib/auth'
-import { HTTPException } from 'hono/http-exception'
+import { userAuthenticate } from '../middlewares/user_authenticate'
+import type { UserRelatedEnv } from '../types'
 import { embed } from './embed'
 import { ogp } from './ogp'
 import { skill } from './skills'
@@ -10,24 +8,7 @@ import { tag } from './tags'
 import { user } from './users'
 import { work } from './works'
 
-/**
- * ユーザー認証ミドルウェア
- * コンテキストにユーザー情報をセットする
- */
-const userAuthenticate = factory.createMiddleware(async (c, next) => {
-  const session = await auth()
-  const user = session?.user
-
-  if (!user) {
-    throw new HTTPException(401, { message: 'Unauthorized' })
-  }
-
-  c.set('user', user)
-  await next()
-})
-
-const api = factory
-  .createApp()
+const api = new Hono<UserRelatedEnv>()
   .use('*', userAuthenticate)
   .route('/embeds', embed)
   .route('/skills', skill)

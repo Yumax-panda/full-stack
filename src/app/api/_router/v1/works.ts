@@ -4,11 +4,11 @@ import { updateWorkInServer } from '@/models'
 import { deleteWork, updateWork } from '@/usecase/work'
 import { getOrCreateEmptyWork } from '@/usecase/work'
 import { zValidator } from '@hono/zod-validator'
+import { Hono } from 'hono'
 import { revalidateTag } from 'next/cache'
-import { factory } from './utils'
+import type { UserRelatedEnv } from '../types'
 
-export const work = factory
-  .createApp()
+export const work = new Hono<UserRelatedEnv>()
   .post('/', async (c) => {
     const userId = c.var.user.id
     const work = await getOrCreateEmptyWork(userId)

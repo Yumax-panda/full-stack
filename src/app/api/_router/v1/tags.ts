@@ -1,15 +1,14 @@
-import { zValidator } from '@hono/zod-validator'
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
-import { revalidateTag } from 'next/cache'
-import { factory } from './utils'
-
 import { DUPLICATED_NAME, UNKNOWN_ERROR } from '@/lib/error'
 import { tag as routeTag } from '@/lib/routes'
 import { createTagSchema, updateTagSchema } from '@/models'
 import { createTag, deleteTag, updateTag } from '@/repository/tag'
+import { zValidator } from '@hono/zod-validator'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
+import { Hono } from 'hono'
+import { revalidateTag } from 'next/cache'
+import type { UserRelatedEnv } from '../types'
 
-export const tag = factory
-  .createApp()
+export const tag = new Hono<UserRelatedEnv>()
   // POST /tags
   .post('/', zValidator('json', createTagSchema), async (c) => {
     const tag = c.req.valid('json')

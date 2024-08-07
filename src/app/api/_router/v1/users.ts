@@ -4,13 +4,12 @@ import { updateUserSchema } from '@/models/user'
 import { updateArticleToken } from '@/repository/articleToken'
 import { updateUser } from '@/repository/user'
 import { zValidator } from '@hono/zod-validator'
-import { revalidateTag } from 'next/cache'
-import { factory } from './utils'
-
 import type { ArticleToken } from '@prisma/client'
+import { Hono } from 'hono'
+import { revalidateTag } from 'next/cache'
+import type { UserRelatedEnv } from '../types'
 
-const me = factory
-  .createApp()
+const me = new Hono<UserRelatedEnv>()
   // PATCH /users/@me
   .patch('/', zValidator('json', updateUserSchema), async (c) => {
     const userId = c.var.user.id
@@ -19,10 +18,11 @@ const me = factory
     try {
       await updateUser({ id: userId, ...user })
       revalidateTag(tag.profile)
-      return new Response(null, { status: 204 })
     } catch (e) {
-      return new Response(null, { status: 400 })
+      return c.body(null, 400)
     }
+
+    return c.body(null, 204)
   })
   // PATCH /users/@me/tokens
   .patch('/tokens', zValidator('json', updateArticleTokenSchema), async (c) => {
@@ -46,13 +46,13 @@ const me = factory
             token,
           })
         } catch (e) {
-          return new Response(null, { status: 400 })
+          return c.body(null, 400)
         }
       }
     }
 
     revalidateTag(tag.token)
-    return new Response(null, { status: 204 })
+    return c.body(null, 204)
   })
 
-export const user = factory.createApp().route('/@me', me)
+export const user = new Hono<UserRelatedEnv>().route('/@me', me)
