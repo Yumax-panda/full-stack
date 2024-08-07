@@ -1,19 +1,13 @@
-import { Box } from '@mui/material'
-import { notFound } from 'next/navigation'
-
-import { TopContent } from '../_components/TopContent'
-
-import { EditProfileForm } from './_components/EditProfileForm'
-import { TokenForm } from './_components/TokenForm'
-
-import type { Metadata } from 'next'
-
-import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
 import { getSession } from '@/lib/auth'
 import { env } from '@/lib/env.mjs'
-import { routes } from '@/lib/routes'
 import { getArticleTokenByUserId } from '@/repository/articleToken'
 import { getUserById } from '@/repository/user'
+import { Box } from '@mui/material'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { TopContent } from '../_components/TopContent'
+import { EditProfileForm } from './_components/EditProfileForm'
+import { TokenForm } from './_components/TokenForm'
 
 export const metadata: Metadata = {
   title: 'プロフィールを編集',
@@ -34,15 +28,6 @@ export default async function Page() {
   return (
     <Box>
       <TopContent userId={user.id} />
-      <Box sx={{ my: '1.5rem' }}>
-        <Breadcrumbs
-          links={[
-            // 構造上はuserSkillを使わないが、プロフィールへ戻る導線として入れている
-            { href: routes.userSkill(user.id), label: user.name || '無名' },
-            { href: routes.userProfileSettings(), label: 'プロフィールを編集' },
-          ]}
-        />
-      </Box>
       <EditProfileForm {...user} />
       <TokenForm tokens={tokens} />
     </Box>

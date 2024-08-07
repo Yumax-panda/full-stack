@@ -1,5 +1,7 @@
 'use client'
 
+import { SectionTitle } from '@/app/_components/Text/SectionTitle'
+import { translateError } from '@/models/user'
 import {
   BadgeOutlined,
   CorporateFare,
@@ -17,11 +19,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { useEditProfileForm } from '../hooks/useEditProfileForm'
-
 import type { User as Props } from '@prisma/client'
-
-import { SectionTitle } from '@/app/_components/Text/SectionTitle'
+import { useEditProfileForm } from '../hooks/useEditProfileForm'
 
 type FieldProps = {
   icon: React.ReactNode
@@ -44,7 +43,7 @@ export const EditProfileForm = ({
   organization,
   bio,
 }: Props) => {
-  const { isLoading, handleSubmit, register } = useEditProfileForm({
+  const { isLoading, handleSubmit, register, errors } = useEditProfileForm({
     name,
     location,
     organization,
@@ -80,6 +79,8 @@ export const EditProfileForm = ({
                   </InputAdornment>
                 ),
               }}
+              helperText={translateError(errors?.name?.message)}
+              error={!!errors?.name?.message}
             />
             <InputLabel htmlFor='location'>居住地</InputLabel>
             <TextField
@@ -95,6 +96,8 @@ export const EditProfileForm = ({
                   </InputAdornment>
                 ),
               }}
+              helperText={translateError(errors?.location?.message)}
+              error={!!errors?.location}
             />
             <InputLabel htmlFor='organization'>所属</InputLabel>
             <TextField
@@ -111,6 +114,8 @@ export const EditProfileForm = ({
                   </InputAdornment>
                 ),
               }}
+              helperText={translateError(errors?.organization?.message)}
+              error={!!errors?.organization}
             />
             <InputLabel htmlFor='bio'>自己紹介</InputLabel>
             <TextField
@@ -121,6 +126,8 @@ export const EditProfileForm = ({
               rows={2}
               variant='standard'
               placeholder='Developer'
+              helperText={translateError(errors?.bio?.message)}
+              error={!!errors?.bio}
             />
           </Stack>
         </Grid>
