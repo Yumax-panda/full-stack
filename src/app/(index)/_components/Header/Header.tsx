@@ -34,7 +34,11 @@ export const Header = () => {
             </Typography>
           </Link>
 
-          <Link href={routes.top()} style={{ flexGrow: 1 }}>
+          <Link
+            href={routes.top()}
+            style={{ flexGrow: 1 }}
+            aria-label='top-page'
+          >
             <Typography
               variant='h5'
               noWrap
