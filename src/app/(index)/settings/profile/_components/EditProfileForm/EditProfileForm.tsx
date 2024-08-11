@@ -133,7 +133,11 @@ export const EditProfileForm = ({
         </Grid>
         <Grid item xs={12} md={4}>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Avatar src={image || undefined} sx={{ width: 200, height: 200 }} />
+            <Avatar
+              src={image || undefined}
+              sx={{ width: 200, height: 200 }}
+              alt='profile-icon'
+            />
           </Box>
         </Grid>
       </Grid>
