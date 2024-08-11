@@ -22,7 +22,7 @@ export const UserCard = ({ user: { id, name, image, bio } }: Props) => {
             sx={{ width: 70, height: 70 }}
           />
         </Link>
-        <Typography variant='h6' sx={{ ml: 2, my: 'auto' }}>
+        <Typography variant='h6' sx={{ ml: 2, my: 'auto' }} component='div'>
           {name || '無名'}
         </Typography>
       </Box>
