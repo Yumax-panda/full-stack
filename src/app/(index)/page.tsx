@@ -10,7 +10,6 @@ export default function Home() {
         Full Stack
       </Typography>
       <Typography
-        variant='subtitle1'
         sx={{
           fontWeight: 'bold',
           flexDirection: {

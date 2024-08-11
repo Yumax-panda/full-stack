@@ -14,7 +14,7 @@ export const Title = ({ title, sx }: Props) => (
       color: 'GrayText',
       ...sx,
     }}
-    variant='h5'
+    variant='h1'
   >
     {title}
   </Typography>
