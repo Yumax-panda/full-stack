@@ -6,11 +6,11 @@ import { SignInButton } from './_components/SignInButton'
 export default function Home() {
   return (
     <Box sx={{ margin: 'auto', textAlign: 'center' }}>
-      <Typography variant='h4' sx={{ fontWeight: 'bold' }}>
+      <Typography variant='h4' component='h1' sx={{ fontWeight: 'bold' }}>
         Full Stack
       </Typography>
       <Typography
-        variant='subtitle1'
+        component='div'
         sx={{
           fontWeight: 'bold',
           flexDirection: {

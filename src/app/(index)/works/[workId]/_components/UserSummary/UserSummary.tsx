@@ -24,7 +24,7 @@ export const UserSummary = ({ user: { id, name, image, bio } }: Props) => {
         />
       </Link>
       <Box sx={{ pl: '1rem', display: 'flex', flexDirection: 'column' }}>
-        <Typography variant='h6' sx={{ my: 'auto' }}>
+        <Typography variant='h6' sx={{ my: 'auto' }} component='div'>
           {name}
         </Typography>
 

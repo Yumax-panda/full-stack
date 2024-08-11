@@ -86,6 +86,7 @@ const Embed = Node.create<EmbedOptions>({
           href: url,
           target: '_blank',
           rel: 'noopener noreferrer nofollow',
+          'aria-label': `Link to ${siteName}`,
           class: 'embed-link',
         }),
         [

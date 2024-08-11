@@ -26,7 +26,11 @@ export const Feature = ({ Icon, title, description }: Props) => (
           opacity: 0.8,
         }}
       />
-      <Typography variant='h6' sx={{ my: '0.5rem', whiteSpace: 'nowrap' }}>
+      <Typography
+        variant='h6'
+        component='section'
+        sx={{ my: '0.5rem', whiteSpace: 'nowrap' }}
+      >
         {title}
       </Typography>
       <Typography variant='body1'>{description}</Typography>

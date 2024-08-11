@@ -25,7 +25,11 @@ export const FeatureSection = () => {
 
   return (
     <Box sx={{ my: '2rem' }}>
-      <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2 }}>
+      <Typography
+        variant='h5'
+        component='h2'
+        sx={{ fontWeight: 'bold', mb: 2 }}
+      >
         どんなサービス ?
       </Typography>
       <Grid container spacing={4} sx={{ display: 'flex' }}>

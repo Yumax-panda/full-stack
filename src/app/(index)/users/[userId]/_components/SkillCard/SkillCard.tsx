@@ -41,7 +41,12 @@ export const SkillCard = ({ name, level, image, tags = [] }: Props) => {
       >
         <Grid item xs={4}>
           {image ? (
-            <Avatar src={image} sx={cardStyle} variant='square' />
+            <Avatar
+              src={image}
+              sx={cardStyle}
+              variant='square'
+              alt={`skill:${name}`}
+            />
           ) : (
             <Avatar sx={cardStyle} variant='square'>
               <QuestionMark />
