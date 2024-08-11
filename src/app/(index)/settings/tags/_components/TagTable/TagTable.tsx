@@ -43,10 +43,10 @@ const TableRow = ({ tag }: TableRowProps) => {
         </Box>
         <Box sx={{ flexGrow: 1, my: 'auto', pl: '1rem' }}>{tag.brief}</Box>
         <Box sx={{ flexGrow: 0, my: 'auto' }}>
-          <IconButton onClick={handleOpen} type='button'>
+          <IconButton onClick={handleOpen} type='button' aria-label='edit tag'>
             <Edit />
           </IconButton>
-          <IconButton onClick={onDelete} type='button'>
+          <IconButton onClick={onDelete} type='button' aria-label='delete tag'>
             <Delete />
           </IconButton>
         </Box>

@@ -67,10 +67,10 @@ const TableRow = ({ skill, tags }: TableRowProps) => {
           display: 'flex',
         }}
       >
-        <IconButton onClick={handleOpen} type='button'>
+        <IconButton onClick={handleOpen} type='button' aria-label='edit skill'>
           <Edit />
         </IconButton>
-        <IconButton onClick={onDelete} type='button'>
+        <IconButton onClick={onDelete} type='button' aria-label='delete skill'>
           <Delete />
         </IconButton>
       </Box>
