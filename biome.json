@@ -7,8 +7,7 @@
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 80,
-    "attributePosition": "auto",
-    "ignore": ["./src/__generated__"]
+    "attributePosition": "auto"
   },
   "organizeImports": { "enabled": true },
   "linter": {
@@ -51,7 +50,8 @@
       "firebase",
       "node_modules",
       "playwright-report",
-      "test-results"
+      "test-results",
+      "src/__generated__"
     ]
   }
 }
