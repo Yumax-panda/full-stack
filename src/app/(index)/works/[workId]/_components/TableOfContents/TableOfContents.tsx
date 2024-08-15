@@ -1,4 +1,3 @@
-import { Link } from '@/app/_components/Link'
 import { encodeURLSafe } from '@/lib/utils'
 import { Typography } from '@mui/material'
 import { forwardRef } from 'react'
@@ -20,7 +19,7 @@ export const TableOfContents = forwardRef<HTMLUListElement | null, Props>(
         </Typography>
         <ul ref={ref} className={styles.toc}>
           {headings.map(({ level, text }, i) => (
-            <Link
+            <a
               key={`heading-${i}-${text}`}
               href={`#${encodeURLSafe(text)}`}
               className={styles.link}
@@ -35,7 +34,7 @@ export const TableOfContents = forwardRef<HTMLUListElement | null, Props>(
               >
                 {text}
               </li>
-            </Link>
+            </a>
           ))}
         </ul>
       </CardContainer>
