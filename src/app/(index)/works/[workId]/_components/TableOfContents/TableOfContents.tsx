@@ -19,6 +19,9 @@ export const TableOfContents = forwardRef<HTMLUListElement | null, Props>(
         </Typography>
         <ul ref={ref} className={styles.toc}>
           {headings.map(({ level, text }, i) => (
+            // NOTE: Next.jsのLinkコンポーネントではhrefにエンコードされた日本語が入っている場合うまく動作しない
+            // Client Side Navigationが原因...?
+            // ref: https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating
             <a
               key={`heading-${i}-${text}`}
               href={`#${encodeURLSafe(text)}`}
