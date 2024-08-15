@@ -1,4 +1,5 @@
 import { Link } from '@/app/_components/Link'
+import { encodeURLSafe } from '@/lib/utils'
 import { Typography } from '@mui/material'
 import { forwardRef } from 'react'
 import { CardContainer } from '../CardContainer'
@@ -21,7 +22,7 @@ export const TableOfContents = forwardRef<HTMLUListElement | null, Props>(
           {headings.map(({ level, text }, i) => (
             <Link
               key={`heading-${i}-${text}`}
-              href={`#${text}`}
+              href={`#${encodeURLSafe(text)}`}
               className={styles.link}
             >
               <li
@@ -30,7 +31,7 @@ export const TableOfContents = forwardRef<HTMLUListElement | null, Props>(
                 className={
                   styles[`heading${Math.max(1, level - minLevel + 1)}`]
                 }
-                id={getTocId(text)}
+                id={getTocId(encodeURLSafe(text))}
               >
                 {text}
               </li>

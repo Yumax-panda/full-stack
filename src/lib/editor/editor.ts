@@ -4,6 +4,7 @@ import Link from '@tiptap/extension-link' // eslint-disable-line import/no-named
 import Placeholder from '@tiptap/extension-placeholder' // eslint-disable-line import/no-named-as-default
 import { generateJSON as originalGenerateJSON } from '@tiptap/html'
 import StarterKit from '@tiptap/starter-kit' // eslint-disable-line import/no-named-as-default
+import { encodeURLSafe } from '../utils'
 
 import Embed from './ext/embed'
 
@@ -17,8 +18,8 @@ export const extensions = [
         ...this.parent?.(),
         id: {
           default: null,
-          parseHTML: (element) => ({
-            id: element.textContent,
+          parseHTML: ({ textContent }) => ({
+            id: textContent ? encodeURLSafe(textContent) : null,
           }),
           renderHTML: (attributes) => attributes.id,
         },
