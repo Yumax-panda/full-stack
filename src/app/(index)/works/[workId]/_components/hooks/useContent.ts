@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
+import { encodeURLSafe } from '@/lib/utils'
 import { type RefObject, useEffect, useRef } from 'react'
 import { ACTIVE_CLASS } from '../utils/constants'
 import { getTocId } from '../utils/id'
@@ -56,8 +57,8 @@ export const useContent = ({ headingTexts }: Props): UseContentReturn => {
 
           // 目次のリンク内で該当する見出しを変更
           for (const text of headingTexts) {
-            const tocId = getTocId(text)
-            const elem = tocRef.current.querySelector(`#${tocId}`)
+            const tocId = getTocId(encodeURLSafe(text))
+            const elem = tocRef.current.querySelector(`[id="${tocId}"]`)
 
             if (elem) {
               if (activeTocId === tocId) {
@@ -75,7 +76,10 @@ export const useContent = ({ headingTexts }: Props): UseContentReturn => {
     )
 
     for (const text of headingTexts) {
-      const headingElem = editorRef.current.querySelector(`#${text}`)
+      const encodedText = encodeURLSafe(text)
+      const headingElem = editorRef.current.querySelector(
+        `[id="${encodedText}"]`,
+      )
 
       if (headingElem) {
         observer.observe(headingElem)
