@@ -31,17 +31,35 @@ export const embed = new Hono<UserRelatedEnv>()
         })
         const text = await res.text()
         const doc = parse(text)
-        const title = doc.querySelector('meta[property="og:title"]')
-        const image = doc.querySelector('meta[property="og:image"]')
-        const favicon = doc.querySelector('link[rel="icon"]')
-        const siteName = doc.querySelector('meta[property="og:site_name"]')
+
+        const title =
+          doc
+            .querySelector('meta[property="og:title"]')
+            ?.getAttribute('content') || doc.querySelector('title')?.textContent
+        const image = doc
+          .querySelector('meta[property="og:image"]')
+          ?.getAttribute('content')
+        const favicon = doc
+          .querySelector('link[rel="icon"]')
+          ?.getAttribute('href')
+        const faviconShortcut = doc
+          .querySelector('link[rel="shortcut icon"]')
+          ?.getAttribute('href')
+        const siteName = doc
+          .querySelector('meta[property="og:site_name"]')
+          ?.getAttribute('content')
+
+        const faviconUrl = favicon || faviconShortcut
+        const isRelativeURL = !!faviconUrl && faviconUrl.startsWith('/')
 
         return c.json(
           {
-            title: title?.getAttribute('content') || '',
-            image: image?.getAttribute('content') || '',
-            favicon: favicon?.getAttribute('href') || '',
-            siteName: siteName?.getAttribute('content') || '',
+            title: title || '',
+            image: image || '',
+            favicon: isRelativeURL
+              ? new URL(faviconUrl, url).toString()
+              : faviconUrl || '',
+            siteName: siteName || '',
             url,
           },
           { status: 200 },
