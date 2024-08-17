@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react'
 import { AccountIconButton } from '../AccountIconButton'
 import { SignInIconButton } from '../SignInIconButton'
 
-import { Container } from '@/app/_components/Container/Container'
+import { Container } from '@/app/_components/Container'
 import { Link } from '@/app/_components/Link'
 import { routes } from '@/lib/routes'
 
