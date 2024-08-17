@@ -18,7 +18,8 @@ type Props = {
   onChange?: (content: string) => void
   editable?: boolean
 }
-
+// FIXME: `works/[workId]`でリロードすると `ReferenceError: document is not defined` が発生する
+// おそらくuseEditor関連が原因
 export const Tiptap = forwardRef<HTMLDivElement | null, Props>(
   ({ content, onChange = () => {}, editable = true, workId, userId }, ref) => {
     const editor = useEditor({
