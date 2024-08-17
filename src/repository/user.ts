@@ -6,9 +6,7 @@ import type { User } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { tag } from '@/lib/routes'
 
-export async function getUserByIdWithoutCache(
-  userId: string,
-): Promise<User | null> {
+async function getUserByIdWithoutCache(userId: string): Promise<User | null> {
   return await prisma.user.findUnique({
     where: {
       id: userId,

@@ -17,13 +17,13 @@ export const updateWorkInServer = z.object({
 export type UpdateWorkInServer = z.infer<typeof updateWorkInServer>
 
 // for client
-export const thumbnailSchema = z
+const thumbnailSchema = z
   .string()
   .nullable()
   .transform((v) => (v?.trim().length ? v.trim() : null))
 
 // IDは変更できないので含めてはいけない
-export const updateWorkCommonSchema = z.object({
+const updateWorkCommonSchema = z.object({
   userId: z.string(),
   pinned: z.boolean(),
 })
@@ -35,16 +35,16 @@ export const isEmpty = (html?: string | null) => {
   return !tmp.textContent?.trim()
 }
 
-export const nonEmptyHtml = z
+const nonEmptyHtml = z
   .string()
   .refine((html) => !isEmpty(html), { message: '本文を入力してください。' })
 
-export const NullishHtml = z
+const NullishHtml = z
   .string()
   .nullable()
   .transform((v) => (isEmpty(v) ? null : v))
 
-export const trimmedNullableTitle = z
+const trimmedNullableTitle = z
   .string()
   .max(titleMaxLength, {
     message: `タイトルは${titleMaxLength}文字以内で入力してください。`,
@@ -52,7 +52,7 @@ export const trimmedNullableTitle = z
   .nullable()
   .transform((v) => (v?.trim().length ? v.trim() : null))
 
-export const nonEmptyTitle = z
+const nonEmptyTitle = z
   .string()
   .min(1, { message: 'タイトルを入力してください。' })
   .max(titleMaxLength, {
@@ -61,25 +61,23 @@ export const nonEmptyTitle = z
   .refine((v) => v.trim(), { message: 'タイトルを入力してください。' })
   .transform((v) => v.trim())
 
-export const privateContentSchema = z.object({
+const privateContentSchema = z.object({
   title: trimmedNullableTitle,
   content: NullishHtml,
   thumbnail: thumbnailSchema,
   isPrivate: z.literal(true),
 })
 
-export const publicContentSchema = z.object({
+const publicContentSchema = z.object({
   title: nonEmptyTitle,
   content: nonEmptyHtml,
   thumbnail: thumbnailSchema,
   isPrivate: z.literal(false),
 })
 
-export const privateWorkSchema =
-  updateWorkCommonSchema.merge(privateContentSchema)
+const privateWorkSchema = updateWorkCommonSchema.merge(privateContentSchema)
 
-export const publicWorkSchema =
-  updateWorkCommonSchema.merge(publicContentSchema)
+const publicWorkSchema = updateWorkCommonSchema.merge(publicContentSchema)
 
 export const updateWorkSchema = z.union([privateWorkSchema, publicWorkSchema])
 

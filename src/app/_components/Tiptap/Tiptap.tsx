@@ -1,16 +1,14 @@
 import './Tiptap.css'
 
+import { extensions } from '@/lib/editor/editor'
 import { Link } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
-import { isTextSelection } from '@tiptap/core'
-import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react'
+import { EditorContent, useEditor } from '@tiptap/react'
 import { forwardRef } from 'react'
-
+import { BubbleMenu } from '../BubbleMenu'
 import { EditorMenu } from '../EditorMenu'
 import { useBubbleMenu } from '../hooks/useBubbleMenu'
 import { useEditorMenu } from '../hooks/useEditorMenu'
-
-import { extensions } from '@/lib/editor/editor'
 
 type Props = {
   content: string
@@ -20,7 +18,8 @@ type Props = {
   onChange?: (content: string) => void
   editable?: boolean
 }
-
+// FIXME: `works/[workId]`でリロードすると `ReferenceError: document is not defined` が発生する
+// おそらくuseEditor関連が原因
 export const Tiptap = forwardRef<HTMLDivElement | null, Props>(
   ({ content, onChange = () => {}, editable = true, workId, userId }, ref) => {
     const editor = useEditor({
@@ -44,33 +43,6 @@ export const Tiptap = forwardRef<HTMLDivElement | null, Props>(
             editor={editor}
             tippyOptions={{
               placement: 'bottom',
-            }}
-            // Headingは非表示
-            // ref: https://github.com/ueberdosis/tiptap/blob/main/packages/extension-bubble-menu/src/bubble-menu-plugin.ts#L47
-            shouldShow={({ view, state, from, to }) => {
-              const { doc, selection } = state
-              const { empty } = selection
-
-              const isEmptyTextBlock =
-                !doc.textBetween(from, to).length &&
-                isTextSelection(state.selection)
-
-              const element = document.querySelector('.ProseMirror')
-              const isChildOfMenu = !!element?.contains(document.activeElement)
-
-              const hasEditorFocus = view.hasFocus() || isChildOfMenu
-
-              const isRangeSelected =
-                hasEditorFocus &&
-                !empty &&
-                !isEmptyTextBlock &&
-                editor.isEditable
-
-              const ignoredNodes = ['heading', 'image', 'embed']
-
-              return (
-                !ignoredNodes.some((v) => editor.isActive(v)) && isRangeSelected
-              )
             }}
           >
             <IconButton onClick={setLink}>

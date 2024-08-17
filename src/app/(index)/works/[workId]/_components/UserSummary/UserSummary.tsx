@@ -5,7 +5,7 @@ import type { User } from '@prisma/client'
 import { Link } from '@/app/_components/Link'
 import { routes } from '@/lib/routes'
 
-export type Props = {
+type Props = {
   user: Pick<User, 'id' | 'name' | 'image' | 'bio'>
 }
 

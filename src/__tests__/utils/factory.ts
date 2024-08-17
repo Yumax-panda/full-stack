@@ -28,17 +28,15 @@ import {
 const prisma = new PrismaClient()
 initialize({ prisma })
 
-export { prisma }
+const UserFactory = defineUserFactory()
 
-export const UserFactory = defineUserFactory()
-
-export const AccountFactory = defineAccountFactory({
+const AccountFactory = defineAccountFactory({
   defaultData: {
     user: UserFactory,
   },
 })
 
-export const WorkFactory = defineWorkFactory({
+const WorkFactory = defineWorkFactory({
   defaultData: {
     user: UserFactory,
   },
@@ -69,15 +67,15 @@ export const SessionFactory = defineSessionFactory({
   },
 })
 
-export const ArticleTokenFactory = defineArticleTokenFactory({
+const ArticleTokenFactory = defineArticleTokenFactory({
   defaultData: {
     user: UserFactory,
   },
 })
 
-export const VerificationTokenFactory = defineVerificationTokenFactory()
+const VerificationTokenFactory = defineVerificationTokenFactory()
 
-export type DatabaseModelType =
+type DatabaseModelType =
   | User
   | Account
   | Session
@@ -88,7 +86,7 @@ export type DatabaseModelType =
   | ArticleToken
   | VerificationToken
 
-export type ModelRelatedTest<T extends Record<string, DatabaseModelType>> = (
+type ModelRelatedTest<T extends Record<string, DatabaseModelType>> = (
   test: (models: T) => Promise<void>,
 ) => () => Promise<void>
 
