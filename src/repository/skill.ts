@@ -19,14 +19,7 @@ async function getSkillsByUserIdWithoutCache(userId: string) {
   })
 }
 
-export const getSkillsByUserId = cache(
-  getSkillsByUserIdWithoutCache,
-  ['getSkillsByUserId'],
-  // tagを含めているため、tagのキャッシュも更新する
-  { tags: [tag.skill, tag.tag] },
-)
-
-export async function getSkillsWithTagsByUserIdWithoutCache(
+async function getSkillsWithTagsByUserIdWithoutCache(
   userId: string,
 ): Promise<SkillWithTags[]> {
   const [skills, tags] = await Promise.all([
@@ -70,18 +63,6 @@ export async function createSkill({
           },
         })),
       },
-    },
-  })
-}
-
-type DeleteSkillProps = {
-  id: string
-}
-
-export async function deleteSkill({ id }: DeleteSkillProps): Promise<Skill> {
-  return prisma.skill.delete({
-    where: {
-      id,
     },
   })
 }

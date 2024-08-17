@@ -13,7 +13,7 @@ export type PartialWork = {
   isPrivate: boolean
 }
 
-export async function getPublicPartialWorksByUserIdWithoutCache(
+async function getPublicPartialWorksByUserIdWithoutCache(
   userId: string,
 ): Promise<PartialWork[]> {
   return prisma.work.findMany({
@@ -39,7 +39,7 @@ export const getPublicPartialWorksByUserId = cache(
   { tags: [tag.work] },
 )
 
-export async function getAllPartialWorksByUserIdWithoutCache(
+async function getAllPartialWorksByUserIdWithoutCache(
   userId: string,
 ): Promise<PartialWork[]> {
   return prisma.work.findMany({
@@ -63,7 +63,7 @@ export const getAllPartialWorksByUserId = cache(
   { tags: [tag.work] },
 )
 
-export async function getWorkByIdWithoutCache(
+async function getWorkByIdWithoutCache(
   workId: string,
 ): Promise<(Work & { user: User }) | null> {
   return prisma.work.findUnique({
@@ -80,22 +80,6 @@ export const getWorkById = cache(getWorkByIdWithoutCache, ['getWorkById'], {
   // includeでuserを指定しているため、profileキャッシュも更新する
   tags: [tag.work, tag.profile],
 })
-
-export async function getWorksByUserIdWithoutCache(
-  userId: string,
-): Promise<Work[]> {
-  return prisma.work.findMany({
-    where: {
-      userId,
-    },
-  })
-}
-
-export const getWorksByUserId = cache(
-  getWorksByUserIdWithoutCache,
-  ['getWorksByUserId'],
-  { tags: [tag.work] },
-)
 
 export async function createNewWork(userId: string): Promise<Work> {
   return prisma.work.create({

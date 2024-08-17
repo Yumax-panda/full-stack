@@ -13,9 +13,7 @@ const firebaseConfig = {
   measurementId: env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 }
 
-export const app = getApps().length
-  ? getApps()[0]
-  : initializeApp(firebaseConfig)
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
 

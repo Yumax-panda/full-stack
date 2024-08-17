@@ -38,7 +38,7 @@ export const extensions = [
   Embed,
 ]
 
-export const generateJSON = (html: string) => {
+const generateJSON = (html: string) => {
   return originalGenerateJSON(html, extensions)
 }
 

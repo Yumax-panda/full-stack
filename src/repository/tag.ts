@@ -5,7 +5,7 @@ import type { CreateTag, UpdateTag } from '@/models'
 import { prisma } from '@/lib/prisma'
 import { tag } from '@/lib/routes'
 
-export async function getTagsByUserIdWithoutCache(userId: string) {
+async function getTagsByUserIdWithoutCache(userId: string) {
   return await prisma.tag.findMany({
     where: {
       userId,

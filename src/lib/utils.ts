@@ -1,4 +1,4 @@
-export const replaceWhitespace = (text: string): string => {
+const replaceWhitespace = (text: string): string => {
   return text.replace(/\s/g, '-')
 }
 

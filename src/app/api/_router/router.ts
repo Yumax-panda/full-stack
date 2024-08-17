@@ -4,7 +4,7 @@ import { prettyJSON } from 'hono/pretty-json'
 import { handle } from 'hono/vercel'
 import { v1 } from './v1/router'
 
-export const app = new Hono()
+const app = new Hono()
   .use('*', prettyJSON(), logger())
   .basePath('/api')
   .route('/v1', v1)

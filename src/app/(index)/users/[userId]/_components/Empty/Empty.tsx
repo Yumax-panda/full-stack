@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 
 import type { SvgIconComponent } from '@mui/icons-material'
 
-export interface EmptyProps {
+type EmptyProps = {
   Icon: SvgIconComponent
   title: string
 }

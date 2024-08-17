@@ -1,6 +1,6 @@
 import type { Provider } from '@prisma/client'
 
-export type NoteArticle = {
+type NoteArticle = {
   provider: `NOTE`
   publishAt: string
   noteUrl: string
@@ -12,7 +12,7 @@ export type NoteArticleResponse = {
   }
 }
 
-export type ZennArticle = {
+type ZennArticle = {
   provider: `ZENN`
   published_at: string
   path: string
@@ -22,7 +22,7 @@ export type ZennArticleResponse = {
   articles: ZennArticle[]
 }
 
-export type QiitaArticle = {
+type QiitaArticle = {
   provider: `QIITA`
   created_at: string
   url: string

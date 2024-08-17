@@ -3,7 +3,7 @@
 
 import { Node, mergeAttributes } from '@tiptap/core'
 
-export interface EmbedOptions {
+interface EmbedOptions {
   HTMLAttributes: Record<string, any>
 }
 

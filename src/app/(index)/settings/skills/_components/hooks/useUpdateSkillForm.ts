@@ -23,7 +23,7 @@ type Props = {
 
 type FormValues = Omit<CreateSkillProps, 'image'>
 
-export type UseUpdateSkillFormReturn = Pick<
+type UseUpdateSkillFormReturn = Pick<
   UseFormReturn<FormValues>,
   'register' | 'formState'
 > & {
