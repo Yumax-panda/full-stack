@@ -39,7 +39,7 @@ export const SkillCard = ({ name, level, image, tags = [] }: Props) => {
           flexDirection: 'row',
         }}
       >
-        <Grid item xs={4}>
+        <Grid size={4}>
           {image ? (
             <Avatar
               src={image}
@@ -54,13 +54,12 @@ export const SkillCard = ({ name, level, image, tags = [] }: Props) => {
           )}
         </Grid>
         <Grid
-          item
-          xs={8}
           sx={{
             display: 'flex',
             flexDirection: 'column',
             paddingLeft: '0.5rem',
           }}
+          size={8}
         >
           <Typography
             sx={{

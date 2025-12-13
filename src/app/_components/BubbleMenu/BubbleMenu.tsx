@@ -1,7 +1,25 @@
-import type { BubbleMenuProps } from '@tiptap/react'
+import type { Editor } from '@tiptap/core'
 import { useCurrentEditor } from '@tiptap/react'
 import { useEffect, useState } from 'react'
 import { BubbleMenuPlugin } from './bubble-menu-plugin'
+
+type BubbleMenuProps = {
+  editor?: Editor | null
+  pluginKey?: string
+  updateDelay?: number
+  shouldShow?:
+    | ((props: {
+        editor: Editor
+        view: any
+        state: any
+        oldState?: any
+        from: number
+        to: number
+      }) => boolean)
+    | null
+  className?: string
+  children?: React.ReactNode
+}
 
 export const BubbleMenu = (props: BubbleMenuProps) => {
   const [element, setElement] = useState<HTMLDivElement | null>(null)
@@ -20,7 +38,6 @@ export const BubbleMenu = (props: BubbleMenuProps) => {
     const {
       pluginKey = 'bubbleMenu',
       editor,
-      tippyOptions = {},
       updateDelay,
       shouldShow = null,
     } = props
@@ -40,11 +57,12 @@ export const BubbleMenu = (props: BubbleMenuProps) => {
       element,
       pluginKey,
       shouldShow,
-      tippyOptions,
     })
 
     menuEditor.registerPlugin(plugin)
-    return () => menuEditor.unregisterPlugin(pluginKey)
+    return () => {
+      menuEditor.unregisterPlugin(pluginKey)
+    }
   }, [props.editor, currentEditor, element])
 
   return (

@@ -16,7 +16,7 @@ export const skill = new Hono<UserRelatedEnv>()
 
     try {
       const created = await createSkill({ ...skill, userId: c.var.user.id })
-      revalidateTag(tag.skill)
+      revalidateTag(tag.skill, 'max')
       return c.json(created, { status: 201 })
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
@@ -36,7 +36,7 @@ export const skill = new Hono<UserRelatedEnv>()
         id: skillId,
         userId: c.var.user.id,
       })
-      revalidateTag(tag.skill)
+      revalidateTag(tag.skill, 'max')
       return c.json(updated)
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
@@ -51,7 +51,7 @@ export const skill = new Hono<UserRelatedEnv>()
 
     try {
       await deleteSkill(skillId)
-      revalidateTag(tag.skill)
+      revalidateTag(tag.skill, 'max')
       return new Response(null, { status: 204 })
     } catch (e) {
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })

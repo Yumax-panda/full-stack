@@ -15,7 +15,7 @@ export const tag = new Hono<UserRelatedEnv>()
 
     try {
       const created = await createTag({ ...tag, userId: c.var.user.id })
-      revalidateTag(routeTag.tag)
+      revalidateTag(routeTag.tag, 'max')
       return c.json(created, { status: 201 })
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
@@ -35,7 +35,7 @@ export const tag = new Hono<UserRelatedEnv>()
         id: tagId,
         userId: c.var.user.id,
       })
-      revalidateTag(routeTag.tag)
+      revalidateTag(routeTag.tag, 'max')
       return c.json(updated, { status: 200 })
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {

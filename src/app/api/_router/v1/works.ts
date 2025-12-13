@@ -25,7 +25,7 @@ export const work = new Hono<UserRelatedEnv>()
         id: workId,
         userId: c.var.user.id,
       })
-      revalidateTag(tag.work)
+      revalidateTag(tag.work, 'max')
       return c.json(updated, { status: 200 })
     } catch (e) {
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
@@ -37,7 +37,7 @@ export const work = new Hono<UserRelatedEnv>()
 
     try {
       await deleteWork(workId)
-      revalidateTag(tag.work)
+      revalidateTag(tag.work, 'max')
       return new Response(null, { status: 204 })
     } catch (e) {
       return c.json({ error: UNKNOWN_ERROR }, { status: 400 })
