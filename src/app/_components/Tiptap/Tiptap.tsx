@@ -39,12 +39,7 @@ export const Tiptap = forwardRef<HTMLDivElement | null, Props>(
     return (
       <div ref={ref}>
         {editor && editable && (
-          <BubbleMenu
-            editor={editor}
-            tippyOptions={{
-              placement: 'bottom',
-            }}
-          >
+          <BubbleMenu editor={editor}>
             <IconButton onClick={setLink}>
               <Link />
             </IconButton>

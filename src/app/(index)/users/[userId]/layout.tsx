@@ -17,9 +17,10 @@ export default async function Layout({
   params,
 }: {
   children: React.ReactNode
-  params: { userId: string }
+  params: Promise<{ userId: string }>
 }) {
-  const user = await getUserById(params.userId)
+  const { userId } = await params
+  const user = await getUserById(userId)
   if (!user) notFound()
 
   return (
@@ -38,9 +39,10 @@ export default async function Layout({
 export async function generateMetadata({
   params,
 }: {
-  params: { userId: string }
+  params: Promise<{ userId: string }>
 }): Promise<Metadata> {
-  const user = await getUserById(params.userId)
+  const { userId } = await params
+  const user = await getUserById(userId)
   if (!user) notFound()
   const signedUrl = await getSignedUrl(userParser.toString(user))
   return {
@@ -50,7 +52,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${user.name} | Full Stack`,
       description: `${user.name}さんのポートフォリオ`,
-      url: `${env.NEXTAUTH_URL}${routes.userSkill(params.userId)}`,
+      url: `${env.NEXTAUTH_URL}${routes.userSkill(userId)}`,
       siteName: 'Full Stack',
       images: [
         {

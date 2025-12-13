@@ -14,7 +14,14 @@ export const ArticleSection = ({ articles }: Props) => (
   <FadeIn>
     <Grid container spacing={2}>
       {articles.map((article) => (
-        <Grid item xs={12} sm={6} md={4} key={article.articleUrl}>
+        <Grid
+          key={article.articleUrl}
+          size={{
+            xs: 12,
+            sm: 6,
+            md: 4,
+          }}
+        >
           <ArticleCard {...article} />
         </Grid>
       ))}

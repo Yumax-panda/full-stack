@@ -32,7 +32,14 @@ export const SkillSection = ({ skills: initial }: Props) => {
       <FadeIn>
         <Grid container spacing={2} sx={{ display: 'flex' }}>
           {filteredSkills.map((skill) => (
-            <Grid item xs={12} sm={6} md={4} key={skill.name}>
+            <Grid
+              key={skill.name}
+              size={{
+                xs: 12,
+                sm: 6,
+                md: 4,
+              }}
+            >
               <SkillCard {...skill} />
             </Grid>
           ))}

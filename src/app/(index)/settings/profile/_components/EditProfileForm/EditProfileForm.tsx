@@ -61,7 +61,12 @@ export const EditProfileForm = ({
           mt: '1rem',
         }}
       >
-        <Grid item xs={12} md={8}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 8,
+          }}
+        >
           <Stack spacing={2}>
             <Typography sx={{ textAlign: 'left' }}>ID: {id}</Typography>
             <Field icon={<Email />} text={email || 'N/A'} />
@@ -131,7 +136,12 @@ export const EditProfileForm = ({
             />
           </Stack>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 4,
+          }}
+        >
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Avatar
               src={image || undefined}

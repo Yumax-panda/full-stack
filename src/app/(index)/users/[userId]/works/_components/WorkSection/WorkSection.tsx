@@ -21,7 +21,14 @@ export const WorkSection = ({ works, isMine }: Props) => {
     <FadeIn>
       <Grid container spacing={2}>
         {works.map((work) => (
-          <Grid key={work.id} item xs={12} sm={6} md={4}>
+          <Grid
+            key={work.id}
+            size={{
+              xs: 12,
+              sm: 6,
+              md: 4,
+            }}
+          >
             <WorkCard {...work} isMine={isMine} />
           </Grid>
         ))}

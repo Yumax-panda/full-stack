@@ -17,7 +17,7 @@ const me = new Hono<UserRelatedEnv>()
 
     try {
       await updateUser({ id: userId, ...user })
-      revalidateTag(tag.profile)
+      revalidateTag(tag.profile, 'max')
     } catch (e) {
       return c.body(null, 400)
     }
@@ -51,7 +51,7 @@ const me = new Hono<UserRelatedEnv>()
       }
     }
 
-    revalidateTag(tag.token)
+    revalidateTag(tag.token, 'max')
     return c.body(null, 204)
   })
 
